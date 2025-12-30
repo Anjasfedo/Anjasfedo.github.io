@@ -157,6 +157,23 @@ html {
   * {
     @apply border-border outline-ring/50;
   }
+
+  /* Smooth theme transitions */
+  *,
+  *::before,
+  *::after {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+
+  /* Disable transitions during theme switch to prevent jank */
+  body.theme-switching *,
+  body.theme-switching *::before,
+  body.theme-switching *::after {
+    transition: none !important;
+  }
+
   body {
     @apply bg-background text-foreground;
   }

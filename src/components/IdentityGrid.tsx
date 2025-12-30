@@ -3,7 +3,6 @@ import React, { useMemo, memo } from "react";
 import { cn } from "@/lib/utils";
 import { BentoGrid, BentoGridItem } from "./ui/bento-grid";
 import { AnimatedTooltip } from "./ui/animated-tooltip";
-import { Tooltip } from "./ui/tooltip-card";
 import {
   IconCode,
   IconMapPin,
@@ -12,12 +11,12 @@ import {
   IconBrandGithub,
   IconBrandLinkedin,
   IconBrandTwitter,
-  IconBulb,
+  IconActivity, // Imported for the Status card
 } from "@tabler/icons-react";
 import { motion } from "motion/react";
 
 // ============================================================================
-// --- MEMOIZED DATA (outside component to prevent recreation) ---
+// --- STATIC DATA ---
 // ============================================================================
 
 const educationData = [
@@ -39,75 +38,62 @@ const educationData = [
   },
 ] as const;
 
-const interestItems = [
-  {
-    id: 1,
-    name: "Rust",
-    designation: "Systems Programming",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rust/rust-plain.svg",
-  },
-  {
-    id: 2,
-    name: "AI Agents",
-    designation: "Autonomous LLMs",
-    image: "https://api.dicebear.com/7.x/identicon/svg?seed=AI",
-  },
-  {
-    id: 3,
-    name: "Local First",
-    designation: "Offline Sync",
-    image: "https://api.dicebear.com/7.x/identicon/svg?seed=Local",
-  },
-] as const;
-
 const techStack = [
   {
     id: 1,
     name: "React",
     designation: "UI Library",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
   },
   {
     id: 2,
     name: "Next.js",
     designation: "Fullstack Framework",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
   },
   {
     id: 3,
     name: "TypeScript",
     designation: "Type Safety",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
   },
   {
     id: 4,
     name: "Tailwind CSS",
     designation: "Styling",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg",
   },
   {
     id: 5,
     name: "Laravel",
     designation: "Backend",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
   },
   {
     id: 6,
     name: "PostgreSQL",
     designation: "Database",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
   },
   {
     id: 7,
     name: "Docker",
     designation: "Deployment",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
   },
   {
     id: 8,
     name: "Node.js",
     designation: "Runtime",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
   },
 ] as const;
 
@@ -143,10 +129,17 @@ const SkeletonEducation = memo(() => (
   <div className="flex flex-1 w-full h-full rounded-xl bg-white dark:bg-black border border-neutral-200/50 dark:border-white/10 relative overflow-hidden group/edu">
     <div className="px-3 md:px-6 h-full flex flex-col justify-center py-4 md:py-6 relative z-10 antialiased">
       {educationData.map((item) => (
-        <div key={item.id} className="flex items-start gap-3 md:gap-6 group mb-3 md:mb-4">
+        <div
+          key={item.id}
+          className="flex items-start gap-3 md:gap-6 group mb-3 md:mb-4"
+        >
           <div className="relative shrink-0">
             <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-1.5 md:p-2 flex items-center justify-center shadow-sm z-20 relative transition-all duration-300 group-hover:rotate-6 group-hover:scale-110">
-              <img src={item.logo} alt={item.school} className="w-full h-full object-contain" />
+              <img
+                src={item.logo}
+                alt={item.school}
+                className="w-full h-full object-contain"
+              />
             </div>
             <div className="absolute inset-0 bg-blue-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
@@ -168,23 +161,10 @@ const SkeletonEducation = memo(() => (
         </div>
       ))}
     </div>
-
     <div className="absolute top-0 right-0 w-32 h-32 bg-grid-black/[0.02] dark:bg-grid-white/[0.02] z-0" />
   </div>
 ));
-
 SkeletonEducation.displayName = "SkeletonEducation";
-
-const SkeletonInterests = memo(() => (
-  <div className="flex flex-1 w-full h-full rounded-xl bg-white dark:bg-black border border-neutral-200 dark:border-white/10 flex-col items-center justify-center p-4 md:p-6 relative overflow-hidden group">
-    <div className="absolute inset-0 bg-dot-black/[0.1] dark:bg-dot-white/[0.1] z-0" />
-    <div className="flex flex-col items-center justify-center gap-4 md:gap-6 z-10">
-      <AnimatedTooltip items={interestItems} />
-    </div>
-  </div>
-));
-
-SkeletonInterests.displayName = "SkeletonInterests";
 
 const SkeletonTech = memo(() => (
   <div className="flex flex-1 w-full h-full items-center justify-center p-4 md:p-6 rounded-xl bg-white dark:bg-black border border-neutral-200 dark:border-white/10">
@@ -194,7 +174,6 @@ const SkeletonTech = memo(() => (
     </div>
   </div>
 ));
-
 SkeletonTech.displayName = "SkeletonTech";
 
 const SkeletonLocation = memo(() => (
@@ -207,42 +186,73 @@ const SkeletonLocation = memo(() => (
       allowFullScreen
       className="absolute inset-0 w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 dark:invert opacity-70 group-hover:opacity-100 scale-110 group-hover:scale-100 pointer-events-none"
     />
-    <div className="absolute inset-0 z-10 bg-linear-to-t from-white/50 via-transparent to-transparent dark:from-black/50 group-hover:opacity-0 transition-opacity" />
+    <div className="absolute inset-0 z-10 bg-gradient-to-t from-white/50 via-transparent to-transparent dark:from-black/50 group-hover:opacity-0 transition-opacity" />
     <div className="absolute bottom-2 md:bottom-4 right-2 md:right-4 z-20 px-2 md:px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/10 text-[9px] md:text-[10px] font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity">
       Bengkulu, ID
     </div>
   </div>
 ));
-
 SkeletonLocation.displayName = "SkeletonLocation";
 
 const SkeletonConnect = memo(() => (
   <div className="flex flex-1 w-full h-full rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border border-neutral-200 dark:border-white/10 flex-col items-center justify-center p-3 md:p-4 relative">
+    {/* Contained Background Pattern */}
     <div className="absolute inset-0 overflow-hidden rounded-xl">
       <div className="absolute inset-0 bg-grid-black/[0.05] dark:bg-grid-white/[0.05] z-0" />
     </div>
-
+    {/* Uncontained Tooltips */}
     <div className="flex flex-row items-center justify-center w-full z-10">
       <AnimatedTooltip items={connectItems} />
     </div>
   </div>
 ));
-
 SkeletonConnect.displayName = "SkeletonConnect";
+
+// --- NEW STATUS CARD ---
+const SkeletonStatus = memo(() => (
+  <div className="group flex flex-1 w-full h-full rounded-xl bg-white dark:bg-black border border-neutral-200 dark:border-white/10 flex-col items-center justify-center p-4 relative overflow-hidden">
+    <div className="absolute inset-0 bg-dot-black/[0.1] dark:bg-dot-white/[0.1] z-0" />
+    <div className="z-10 flex flex-col items-center gap-3 md:gap-4 relative">
+      <div className="relative flex items-center justify-center">
+        <div className="absolute w-12 h-12 bg-emerald-500/30 rounded-full animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite]" />
+        <div className="absolute w-12 h-12 bg-emerald-500/10 rounded-full" />
+        <div className="relative w-4 h-4 bg-emerald-500 rounded-full border-[3px] border-white dark:border-black shadow-sm" />
+      </div>
+      <div className="text-center">
+        <h3 className="font-bold text-md md:text-lg text-neutral-800 dark:text-neutral-100 mb-1">
+          Available for Work
+        </h3>
+        <p className="text-[10px] md:text-xs text-neutral-500 dark:text-neutral-400 max-w-[150px] mx-auto leading-relaxed">
+          Accepting new projects & contracts.
+        </p>
+      </div>
+      <a
+        href="mailto:hello@example.com"
+        className="mt-1 px-4 py-1.5 rounded-full bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-300 text-[10px] md:text-xs font-bold border border-neutral-200 dark:border-neutral-800 transition-all hover:scale-105 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 shadow-sm"
+      >
+        Hire Me
+      </a>
+    </div>
+  </div>
+));
+SkeletonStatus.displayName = "SkeletonStatus";
 
 // ============================================================================
 // --- MAIN IDENTITY GRID COMPONENT ---
 // ============================================================================
 
 export const IdentityGrid = memo(function IdentityGrid() {
-  // Memoize the items array to prevent recreation
   const items = useMemo(
     () => [
       {
         title: "The Tech Stack",
-        description: <span className="text-xs md:text-sm">Technologies I use to build scalable products.</span>,
+        description: (
+          <span className="text-xs md:text-sm">
+            Technologies I use to build scalable products.
+          </span>
+        ),
         header: <SkeletonTech />,
-        className: "md:col-span-3 ",
+        className: "md:col-span-3",
         icon: <IconCode className="h-4 w-4 text-neutral-500" />,
       },
       {
@@ -254,24 +264,33 @@ export const IdentityGrid = memo(function IdentityGrid() {
       },
       {
         title: "Connect",
-        description: <span className="text-xs md:text-sm">Let's build something together.</span>,
+        description: (
+          <span className="text-xs md:text-sm">
+            Let's build something together.
+          </span>
+        ),
         header: <SkeletonConnect />,
         className: "md:col-span-2",
         icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
       },
       {
         title: "Education",
-        description: <span className="text-xs md:text-sm">My academic journey.</span>,
+        description: (
+          <span className="text-xs md:text-sm">My academic journey.</span>
+        ),
         header: <SkeletonEducation />,
         className: "md:col-span-2",
         icon: <IconSchool className="h-4 w-4 text-neutral-500" />,
       },
+      // Updated Status Card
       {
-        title: "Interests",
-        description: <span className="text-xs md:text-sm">Current tinkering.</span>,
-        header: <SkeletonInterests />,
+        title: "Status",
+        description: (
+          <span className="text-xs md:text-sm">Current availability.</span>
+        ),
+        header: <SkeletonStatus />,
         className: "md:col-span-1 h-[300px] md:h-full",
-        icon: <IconBulb className="h-4 w-4 text-neutral-500" />,
+        icon: <IconActivity className="h-4 w-4 text-neutral-500" />,
       },
     ],
     []
