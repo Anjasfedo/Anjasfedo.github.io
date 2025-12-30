@@ -5,24 +5,51 @@ import { TextGenerateEffect } from "./ui/text-generate-effect";
 import { cn } from "@/lib/utils";
 
 const roles = [
-  "Full-Stack Developer",
-  "Backend Engineer",
-  "Frontend Developer",
-  "Mobile Developer",
-  "UI/UX Enthusiast",
-  "DevOps Engineer",
+  {
+    label: "Full-Stack Developer",
+    description:
+      "Bridging complex backends with beautiful frontends using Laravel & React.",
+  },
+  {
+    label: "Backend Engineer",
+    description:
+      "Architecting scalable APIs and optimizing database performance.",
+  },
+  {
+    label: "Frontend Developer",
+    description:
+      "Crafting pixel-perfect, responsive user interfaces with Tailwind & Astro.",
+  },
+  {
+    label: "Mobile Developer",
+    description:
+      "Building cross-platform apps that feel native using React Native.",
+  },
+  {
+    label: "UI/UX Enthusiast",
+    description:
+      "Designing intuitive user flows and accessible digital experiences.",
+  },
+  {
+    label: "DevOps Engineer",
+    description:
+      "Automating deployments and managing cloud infrastructure with Docker.",
+  },
 ];
 
 export function Hero({ className }: { className?: string }) {
-  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+  const [activeRoleIndex, setActiveRoleIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
+    if (isHovered) return;
+
     const interval = setInterval(() => {
-      setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 3000); // Slowed down slightly for better readability
+      setActiveRoleIndex((prev) => (prev + 1) % roles.length);
+    }, 2500);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isHovered]);
 
   return (
     <section
@@ -34,62 +61,63 @@ export function Hero({ className }: { className?: string }) {
       {/* --- BACKGROUND BLOBS (Unchanged) --- */}
       <div className="absolute inset-0 -z-10" aria-hidden="true">
         <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
         />
         <motion.div
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={{ scale: [1.2, 1, 1.2], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-1/3 right-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
         />
         <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
           className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"
         />
       </div>
 
       {/* --- CONTENT --- */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-        {/* Badge */}
+        {/* --- PROFILE AVATAR SECTION --- */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.5, y: -20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 mb-8"
+          className="flex flex-col items-center mb-8"
         >
-          <span className="relative flex h-3 w-3">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-          </span>
-          <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
-            Available for freelance work
-          </span>
-        </motion.div>
+          {/* Avatar Container with Glow */}
+          <div className="relative mb-4">
+            {/* Subtle Gradient Glow behind the image */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full blur opacity-30 dark:opacity-50"></div>
 
-        {/* Main Headline */}
+            {/* Profile Image */}
+            <img
+              // Using picsum seed so the image stays consistent on reload
+              src="https://picsum.photos/seed/portfolio-avatar/200/200"
+              alt="Profile"
+              className="relative w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-[3px] border-white dark:border-gray-900 shadow-lg"
+            />
+
+            {/* Integrated Status Dot */}
+            <div className="absolute bottom-1 right-1 p-1 bg-white dark:bg-gray-900 rounded-full z-10">
+              <span className="relative flex h-4 w-4">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-4 w-4 bg-green-500 border-2 border-white dark:border-gray-900"></span>
+              </span>
+            </div>
+          </div>
+
+          {/* Simple Status Text */}
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-gray-100/80 dark:bg-gray-800/80 border border-gray-200 dark:border-gray-700 backdrop-blur-sm">
+            <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
+              Available for freelance work
+            </span>
+          </div>
+        </motion.div>
+        {/* ------------------------------- */}
+
+        {/* Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -102,50 +130,71 @@ export function Hero({ className }: { className?: string }) {
           />
         </motion.h1>
 
-        {/* --- OPTION 1: THE CLEAN TYPEWRITER LAYOUT --- */}
+        {/* --- GRID REVEAL (Unchanged) --- */}
         <div className="flex flex-col items-center justify-center mb-12">
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mb-2"
+            className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-6 font-medium"
           >
-            I am a specialized
+            I specialize in:
           </motion.p>
 
-          {/* Fixed Height Container to prevent layout shift */}
-          <div className="h-16 md:h-20 flex items-center justify-center overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.h2
-                key={roles[currentRoleIndex]}
-                initial={{ y: 20, opacity: 0, filter: "blur(5px)" }}
-                animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
-                exit={{ y: -20, opacity: 0, filter: "blur(5px)" }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-blue-500 pb-2"
-              >
-                {roles[currentRoleIndex]}
-              </motion.h2>
-            </AnimatePresence>
+          <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto mb-8">
+            {roles.map((role, idx) => {
+              const isActive = idx === activeRoleIndex;
+              return (
+                <motion.div
+                  key={role.label}
+                  onMouseEnter={() => {
+                    setIsHovered(true);
+                    setActiveRoleIndex(idx);
+                  }}
+                  onMouseLeave={() => {
+                    setIsHovered(false);
+                  }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{
+                    opacity: 1,
+                    scale: isActive ? 1.05 : 1,
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className={cn(
+                    "px-4 py-2 rounded-full border text-sm md:text-base transition-all duration-300 cursor-pointer backdrop-blur-sm",
+                    isActive
+                      ? "border-transparent bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold shadow-lg shadow-purple-500/25 transform"
+                      : "border-gray-300/50 dark:border-gray-700/50 text-gray-700 dark:text-gray-300 bg-white/80 dark:bg-gray-950/80 hover:bg-white dark:hover:bg-gray-900 hover:border-purple-300/50"
+                  )}
+                >
+                  {role.label}
+                </motion.div>
+              );
+            })}
           </div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="text-lg md:text-xl text-gray-600 dark:text-gray-400 mt-2 max-w-2xl"
-          >
-            building modern web applications with cutting-edge technologies.
-          </motion.p>
+          <div className="h-16 flex items-center justify-center w-full max-w-2xl px-4">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={activeRoleIndex}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className="text-lg md:text-xl text-gray-800 dark:text-gray-200 text-center font-medium"
+              >
+                {roles[activeRoleIndex].description}
+              </motion.p>
+            </AnimatePresence>
+          </div>
         </div>
-        {/* --------------------------------------------- */}
 
-        {/* CTA Buttons */}
+        {/* CTA Buttons (Unchanged) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4"
         >
           <motion.a
             href="#projects"

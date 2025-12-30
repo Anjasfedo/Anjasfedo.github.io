@@ -22,24 +22,20 @@ export const FloatingDock = ({
   desktopClassName?: string;
   mobileClassName?: string;
 }) => {
-  // Use scrollY (pixels) instead of progress (percentage) for better control
   const { scrollY } = useScroll();
   const [visible, setVisible] = useState(true);
 
   useMotionValueEvent(scrollY, "change", (current) => {
-    // Check previous value to determine direction
     const previous = scrollY.getPrevious() ?? 0;
     const direction = current - previous;
 
-    // 1. If at the absolute top (less than 10px), ALWAYS show
     if (current < 10) {
       setVisible(true);
     } else {
-      // 2. Otherwise, check scroll direction
       if (direction < 0) {
-        setVisible(true); // Scrolling UP -> Show
+        setVisible(true);
       } else {
-        setVisible(false); // Scrolling DOWN -> Hide
+        setVisible(false);
       }
     }
   });
@@ -47,7 +43,6 @@ export const FloatingDock = ({
   return (
     <AnimatePresence mode="wait">
       <motion.div
-        // FIX: Set initial y based on visibility state to ensure it's visible on load
         initial={{
           opacity: 1,
           y: visible ? 0 : -100,
@@ -85,7 +80,11 @@ const FloatingDockDesktop = ({
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        "hidden md:flex h-16 gap-4 items-end rounded-full bg-gray-50 dark:bg-neutral-900 px-4 pb-3",
+        // UPDATED STYLING:
+        // 1. bg-white/90 + backdrop-blur: Glassmorphism
+        // 2. border border-gray-200: Distinct outline
+        // 3. shadow-xl: Lifts it off the page
+        "hidden md:flex h-16 gap-4 items-end rounded-full bg-white/90 dark:bg-neutral-900/90 border border-gray-200 dark:border-white/10 shadow-xl backdrop-blur-md px-4 pb-3",
         className
       )}
     >
@@ -110,7 +109,7 @@ const FloatingDockMobile = ({
         {open && (
           <motion.div
             layoutId="nav"
-            className="absolute inset-x-0 top-full mt-2 flex flex-col gap-2 bg-gray-50 dark:bg-neutral-900 p-2 rounded-2xl"
+            className="absolute inset-x-0 top-full mt-2 flex flex-col gap-2 bg-white dark:bg-neutral-900 border border-gray-200 dark:border-white/10 p-2 rounded-2xl shadow-xl"
           >
             {items.map((item, idx) => (
               <motion.div
@@ -126,7 +125,7 @@ const FloatingDockMobile = ({
               >
                 <a
                   href={item.href}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 dark:bg-neutral-900"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-white/10"
                 >
                   <div className="h-4 w-4">{item.icon}</div>
                 </a>
@@ -137,7 +136,7 @@ const FloatingDockMobile = ({
       </AnimatePresence>
       <button
         onClick={() => setOpen(!open)}
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 dark:bg-neutral-800"
+        className="flex h-10 w-10 items-center justify-center rounded-full bg-white dark:bg-neutral-800 border border-gray-200 dark:border-white/10 shadow-lg"
       >
         <IconLayoutNavbarCollapse className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />
       </button>
@@ -204,7 +203,9 @@ function IconContainer({
         style={{ width, height }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="relative flex aspect-square items-center justify-center rounded-full bg-gray-200 dark:bg-neutral-800"
+        // UPDATED ICON STYLING:
+        // Added border and slightly distinct background to separate it from the dock container
+        className="relative flex aspect-square items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800 border border-gray-200 dark:border-white/10 shadow-sm"
       >
         <AnimatePresence>
           {hovered && (
@@ -212,7 +213,8 @@ function IconContainer({
               initial={{ opacity: 0, y: -10, x: "-50%" }}
               animate={{ opacity: 1, y: 0, x: "-50%" }}
               exit={{ opacity: 0, y: -2, x: "-50%" }}
-              className="absolute top-full mt-2 left-1/2 w-fit rounded-md border border-gray-200 bg-gray-100 px-2 py-0.5 text-xs whitespace-pre text-neutral-700 dark:border-neutral-900 dark:bg-neutral-800 dark:text-white"
+              // Updated Tooltip for better visibility
+              className="absolute top-full mt-2 left-1/2 w-fit rounded-md border border-gray-200 bg-white shadow-md px-2 py-0.5 text-xs whitespace-pre text-neutral-700 dark:border-neutral-900 dark:bg-neutral-800 dark:text-white"
             >
               {title}
             </motion.div>
