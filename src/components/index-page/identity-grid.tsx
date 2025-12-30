@@ -16,10 +16,43 @@ import { AnimatedTooltip } from "../ui/animated-tooltip";
 import { BentoGrid, BentoGridItem } from "../ui/bento-grid";
 
 // ============================================================================
-// --- STATIC DATA ---
+// --- TYPES & INTERFACES ---
 // ============================================================================
 
-const educationData = [
+interface EducationItem {
+  id: number;
+  school: string;
+  degree: string;
+  year: string;
+  logo: string;
+  details: string;
+}
+
+interface TechStackItem {
+  id: number;
+  name: string;
+  designation: string;
+  image: string;
+}
+
+interface ConnectItem {
+  id: number;
+  name: string;
+  designation: string;
+  icon: React.ReactNode;
+  image: string;
+}
+
+interface IdentityGridContent {
+  education?: EducationItem[];
+  techStack?: TechStackItem[];
+}
+
+// ============================================================================
+// --- DEFAULT DATA ---
+// ============================================================================
+
+const defaultEducationData: EducationItem[] = [
   {
     id: 1,
     school: "University of Indonesia",
@@ -36,66 +69,58 @@ const educationData = [
     logo: "https://api.dicebear.com/7.x/identicon/svg?seed=School",
     details: "Learned the fundamentals of networking and algorithm logic.",
   },
-] as const;
+];
 
-const techStack = [
+const defaultTechStack: TechStackItem[] = [
   {
     id: 1,
     name: "React",
     designation: "UI Library",
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
   },
   {
     id: 2,
     name: "Next.js",
     designation: "Fullstack Framework",
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
   },
   {
     id: 3,
     name: "TypeScript",
     designation: "Type Safety",
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
   },
   {
     id: 4,
     name: "Tailwind CSS",
     designation: "Styling",
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg",
+    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg",
   },
   {
     id: 5,
     name: "Laravel",
     designation: "Backend",
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
+    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
   },
   {
     id: 6,
     name: "PostgreSQL",
     designation: "Database",
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
   },
   {
     id: 7,
     name: "Docker",
     designation: "Deployment",
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
   },
   {
     id: 8,
     name: "Node.js",
     designation: "Runtime",
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
   },
-] as const;
+];
 
 const connectItems = [
   {
@@ -125,8 +150,8 @@ const connectItems = [
 // --- MEMOIZED SKELETON COMPONENTS ---
 // ============================================================================
 
-// 1. UPDATED EDUCATION SKELETON (Indigo/Purple Gradient)
-const SkeletonEducation = memo(() => (
+// 1. EDUCATION SKELETON (Indigo/Purple Gradient)
+const SkeletonEducation = memo(({ educationData }: { educationData: EducationItem[] }) => (
   <div className="flex flex-1 w-full h-full rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 border border-neutral-200 dark:border-white/10 relative overflow-hidden group/edu">
     <div className="px-3 md:px-6 h-full flex flex-col justify-center py-4 md:py-6 relative z-10 antialiased">
       {educationData.map((item) => (
@@ -167,8 +192,8 @@ const SkeletonEducation = memo(() => (
 ));
 SkeletonEducation.displayName = "SkeletonEducation";
 
-// 2. UPDATED TECH STACK SKELETON (Slate/Gray Gradient)
-const SkeletonTech = memo(() => (
+// 2. TECH STACK SKELETON (Slate/Gray Gradient)
+const SkeletonTech = memo(({ techStack }: { techStack: TechStackItem[] }) => (
   <div className="flex flex-1 w-full h-full items-center justify-center p-4 md:p-6 rounded-xl bg-gradient-to-br from-slate-50 to-neutral-50 dark:from-slate-950/30 dark:to-neutral-950/30 border border-neutral-200 dark:border-white/10">
     <div className="absolute inset-0 bg-dot-black/[0.1] dark:bg-dot-white/[0.1] z-0" />
     <div className="flex flex-wrap justify-center items-center gap-2 md:gap-3 z-10 w-full">
@@ -243,7 +268,15 @@ SkeletonStatus.displayName = "SkeletonStatus";
 // --- MAIN IDENTITY GRID COMPONENT ---
 // ============================================================================
 
-export const IdentityGrid = memo(function IdentityGrid() {
+export const IdentityGrid = memo(function IdentityGrid({
+  content
+}: {
+  content?: IdentityGridContent;
+}) {
+  // Use content from props or fall back to defaults
+  const educationData = content?.education || defaultEducationData;
+  const techStackData = content?.techStack || defaultTechStack;
+
   const items = useMemo(
     () => [
       {
@@ -253,7 +286,7 @@ export const IdentityGrid = memo(function IdentityGrid() {
             Technologies I use to build scalable products.
           </span>
         ),
-        header: <SkeletonTech />,
+        header: <SkeletonTech techStack={techStackData} />,
         className: "md:col-span-3",
         icon: <IconCode className="h-4 w-4 text-neutral-500" />,
       },
@@ -280,7 +313,7 @@ export const IdentityGrid = memo(function IdentityGrid() {
         description: (
           <span className="text-xs md:text-sm">My academic journey.</span>
         ),
-        header: <SkeletonEducation />,
+        header: <SkeletonEducation educationData={educationData} />,
         className: "md:col-span-2",
         icon: <IconSchool className="h-4 w-4 text-neutral-500" />,
       },
@@ -294,7 +327,7 @@ export const IdentityGrid = memo(function IdentityGrid() {
         icon: <IconActivity className="h-4 w-4 text-neutral-500" />,
       },
     ],
-    []
+    [educationData, techStackData]
   );
 
   return (

@@ -6,6 +6,31 @@ import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { IconDownload, IconFileText } from "@tabler/icons-react";
 
+// ============================================================================
+// --- TYPES & INTERFACES ---
+// ============================================================================
+
+interface Role {
+  title: string;
+  company: string;
+  date: string;
+  desc: string;
+}
+
+interface TimelineItem {
+  title: string;
+  description?: string;
+  content?: Role[];
+}
+
+interface ExperienceTimelineContent {
+  timeline?: TimelineItem[];
+}
+
+// ============================================================================
+// --- SUB-COMPONENTS ---
+// ============================================================================
+
 const SubTimelineWrapper = memo(
   ({
     children,
@@ -83,8 +108,11 @@ const SubRole = memo(
 
 SubRole.displayName = "SubRole";
 
-// Memoized timeline data to prevent recreation
-const timelineData = [
+// ============================================================================
+// --- DEFAULT DATA ---
+// ============================================================================
+
+const defaultTimelineData: TimelineItem[] = [
   {
     title: "Present",
     content: (
@@ -160,7 +188,56 @@ const timelineData = [
   },
 ];
 
-export const ExperienceTimeline = memo(function ExperienceTimeline() {
+// Helper to convert TimelineItem to the structure expected by Timeline component
+const convertToTimelineData = (items: TimelineItem[]) => {
+  return items.map((item) => ({
+    title: item.title,
+    content: item.content ? (
+      <div className="flex flex-col">
+        {item.description && (
+          <p className="text-neutral-800 dark:text-neutral-200 text-sm md:text-base mb-12 max-w-2xl leading-relaxed">
+            {item.description}
+          </p>
+        )}
+        <SubTimelineWrapper
+          variant={item.title === "Present" ? "present" : "past"}
+        >
+          {item.content.map((role, idx) => (
+            <SubRole
+              key={idx}
+              title={role.title}
+              company={role.company}
+              date={role.date}
+              desc={role.desc}
+            />
+          ))}
+        </SubTimelineWrapper>
+      </div>
+    ) : (
+      <div className="pb-20">
+        <h4 className="text-lg font-bold dark:text-white mb-2">
+          {item.content?.[0]?.title || ""}
+        </h4>
+        <p className="text-neutral-600 dark:text-neutral-400">
+          {item.content?.[0]?.company ? `${item.content[0].company} • ` : ""}{item.content?.[0]?.date || ""}
+        </p>
+        {item.description && (
+          <p className="mt-4 text-sm dark:text-neutral-300">{item.description}</p>
+        )}
+      </div>
+    ),
+  }));
+};
+
+export const ExperienceTimeline = memo(function ExperienceTimeline({
+  content
+}: {
+  content?: ExperienceTimelineContent;
+}) {
+  // Use content from props or fall back to defaults
+  const timelineData = content?.timeline || defaultTimelineData;
+  const convertedData = convertToTimelineData(timelineData);
+
   return (
     <BackgroundBeamsWithCollision className="!h-auto !min-h-screen w-full items-start justify-start pt-20">
       <section className="w-full relative z-10 pb-20">
@@ -184,7 +261,7 @@ export const ExperienceTimeline = memo(function ExperienceTimeline() {
             to leading frontend teams.
           </motion.p>
         </div>
-        <Timeline data={timelineData} />
+        <Timeline data={convertedData} />
 
         {/* Download CV Section */}
         <motion.div

@@ -210,8 +210,15 @@ const ProjectCard = React.forwardRef<
       }
     };
 
+    const handleNavigation = () => {
+      sessionStorage.setItem(
+        "projects-scroll-position",
+        window.scrollY.toString()
+      );
+    };
+
     return (
-      <a href={`/projects/${project.slug}`}>
+      <a href={`/projects/${project.slug}`} onClick={handleNavigation}>
         <motion.div
           ref={_ref}
           initial={{ opacity: 0, y: 20 }}
@@ -378,6 +385,24 @@ export function ProjectsPage({ projects }: { projects: Project[] }) {
     setTimeout(handleScroll, 100);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [visibleProjects]);
+
+  useEffect(() => {
+    const savedPosition = sessionStorage.getItem("projects-scroll-position");
+
+    if (savedPosition) {
+      // Use a slight timeout to ensure the grid has rendered before scrolling
+      const timeoutId = setTimeout(() => {
+        window.scrollTo({
+          top: parseInt(savedPosition, 10),
+          behavior: "instant", // Use "instant" so the user doesn't see the jump
+        });
+        // Clear it so it doesn't scroll again on refresh
+        sessionStorage.removeItem("projects-scroll-position");
+      }, 100);
+
+      return () => clearTimeout(timeoutId);
+    }
+  }, []);
 
   const isCardFocused = (index: number) => {
     if (typeof window === "undefined") return false;

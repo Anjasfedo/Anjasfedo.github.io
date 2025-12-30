@@ -4,16 +4,33 @@ import { Hero } from "../components/index-page/hero";
 import { IdentityGrid } from "../components/index-page/identity-grid";
 import { ExperienceTimeline } from "../components/index-page/experience-timeline";
 import { ServicesSection } from "../components/index-page/services-section";
+import { getCollection } from "astro:content";
+
+// Load all index page content
+const indexContent = await getCollection("indexPage");
+
+// Sort by order and convert to map for easy access
+const contentMap = Object.fromEntries(
+  indexContent
+    .sort((a, b) => a.data.order - b.data.order)
+    .map(item => [item.data.section, item])
+);
+
+// Extract content for each section
+const heroContent = contentMap.hero?.data;
+const identityGridContent = contentMap['identity-grid']?.data;
+const experienceTimelineContent = contentMap['experience-timeline']?.data;
+const servicesContent = contentMap.services?.data;
 ---
 
 <Layout>
-  <Hero client:load />
-  <IdentityGrid client:visible />
+  <Hero client:load content={heroContent} />
+  <IdentityGrid client:visible content={identityGridContent} />
   <div id="experience">
-    <ExperienceTimeline client:visible />
+    <ExperienceTimeline client:visible content={experienceTimelineContent} />
   </div>
   <!-- <ProjectsGrid client:visible /> -->
   <div id="services">
-    <ServicesSection client:visible />
+    <ServicesSection client:visible content={servicesContent} />
   </div>
 </Layout>

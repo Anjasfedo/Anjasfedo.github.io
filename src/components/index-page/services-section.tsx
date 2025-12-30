@@ -13,49 +13,95 @@ import {
   IconAppWindow,
 } from "@tabler/icons-react";
 
-export function ServicesSection() {
-  const services = [
-    {
-      title: "Frontend Development",
-      description: "Building modern, responsive web applications with React, Vue, Astro, and cutting-edge CSS frameworks.",
-      icon: <IconBrandReact className="w-8 h-8" />,
-    },
-    {
-      title: "Backend Development",
-      description: "Creating robust server-side applications with Node.js, Python, and scalable database architectures.",
-      icon: <IconServer className="w-8 h-8" />,
-    },
-    {
-      title: "Full Stack Solutions",
-      description: "End-to-end development services from database design to polished user interfaces.",
-      icon: <IconDeviceDesktop className="w-8 h-8" />,
-    },
-    {
-      title: "UI/UX Design",
-      description: "Crafting intuitive, accessible interfaces with smooth animations and delightful user experiences.",
-      icon: <IconPalette className="w-8 h-8" />,
-    },
-    {
-      title: "Performance Optimization",
-      description: "Boosting website speed, Core Web Vitals, and overall performance for better user engagement.",
-      icon: <IconSpeedboat className="w-8 h-8" />,
-    },
-    {
-      title: "Code Review & Consulting",
-      description: "Expert code reviews, architecture consulting, and best practices guidance for your projects.",
-      icon: <IconCode className="w-8 h-8" />,
-    },
-    {
-      title: "API Development",
-      description: "Designing and building RESTful and GraphQL APIs with proper documentation and security.",
-      icon: <IconApi className="w-8 h-8" />,
-    },
-    {
-      title: "Progressive Web Apps",
-      description: "Creating installable web apps with offline capabilities and native-like experiences.",
-      icon: <IconAppWindow className="w-8 h-8" />,
-    },
-  ];
+// ============================================================================
+// --- TYPES & INTERFACES ---
+// ============================================================================
+
+interface ServiceItem {
+  title: string;
+  description: string;
+  icon: string; // Icon name as string
+}
+
+interface ServicesSectionContent {
+  services?: ServiceItem[];
+}
+
+// ============================================================================
+// --- ICON MAPPING ---
+// ============================================================================
+
+const iconMap: Record<string, React.ReactNode> = {
+  IconBrandReact: <IconBrandReact className="w-8 h-8" />,
+  IconServer: <IconServer className="w-8 h-8" />,
+  IconDeviceDesktop: <IconDeviceDesktop className="w-8 h-8" />,
+  IconPalette: <IconPalette className="w-8 h-8" />,
+  IconSpeedboat: <IconSpeedboat className="w-8 h-8" />,
+  IconCode: <IconCode className="w-8 h-8" />,
+  IconApi: <IconApi className="w-8 h-8" />,
+  IconAppWindow: <IconAppWindow className="w-8 h-8" />,
+};
+
+// ============================================================================
+// --- DEFAULT DATA ---
+// ============================================================================
+
+const defaultServices: ServiceItem[] = [
+  {
+    title: "Frontend Development",
+    description: "Building modern, responsive web applications with React, Vue, Astro, and cutting-edge CSS frameworks.",
+    icon: "IconBrandReact",
+  },
+  {
+    title: "Backend Development",
+    description: "Creating robust server-side applications with Node.js, Python, and scalable database architectures.",
+    icon: "IconServer",
+  },
+  {
+    title: "Full Stack Solutions",
+    description: "End-to-end development services from database design to polished user interfaces.",
+    icon: "IconDeviceDesktop",
+  },
+  {
+    title: "UI/UX Design",
+    description: "Crafting intuitive, accessible interfaces with smooth animations and delightful user experiences.",
+    icon: "IconPalette",
+  },
+  {
+    title: "Performance Optimization",
+    description: "Boosting website speed, Core Web Vitals, and overall performance for better user engagement.",
+    icon: "IconSpeedboat",
+  },
+  {
+    title: "Code Review & Consulting",
+    description: "Expert code reviews, architecture consulting, and best practices guidance for your projects.",
+    icon: "IconCode",
+  },
+  {
+    title: "API Development",
+    description: "Designing and building RESTful and GraphQL APIs with proper documentation and security.",
+    icon: "IconApi",
+  },
+  {
+    title: "Progressive Web Apps",
+    description: "Creating installable web apps with offline capabilities and native-like experiences.",
+    icon: "IconAppWindow",
+  },
+];
+
+export function ServicesSection({
+  content
+}: {
+  content?: ServicesSectionContent;
+}) {
+  // Use content from props or fall back to defaults
+  const servicesData = content?.services || defaultServices;
+
+  // Convert service items to include actual icon components
+  const services = servicesData.map((service) => ({
+    ...service,
+    icon: iconMap[service.icon] || iconMap.IconCode,
+  }));
 
   return (
     <AuroraBackground showRadialGradient={true} className="min-h-fit !h-auto">

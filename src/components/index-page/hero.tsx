@@ -5,39 +5,44 @@ import { BackgroundLines } from "@/components/ui/background-lines";
 import { cn } from "@/lib/utils";
 import { TextGenerateEffect } from "../ui/text-generate-effect";
 
-// Move outside component to prevent recreation on re-renders
-const roles = [
+// Types for content from MDX
+interface Role {
+  label: string;
+  description: string;
+}
+
+interface HeroContent {
+  roles?: Role[];
+  title?: string;
+}
+
+// Default roles (fallback if no content provided)
+const defaultRoles: Role[] = [
   {
     label: "Full-Stack Developer",
-    description:
-      "Bridging complex backends with beautiful frontends using Laravel & React.",
+    description: "Bridging complex backends with beautiful frontends using Laravel & React.",
   },
   {
     label: "Backend Engineer",
-    description:
-      "Architecting scalable APIs and optimizing database performance.",
+    description: "Architecting scalable APIs and optimizing database performance.",
   },
   {
     label: "Frontend Developer",
-    description:
-      "Crafting pixel-perfect, responsive user interfaces with Tailwind & Astro.",
+    description: "Crafting pixel-perfect, responsive user interfaces with Tailwind & Astro.",
   },
   {
     label: "Mobile Developer",
-    description:
-      "Building cross-platform apps that feel native using React Native.",
+    description: "Building cross-platform apps that feel native using React Native.",
   },
   {
     label: "UI/UX Enthusiast",
-    description:
-      "Designing intuitive user flows and accessible digital experiences.",
+    description: "Designing intuitive user flows and accessible digital experiences.",
   },
   {
     label: "DevOps Engineer",
-    description:
-      "Automating deployments and managing cloud infrastructure with Docker.",
+    description: "Automating deployments and managing cloud infrastructure with Docker.",
   },
-] as const;
+];
 
 // Memoized role card component to prevent unnecessary re-renders
 const RoleCard = React.memo(
@@ -47,10 +52,7 @@ const RoleCard = React.memo(
     onMouseEnter,
     onMouseLeave,
   }: {
-    role: {
-      label: string;
-      description: string;
-    };
+    role: Role;
     isActive: boolean;
     onMouseEnter: () => void;
     onMouseLeave: () => void;
@@ -79,7 +81,16 @@ const RoleCard = React.memo(
 
 RoleCard.displayName = "RoleCard";
 
-export function Hero({ className }: { className?: string }) {
+export function Hero({
+  className,
+  content
+}: {
+  className?: string;
+  content?: HeroContent;
+}) {
+  // Use content from props or fall back to default roles
+  const roles = content?.roles || defaultRoles;
+
   const [activeRoleIndex, setActiveRoleIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -91,12 +102,12 @@ export function Hero({ className }: { className?: string }) {
     }, 2500);
 
     return () => clearInterval(interval);
-  }, [isHovered]);
+  }, [isHovered, roles.length]);
 
   // Memoize the active role description
   const activeDescription = useMemo(
-    () => roles[activeRoleIndex].description,
-    [activeRoleIndex]
+    () => roles[activeRoleIndex]?.description || "",
+    [activeRoleIndex, roles]
   );
 
   // Use callbacks to prevent recreation of functions on each render
