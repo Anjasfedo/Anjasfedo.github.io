@@ -47,7 +47,10 @@ const RoleCard = React.memo(
     onMouseEnter,
     onMouseLeave,
   }: {
-    role: typeof roles[0];
+    role: {
+      label: string;
+      description: string;
+    };
     isActive: boolean;
     onMouseEnter: () => void;
     onMouseLeave: () => void;

@@ -158,7 +158,7 @@ const timelineData = [
       </div>
     ),
   },
-] as const;
+];
 
 export const ExperienceTimeline = memo(function ExperienceTimeline() {
   return (

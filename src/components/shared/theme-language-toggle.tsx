@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { IconSun, IconMoon, IconGlobe, IconArrowUp } from "@tabler/icons-react";
+import { IconSun, IconMoon, IconArrowUp } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 
 type Language = "en" | "id";
@@ -59,8 +59,8 @@ const MeteorShower = ({ theme }: { theme: "light" | "dark" }) => {
 
 export const ThemeLanguageToggle = () => {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
-  const [language, setLanguage] = useState<Language>("en");
-  const [isOpen, setIsOpen] = useState(false);
+  // const [language, setLanguage] = useState<Language>("en");
+  // const [isOpen, setIsOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   // Transition State
@@ -71,7 +71,7 @@ export const ThemeLanguageToggle = () => {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
-    const savedLanguage = localStorage.getItem("language") as Language | null;
+    // const savedLanguage = localStorage.getItem("language") as Language | null;
 
     if (savedTheme) {
       setTheme(savedTheme);
@@ -84,9 +84,9 @@ export const ThemeLanguageToggle = () => {
       document.documentElement.classList.toggle("dark", prefersDark);
     }
 
-    if (savedLanguage) {
-      setLanguage(savedLanguage);
-    }
+    // if (savedLanguage) {
+    //   setLanguage(savedLanguage);
+    // }
   }, []);
 
   useEffect(() => {
@@ -198,7 +198,7 @@ export const ThemeLanguageToggle = () => {
         </motion.button>
 
         {/* Language Toggle */}
-        <div className="relative">
+        {/* <div className="relative">
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
@@ -252,7 +252,7 @@ export const ThemeLanguageToggle = () => {
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
+        </div> */}
       </div>
     </>
   );

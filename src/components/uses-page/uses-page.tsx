@@ -98,7 +98,7 @@ const hardwareData = {
       },
     ],
   },
-} as const;
+};
 
 // Software data organized by category - formatted for HoverEffect
 const softwareData = {
@@ -265,7 +265,7 @@ const softwareData = {
       },
     ],
   },
-} as const;
+};
 
 const HardwareCard = React.memo(
   ({
