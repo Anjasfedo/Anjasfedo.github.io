@@ -2,7 +2,8 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { BentoGrid, BentoGridItem } from "./ui/bento-grid";
-import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect";
+import { LinkPreview } from "./ui/link-preview";
+import { InfiniteMovingCards } from "./ui/infinite-moving-cards";
 import {
   IconCode,
   IconMapPin,
@@ -12,27 +13,23 @@ import {
   IconBrandLinkedin,
   IconBrandTwitter,
   IconBulb,
-  IconBrandReact,
-  IconBrandNextjs,
-  IconBrandTailwind,
-  IconBrandTypescript,
-  IconBrandLaravel,
-  IconBrandDocker,
-  IconBrandNodejs,
-  IconDatabase,
-  IconCpu,
-  IconBrandRust,
-  IconAtom,
-  IconBrandPython,
-  IconDeviceGamepad2,
-  IconCloudCode,
 } from "@tabler/icons-react";
 import { motion } from "motion/react";
 
 export function IdentityGrid() {
   return (
     <div className="relative min-h-fit !h-auto bg-white dark:bg-black">
-      <BackgroundRippleEffect rows={8} cols={27} cellSize={56} />
+      {/* Grid Background */}
+      <div
+        className={cn(
+          "absolute inset-0",
+          "[background-size:40px_40px]",
+          "[background-image:linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)]",
+          "dark:[background-image:linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)]",
+        )}
+      />
+      {/* Radial gradient for the container to give a faded look */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"></div>
       <section className="py-12 md:py-20 relative z-10">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <motion.h2
@@ -86,7 +83,7 @@ const educationData = [
 
 const SkeletonEducation = () => (
   <div className="flex flex-1 w-full h-full rounded-xl bg-white dark:bg-black border border-neutral-200 dark:border-white/10 relative overflow-hidden group/edu">
-    <div className="px-3 md:px-6 h-full flex flex-col justify-around py-4 md:py-6 relative z-10 antialiased">
+    <div className="px-3 md:px-6 h-full flex flex-col justify-center py-4 md:py-6 relative z-10 antialiased">
       {educationData.map((item) => (
         <div key={item.id} className="flex items-start gap-3 md:gap-6 group mb-3 md:mb-4">
           <div className="relative shrink-0">
@@ -116,39 +113,24 @@ const SkeletonEducation = () => (
 // --- SKELETON: INTERESTS (Vertical Scroll) ---
 // ============================================================================
 const interestItems = [
-  { name: "Rust", desc: "Systems Programming", icon: <IconBrandRust className="text-orange-500" /> },
-  { name: "AI Agents", desc: "Autonomous LLMs", icon: <IconCpu className="text-purple-500" /> },
-  { name: "Local First", desc: "Offline Sync", icon: <IconAtom className="text-blue-500" /> },
-  { name: "Python", desc: "Automation", icon: <IconBrandPython className="text-yellow-500" /> },
-  { name: "Gaming", desc: "Strategy Games", icon: <IconDeviceGamepad2 className="text-red-500" /> },
-  { name: "Cloud", desc: "Infrastructure", icon: <IconCloudCode className="text-sky-500" /> },
+  { quote: "Rust", name: "Systems Programming", title: "Memory-safe systems programming" },
+  { quote: "AI Agents", name: "Autonomous LLMs", title: "Building autonomous AI systems" },
+  { quote: "Local First", name: "Offline Sync", title: "Offline-first application architecture" },
+  { quote: "Python", name: "Automation", title: "Scripting and automation workflows" },
+  { quote: "Gaming", name: "Strategy Games", title: "Strategy and simulation games" },
+  { quote: "Cloud", name: "Infrastructure", title: "Cloud infrastructure management" },
 ];
 
 const SkeletonInterests = () => {
-  const duplicatedItems = [...interestItems, ...interestItems];
   return (
-    <div className="flex flex-1 w-full h-full rounded-xl bg-white dark:bg-black border border-neutral-200 dark:border-white/10 flex-col items-center relative overflow-hidden group">
-      <div className="absolute top-0 inset-x-0 h-6 md:h-10 bg-linear-to-b from-white dark:from-black to-transparent z-20" />
-      <div className="absolute bottom-0 inset-x-0 h-6 md:h-10 bg-linear-to-t from-white dark:from-black to-transparent z-20" />
-      <div className="flex flex-col w-full px-2 md:px-4 z-10 animate-marquee-vertical mt-1 md:mt-4">
-        {duplicatedItems.map((item, i) => (
-          <CardTooltip key={i} className="w-full mb-1.5 md:mb-3" content={
-            <div className="text-center">
-              <p className="font-bold text-xs md:text-sm text-neutral-900 dark:text-white">{item.name}</p>
-              <p className="text-[10px] md:text-xs text-neutral-500">{item.desc}</p>
-            </div>
-          }>
-            <div className="flex items-center gap-2 md:gap-3 p-1.5 md:p-3 rounded-xl bg-gray-50/50 dark:bg-neutral-900/50 backdrop-blur-sm border border-neutral-200 dark:border-white/10 hover:bg-white dark:hover:bg-neutral-800 transition-all w-full cursor-pointer">
-              {React.cloneElement(item.icon as any, { className: "w-3 h-3 md:w-4 md:h-4" })}
-              <span className="text-[9px] md:text-[11px] font-semibold text-neutral-700 dark:text-neutral-300">{item.name}</span>
-            </div>
-          </CardTooltip>
-        ))}
-      </div>
-      <style>{`
-        @keyframes marquee-vertical { from { transform: translateY(0); } to { transform: translateY(-50%); } }
-        .animate-marquee-vertical { animation: marquee-vertical 15s linear infinite; }
-      `}</style>
+    <div className="flex flex-1 w-full h-full rounded-xl bg-white dark:bg-black border border-neutral-200 dark:border-white/10 flex-col items-center justify-center relative overflow-hidden group">
+      <InfiniteMovingCards
+        items={interestItems}
+        direction="left"
+        speed="slow"
+        pauseOnHover={true}
+        className="w-full"
+      />
     </div>
   );
 };
@@ -158,14 +140,14 @@ const SkeletonInterests = () => {
 // ============================================================================
 
 const techStack = [
-  { name: "React", desc: "UI Library", icon: <IconBrandReact className="w-8 h-8 text-cyan-400" /> },
-  { name: "Next.js", desc: "Fullstack Framework", icon: <IconBrandNextjs className="w-8 h-8 text-black dark:text-white" /> },
-  { name: "TypeScript", desc: "Type Safety", icon: <IconBrandTypescript className="w-8 h-8 text-blue-500" /> },
-  { name: "Tailwind", desc: "Styling", icon: <IconBrandTailwind className="w-8 h-8 text-cyan-500" /> },
-  { name: "Laravel", desc: "Backend", icon: <IconBrandLaravel className="w-8 h-8 text-red-500" /> },
-  { name: "PostgreSQL", desc: "Database", icon: <IconDatabase className="w-8 h-8 text-blue-400" /> },
-  { name: "Docker", desc: "Deployment", icon: <IconBrandDocker className="w-8 h-8 text-blue-600" /> },
-  { name: "Node.js", desc: "Runtime", icon: <IconBrandNodejs className="w-8 h-8 text-green-500" /> },
+  { quote: "React", name: "UI Library", title: "Building modern user interfaces" },
+  { quote: "Next.js", name: "Fullstack Framework", title: "React framework for production" },
+  { quote: "TypeScript", name: "Type Safety", title: "Typed JavaScript at scale" },
+  { quote: "Tailwind", name: "Styling", title: "Utility-first CSS framework" },
+  { quote: "Laravel", name: "Backend", title: "Elegant PHP framework" },
+  { quote: "PostgreSQL", name: "Database", title: "Powerful open source database" },
+  { quote: "Docker", name: "Deployment", title: "Container platform for apps" },
+  { quote: "Node.js", name: "Runtime", title: "JavaScript runtime environment" },
 ];
 
 const SkeletonTech = () => (
@@ -173,24 +155,13 @@ const SkeletonTech = () => (
     <div className="absolute inset-0 bg-dot-black/[0.1] dark:bg-dot-white/[0.1] z-0" />
     <div className="absolute left-0 w-8 md:w-16 bg-linear-to-r from-white dark:from-black to-transparent z-20 h-full" />
     <div className="absolute right-0 w-8 md:w-16 bg-linear-to-l from-white dark:from-black to-transparent z-20 h-full" />
-    <div className="flex gap-3 md:gap-6 z-10 animate-marquee-horizontal">
-      {[...techStack, ...techStack].map((tech, i) => (
-        <CardTooltip key={i} className="shrink-0" content={
-          <div className="flex flex-col items-center gap-1">
-            <p className="font-bold text-xs md:text-sm text-neutral-900 dark:text-white">{tech.name}</p>
-            <p className="text-[9px] md:text-[10px] text-neutral-500">{tech.desc}</p>
-          </div>
-        }>
-          <div className="p-2 md:p-4 bg-gray-50/80 dark:bg-neutral-900/80 backdrop-blur-sm border border-gray-200 dark:border-white/10 rounded-xl md:rounded-2xl transition-all hover:bg-white dark:hover:bg-neutral-800">
-            {React.cloneElement(tech.icon as any, { className: "w-5 h-5 md:w-8 md:h-8" })}
-          </div>
-        </CardTooltip>
-      ))}
-    </div>
-    <style>{`
-      @keyframes marquee-horizontal { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-      .animate-marquee-horizontal { animation: marquee-horizontal 25s linear infinite; }
-    `}</style>
+    <InfiniteMovingCards
+      items={techStack}
+      direction="left"
+      speed="fast"
+      pauseOnHover={true}
+      className="w-full"
+    />
   </div>
 );
 
@@ -213,32 +184,17 @@ const SkeletonConnect = () => (
   <div className="flex flex-1 w-full h-full rounded-xl bg-white dark:bg-black border border-neutral-200 dark:border-white/10 flex-col items-center justify-center p-3 md:p-4 relative overflow-hidden">
     <div className="absolute inset-0 bg-grid-black/[0.05] dark:bg-grid-white/[0.05] z-0" />
     <div className="flex gap-4 md:gap-6 z-10 flex-wrap justify-center">
-      <a
-        href="https://github.com/Anjasfedo"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="p-3 md:p-4 rounded-xl bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-white/10 hover:text-black dark:hover:text-white transition-all hover:scale-110 shadow-sm cursor-pointer"
-      >
+      <LinkPreview url="https://github.com/Anjasfedo" className="p-3 md:p-4 rounded-xl bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-white/10 hover:text-black dark:hover:text-white transition-all hover:scale-110 shadow-sm cursor-pointer">
         <IconBrandGithub className="w-6 h-6 md:w-8 md:h-8" />
-      </a>
+      </LinkPreview>
 
-      <a
-        href="https://linkedin.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="p-3 md:p-4 rounded-xl bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-white/10 hover:text-blue-600 transition-all hover:scale-110 shadow-sm cursor-pointer"
-      >
+      <LinkPreview url="https://linkedin.com" className="p-3 md:p-4 rounded-xl bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-white/10 hover:text-blue-600 transition-all hover:scale-110 shadow-sm cursor-pointer">
         <IconBrandLinkedin className="w-6 h-6 md:w-8 md:h-8" />
-      </a>
+      </LinkPreview>
 
-      <a
-        href="https://twitter.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="p-3 md:p-4 rounded-xl bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-white/10 hover:text-sky-500 transition-all hover:scale-110 shadow-sm cursor-pointer"
-      >
+      <LinkPreview url="https://twitter.com" className="p-3 md:p-4 rounded-xl bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-white/10 hover:text-sky-500 transition-all hover:scale-110 shadow-sm cursor-pointer">
         <IconBrandTwitter className="w-6 h-6 md:w-8 md:h-8" />
-      </a>
+      </LinkPreview>
     </div>
   </div>
 );
@@ -253,20 +209,3 @@ const items = [
   { title: "Education", description: <span className="text-xs md:text-sm">My academic journey.</span>, header: <SkeletonEducation />, className: "md:col-span-2", icon: <IconSchool className="h-4 w-4 text-neutral-500" /> },
   { title: "Interests", description: <span className="text-xs md:text-sm">Current tinkering.</span>, header: <SkeletonInterests />, className: "md:col-span-1 h-[300px] md:h-full", icon: <IconBulb className="h-4 w-4 text-neutral-500" /> },
 ];
-
-// ============================================================================
-// --- TOOLTIPS ---
-// ============================================================================
-const CardTooltip = ({ children, content, className }: { children: React.ReactNode; content: React.ReactNode; className?: string }) => {
-  return (
-    <div className={cn("relative inline-block group", className)}>
-      <div className="absolute -top-16 md:-top-20 left-1/2 -translate-x-1/2 z-50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none hidden md:block">
-        <div className="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 shadow-xl rounded-lg p-2 md:p-3 w-36 md:w-40 text-center relative">
-          {content}
-          <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white dark:bg-neutral-900 border-b border-r border-neutral-200 dark:border-neutral-800 rotate-45" />
-        </div>
-      </div>
-      {children}
-    </div>
-  );
-};

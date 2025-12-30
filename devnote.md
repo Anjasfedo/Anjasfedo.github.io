@@ -8,3 +8,10 @@
   animated component (make sure handle island react properly) and also make sure all
   section was animated with frammer motion. lets start with first secton of hero about who   
   are me
+
+
+  
+
+
+> well for surely they use @src/components/ui/infinite-moving-cards.tsx , but it still need show icon and animated tooltip like before. make sure the tech scroll x and interest scroll y. just make
+  new ui compoentn based on infinite moving cards that implement our logic. and for education items. implement this expendable [Pasted text #1 +318 lines]

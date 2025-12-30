@@ -12,25 +12,30 @@ export function ProjectsGrid() {
   // Handle mobile focus based on viewport position
   useEffect(() => {
     const handleScroll = () => {
-      if (window.innerWidth < 768) { // Only on mobile
-        const viewportCenter = window.innerHeight / 2;
-        let maxVisibility = 0;
-        let mostVisibleIndex = 0;
-
-        cardRefs.current.forEach((card, index) => {
-          if (!card) return;
-          const rect = card.getBoundingClientRect();
-          const cardCenter = rect.top + rect.height / 2;
-          const distanceFromCenter = Math.abs(viewportCenter - cardCenter);
-
-          if (distanceFromCenter < maxVisibility || index === 0) {
-            maxVisibility = distanceFromCenter;
-            mostVisibleIndex = index;
-          }
-        });
-
-        setFocusedCard(mostVisibleIndex);
+      // Only apply scroll-based focus on mobile devices
+      const isMobile = window.innerWidth < 768;
+      if (!isMobile) {
+        setFocusedCard(null); // Clear focus on desktop
+        return;
       }
+
+      const viewportCenter = window.innerHeight / 2;
+      let maxVisibility = 0;
+      let mostVisibleIndex = 0;
+
+      cardRefs.current.forEach((card, index) => {
+        if (!card) return;
+        const rect = card.getBoundingClientRect();
+        const cardCenter = rect.top + rect.height / 2;
+        const distanceFromCenter = Math.abs(viewportCenter - cardCenter);
+
+        if (distanceFromCenter < maxVisibility || index === 0) {
+          maxVisibility = distanceFromCenter;
+          mostVisibleIndex = index;
+        }
+      });
+
+      setFocusedCard(mostVisibleIndex);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -42,6 +47,7 @@ export function ProjectsGrid() {
   const isFocused = (index: number) => {
     if (typeof window === 'undefined') return hovered === index;
     const isMobile = window.innerWidth < 768;
+    // On mobile: use scroll-based focus, on desktop: use hover
     if (isMobile) {
       return focusedCard === index;
     }
