@@ -2,6 +2,7 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 import { BentoGrid, BentoGridItem } from "./ui/bento-grid";
+import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect";
 import {
   IconCode,
   IconMapPin,
@@ -30,31 +31,34 @@ import { motion } from "motion/react";
 
 export function IdentityGrid() {
   return (
-    <section className="py-12 md:py-20 relative">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-8 md:mb-12 text-center"
-        >
-          Identity & Expertise
-        </motion.h2>
+    <div className="relative min-h-fit !h-auto bg-white dark:bg-black">
+      <BackgroundRippleEffect rows={8} cols={27} cellSize={56} />
+      <section className="py-12 md:py-20 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-8 md:mb-12 text-center"
+          >
+            Identity & Expertise
+          </motion.h2>
 
-        <BentoGrid className="max-w-6xl mx-auto grid-cols-1 md:grid-cols-3 md:auto-rows-[20rem] lg:auto-rows-[22rem] gap-3 md:gap-4">
-          {items.map((item, i) => (
-            <BentoGridItem
-              key={i}
-              title={item.title}
-              description={item.description}
-              header={item.header}
-              className={cn(item.className)}
-              icon={item.icon}
-            />
-          ))}
-        </BentoGrid>
-      </div>
-    </section>
+          <BentoGrid className="max-w-6xl mx-auto grid-cols-1 md:grid-cols-3 md:auto-rows-[20rem] lg:auto-rows-[22rem] gap-3 md:gap-4">
+            {items.map((item, i) => (
+              <BentoGridItem
+                key={i}
+                title={item.title}
+                description={item.description}
+                header={item.header}
+                className={cn(item.className)}
+                icon={item.icon}
+              />
+            ))}
+          </BentoGrid>
+        </div>
+      </section>
+    </div>
   );
 }
 

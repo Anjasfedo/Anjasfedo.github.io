@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
+import { WavyBackground } from "@/components/ui/wavy-background";
 
 export function ProjectsGrid() {
   const [hovered, setHovered] = useState<number | null>(null);
@@ -48,21 +49,42 @@ export function ProjectsGrid() {
   };
 
   return (
-    <section className="py-12 md:py-20 relative">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
+    <WavyBackground
+      className="w-full"
+      containerClassName="min-h-fit !h-auto"
+      colors={["#38bdf8", "#818cf8", "#c084fc", "#e879f9", "#22d3ee"]}
+      waveWidth={50}
+      backgroundFill="transparent"
+      blur={10}
+      speed="fast"
+      waveOpacity={0.2}
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="relative z-10 flex w-full flex-col items-center justify-center gap-8 py-12 md:py-20"
+      >
+        {/* Title */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-8 md:mb-12 text-center"
+          className="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white text-center mb-4"
         >
           Featured Projects
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto w-full">
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-7xl mx-auto w-full px-4">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
               ref={(el) => {
                 cardRefs.current[index] = el;
               }}
@@ -76,7 +98,7 @@ export function ProjectsGrid() {
                 focusedCard !== null && focusedCard !== index && "blur-sm scale-[0.98] opacity-70 md:blur-0 md:scale-100 md:opacity-100"
               )}
               whileHover={{ scale: hovered === index ? 1.02 : 1 }}
-              transition={{ duration: 0.2 }}
+              whileTap={{ scale: 0.98 }}
             >
               {/* Background Image */}
               <img
@@ -158,11 +180,11 @@ export function ProjectsGrid() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex justify-center mt-12 md:mt-16"
+          className="flex justify-center"
         >
           <motion.a
             href="/projects"
-            className="group relative px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full text-white font-semibold overflow-hidden"
+            className="group relative px-8 py-4 bg-black dark:bg-white rounded-full w-fit text-white dark:text-black font-semibold overflow-hidden"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -177,16 +199,10 @@ export function ProjectsGrid() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </span>
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600"
-              initial={{ x: "-100%" }}
-              whileHover={{ x: 0 }}
-              transition={{ duration: 0.3 }}
-            />
           </motion.a>
         </motion.div>
-      </div>
-    </section>
+      </motion.div>
+    </WavyBackground>
   );
 }
 

@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { TextGenerateEffect } from "./ui/text-generate-effect";
+import { BackgroundLines } from "@/components/ui/background-lines";
 import { cn } from "@/lib/utils";
 
 const roles = [
@@ -52,12 +53,13 @@ export function Hero({ className }: { className?: string }) {
   }, [isHovered]);
 
   return (
-    <section
-      className={cn(
-        "relative min-h-screen flex items-center justify-center py-20 overflow-hidden",
-        className
-      )}
-    >
+    <BackgroundLines className="min-h-screen bg-white dark:bg-black">
+      <section
+        className={cn(
+          "relative min-h-screen flex items-center justify-center py-20 overflow-hidden",
+          className
+        )}
+      >
       {/* --- BACKGROUND BLOBS (Unchanged) --- */}
       <div className="absolute inset-0 -z-10" aria-hidden="true">
         <motion.div
@@ -215,5 +217,6 @@ export function Hero({ className }: { className?: string }) {
         </motion.div>
       </div>
     </section>
+    </BackgroundLines>
   );
 }

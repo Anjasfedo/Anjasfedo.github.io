@@ -1,6 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
+import { AuroraBackground } from "@/components/ui/aurora-background";
 import {
   IconBrandReact,
   IconServer,
@@ -57,34 +58,31 @@ export function ServicesSection() {
   ];
 
   return (
-    <section className="py-12 md:py-16 lg:py-20 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.h2
+    <AuroraBackground showRadialGradient={true} className="min-h-fit !h-auto">
+      <div className="max-w-7xl mx-auto px-6 py-12 md:py-20">
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4 text-center tracking-tight"
+          className="text-center mb-16 md:mb-24"
         >
-          Services & Offerings
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="text-neutral-600 dark:text-neutral-400 text-sm md:text-base lg:text-lg max-w-2xl mx-auto mb-12 lg:mb-20 text-center leading-relaxed"
-        >
-          Specialized web development services tailored to bring your ideas to life
-          with modern technologies and best practices.
-        </motion.p>
-      </div>
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight">
+            Services & Offerings
+          </h2>
+          <p className="text-neutral-600 dark:text-neutral-400 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed">
+            Specialized web development services tailored to bring your ideas to life
+            with modern technologies and best practices.
+          </p>
+        </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative z-10 max-w-7xl mx-auto border-neutral-200 dark:border-neutral-800 md:border-t">
-        {services.map((service, index) => (
-          <Service key={service.title} {...service} index={index} />
-        ))}
+        {/* Grid is kept standard, AuroraBackground handles the container */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-neutral-200 dark:border-neutral-800 md:border-t">
+          {services.map((service, index) => (
+            <Service key={service.title} {...service} index={index} />
+          ))}
+        </div>
       </div>
-    </section>
+    </AuroraBackground>
   );
 }
 

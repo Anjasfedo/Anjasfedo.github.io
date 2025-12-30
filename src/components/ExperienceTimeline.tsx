@@ -1,6 +1,6 @@
 "use client";
-import React from "react";
 import { Timeline } from "@/components/ui/timeline";
+import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
@@ -50,9 +50,35 @@ export function ExperienceTimeline() {
   ];
 
   return (
-    <section className="py-20">
-      <Timeline data={data} />
-    </section>
+    /* FIX: Removed h-auto and min-h-fit constraints that conflict with Beams.
+       We use BackgroundBeamsWithCollision as the main wrapper. 
+    */
+    <BackgroundBeamsWithCollision className="w-full h-full min-h-full items-start pt-20">
+      <section className="w-full relative z-10">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-8 md:mb-12 text-center"
+          >
+            Work Experience
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-neutral-600 dark:text-neutral-400 text-sm md:text-base max-w-2xl mx-auto mb-12 md:mb-16 text-center"
+          >
+            My professional journey through tech, from open source contributions to
+            leading frontend teams.
+          </motion.p>
+        </div>
+        {/* FIX: Ensure Timeline has no opaque background */}
+        <Timeline data={data} />
+      </section>
+    </BackgroundBeamsWithCollision>
   );
 }
 
