@@ -23,7 +23,7 @@ export const CollapsibleSection = React.memo(
           className="w-full text-left group"
         >
           {badge && (
-            <span className="bg-black dark:bg-white text-white dark:text-black rounded-full text-sm w-fit px-4 py-1 mb-4 inline-block">
+            <span className="bg-black dark:bg-white text-white dark:text-black rounded-full text-sm w-fit px-4 mx-1 py-1 mb-4 inline-block">
               {badge}
             </span>
           )}
