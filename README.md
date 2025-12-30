@@ -1,46 +1,46 @@
-# Astro Starter Kit: Basics test deploy
+# Anjasfedo | Full-Stack Engineer Portfolio
 
-```sh
-npm create astro@latest -- --template basics
-```
+![Website Status](https://img.shields.io/website?url=https%3A%2F%2Fanjasfedo.github.io%2F&style=flat-square&label=Status&logo=github)
+![CI/CD](https://github.com/Anjasfedo/Anjasfedo.github.io/actions/workflows/deploy.yml/badge.svg)
+![License](https://img.shields.io/badge/License-MIT-blue.svg)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+> **"Building the Bridge Between Complex Backends and Beautiful Frontends."**
 
-## 🚀 Project Structure
+This is the repository for my personal portfolio website, designed to showcase my projects, skills, and engineering philosophy. It is built with a focus on **performance**, **accessibility**, and **interactive design**.
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🔗 Live Demo
+🚀 **[anjasfedo.github.io](https://anjasfedo.github.io/)**
+
+---
+
+## 🛠️ Tech Stack
+
+This project leverages a modern, high-performance stack:
+
+-   **Framework:** [Astro](https://astro.build/) (Static Site Generation for speed)
+-   **UI Library:** [React](https://reactjs.org/) (For interactive islands like the Dock)
+-   **Styling:** [Tailwind CSS](https://tailwindcss.com/) (Utility-first styling)
+-   **Animations:** [Motion](https://motion.dev/) (Framer Motion for layout transitions)
+-   **Icons:** [Tabler Icons](https://tabler-icons.io/)
+-   **Deployment:** GitHub Pages via GitHub Actions (CI/CD)
+
+## ✨ Key Features
+
+-   **Hybrid Rendering:** Uses Astro's Island Architecture to hydrate React components only when needed.
+-   **Mac-style Dock:** A fully interactive, physics-based floating navigation dock.
+-   **Responsive Design:** Mobile-first architecture that adapts to any screen size.
+-   **Automated Deployment:** Commits to `main` trigger a complete build and deploy cycle via GitHub Actions.
+-   **SEO Optimized:** Includes sitemap generation and semantic HTML structure.
+
+## 📂 Project Structure
 
 ```text
 /
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+├── public/           # Static assets (images, fonts, icons)
+├── src/
+│   ├── components/   # UI Components (Hero, Dock, Grids)
+│   ├── layouts/      # Base layouts (Head, Meta tags, Footer)
+│   ├── pages/        # Astro pages (File-based routing)
+│   ├── styles/       # Global CSS and Tailwind directives
+│   └── lib/          # Utility functions (clsx, tw-merge)
+└── astro.config.mjs  # Configuration settings
