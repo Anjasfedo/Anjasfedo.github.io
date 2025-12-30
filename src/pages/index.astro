@@ -10,7 +10,11 @@ import { ServicesSection } from "../components/ServicesSection";
 <Layout>
   <Hero client:load />
   <IdentityGrid client:visible />
-  <ProjectsGrid client:visible />
-  <ExperienceTimeline client:visible />
-  <ServicesSection client:visible />
+  <div id="experience">
+    <ExperienceTimeline client:visible />
+  </div>
+  <!-- <ProjectsGrid client:visible /> -->
+  <div id="services">
+    <ServicesSection client:visible />
+  </div>
 </Layout>

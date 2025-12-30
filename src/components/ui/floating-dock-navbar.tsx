@@ -13,6 +13,25 @@ import {
 import { cn } from "@/lib/utils";
 import { IconLayoutNavbarCollapse, IconX } from "@tabler/icons-react";
 
+// Helper function to handle navigation with hash
+const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  // Check if the href contains a hash
+  if (href.includes("#")) {
+    const [path, hash] = href.split("#");
+    const targetId = `#${hash}`;
+
+    // If we're already on the home page or the path matches
+    if (window.location.pathname === "/" || window.location.pathname === path) {
+      e.preventDefault();
+      const element = document.querySelector(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+    // Otherwise, let the default link behavior work (navigate to /#section)
+  }
+};
+
 export const FloatingDock = ({
   items,
   desktopClassName,
@@ -100,7 +119,10 @@ const FloatingDockMobile = ({
               >
                 <a
                   href={item.href}
-                  onClick={() => setTimeout(() => setOpen(false), 150)}
+                  onClick={(e) => {
+                    handleNavClick(e, item.href);
+                    setTimeout(() => setOpen(false), 150);
+                  }}
                   className="group flex items-center gap-4 h-16 px-4 rounded-2xl bg-gray-50/50 dark:bg-neutral-800/50 border border-transparent dark:border-white/5 transition-all overflow-hidden"
                 >
                   {/* Magnified Icon Container */}
@@ -201,7 +223,7 @@ function IconContainer({
   const [hovered, setHovered] = useState(false);
 
   return (
-    <a href={href}>
+    <a href={href} onClick={(e) => handleNavClick(e, href)}>
       <motion.div
         ref={ref}
         style={{ width, height }}
