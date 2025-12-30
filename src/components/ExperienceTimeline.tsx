@@ -4,6 +4,7 @@ import { Timeline } from "@/components/ui/timeline";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
+import { IconDownload, IconFileText } from "@tabler/icons-react";
 
 const SubTimelineWrapper = memo(
   ({
@@ -184,6 +185,32 @@ export const ExperienceTimeline = memo(function ExperienceTimeline() {
           </motion.p>
         </div>
         <Timeline data={timelineData} />
+
+        {/* Download CV Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3 }}
+          className="max-w-7xl mx-auto px-4 md:px-6 mt-16"
+        >
+          <div className="flex flex-col items-center justify-center gap-6">
+            <p className="text-neutral-600 dark:text-neutral-400 text-sm md:text-base text-center max-w-2xl">
+              Interested in my complete professional history? Download my CV for a detailed overview of my experience, skills, and accomplishments.
+            </p>
+            <motion.a
+              href="/cv.pdf"
+              download
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center gap-3"
+            >
+              <IconFileText className="w-5 h-5" />
+              <span>Download CV</span>
+              <IconDownload className="w-5 h-5 group-hover:translate-y-0.5 transition-transform" />
+            </motion.a>
+          </div>
+        </motion.div>
       </section>
     </BackgroundBeamsWithCollision>
   );

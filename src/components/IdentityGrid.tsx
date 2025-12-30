@@ -11,7 +11,7 @@ import {
   IconBrandGithub,
   IconBrandLinkedin,
   IconBrandTwitter,
-  IconActivity, // Imported for the Status card
+  IconActivity,
 } from "@tabler/icons-react";
 import { motion } from "motion/react";
 
@@ -125,8 +125,9 @@ const connectItems = [
 // --- MEMOIZED SKELETON COMPONENTS ---
 // ============================================================================
 
+// 1. UPDATED EDUCATION SKELETON (Indigo/Purple Gradient)
 const SkeletonEducation = memo(() => (
-  <div className="flex flex-1 w-full h-full rounded-xl bg-white dark:bg-black border border-neutral-200/50 dark:border-white/10 relative overflow-hidden group/edu">
+  <div className="flex flex-1 w-full h-full rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 border border-neutral-200 dark:border-white/10 relative overflow-hidden group/edu">
     <div className="px-3 md:px-6 h-full flex flex-col justify-center py-4 md:py-6 relative z-10 antialiased">
       {educationData.map((item) => (
         <div
@@ -166,8 +167,9 @@ const SkeletonEducation = memo(() => (
 ));
 SkeletonEducation.displayName = "SkeletonEducation";
 
+// 2. UPDATED TECH STACK SKELETON (Slate/Gray Gradient)
 const SkeletonTech = memo(() => (
-  <div className="flex flex-1 w-full h-full items-center justify-center p-4 md:p-6 rounded-xl bg-white dark:bg-black border border-neutral-200 dark:border-white/10">
+  <div className="flex flex-1 w-full h-full items-center justify-center p-4 md:p-6 rounded-xl bg-gradient-to-br from-slate-50 to-neutral-50 dark:from-slate-950/30 dark:to-neutral-950/30 border border-neutral-200 dark:border-white/10">
     <div className="absolute inset-0 bg-dot-black/[0.1] dark:bg-dot-white/[0.1] z-0" />
     <div className="flex flex-wrap justify-center items-center gap-2 md:gap-3 z-10 w-full">
       <AnimatedTooltip items={techStack} />
@@ -208,9 +210,9 @@ const SkeletonConnect = memo(() => (
 ));
 SkeletonConnect.displayName = "SkeletonConnect";
 
-// --- NEW STATUS CARD ---
+// 3. UPDATED STATUS SKELETON (Emerald/Green Gradient)
 const SkeletonStatus = memo(() => (
-  <div className="group flex flex-1 w-full h-full rounded-xl bg-white dark:bg-black border border-neutral-200 dark:border-white/10 flex-col items-center justify-center p-4 relative overflow-hidden">
+  <div className="group flex flex-1 w-full h-full rounded-xl bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30 border border-neutral-200 dark:border-white/10 flex-col items-center justify-center p-4 relative overflow-hidden">
     <div className="absolute inset-0 bg-dot-black/[0.1] dark:bg-dot-white/[0.1] z-0" />
     <div className="z-10 flex flex-col items-center gap-3 md:gap-4 relative">
       <div className="relative flex items-center justify-center">
@@ -228,7 +230,7 @@ const SkeletonStatus = memo(() => (
       </div>
       <a
         href="mailto:hello@example.com"
-        className="mt-1 px-4 py-1.5 rounded-full bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-300 text-[10px] md:text-xs font-bold border border-neutral-200 dark:border-neutral-800 transition-all hover:scale-105 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 shadow-sm"
+        className="mt-1 px-4 py-1.5 rounded-full bg-white/50 dark:bg-neutral-900/50 backdrop-blur-sm text-neutral-600 dark:text-neutral-300 text-[10px] md:text-xs font-bold border border-neutral-200 dark:border-neutral-800 transition-all hover:scale-105 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 shadow-sm"
       >
         Hire Me
       </a>
@@ -282,7 +284,6 @@ export const IdentityGrid = memo(function IdentityGrid() {
         className: "md:col-span-2",
         icon: <IconSchool className="h-4 w-4 text-neutral-500" />,
       },
-      // Updated Status Card
       {
         title: "Status",
         description: (
