@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { Timeline } from "@/components/ui/timeline";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { motion } from "motion/react";
@@ -28,7 +29,7 @@ export function ExperienceTimeline() {
         <div className="flex flex-col">
           <p className="text-neutral-800 dark:text-neutral-200 text-sm md:text-base mb-12 max-w-2xl leading-relaxed">
             A high-growth period where I balanced agency leadership with specialized FinTech
-            consulting projects.
+            consulting projects from 2021 through 2024.
           </p>
           <SubTimelineWrapper variant="past">
             <SubRole title="Lead Web Developer" company="Creative Agency" date="2022 - 2024" desc="Managed a team of 5 developers for high-traffic media sites." />
@@ -50,11 +51,8 @@ export function ExperienceTimeline() {
   ];
 
   return (
-    /* FIX: Removed h-auto and min-h-fit constraints that conflict with Beams.
-       We use BackgroundBeamsWithCollision as the main wrapper. 
-    */
-    <BackgroundBeamsWithCollision className="w-full h-full min-h-full items-start pt-20">
-      <section className="w-full relative z-10">
+    <BackgroundBeamsWithCollision className="!h-auto !min-h-screen w-full items-start justify-start pt-20">
+      <section className="w-full relative z-10 pb-20">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -75,7 +73,6 @@ export function ExperienceTimeline() {
             leading frontend teams.
           </motion.p>
         </div>
-        {/* FIX: Ensure Timeline has no opaque background */}
         <Timeline data={data} />
       </section>
     </BackgroundBeamsWithCollision>
@@ -86,7 +83,6 @@ const SubTimelineWrapper = ({ children, variant }: { children: React.ReactNode, 
   return (
     <div className="relative pb-20">
       <div className="absolute left-[3px] md:left-[-37px] top-2 bottom-0 w-[2px] bg-neutral-100 dark:bg-neutral-900 z-0" />
-
       <motion.div
         initial={{ clipPath: "inset(0 0 100% 0)" }}
         whileInView={{ clipPath: "inset(0 0 0% 0)" }}
@@ -99,7 +95,6 @@ const SubTimelineWrapper = ({ children, variant }: { children: React.ReactNode, 
             : "bg-blue-500/50"
         )}
       />
-
       <div className="flex flex-col gap-20 relative z-20">
         {children}
       </div>
@@ -110,24 +105,17 @@ const SubTimelineWrapper = ({ children, variant }: { children: React.ReactNode, 
 const SubRole = ({ title, company, date, desc }: any) => {
   return (
     <div className="relative pl-8 md:pl-0 group">
-      {/* ANIMATED BLUE DOT:
-          Starts as gray (neutral-300/800) and turns blue when scrolled into view 
-      */}
       <motion.div
-        initial={{
-          scale: 0.8,
-          backgroundColor: "#d1d5db" // gray-300
-        }}
+        initial={{ scale: 0.8, backgroundColor: "#d1d5db" }}
         whileInView={{
           scale: 1.1,
-          backgroundColor: "#3b82f6", // blue-500
+          backgroundColor: "#3b82f6",
           boxShadow: "0px 0px 12px rgba(59, 130, 246, 0.6)"
         }}
         viewport={{ amount: 0.8 }}
         transition={{ duration: 0.5 }}
         className="absolute left-[-5px] md:left-[-45px] top-2 w-3.5 h-3.5 rounded-full z-30 border-2 border-white dark:border-neutral-950 transition-transform group-hover:scale-125 shadow-sm"
       />
-
       <div className="flex flex-col gap-1">
         <span className="text-[10px] font-bold uppercase tracking-widest text-neutral-500">{date}</span>
         <h4 className="text-xl font-bold dark:text-white leading-none">{title}</h4>
