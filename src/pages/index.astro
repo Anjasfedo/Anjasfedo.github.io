@@ -2,9 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 import { Hero } from "../components/Hero";
 import { IdentityGrid } from "../components/IdentityGrid";
+import { ProjectsGrid } from "../components/ProjectsGrid";
 ---
 
 <Layout>
   <Hero client:load />
   <IdentityGrid client:visible />
+  <ProjectsGrid client:visible />
 </Layout>
