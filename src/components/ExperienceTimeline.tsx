@@ -1,55 +1,56 @@
 "use client";
-import React from "react";
+import React, { useMemo, memo } from "react";
 import { Timeline } from "@/components/ui/timeline";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
-export function ExperienceTimeline() {
-  const data = [
-    {
-      title: "Present",
-      content: (
-        <div className="flex flex-col">
-          <p className="text-neutral-800 dark:text-neutral-200 text-sm md:text-base mb-12 max-w-2xl leading-relaxed">
-            I am currently managing a multi-faceted career path, balancing enterprise-level
-            frontend engineering with specialized freelance consulting and open-source contributions.
-          </p>
-          <SubTimelineWrapper variant="present">
-            <SubRole title="Senior Frontend Engineer" company="Tech Innovations Inc." date="2025 - Present" desc="Leading architecture and frontend strategy." />
-            <SubRole title="Full Stack Freelancer" company="Independent" date="2024 - Present" desc="Specialized in Local-First synchronization." />
-            <SubRole title="Open Source Maintainer" company="GitHub" date="2023 - Present" desc="Maintaining high-performance UI libraries." />
-          </SubTimelineWrapper>
-        </div>
-      ),
-    },
-    {
-      title: "2024",
-      content: (
-        <div className="flex flex-col">
-          <p className="text-neutral-800 dark:text-neutral-200 text-sm md:text-base mb-12 max-w-2xl leading-relaxed">
-            A high-growth period where I balanced agency leadership with specialized FinTech
-            consulting projects from 2021 through 2024.
-          </p>
-          <SubTimelineWrapper variant="past">
-            <SubRole title="Lead Web Developer" company="Creative Agency" date="2022 - 2024" desc="Managed a team of 5 developers for high-traffic media sites." />
-            <SubRole title="UI/UX Consultant" company="FinTech Solutions" date="2021 - 2024" desc="Designed systems for global banking dashboards." />
-          </SubTimelineWrapper>
-        </div>
-      ),
-    },
-    {
-      title: "Early 2021",
-      content: (
-        <div className="pb-20">
-          <h4 className="text-lg font-bold dark:text-white mb-2">Junior Developer</h4>
-          <p className="text-neutral-600 dark:text-neutral-400">StartupXYZ • Jan 2021 - Dec 2022</p>
-          <p className="mt-4 text-sm dark:text-neutral-300">Foundational years learning full-stack basics and agile development.</p>
-        </div>
-      ),
-    },
-  ];
+// Memoized timeline data to prevent recreation
+const timelineData = [
+  {
+    title: "Present",
+    content: (
+      <div className="flex flex-col">
+        <p className="text-neutral-800 dark:text-neutral-200 text-sm md:text-base mb-12 max-w-2xl leading-relaxed">
+          I am currently managing a multi-faceted career path, balancing enterprise-level
+          frontend engineering with specialized freelance consulting and open-source contributions.
+        </p>
+        <SubTimelineWrapper variant="present">
+          <SubRole title="Senior Frontend Engineer" company="Tech Innovations Inc." date="2025 - Present" desc="Leading architecture and frontend strategy." />
+          <SubRole title="Full Stack Freelancer" company="Independent" date="2024 - Present" desc="Specialized in Local-First synchronization." />
+          <SubRole title="Open Source Maintainer" company="GitHub" date="2023 - Present" desc="Maintaining high-performance UI libraries." />
+        </SubTimelineWrapper>
+      </div>
+    ),
+  },
+  {
+    title: "2024",
+    content: (
+      <div className="flex flex-col">
+        <p className="text-neutral-800 dark:text-neutral-200 text-sm md:text-base mb-12 max-w-2xl leading-relaxed">
+          A high-growth period where I balanced agency leadership with specialized FinTech
+          consulting projects from 2021 through 2024.
+        </p>
+        <SubTimelineWrapper variant="past">
+          <SubRole title="Lead Web Developer" company="Creative Agency" date="2022 - 2024" desc="Managed a team of 5 developers for high-traffic media sites." />
+          <SubRole title="UI/UX Consultant" company="FinTech Solutions" date="2021 - 2024" desc="Designed systems for global banking dashboards." />
+        </SubTimelineWrapper>
+      </div>
+    ),
+  },
+  {
+    title: "Early 2021",
+    content: (
+      <div className="pb-20">
+        <h4 className="text-lg font-bold dark:text-white mb-2">Junior Developer</h4>
+        <p className="text-neutral-600 dark:text-neutral-400">StartupXYZ • Jan 2021 - Dec 2022</p>
+        <p className="mt-4 text-sm dark:text-neutral-300">Foundational years learning full-stack basics and agile development.</p>
+      </div>
+    ),
+  },
+] as const;
 
+export const ExperienceTimeline = memo(function ExperienceTimeline() {
   return (
     <BackgroundBeamsWithCollision className="!h-auto !min-h-screen w-full items-start justify-start pt-20">
       <section className="w-full relative z-10 pb-20">
@@ -73,13 +74,13 @@ export function ExperienceTimeline() {
             leading frontend teams.
           </motion.p>
         </div>
-        <Timeline data={data} />
+        <Timeline data={timelineData} />
       </section>
     </BackgroundBeamsWithCollision>
   );
-}
+});
 
-const SubTimelineWrapper = ({ children, variant }: { children: React.ReactNode, variant: "present" | "past" }) => {
+const SubTimelineWrapper = memo(({ children, variant }: { children: React.ReactNode, variant: "present" | "past" }) => {
   return (
     <div className="relative pb-20">
       <div className="absolute left-[3px] md:left-[-37px] top-2 bottom-0 w-[2px] bg-neutral-100 dark:bg-neutral-900 z-0" />
@@ -100,9 +101,11 @@ const SubTimelineWrapper = ({ children, variant }: { children: React.ReactNode, 
       </div>
     </div>
   );
-};
+});
 
-const SubRole = ({ title, company, date, desc }: any) => {
+SubTimelineWrapper.displayName = "SubTimelineWrapper";
+
+const SubRole = memo(({ title, company, date, desc }: { title: string; company: string; date: string; desc: string }) => {
   return (
     <div className="relative pl-8 md:pl-0 group">
       <motion.div
@@ -126,4 +129,6 @@ const SubRole = ({ title, company, date, desc }: any) => {
       </div>
     </div>
   );
-};
+});
+
+SubRole.displayName = "SubRole";

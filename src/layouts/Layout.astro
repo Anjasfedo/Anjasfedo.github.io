@@ -3,6 +3,7 @@ import "../styles/global.css";
 // Import the WRAPPER, not the generic UI component
 import { FloatingDockWrapper } from "../components/floating-dock-wrapper";
 import { Footer } from "../components/Footer";
+import { ThemeLanguageToggle } from "../components/theme-language-toggle";
 ---
 
 <!doctype html>
@@ -16,6 +17,7 @@ import { Footer } from "../components/Footer";
   </head>
   <body>
     <FloatingDockWrapper client:load />
+    <ThemeLanguageToggle client:load />
 
     <slot />
 

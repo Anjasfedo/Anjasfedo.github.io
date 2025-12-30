@@ -1,10 +1,11 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { TextGenerateEffect } from "./ui/text-generate-effect";
 import { BackgroundLines } from "@/components/ui/background-lines";
 import { cn } from "@/lib/utils";
 
+// Move outside component to prevent recreation on re-renders
 const roles = [
   {
     label: "Full-Stack Developer",
@@ -36,7 +37,42 @@ const roles = [
     description:
       "Automating deployments and managing cloud infrastructure with Docker.",
   },
-];
+] as const;
+
+// Memoized role card component to prevent unnecessary re-renders
+const RoleCard = React.memo(({
+  role,
+  isActive,
+  onMouseEnter,
+  onMouseLeave,
+}: {
+  role: typeof roles[0];
+  isActive: boolean;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
+}) => (
+  <motion.div
+    key={role.label}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
+    initial={{ opacity: 0, scale: 0.8 }}
+    animate={{
+      opacity: 1,
+      scale: isActive ? 1.05 : 1,
+    }}
+    transition={{ duration: 0.3 }}
+    className={cn(
+      "px-4 py-2 rounded-full border text-sm md:text-base transition-all duration-300 cursor-pointer backdrop-blur-sm",
+      isActive
+        ? "border-transparent bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold shadow-lg shadow-purple-500/25 transform"
+        : "border-gray-300/50 dark:border-gray-700/50 text-gray-700 dark:text-gray-300 bg-white/80 dark:bg-gray-950/80 hover:bg-white dark:hover:bg-gray-900 hover:border-purple-300/50"
+    )}
+  >
+    {role.label}
+  </motion.div>
+));
+
+RoleCard.displayName = "RoleCard";
 
 export function Hero({ className }: { className?: string }) {
   const [activeRoleIndex, setActiveRoleIndex] = useState(0);
@@ -51,6 +87,19 @@ export function Hero({ className }: { className?: string }) {
 
     return () => clearInterval(interval);
   }, [isHovered]);
+
+  // Memoize the active role description
+  const activeDescription = useMemo(() => roles[activeRoleIndex].description, [activeRoleIndex]);
+
+  // Use callbacks to prevent recreation of functions on each render
+  const handleMouseEnter = useCallback((index: number) => {
+    setIsHovered(true);
+    setActiveRoleIndex(index);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setIsHovered(false);
+  }, []);
 
   return (
     <BackgroundLines className="min-h-screen bg-white dark:bg-black">
@@ -144,35 +193,15 @@ export function Hero({ className }: { className?: string }) {
           </motion.p>
 
           <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto mb-8">
-            {roles.map((role, idx) => {
-              const isActive = idx === activeRoleIndex;
-              return (
-                <motion.div
-                  key={role.label}
-                  onMouseEnter={() => {
-                    setIsHovered(true);
-                    setActiveRoleIndex(idx);
-                  }}
-                  onMouseLeave={() => {
-                    setIsHovered(false);
-                  }}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{
-                    opacity: 1,
-                    scale: isActive ? 1.05 : 1,
-                  }}
-                  transition={{ duration: 0.3 }}
-                  className={cn(
-                    "px-4 py-2 rounded-full border text-sm md:text-base transition-all duration-300 cursor-pointer backdrop-blur-sm",
-                    isActive
-                      ? "border-transparent bg-gradient-to-r from-purple-600 to-blue-600 text-white font-bold shadow-lg shadow-purple-500/25 transform"
-                      : "border-gray-300/50 dark:border-gray-700/50 text-gray-700 dark:text-gray-300 bg-white/80 dark:bg-gray-950/80 hover:bg-white dark:hover:bg-gray-900 hover:border-purple-300/50"
-                  )}
-                >
-                  {role.label}
-                </motion.div>
-              );
-            })}
+            {roles.map((role, idx) => (
+              <RoleCard
+                key={role.label}
+                role={role}
+                isActive={idx === activeRoleIndex}
+                onMouseEnter={() => handleMouseEnter(idx)}
+                onMouseLeave={handleMouseLeave}
+              />
+            ))}
           </div>
 
           <div className="h-16 flex items-center justify-center w-full max-w-2xl px-4">
@@ -185,7 +214,7 @@ export function Hero({ className }: { className?: string }) {
                 transition={{ duration: 0.3 }}
                 className="text-lg md:text-xl text-gray-800 dark:text-gray-200 text-center font-medium"
               >
-                {roles[activeRoleIndex].description}
+                {activeDescription}
               </motion.p>
             </AnimatePresence>
           </div>
