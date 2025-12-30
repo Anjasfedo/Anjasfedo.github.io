@@ -3,10 +3,14 @@ import Layout from "../layouts/Layout.astro";
 import { Hero } from "../components/Hero";
 import { IdentityGrid } from "../components/IdentityGrid";
 import { ProjectsGrid } from "../components/ProjectsGrid";
+import { ExperienceTimeline } from "../components/ExperienceTimeline";
+import { ServicesSection } from "../components/ServicesSection";
 ---
 
 <Layout>
   <Hero client:load />
   <IdentityGrid client:visible />
   <ProjectsGrid client:visible />
+  <ExperienceTimeline client:visible />
+  <ServicesSection client:visible />
 </Layout>

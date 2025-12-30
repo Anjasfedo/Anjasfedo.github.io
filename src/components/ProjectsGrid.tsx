@@ -63,7 +63,9 @@ export function ProjectsGrid() {
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
-              ref={(el) => (cardRefs.current[index] = el)}
+              ref={(el) => {
+                cardRefs.current[index] = el;
+              }}
               onMouseEnter={() => setHovered(index)}
               onMouseLeave={() => setHovered(null)}
               className={cn(
