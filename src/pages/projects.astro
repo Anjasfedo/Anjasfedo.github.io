@@ -1,8 +1,41 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { ProjectsPage } from "../components/ProjectsPage";
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+// Fetch all projects from the content collection
+const allProjects = await getCollection("projects");
+
+// Transform projects to match the Project interface
+const projectsData = allProjects.map((project) => ({
+  id: project.id,
+  slug: project.data.slug,
+  name: project.data.title,
+  description: project.data.description,
+  longDescription: project.data.longDescription,
+  status: project.data.status,
+  tags: project.data.tags,
+  image: project.data.image,
+  images: project.data.images,
+  video: project.data.video,
+  colorClass: project.data.colorClass,
+  github: project.data.github,
+  demo: project.data.demo,
+}));
 ---
 
 <Layout title="Projects | M. Anjasfedo Afridiansah">
-  <ProjectsPage client:load />
+  <div class="relative min-h-screen w-full flex items-center justify-center bg-white dark:bg-black overflow-hidden">
+    {/* Dotted Background */}
+    <div
+      class="absolute inset-0 [background-size:20px_20px] [background-image:radial-gradient(#d4d4d4_1px,transparent_1px)] dark:[background-image:radial-gradient(#404040_1px,transparent_1px)]"
+    />
+    {/* Radial gradient for the container to give a faded look */}
+    <div class="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"></div>
+
+    <div class="relative z-10 w-full">
+      <ProjectsPage client:load projects={projectsData} />
+    </div>
+  </div>
 </Layout>

@@ -9,7 +9,7 @@
   section was animated with frammer motion. lets start with first secton of hero about who   
   are me
 
-
+make pivacy policy & terms page
   
 
 

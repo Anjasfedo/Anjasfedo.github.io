@@ -1,0 +1,58 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { ProjectDetail } from "../../components/ProjectDetail";
+import { getCollection, render } from "astro:content";
+
+// Generate static paths for all projects
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+
+  return projects.map((project) => ({
+    params: { slug: project.data.slug },
+    props: { project },
+  }));
+}
+
+// Get the project from props (returned by getStaticPaths)
+const { project } = Astro.props;
+const { Content } = await render(project);
+
+// Set page metadata
+const title = `${project.data.title} | Project | M. Anjasfedo Afridiansah`;
+const description = project.data.description;
+---
+
+<Layout title={title}>
+  <ProjectDetail
+    client:load
+    project={{
+      id: project.id,
+      slug: project.slug,
+      name: project.data.title,
+      description: project.data.description,
+      longDescription: project.data.longDescription,
+      status: project.data.status,
+      tags: project.data.tags,
+      image: project.data.image,
+      images: project.data.images,
+      video: project.data.video,
+      colorClass: project.data.colorClass,
+      github: project.data.github,
+      demo: project.data.demo,
+    }}
+  />
+
+  <!-- Render MDX content below the project details -->
+  <div class="bg-white dark:bg-neutral-950 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 md:px-6 pb-24 pt-12">
+      <div
+        class="prose prose-lg prose-neutral dark:prose-invert max-w-none
+                  prose-headings:font-bold
+                  prose-p:leading-relaxed
+                  prose-img:rounded-xl"
+      >
+        <Content />
+      </div>
+    </div>
+  </div>
+</Layout>

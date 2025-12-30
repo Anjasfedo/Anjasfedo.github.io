@@ -12,19 +12,17 @@ import {
 } from "@tabler/icons-react";
 
 export function Footer() {
-  const [yValue, setYValue] = useState(25);
+  // Logic remains for settling points, but we'll focus on X-axis now
+  const [settleX, setSettleX] = useState(0);
 
-  // Handle responsive Y value for the animation settle point
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setYValue(55); // Mobile settle point
-      } else {
-        setYValue(25); // Desktop settle point
-      }
+      // Typically for horizontal center, 0 is the neutral point in Framer Motion
+      // if the parent container is flex-col items-center.
+      setSettleX(0);
     };
 
-    handleResize(); // Set initial value
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -50,7 +48,7 @@ export function Footer() {
     },
     {
       name: "Email",
-      icon: <IconMail className="w-5 h-5" />,
+      icon: <IconMail className="h-5 w-5" />,
       href: "mailto:hello@example.com",
       color: "hover:bg-red-500",
     },
@@ -58,20 +56,19 @@ export function Footer() {
 
   return (
     <footer className="bg-slate-950 w-full overflow-hidden">
-      {/* - Removed default height constraints from LampContainer if they existed 
-          - Ensured the lamp effect centers correctly within the 1280px boundary
-      */}
       <LampContainer className="">
         <div className="flex flex-col items-center justify-end w-full h-full mx-auto px-6">
-
-          {/* Main Footer CTA */}
+          {/* Main Footer CTA - Updated Animation */}
           <motion.div
-            initial={{ opacity: 0.5, y: 200 }}
-            whileInView={{ opacity: 1, y: yValue }}
+            // CHANGE: Start from -200px (left) and 0.2 opacity
+            initial={{ opacity: 0, x: -200 }}
+            // CHANGE: Animate to settleX (center)
+            whileInView={{ opacity: 1, x: settleX }}
+            viewport={{ once: true }} // Optional: only animate once
             transition={{
               delay: 0.3,
-              duration: 0.8,
-              ease: "easeInOut",
+              duration: 1, // Slightly longer for a smoother horizontal sweep
+              ease: "easeOut",
             }}
             className="text-center mb-16 md:mb-24 mt-12"
           >
@@ -79,8 +76,8 @@ export function Footer() {
               Ready to start?
             </h2>
             <p className="text-neutral-400 text-sm md:text-base max-w-md mx-auto mb-10 leading-relaxed">
-              Currently accepting new projects and collaborations.
-              Let’s turn your vision into a digital reality.
+              Currently accepting new projects and collaborations. Let’s turn
+              your vision into a digital reality.
             </p>
 
             <motion.a
@@ -94,11 +91,10 @@ export function Footer() {
             </motion.a>
           </motion.div>
 
-          {/* Bottom Bar Section - Constrained to 1280px */}
+          {/* Bottom Bar Section */}
           <div className="w-full pt-10 pb-10 border-t border-slate-800/60">
             <div className="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-4">
-
-              {/* Copyright & Branding */}
+              {/* Branding */}
               <div className="flex flex-col items-center md:items-start order-2 md:order-1">
                 <p className="text-slate-100 font-bold text-xl mb-1 tracking-tighter">
                   ANJAS<span className="text-cyan-500">FEDO</span>
@@ -108,7 +104,7 @@ export function Footer() {
                 </p>
               </div>
 
-              {/* Social Links */}
+              {/* Socials */}
               <div className="flex items-center gap-4 order-1 md:order-2">
                 {socialLinks.map((social) => (
                   <a
@@ -127,19 +123,27 @@ export function Footer() {
                 ))}
               </div>
 
-              {/* Tertiary Links */}
+              {/* Links */}
               <div className="flex items-center gap-6 order-3">
-                {["Privacy", "Terms", "Sitemap"].map((link) => (
-                  <a
-                    key={link}
-                    href="#"
-                    className="text-slate-500 hover:text-cyan-400 text-[10px] md:text-xs font-bold transition-colors uppercase tracking-[0.2em]"
-                  >
-                    {link}
-                  </a>
-                ))}
+                <a
+                  href="/privacy"
+                  className="text-slate-500 hover:text-cyan-400 text-[10px] md:text-xs font-bold transition-colors uppercase tracking-[0.2em]"
+                >
+                  Privacy
+                </a>
+                <a
+                  href="/terms"
+                  className="text-slate-500 hover:text-cyan-400 text-[10px] md:text-xs font-bold transition-colors uppercase tracking-[0.2em]"
+                >
+                  Terms
+                </a>
+                <a
+                  href="/sitemap-index.xml"
+                  className="text-slate-500 hover:text-cyan-400 text-[10px] md:text-xs font-bold transition-colors uppercase tracking-[0.2em]"
+                >
+                  Sitemap
+                </a>
               </div>
-
             </div>
           </div>
         </div>

@@ -1,0 +1,191 @@
+---
+import Layout from "../layouts/Layout.astro";
+import {
+  IconLinkOff,
+  IconSearchOff,
+  IconCloudQuestion,
+} from "@tabler/icons-react";
+---
+
+<Layout title="404 - Page Not Found | M. Anjasfedo Afridiansah">
+  <div
+    class="min-h-screen bg-white dark:bg-black flex items-center justify-center relative overflow-hidden"
+  >
+    {/* Animated Background */}
+    <div class="absolute inset-0 opacity-30">
+      <div
+        class="absolute top-20 left-20 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"
+      >
+      </div>
+      <div
+        class="absolute top-20 right-20 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"
+      >
+      </div>
+      <div
+        class="absolute -bottom-8 left-1/2 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"
+      >
+      </div>
+    </div>
+
+    {/* Grid Pattern */}
+    <div
+      class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"
+    >
+    </div>
+
+    <div
+      class="relative z-10 max-w-4xl mx-auto px-4 md:px-6 text-center space-y-8 py-20"
+    >
+      {/* 404 Text with Animation */}
+      <div class="relative">
+        <div
+          class="text-[180px] md:text-[220px] lg:text-[280px] font-bold leading-none tracking-tighter"
+        >
+          <span
+            class="bg-gradient-to-br from-purple-600 via-blue-600 to-pink-600 bg-clip-text text-transparent animate-gradient-x"
+          >
+            404
+          </span>
+        </div>
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="text-6xl md:text-8xl animate-float">👻</div>
+        </div>
+      </div>
+
+      {/* Error Message */}
+      <div class="space-y-4">
+        <h1
+          class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white"
+        >
+          Page Not Found
+        </h1>
+        <p
+          class="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed"
+        >
+          Oops! The page you're looking for seems to have wandered off into the
+          digital void. Let's get you back to safety.
+        </p>
+      </div>
+
+      {/* FIXED: Meaningful Error Illustration Icons */}
+      <div class="flex flex-wrap justify-center gap-6 py-8">
+        {/* Broken Link Icon */}
+        <div
+          class="flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 animate-bounce shadow-lg shadow-purple-500/25 text-white"
+        >
+          <IconLinkOff size={48} stroke={1.5} />
+        </div>
+
+        {/* Search Not Found Icon */}
+        <div
+          class="flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br from-blue-500 to-cyan-500 animate-bounce animation-delay-200 shadow-lg shadow-blue-500/25 text-white"
+        >
+          <IconSearchOff size={48} stroke={1.5} />
+        </div>
+
+        {/* Missing Cloud Page Icon */}
+        <div
+          class="flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-500 animate-bounce animation-delay-400 shadow-lg shadow-pink-500/25 text-white"
+        >
+          <IconCloudQuestion size={48} stroke={1.5} />
+        </div>
+      </div>
+
+      {/* Action Buttons */}
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a
+          href="/"
+          class="group relative px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-full font-semibold text-lg overflow-hidden transition-all hover:scale-105 hover:shadow-xl hover:shadow-gray-900/20 dark:hover:shadow-white/20"
+        >
+          <span class="relative z-10 flex items-center gap-2">
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              ></path>
+            </svg>
+            Go Home
+          </span>
+        </a>
+
+        <a
+          href="/projects"
+          class="group px-8 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full font-semibold text-lg transition-all hover:scale-105 hover:shadow-xl hover:shadow-purple-500/25"
+        >
+          <span class="flex items-center gap-2">
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+              ></path>
+            </svg>
+            View Projects
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <style is:global>
+      @keyframes blob {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        33% {
+          transform: translate(30px, -50px) scale(1.1);
+        }
+        66% {
+          transform: translate(-20px, 20px) scale(0.9);
+        }
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+      @keyframes gradient-x {
+        0%,
+        100% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+      }
+      .animate-blob {
+        animation: blob 7s infinite;
+      }
+      .animation-delay-2000 {
+        animation-delay: 2s;
+      }
+      .animation-delay-4000 {
+        animation-delay: 4s;
+      }
+      .animate-float {
+        animation: float 3s ease-in-out infinite;
+      }
+      .animate-gradient-x {
+        background-size: 200% 200%;
+        animation: gradient-x 3s ease infinite;
+      }
+    </style>
+  </div>
+</Layout>

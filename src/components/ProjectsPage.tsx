@@ -10,14 +10,14 @@ import { IconSearch, IconX, IconChevronDown } from "@tabler/icons-react";
 // --- PROJECT DATA & TYPES ---
 // ============================================================================
 
-type ProjectStatus =
+export type ProjectStatus =
   | "All"
   | "Production"
   | "Beta"
   | "Alpha"
   | "Archived"
   | "Featured";
-type ProjectTag =
+export type ProjectTag =
   | "React"
   | "Next.js"
   | "TypeScript"
@@ -48,22 +48,26 @@ type ProjectTag =
   | "GraphQL"
   | "Laravel";
 
-interface Project {
+export interface Project {
   id: number;
+  slug: string;
   name: string;
   description: string;
   longDescription: string;
   status: ProjectStatus[];
   tags: ProjectTag[];
-  image: string;
+  image: string; // thumbnail
+  images?: string[]; // gallery images
+  video?: string; // video URL (YouTube, Vimeo, etc.)
   colorClass: string;
   github?: string;
   demo?: string;
 }
-const allProjects: Project[] = [
+export const allProjects: Project[] = [
   // --- EXISTING PROJECTS (1-6) ---
   {
     id: 1,
+    slug: "ai-content-generator",
     name: "AI Content Generator",
     description:
       "An intelligent content generation platform powered by LLMs with custom fine-tuning capabilities.",
@@ -72,12 +76,19 @@ const allProjects: Project[] = [
     status: ["Production", "Featured"],
     tags: ["React", "Next.js", "TypeScript", "OpenAI", "PostgreSQL", "Python"],
     image: "https://picsum.photos/seed/project1/800/600",
+    images: [
+      "https://picsum.photos/seed/project1-1/1200/800",
+      "https://picsum.photos/seed/project1-2/1200/800",
+      "https://picsum.photos/seed/project1-3/1200/800",
+    ],
+    video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
     colorClass: "bg-gradient-to-br from-indigo-900/90 to-purple-900/90",
     github: "https://github.com",
     demo: "https://demo.com",
   },
   {
     id: 2,
+    slug: "ecommerce-analytics",
     name: "E-Commerce Analytics",
     description:
       "Real-time analytics dashboard for tracking sales, inventory, and customer behavior patterns.",
@@ -90,6 +101,7 @@ const allProjects: Project[] = [
   },
   {
     id: 3,
+    slug: "task-management-app",
     name: "Task Management App",
     description:
       "Collaborative task management tool with real-time updates and team collaboration features.",
@@ -102,6 +114,7 @@ const allProjects: Project[] = [
   },
   {
     id: 4,
+    slug: "weather-forecast",
     name: "Weather Forecast",
     description:
       "Beautiful weather application with 7-day forecasts, hourly data, and location-based alerts.",
@@ -114,6 +127,7 @@ const allProjects: Project[] = [
   },
   {
     id: 5,
+    slug: "social-media-dashboard",
     name: "Social Media Dashboard",
     description:
       "Unified dashboard for managing multiple social media accounts with scheduling and analytics.",
@@ -125,6 +139,7 @@ const allProjects: Project[] = [
   },
   {
     id: 6,
+    slug: "code-snippet-manager",
     name: "Code Snippet Manager",
     description:
       "Developer tool for organizing, sharing, and discovering code snippets with syntax highlighting.",
@@ -139,6 +154,7 @@ const allProjects: Project[] = [
   // --- NEW PROJECTS (7-12) ---
   {
     id: 7,
+    slug: "realtime-chat-app",
     name: "Real-time Chat App",
     description:
       "Secure messaging platform with end-to-end encryption, file sharing, and group calls.",
@@ -151,6 +167,7 @@ const allProjects: Project[] = [
   },
   {
     id: 8,
+    slug: "defi-crypto-portfolio",
     name: "DeFi Crypto Portfolio",
     description:
       "Cryptocurrency tracker connecting to multiple wallets and exchanges for a unified view.",
@@ -163,6 +180,7 @@ const allProjects: Project[] = [
   },
   {
     id: 9,
+    slug: "automated-testing-cicd",
     name: "Automated Testing CI/CD",
     description:
       "A custom CI/CD pipeline tool that automates testing and deployment workflows for microservices.",
@@ -175,6 +193,7 @@ const allProjects: Project[] = [
   },
   {
     id: 10,
+    slug: "health-fitness-tracker",
     name: "Health & Fitness Tracker",
     description:
       "Mobile application for tracking workouts, nutrition logs, and connecting with wearable devices.",
@@ -187,6 +206,7 @@ const allProjects: Project[] = [
   },
   {
     id: 11,
+    slug: "learning-management-system",
     name: "Learning Management System",
     description:
       "Educational platform for course creation, student management, and interactive quizzes.",
@@ -199,6 +219,7 @@ const allProjects: Project[] = [
   },
   {
     id: 12,
+    slug: "travel-booking-engine",
     name: "Travel Booking Engine",
     description:
       "Search engine for flights and hotels aggregating data from multiple travel APIs.",
@@ -435,22 +456,41 @@ const ProjectCard = React.forwardRef<
     { project, index, isFocused, isBlurred, onMouseEnter, onMouseLeave },
     ref
   ) => {
+    // Status color helper function
+    const getStatusColor = (status: string) => {
+      switch (status) {
+        case "Production":
+          return "bg-green-500/20 text-green-400 border-green-500/30";
+        case "Beta":
+          return "bg-blue-500/20 text-blue-400 border-blue-500/30";
+        case "Alpha":
+          return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
+        case "Archived":
+          return "bg-gray-500/20 text-gray-400 border-gray-500/30";
+        case "Featured":
+          return "bg-purple-500/20 text-purple-400 border-purple-500/30";
+        default:
+          return "bg-neutral-500/20 text-neutral-400 border-neutral-500/30";
+      }
+    };
+
     return (
-      <motion.div
-        ref={ref}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: index * 0.05 }}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
-        whileHover={{ scale: isFocused ? 1.02 : 1 }}
-        whileTap={{ scale: 0.98 }}
-        className={cn(
-          "relative rounded-xl overflow-hidden min-h-80 md:min-h-96 transition-all duration-500 ease-out cursor-pointer group",
-          // Focus/Blur Logic applied via classNames based on props
-          isBlurred && "blur-sm scale-[0.98] opacity-70 grayscale-[0.5]"
-        )}
-      >
+      <a href={`/projects/${project.slug}`}>
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.05 }}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+          whileHover={{ scale: isFocused ? 1.02 : 1 }}
+          whileTap={{ scale: 0.98 }}
+          className={cn(
+            "relative rounded-xl overflow-hidden min-h-80 md:min-h-96 transition-all duration-500 ease-out cursor-pointer group",
+            // Focus/Blur Logic applied via classNames based on props
+            isBlurred && "blur-sm scale-[0.98] opacity-70 grayscale-[0.5]"
+          )}
+        >
         {/* Background Image */}
         <img
           src={project.image}
@@ -483,9 +523,10 @@ const ProjectCard = React.forwardRef<
                 key={status}
                 className={cn(
                   "px-3 py-1 text-[10px] md:text-xs font-semibold rounded-full border backdrop-blur-sm transition-all duration-300",
+                  getStatusColor(status),
                   isFocused
-                    ? "bg-white/30 text-white border-white/50"
-                    : "bg-white/10 text-white/70 border-white/20"
+                    ? "bg-opacity-30 border-opacity-50"
+                    : "bg-opacity-10 border-opacity-20"
                 )}
               >
                 {status}
@@ -583,6 +624,7 @@ const ProjectCard = React.forwardRef<
           </div>
         </div>
       </motion.div>
+      </a>
     );
   }
 );
@@ -592,7 +634,7 @@ ProjectCard.displayName = "ProjectCard";
 // --- MAIN PROJECTS PAGE COMPONENT ---
 // ============================================================================
 
-export function ProjectsPage() {
+export function ProjectsPage({ projects }: { projects: Project[] }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedStatus, setSelectedStatus] = useState<ProjectStatus>("All");
   const [selectedTags, setSelectedTags] = useState<ProjectTag[]>([]);
@@ -605,7 +647,7 @@ export function ProjectsPage() {
 
   // Filter projects
   const filteredProjects = useMemo(() => {
-    return allProjects.filter((project) => {
+    return projects.filter((project) => {
       const matchesSearch =
         searchQuery === "" ||
         project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -620,7 +662,7 @@ export function ProjectsPage() {
         selectedTags.every((tag) => project.tags.includes(tag));
       return matchesSearch && matchesStatus && matchesTags;
     });
-  }, [searchQuery, selectedStatus, selectedTags]);
+  }, [projects, searchQuery, selectedStatus, selectedTags]);
 
   const visibleProjects = filteredProjects.slice(0, visibleCount);
   const hasMore = filteredProjects.length > visibleCount;
