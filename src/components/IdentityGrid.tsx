@@ -2,7 +2,9 @@
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { BentoGrid, BentoGridItem } from "./ui/bento-grid";
-import { TracingBeam } from "./ui/tracing-beam"; // Ensure this path is correct
+import { TracingBeam } from "./ui/tracing-beam";
+import { LinkPreview } from "./ui/link-preview";
+import { HoverBorderGradient } from "./ui/hover-border-gradient";
 import {
   IconCode,
   IconMapPin,
@@ -30,10 +32,7 @@ import {
 } from "@tabler/icons-react";
 import {
   motion,
-  useTransform,
   AnimatePresence,
-  useMotionValue,
-  useSpring,
 } from "motion/react";
 
 export function IdentityGrid() {
@@ -136,7 +135,7 @@ const SkeletonInterests = () => {
     <div className="flex flex-1 w-full h-full rounded-xl bg-white dark:bg-black border border-neutral-200 dark:border-white/[0.1] flex-col items-center relative overflow-hidden group">
       <div className="absolute top-0 inset-x-0 h-10 bg-gradient-to-b from-white dark:from-black to-transparent z-20" />
       <div className="absolute bottom-0 inset-x-0 h-10 bg-gradient-to-t from-white dark:from-black to-transparent z-20" />
-      <div className="flex flex-col w-full px-4 z-10 animate-marquee-vertical group-hover:pause mt-4">
+      <div className="flex flex-col w-full px-4 z-10 animate-marquee-vertical mt-4">
         {duplicatedItems.map((item, i) => (
           <CardTooltip key={i} className="w-full mb-3" content={
             <div className="text-center">
@@ -151,10 +150,9 @@ const SkeletonInterests = () => {
           </CardTooltip>
         ))}
       </div>
-      <style jsx global>{`
+      <style>{`
         @keyframes marquee-vertical { from { transform: translateY(0); } to { transform: translateY(-50%); } }
         .animate-marquee-vertical { animation: marquee-vertical 15s linear infinite; }
-        .pause { animation-play-state: paused; }
       `}</style>
     </div>
   );
@@ -180,7 +178,7 @@ const SkeletonTech = () => (
     <div className="absolute inset-0 bg-dot-black/[0.1] dark:bg-dot-white/[0.1] z-0" />
     <div className="absolute left-0 w-16 bg-gradient-to-r from-white dark:from-black to-transparent z-20 h-full" />
     <div className="absolute right-0 w-16 bg-gradient-to-l from-white dark:from-black to-transparent z-20 h-full" />
-    <div className="flex gap-6 z-10 animate-marquee-horizontal group-hover:pause">
+    <div className="flex gap-6 z-10 animate-marquee-horizontal">
       {[...techStack, ...techStack].map((tech, i) => (
         <CardTooltip key={i} className="shrink-0" content={
           <div className="flex flex-col items-center gap-1">
@@ -192,7 +190,7 @@ const SkeletonTech = () => (
         </CardTooltip>
       ))}
     </div>
-    <style jsx global>{`
+    <style>{`
       @keyframes marquee-horizontal { from { transform: translateX(0); } to { transform: translateX(-50%); } }
       .animate-marquee-horizontal { animation: marquee-horizontal 25s linear infinite; }
     `}</style>
@@ -208,12 +206,44 @@ const SkeletonLocation = () => (
 );
 
 const SkeletonConnect = () => (
-  <div className="flex flex-1 w-full h-full rounded-xl bg-white dark:bg-black border border-neutral-200 dark:border-white/[0.1] flex-col items-center justify-center p-4 relative overflow-hidden">
+  <div className="flex flex-1 w-full h-full rounded-xl bg-white dark:bg-black border border-neutral-200 dark:border-white/10 flex-col items-center justify-center p-4 relative overflow-hidden">
     <div className="absolute inset-0 bg-grid-black/[0.05] dark:bg-grid-white/[0.05] z-0" />
-    <div className="flex gap-8 z-10">
-      <SpringTooltip content="GitHub"><a href="https://github.com/Anjasfedo" target="_blank" className="block p-5 rounded-2xl bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-white/[0.1] hover:text-black dark:hover:text-white transition-all hover:scale-110 shadow-sm"><IconBrandGithub className="w-10 h-10" /></a></SpringTooltip>
-      <SpringTooltip content="LinkedIn"><a href="#" target="_blank" className="block p-5 rounded-2xl bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-white/[0.1] hover:text-blue-600 transition-all hover:scale-110 shadow-sm"><IconBrandLinkedin className="w-10 h-10" /></a></SpringTooltip>
-      <SpringTooltip content="Twitter"><a href="#" target="_blank" className="block p-5 rounded-2xl bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-white/[0.1] hover:text-sky-500 transition-all hover:scale-110 shadow-sm"><IconBrandTwitter className="w-10 h-10" /></a></SpringTooltip>
+    <div className="flex gap-6 z-10 flex-wrap justify-center">
+      <HoverBorderGradient
+        duration={2}
+        className="!bg-transparent !rounded-2xl"
+        containerClassName="!rounded-2xl"
+      >
+        <LinkPreview url="https://github.com/Anjasfedo" className="block">
+          <div className="p-4 rounded-xl bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-white/10 hover:text-black dark:hover:text-white transition-all hover:scale-110 shadow-sm cursor-pointer">
+            <IconBrandGithub className="w-8 h-8" />
+          </div>
+        </LinkPreview>
+      </HoverBorderGradient>
+
+      <HoverBorderGradient
+        duration={2.5}
+        className="!bg-transparent !rounded-2xl"
+        containerClassName="!rounded-2xl"
+      >
+        <LinkPreview url="https://linkedin.com" className="block">
+          <div className="p-4 rounded-xl bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-white/10 hover:text-blue-600 transition-all hover:scale-110 shadow-sm cursor-pointer">
+            <IconBrandLinkedin className="w-8 h-8" />
+          </div>
+        </LinkPreview>
+      </HoverBorderGradient>
+
+      <HoverBorderGradient
+        duration={3}
+        className="!bg-transparent !rounded-2xl"
+        containerClassName="!rounded-2xl"
+      >
+        <LinkPreview url="https://twitter.com" className="block">
+          <div className="p-4 rounded-xl bg-gray-50 dark:bg-neutral-900 border border-gray-200 dark:border-white/10 hover:text-sky-500 transition-all hover:scale-110 shadow-sm cursor-pointer">
+            <IconBrandTwitter className="w-8 h-8" />
+          </div>
+        </LinkPreview>
+      </HoverBorderGradient>
     </div>
   </div>
 );
@@ -243,25 +273,6 @@ const CardTooltip = ({ children, content, className }: { children: React.ReactNo
               {content}
               <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white dark:bg-neutral-900 border-b border-r border-neutral-200 dark:border-neutral-800 rotate-45" />
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      {children}
-    </div>
-  );
-};
-
-const SpringTooltip = ({ children, content }: { children: React.ReactNode; content: React.ReactNode }) => {
-  const [hovered, setHovered] = useState(false);
-  const x = useMotionValue(0);
-  const rotate = useSpring(useTransform(x, [-100, 100], [-45, 45]), { stiffness: 100, damping: 5 });
-  const translateX = useSpring(useTransform(x, [-100, 100], [-50, 50]), { stiffness: 100, damping: 5 });
-  return (
-    <div className="relative inline-block" onMouseEnter={() => setHovered(true)} onMouseLeave={() => { setHovered(false); x.set(0); }} onMouseMove={(e) => x.set(e.nativeEvent.offsetX - e.currentTarget.offsetWidth / 2)}>
-      <AnimatePresence>
-        {hovered && (
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }} style={{ translateX, rotate }} className="absolute -top-12 -left-1/2 translate-x-1/2 flex text-xs flex-col items-center justify-center rounded-lg bg-black dark:bg-white z-50 shadow-xl px-4 py-2 font-bold text-white dark:text-black">
-            {content}
           </motion.div>
         )}
       </AnimatePresence>
