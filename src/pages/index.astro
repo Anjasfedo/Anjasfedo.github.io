@@ -2,10 +2,12 @@
 import Layout from "../layouts/Layout.astro";
 import Container from "../components/Container.astro";
 import { Hero } from "../components/Hero";
+import { IdentityGrid } from "../components/IdentityGrid";
 ---
 
 <Layout>
-  <!-- <Container> -->
-    <Hero client:load />
-  <!-- </Container> -->
+  <Hero client:load />
+  <Container>
+    <IdentityGrid client:visible />
+  </Container>
 </Layout>
