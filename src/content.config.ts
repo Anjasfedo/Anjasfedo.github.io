@@ -75,4 +75,20 @@ const indexPage = defineCollection({
     })
 });
 
-export const collections = { projects, indexPage };
+// Certificates content collection
+const certificates = defineCollection({
+    loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/certificates" }),
+    schema: z.object({
+        title: z.string(),
+        slug: z.string(),
+        issuer: z.string(),
+        description: z.string().optional(),
+        skills: z.array(z.string()).optional(),
+        media: z.string().optional(),
+        credential: z.string().optional(), // URL to credential
+        issueDate: z.coerce.date(),
+        expirationDate: z.coerce.date().optional(),
+    })
+});
+
+export const collections = { projects, indexPage, certificates };

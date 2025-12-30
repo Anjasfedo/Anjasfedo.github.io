@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
 import React, { useState } from "react";
@@ -8,9 +9,9 @@ export const HoverEffect = ({
 }: {
   items: {
     title: string;
-    description: string;
+    description: React.ReactNode; // Change from string to React.ReactNode
     link: string;
-    icon?: React.ReactNode; // Added icon prop
+    icon?: React.ReactNode;
   }[];
   className?: string;
 }) => {
@@ -24,9 +25,8 @@ export const HoverEffect = ({
       )}
     >
       {items.map((item, idx) => (
-        <a
-          href={item?.link}
-          key={item?.link}
+        <div // Changed from <a> to <div> because your description might contain <a> tags (LinkPreview)
+          key={item?.link + idx}
           className="relative group block p-2 h-full w-full"
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
@@ -49,7 +49,6 @@ export const HoverEffect = ({
             )}
           </AnimatePresence>
           <Card>
-            {/* Render Icon if provided */}
             {item.icon && (
               <div className="mb-4 text-zinc-900 dark:text-zinc-100 opacity-80 group-hover:opacity-100 transition-opacity">
                 {item.icon}
@@ -58,7 +57,7 @@ export const HoverEffect = ({
             <CardTitle>{item.title}</CardTitle>
             <CardDescription>{item.description}</CardDescription>
           </Card>
-        </a>
+        </div>
       ))}
     </div>
   );
@@ -98,8 +97,7 @@ export const CardTitle = ({
   return (
     <h4
       className={cn(
-        "font-bold tracking-wide mt-2", // Reduced mt because of icon
-        "text-zinc-900 dark:text-zinc-100",
+        "font-bold tracking-wide mt-2 text-zinc-900 dark:text-zinc-100",
         className
       )}
     >
@@ -113,17 +111,16 @@ export const CardDescription = ({
   children,
 }: {
   className?: string;
-  children: React.ReactNode;
+  children: React.ReactNode; // This already supports ReactNode
 }) => {
   return (
-    <p
+    <div // Changed from <p> to <div> because a <p> cannot contain block elements like <img> or <div>
       className={cn(
-        "mt-4 tracking-wide leading-relaxed text-sm", // Reduced mt for tighter layout
-        "text-zinc-600 dark:text-zinc-400",
+        "mt-4 tracking-wide leading-relaxed text-sm text-zinc-600 dark:text-zinc-400",
         className
       )}
     >
       {children}
-    </p>
+    </div>
   );
 };

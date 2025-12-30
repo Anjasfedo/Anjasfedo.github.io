@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
-import { IconSearch, IconX, IconChevronDown } from "@tabler/icons-react";
+import { IconSearch, IconX, IconChevronDown, IconAward, IconCapProjecting } from "@tabler/icons-react";
 
 // ============================================================================
 // --- TYPES ---
@@ -84,11 +84,9 @@ const FilterBar = ({
           {activeFiltersCount > 0 && (
             <button
               onClick={onClearFilters}
-              className="px-4 py-3 rounded-xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-black text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors flex items-center gap-2 whitespace-nowrap"
+              className="px-4 py-3 rounded-xl bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-red-100 dark:border-red-900/30 flex items-center gap-2 text-sm font-bold"
             >
-              <IconX className="w-4 h-4" />
-              Clear {activeFiltersCount}{" "}
-              {activeFiltersCount === 1 ? "Filter" : "Filters"}
+              <IconX className="w-4 h-4" /> Reset Filters
             </button>
           )}
         </div>
@@ -479,20 +477,10 @@ export function ProjectsPage({ projects }: { projects: Project[] }) {
               ))}
             </motion.div>
           ) : (
-            <motion.div
-              key="empty"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-20"
-            >
-              <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-xl font-semibold text-neutral-900 dark:text-white mb-2">
-                No projects found
-              </h3>
-              <p className="text-neutral-600 dark:text-neutral-400">
-                Try adjusting your filters or search query
-              </p>
-            </motion.div>
+            <div className="text-center py-20 bg-neutral-50 dark:bg-neutral-900/50 rounded-3xl border border-dashed border-neutral-300 dark:border-neutral-800">
+              <IconCapProjecting className="w-12 h-12 mx-auto text-neutral-300 mb-4" />
+              <p className="text-neutral-500">No matching projects found.</p>
+            </div>
           )}
         </AnimatePresence>
       </div>

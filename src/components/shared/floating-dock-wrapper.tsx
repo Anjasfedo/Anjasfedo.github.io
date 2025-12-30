@@ -4,8 +4,9 @@ import {
   IconUser,
   IconCode,
   IconBriefcase,
-  IconDeviceDesktop, // Imported for Uses
-  IconTerminal2, // Imported for Services
+  IconDeviceDesktop,
+  IconTerminal2,
+  IconAward, // Added for Certificates
 } from "@tabler/icons-react";
 import { FloatingDock } from "../ui/floating-dock-navbar";
 
@@ -23,6 +24,13 @@ export const navigationItems = [
       <IconCode className="h-full w-full text-neutral-500 dark:text-neutral-300" />
     ),
     href: "/projects",
+  },
+  {
+    title: "Certificates",
+    icon: (
+      <IconAward className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+    ),
+    href: "/certificates",
   },
   {
     title: "Experience",
