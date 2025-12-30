@@ -6,31 +6,51 @@ import { ExperienceTimeline } from "../components/index-page/experience-timeline
 import { ServicesSection } from "../components/index-page/services-section";
 import { getCollection } from "astro:content";
 
-// Load all index page content
-const indexContent = await getCollection("indexPage");
+// 1. Fetch the collection
+const indexEntries = await getCollection("indexPage");
 
-// Sort by order and convert to map for easy access
-const contentMap = Object.fromEntries(
-  indexContent
-    .sort((a, b) => a.data.order - b.data.order)
-    .map(item => [item.data.section, item])
-);
+// 2. Safely check if we have data
+if (indexEntries.length === 0) {
+  throw new Error(
+    "Could not find index.mdx in src/content/index-page/. Check your file path and pattern."
+  );
+}
 
-// Extract content for each section
-const heroContent = contentMap.hero?.data;
-const identityGridContent = contentMap['identity-grid']?.data;
-const experienceTimelineContent = contentMap['experience-timeline']?.data;
-const servicesContent = contentMap.services?.data;
+const content = indexEntries[0].data;
 ---
 
 <Layout>
-  <Hero client:load content={heroContent} />
-  <IdentityGrid client:visible content={identityGridContent} />
+  <Hero
+    client:load
+    content={{
+      roles: content.roles,
+      headline: content.headline,
+    }}
+  />
+
+  <IdentityGrid
+    client:visible
+    content={{
+      education: content.education,
+      techStack: content.techStack,
+    }}
+  />
+
   <div id="experience">
-    <ExperienceTimeline client:visible content={experienceTimelineContent} />
+    <ExperienceTimeline
+      client:visible
+      content={{
+        timeline: content.timeline,
+      }}
+    />
   </div>
-  <!-- <ProjectsGrid client:visible /> -->
+
   <div id="services">
-    <ServicesSection client:visible content={servicesContent} />
+    <ServicesSection
+      client:visible
+      content={{
+        services: content.services,
+      }}
+    />
   </div>
 </Layout>

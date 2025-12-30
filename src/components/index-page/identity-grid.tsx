@@ -76,49 +76,57 @@ const defaultTechStack: TechStackItem[] = [
     id: 1,
     name: "React",
     designation: "UI Library",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
   },
   {
     id: 2,
     name: "Next.js",
     designation: "Fullstack Framework",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
   },
   {
     id: 3,
     name: "TypeScript",
     designation: "Type Safety",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
   },
   {
     id: 4,
     name: "Tailwind CSS",
     designation: "Styling",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg",
   },
   {
     id: 5,
     name: "Laravel",
     designation: "Backend",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
   },
   {
     id: 6,
     name: "PostgreSQL",
     designation: "Database",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
   },
   {
     id: 7,
     name: "Docker",
     designation: "Deployment",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
   },
   {
     id: 8,
     name: "Node.js",
     designation: "Runtime",
-    image: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+    image:
+      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
   },
 ];
 
@@ -151,45 +159,48 @@ const connectItems = [
 // ============================================================================
 
 // 1. EDUCATION SKELETON (Indigo/Purple Gradient)
-const SkeletonEducation = memo(({ educationData }: { educationData: EducationItem[] }) => (
-  <div className="flex flex-1 w-full h-full rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 border border-neutral-200 dark:border-white/10 relative overflow-hidden group/edu">
-    <div className="px-3 md:px-6 h-full flex flex-col justify-center py-4 md:py-6 relative z-10 antialiased">
-      {educationData.map((item) => (
-        <div
-          key={item.id}
-          className="flex items-start gap-3 md:gap-6 group mb-3 md:mb-4"
-        >
-          <div className="relative shrink-0">
-            <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-1.5 md:p-2 flex items-center justify-center shadow-sm z-20 relative transition-all duration-300 group-hover:rotate-6 group-hover:scale-110">
-              <img
-                src={item.logo}
-                alt={item.school}
-                className="w-full h-full object-contain"
-              />
+const SkeletonEducation = memo(
+  ({ educationData }: { educationData: EducationItem[] }) => (
+    <div className="flex flex-1 w-full h-full min-h-[300px] rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 border border-neutral-200 dark:border-white/10 relative overflow-hidden group/edu">
+      {/* FIXED: Changed justify-center to justify-start and added overflow-y-auto for safety */}
+      <div className="px-3 md:px-6 h-full flex flex-col justify-start py-4 md:py-8 relative z-10 antialiased overflow-y-auto scrollbar-hide">
+        {educationData.map((item) => (
+          <div
+            key={item.id}
+            className="flex items-start gap-3 md:gap-6 group mb-6 md:mb-8 last:mb-0"
+          >
+            <div className="relative shrink-0">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-1.5 md:p-2 flex items-center justify-center shadow-sm z-20 relative transition-all duration-300 group-hover:rotate-6 group-hover:scale-110">
+                <img
+                  src={item.logo}
+                  alt={item.school}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <div className="absolute inset-0 bg-blue-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
-            <div className="absolute inset-0 bg-blue-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-          </div>
 
-          <div className="flex flex-col min-w-0 flex-1">
-            <span className="text-[9px] md:text-[10px] font-bold text-blue-500 bg-blue-500/10 px-1.5 md:px-2 py-0.5 rounded w-fit mb-1">
-              {item.year}
-            </span>
-            <h4 className="font-bold text-xs md:text-sm lg:text-md text-neutral-800 dark:text-white leading-tight">
-              {item.school}
-            </h4>
-            <p className="text-[10px] md:text-xs text-neutral-500 dark:text-neutral-400 font-medium">
-              {item.degree}
-            </p>
-            <p className="text-[9px] md:text-[10px] text-neutral-400 mt-1 italic">
-              "{item.details}"
-            </p>
+            <div className="flex flex-col min-w-0 flex-1">
+              <span className="text-[9px] md:text-[10px] font-bold text-blue-500 bg-blue-500/10 px-1.5 md:px-2 py-0.5 rounded w-fit mb-1">
+                {item.year}
+              </span>
+              <h4 className="font-bold text-xs md:text-sm lg:text-md text-neutral-800 dark:text-white leading-tight">
+                {item.school}
+              </h4>
+              <p className="text-[10px] md:text-xs text-neutral-500 dark:text-neutral-400 font-medium">
+                {item.degree}
+              </p>
+              <p className="text-[9px] md:text-[10px] text-neutral-400 mt-1 italic leading-relaxed">
+                "{item.details}"
+              </p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
+      <div className="absolute top-0 right-0 w-32 h-32 bg-grid-black/[0.02] dark:bg-grid-white/[0.02] z-0" />
     </div>
-    <div className="absolute top-0 right-0 w-32 h-32 bg-grid-black/[0.02] dark:bg-grid-white/[0.02] z-0" />
-  </div>
-));
+  )
+);
 SkeletonEducation.displayName = "SkeletonEducation";
 
 // 2. TECH STACK SKELETON (Slate/Gray Gradient)
@@ -269,7 +280,7 @@ SkeletonStatus.displayName = "SkeletonStatus";
 // ============================================================================
 
 export const IdentityGrid = memo(function IdentityGrid({
-  content
+  content,
 }: {
   content?: IdentityGridContent;
 }) {
@@ -314,7 +325,8 @@ export const IdentityGrid = memo(function IdentityGrid({
           <span className="text-xs md:text-sm">My academic journey.</span>
         ),
         header: <SkeletonEducation educationData={educationData} />,
-        className: "md:col-span-2",
+        // FIXED: added row-span-2 to give it double height
+        className: "md:col-span-2 md:row-span-2",
         icon: <IconSchool className="h-4 w-4 text-neutral-500" />,
       },
       {

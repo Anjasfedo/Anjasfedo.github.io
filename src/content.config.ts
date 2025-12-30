@@ -21,19 +21,20 @@ const projects = defineCollection({
     })
 });
 
-// Index page content collection
+// Index page content collection - single file with all content
 const indexPage = defineCollection({
-    loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/index-page" }),
-    schema: z.object({
-        section: z.enum(["hero", "identity-grid", "experience-timeline", "services"]),
-        title: z.string().optional(),
+    loader: glob({ pattern: "**/index.mdx", base: "./src/content/index-page" }), schema: z.object({
+        title: z.string(),
         order: z.number(),
-        // Hero section data
+
+        // Hero section
+        headline: z.string(),
         roles: z.array(z.object({
             label: z.string(),
             description: z.string(),
-        })).optional(),
-        // Identity grid data
+        })),
+
+        // Identity grid section
         education: z.array(z.object({
             id: z.number(),
             school: z.string(),
@@ -41,30 +42,36 @@ const indexPage = defineCollection({
             year: z.string(),
             logo: z.string(),
             details: z.string(),
-        })).optional(),
+        })),
         techStack: z.array(z.object({
             id: z.number(),
             name: z.string(),
             designation: z.string(),
             image: z.string(),
-        })).optional(),
-        // Experience timeline data
+        })),
+
+        // Experience timeline section
+        experienceTitle: z.string(),
+        experienceDescription: z.string(),
         timeline: z.array(z.object({
             title: z.string(),
+            description: z.string().optional(),
             content: z.array(z.object({
                 title: z.string(),
                 company: z.string(),
                 date: z.string(),
                 desc: z.string(),
             })).optional(),
-            description: z.string().optional(),
-        })).optional(),
-        // Services data
+        })),
+
+        // Services section
+        servicesTitle: z.string(),
+        servicesDescription: z.string(),
         services: z.array(z.object({
             title: z.string(),
             description: z.string(),
             icon: z.string(),
-        })).optional(),
+        })),
     })
 });
 
