@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { ProjectDetail } from "../../components/ProjectDetail";
+import { ProjectDetail } from "../../components/project-detail-page/project-detail";
 import { getCollection, render } from "astro:content";
 
 // Generate static paths for all projects
@@ -19,7 +19,6 @@ const { Content } = await render(project);
 
 // Set page metadata
 const title = `${project.data.title} | Project | M. Anjasfedo Afridiansah`;
-const description = project.data.description;
 ---
 
 <Layout title={title}>

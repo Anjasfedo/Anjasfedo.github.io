@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import {
   motion,
   useTransform,
@@ -32,18 +32,29 @@ export const AnimatedTooltip = React.memo(
       springConfig
     );
 
+    // FIXED: Replaced 'any' with React.MouseEvent and properly typed the target
     const handleMouseMove = useCallback(
-      (event: any) => {
+      (event: React.MouseEvent<HTMLDivElement>) => {
         if (animationFrameRef.current) {
           cancelAnimationFrame(animationFrameRef.current);
         }
         animationFrameRef.current = requestAnimationFrame(() => {
-          const halfWidth = event.target.offsetWidth / 2;
+          const target = event.target as HTMLElement;
+          const halfWidth = target.offsetWidth / 2;
           x.set(event.nativeEvent.offsetX - halfWidth);
         });
       },
       [x]
     );
+
+    // Cleanup animation frame on unmount
+    useEffect(() => {
+      return () => {
+        if (animationFrameRef.current) {
+          cancelAnimationFrame(animationFrameRef.current);
+        }
+      };
+    }, []);
 
     const handleMouseEnter = useCallback((id: number) => {
       setHoveredIndex(id);
@@ -62,7 +73,7 @@ export const AnimatedTooltip = React.memo(
             onMouseEnter={() => handleMouseEnter(item.id)}
             onMouseLeave={handleMouseLeave}
           >
-            <AnimatePresence>
+            <AnimatePresence mode="popLayout">
               {hoveredIndex === item.id && (
                 <motion.div
                   initial={{ opacity: 0, y: 20, scale: 0.6 }}
@@ -78,7 +89,6 @@ export const AnimatedTooltip = React.memo(
                     rotate: rotate,
                     whiteSpace: "nowrap",
                   }}
-                  // FIXED: z-[100] ensures it's higher than any grid item border or text
                   className="absolute -top-16 -left-1/2 translate-x-1/2 flex text-xs flex-col items-center justify-center rounded-md bg-black z-[100] shadow-xl px-4 py-2"
                 >
                   <div className="absolute inset-x-10 -bottom-px z-30 h-px w-[20%] bg-gradient-to-r from-transparent via-emerald-500 to-transparent" />

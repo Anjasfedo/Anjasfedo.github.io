@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { motion, AnimatePresence } from "motion/react";
-import React, { useEffect, useState } from "react";
+import { motion, AnimatePresence, type Variants } from "motion/react";
+import React, { useEffect, useState, useCallback } from "react";
 
 export const ImagesSlider = ({
   images,
@@ -21,26 +21,24 @@ export const ImagesSlider = ({
   direction?: "up" | "down";
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false); // Prefixed with _ if unused, or just removed
   const [loadedImages, setLoadedImages] = useState<string[]>([]);
 
-  const handleNext = () => {
+  // Memoize handleNext to prevent unnecessary effect re-runs
+  const handleNext = useCallback(() => {
     setCurrentIndex((prevIndex) =>
       prevIndex + 1 === images.length ? 0 : prevIndex + 1
     );
-  };
+  }, [images.length]);
 
-  const handlePrevious = () => {
+  const handlePrevious = useCallback(() => {
     setCurrentIndex((prevIndex) =>
       prevIndex - 1 < 0 ? images.length - 1 : prevIndex - 1
     );
-  };
+  }, [images.length]);
 
-  useEffect(() => {
-    loadImages();
-  }, []);
-
-  const loadImages = () => {
+  // Memoize loadImages to satisfy dependency rules
+  const loadImages = useCallback(() => {
     setLoading(true);
     const loadPromises = images.map((image) => {
       return new Promise((resolve, reject) => {
@@ -52,12 +50,17 @@ export const ImagesSlider = ({
     });
 
     Promise.all(loadPromises)
-      .then((loadedImages) => {
-        setLoadedImages(loadedImages as string[]);
+      .then((loaded) => {
+        setLoadedImages(loaded as string[]);
         setLoading(false);
       })
-      .catch((error) => console.error("Failed to load images", error));
-  };
+      .catch((_error) => {});
+  }, [images]);
+
+  useEffect(() => {
+    loadImages();
+  }, [loadImages]);
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "ArrowRight") {
@@ -69,8 +72,8 @@ export const ImagesSlider = ({
 
     window.addEventListener("keydown", handleKeyDown);
 
-    // autoplay
-    let interval: any;
+    // FIXED: Properly typed interval and handleNext dependency
+    let interval: ReturnType<typeof setInterval> | undefined;
     if (autoplay) {
       interval = setInterval(() => {
         handleNext();
@@ -79,11 +82,11 @@ export const ImagesSlider = ({
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
-      clearInterval(interval);
+      if (interval) clearInterval(interval);
     };
-  }, []);
+  }, [autoplay, handleNext, handlePrevious]);
 
-  const slideVariants = {
+  const slideVariants: Variants = {
     initial: {
       scale: 0,
       opacity: 0,

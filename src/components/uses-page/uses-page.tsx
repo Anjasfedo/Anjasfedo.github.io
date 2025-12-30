@@ -1,10 +1,8 @@
 "use client";
-import React, { useMemo } from "react";
+import React from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
-import { HoverEffect } from "./ui/card-hover-effect";
 import {
-  IconCpu,
   IconDeviceLaptop,
   IconDeviceDesktop,
   IconCode,
@@ -30,6 +28,7 @@ import {
   IconVideo,
   IconChecklist,
 } from "@tabler/icons-react";
+import { HoverEffect } from "../ui/card-hover-effect";
 
 // Hardware data organized by category
 const hardwareData = {

@@ -3,6 +3,17 @@ import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "motion/react";
 import React, { useRef, useState, useEffect } from "react";
 
+// 1. Define a strict interface for Beam options
+interface BeamOptions {
+  initialX?: number;
+  initialY?: string;
+  translateX?: number;
+  duration?: number;
+  repeatDelay?: number;
+  delay?: number;
+  className?: string;
+}
+
 export const BackgroundBeamsWithCollision = ({
   children,
   className,
@@ -13,13 +24,32 @@ export const BackgroundBeamsWithCollision = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const parentRef = useRef<HTMLDivElement>(null);
 
-  const beams = [
+  // Apply the interface to the beams array
+  const beams: BeamOptions[] = [
     { initialX: 10, translateX: 10, duration: 7, repeatDelay: 3, delay: 2 },
     { initialX: 600, translateX: 600, duration: 3, repeatDelay: 3, delay: 4 },
-    { initialX: 100, translateX: 100, duration: 7, repeatDelay: 7, className: "h-6" },
+    {
+      initialX: 100,
+      translateX: 100,
+      duration: 7,
+      repeatDelay: 7,
+      className: "h-6",
+    },
     { initialX: 400, translateX: 400, duration: 5, repeatDelay: 14, delay: 4 },
-    { initialX: 800, translateX: 800, duration: 11, repeatDelay: 2, className: "h-20" },
-    { initialX: 1000, translateX: 1000, duration: 4, repeatDelay: 2, className: "h-12" },
+    {
+      initialX: 800,
+      translateX: 800,
+      duration: 11,
+      repeatDelay: 2,
+      className: "h-20",
+    },
+    {
+      initialX: 1000,
+      translateX: 1000,
+      duration: 4,
+      repeatDelay: 2,
+      className: "h-12",
+    },
     { initialX: 1200, translateX: 1200, duration: 6, repeatDelay: 4, delay: 2 },
   ];
 
@@ -52,11 +82,12 @@ export const BackgroundBeamsWithCollision = ({
 const CollisionMechanism = React.forwardRef<
   HTMLDivElement,
   {
-    containerRef: React.RefObject<HTMLDivElement>;
-    parentRef: React.RefObject<HTMLDivElement>;
-    beamOptions?: any;
+    containerRef: React.RefObject<HTMLDivElement | null>;
+    parentRef: React.RefObject<HTMLDivElement | null>;
+    beamOptions?: BeamOptions; // FIXED: Replaced 'any' with BeamOptions
   }
->(({ parentRef, containerRef, beamOptions = {} }, ref) => {
+>(({ parentRef, containerRef, beamOptions = {} }, _ref) => {
+  // FIXED: Prefixed 'ref' with '_'
   const beamRef = useRef<HTMLDivElement>(null);
   const [collision, setCollision] = useState<{
     detected: boolean;
@@ -67,16 +98,25 @@ const CollisionMechanism = React.forwardRef<
 
   useEffect(() => {
     const checkCollision = () => {
-      if (beamRef.current && containerRef.current && parentRef.current && !cycleCollisionDetected) {
+      if (
+        beamRef.current &&
+        containerRef.current &&
+        parentRef.current &&
+        !cycleCollisionDetected
+      ) {
         const beamRect = beamRef.current.getBoundingClientRect();
         const containerRect = containerRef.current.getBoundingClientRect();
         const parentRect = parentRef.current.getBoundingClientRect();
 
         if (beamRect.bottom >= containerRect.top) {
-          const relativeX = beamRect.left - parentRect.left + beamRect.width / 2;
-          const relativeY = parentRect.height; // Collision at absolute bottom
+          const relativeX =
+            beamRect.left - parentRect.left + beamRect.width / 2;
+          const relativeY = parentRect.height;
 
-          setCollision({ detected: true, coordinates: { x: relativeX, y: relativeY } });
+          setCollision({
+            detected: true,
+            coordinates: { x: relativeX, y: relativeY },
+          });
           setCycleCollisionDetected(true);
         }
       }
@@ -88,11 +128,12 @@ const CollisionMechanism = React.forwardRef<
 
   useEffect(() => {
     if (collision.detected && collision.coordinates) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         setCollision({ detected: false, coordinates: null });
         setCycleCollisionDetected(false);
         setBeamKey((prev) => prev + 1);
       }, 2000);
+      return () => clearTimeout(timer); // Added cleanup for safety
     }
   }, [collision]);
 
@@ -108,7 +149,7 @@ const CollisionMechanism = React.forwardRef<
         }}
         variants={{
           animate: {
-            translateY: "5000px", // High enough to ensure it hits bottom of long pages
+            translateY: "5000px",
             translateX: beamOptions.translateX || "0px",
           },
         }}
@@ -131,7 +172,7 @@ const CollisionMechanism = React.forwardRef<
             style={{
               left: `${collision.coordinates.x}px`,
               top: `${collision.coordinates.y}px`,
-              transform: "translate(-50%, -100%)", // Align exactly on the floor line
+              transform: "translate(-50%, -100%)",
             }}
           />
         )}
@@ -139,6 +180,9 @@ const CollisionMechanism = React.forwardRef<
     </>
   );
 });
+
+// Added display name for ForwardRef components to avoid potential devtool warnings
+CollisionMechanism.displayName = "CollisionMechanism";
 
 const Explosion = ({ ...props }: React.HTMLProps<HTMLDivElement>) => {
   const spans = Array.from({ length: 20 }, (_, index) => ({

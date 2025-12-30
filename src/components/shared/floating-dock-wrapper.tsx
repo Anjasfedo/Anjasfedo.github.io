@@ -1,14 +1,13 @@
 "use client";
 import React from "react";
-import { FloatingDock } from "./ui/floating-dock-navbar";
 import {
-  IconBrandGithub,
   IconUser,
   IconCode,
   IconBriefcase,
   IconDeviceDesktop, // Imported for Uses
   IconTerminal2, // Imported for Services
 } from "@tabler/icons-react";
+import { FloatingDock } from "../ui/floating-dock-navbar";
 
 export const navigationItems = [
   {

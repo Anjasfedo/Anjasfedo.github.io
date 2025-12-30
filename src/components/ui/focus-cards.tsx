@@ -3,6 +3,13 @@
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 
+// Define the type clearly at the top
+type CardType = {
+  title: string;
+  src: string;
+};
+
+// Use the CardType instead of 'any'
 export const Card = React.memo(
   ({
     card,
@@ -10,7 +17,7 @@ export const Card = React.memo(
     hovered,
     setHovered,
   }: {
-    card: any;
+    card: CardType; // FIXED: Changed from any to CardType
     index: number;
     hovered: number | null;
     setHovered: React.Dispatch<React.SetStateAction<number | null>>;
@@ -26,7 +33,7 @@ export const Card = React.memo(
       <img
         src={card.src}
         alt={card.title}
-        className="object-cover absolute inset-0"
+        className="object-cover absolute inset-0 w-full h-full" // Added explicit sizing
       />
       <div
         className={cn(
@@ -44,19 +51,14 @@ export const Card = React.memo(
 
 Card.displayName = "Card";
 
-type Card = {
-  title: string;
-  src: string;
-};
-
-export function FocusCards({ cards }: { cards: Card[] }) {
+export function FocusCards({ cards }: { cards: CardType[] }) {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto md:px-8 w-full">
       {cards.map((card, index) => (
         <Card
-          key={card.title}
+          key={`${card.title}-${index}`} // Improved key uniqueness
           card={card}
           index={index}
           hovered={hovered}

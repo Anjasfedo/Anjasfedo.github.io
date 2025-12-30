@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { IconChevronDown } from "@tabler/icons-react";
-import { cn } from "@/lib/utils";
 
 interface CollapsibleSectionProps {
   title: string;

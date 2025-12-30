@@ -3,7 +3,6 @@
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
-import { WavyBackground } from "@/components/ui/wavy-background";
 import { IconSearch, IconX, IconChevronDown } from "@tabler/icons-react";
 
 // ============================================================================

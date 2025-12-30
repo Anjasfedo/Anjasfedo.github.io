@@ -1,5 +1,5 @@
 "use client";
-import React, { useMemo, memo } from "react";
+import React, { memo } from "react";
 import { Timeline } from "@/components/ui/timeline";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { motion } from "motion/react";

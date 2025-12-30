@@ -3,12 +3,11 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
-import type { Project } from "./ProjectsPage";
+import type { Project } from "../projects-page/projects-page";
 import {
   IconArrowLeft,
   IconBrandGithub,
   IconExternalLink,
-  IconPhoto,
   IconVideo,
 } from "@tabler/icons-react";
 

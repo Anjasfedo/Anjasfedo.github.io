@@ -16,7 +16,9 @@ export const BackgroundRippleEffect = ({
     col: number;
   } | null>(null);
   const [rippleKey, setRippleKey] = useState(0);
-  const ref = useRef<any>(null);
+
+  // FIXED: Properly typed the ref as HTMLDivElement
+  const ref = useRef<HTMLDivElement>(null);
 
   return (
     <div
@@ -24,7 +26,7 @@ export const BackgroundRippleEffect = ({
       className={cn(
         "absolute inset-0 h-full w-full",
         "[--cell-border-color:var(--color-neutral-300)] [--cell-fill-color:var(--color-neutral-100)] [--cell-shadow-color:var(--color-neutral-500)]",
-        "dark:[--cell-border-color:var(--color-neutral-700)] dark:[--cell-fill-color:var(--color-neutral-900)] dark:[--cell-shadow-color:var(--color-neutral-800)]",
+        "dark:[--cell-border-color:var(--color-neutral-700)] dark:[--cell-fill-color:var(--color-neutral-900)] dark:[--cell-shadow-color:var(--color-neutral-800)]"
       )}
     >
       <div className="relative h-auto w-auto overflow-hidden">
@@ -53,17 +55,12 @@ type DivGridProps = {
   className?: string;
   rows: number;
   cols: number;
-  cellSize: number; // in pixels
+  cellSize: number;
   borderColor: string;
   fillColor: string;
   clickedCell: { row: number; col: number } | null;
   onCellClick?: (row: number, col: number) => void;
   interactive?: boolean;
-};
-
-type CellStyle = React.CSSProperties & {
-  ["--delay"]?: string;
-  ["--duration"]?: string;
 };
 
 const DivGrid = ({
@@ -74,12 +71,12 @@ const DivGrid = ({
   borderColor = "#3f3f46",
   fillColor = "rgba(14,165,233,0.3)",
   clickedCell = null,
-  onCellClick = () => {},
+  onCellClick,
   interactive = true,
 }: DivGridProps) => {
   const cells = useMemo(
     () => Array.from({ length: rows * cols }, (_, idx) => idx),
-    [rows, cols],
+    [rows, cols]
   );
 
   const gridStyle: React.CSSProperties = {
@@ -99,15 +96,21 @@ const DivGrid = ({
         const distance = clickedCell
           ? Math.hypot(clickedCell.row - rowIdx, clickedCell.col - colIdx)
           : 0;
-        const delay = clickedCell ? Math.max(0, distance * 55) : 0; // ms
-        const duration = 200 + distance * 80; // ms
+        const delay = clickedCell ? Math.max(0, distance * 55) : 0;
+        const duration = 200 + distance * 80;
 
-        const style: CellStyle = clickedCell
-          ? {
+        // FIXED: Explicitly cast custom properties to React.CSSProperties
+        const cellStyle = clickedCell
+          ? ({
               "--delay": `${delay}ms`,
               "--duration": `${duration}ms`,
-            }
-          : {};
+              backgroundColor: fillColor,
+              borderColor: borderColor,
+            } as React.CSSProperties)
+          : ({
+              backgroundColor: fillColor,
+              borderColor: borderColor,
+            } as React.CSSProperties);
 
         return (
           <div
@@ -115,13 +118,9 @@ const DivGrid = ({
             className={cn(
               "cell relative border-[0.5px] opacity-40 transition-opacity duration-150 will-change-transform hover:opacity-80 dark:shadow-[0px_0px_40px_1px_var(--cell-shadow-color)_inset]",
               clickedCell && "animate-cell-ripple [animation-fill-mode:none]",
-              !interactive && "pointer-events-none",
+              !interactive && "pointer-events-none"
             )}
-            style={{
-              backgroundColor: fillColor,
-              borderColor: borderColor,
-              ...style,
-            }}
+            style={cellStyle}
             onClick={
               interactive ? () => onCellClick?.(rowIdx, colIdx) : undefined
             }

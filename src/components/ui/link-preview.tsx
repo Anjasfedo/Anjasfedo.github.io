@@ -1,6 +1,5 @@
 "use client";
 import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
-
 import { encode } from "qss";
 import React from "react";
 import {
@@ -9,7 +8,6 @@ import {
   useMotionValue,
   useSpring,
 } from "motion/react";
-
 import { cn } from "@/lib/utils";
 
 type LinkPreviewProps = {
@@ -31,12 +29,10 @@ export const LinkPreview = ({
   className,
   width = 200,
   height = 125,
-  quality = 50,
-  layout = "fixed",
   isStatic = false,
   imageSrc = "",
 }: LinkPreviewProps) => {
-  let src;
+  let src: string; // Explicitly typed
   if (!isStatic) {
     const params = encode({
       url,
@@ -55,7 +51,6 @@ export const LinkPreview = ({
   }
 
   const [isOpen, setOpen] = React.useState(false);
-
   const [isMounted, setIsMounted] = React.useState(false);
 
   React.useEffect(() => {
@@ -64,28 +59,23 @@ export const LinkPreview = ({
 
   const springConfig = { stiffness: 100, damping: 15 };
   const x = useMotionValue(0);
-
   const translateX = useSpring(x, springConfig);
 
-  const handleMouseMove = (event: any) => {
-    const targetRect = event.target.getBoundingClientRect();
+  // FIXED: Replaced 'any' with proper MouseEvent type
+  const handleMouseMove = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    const targetRect = event.currentTarget.getBoundingClientRect();
     const eventOffsetX = event.clientX - targetRect.left;
-    const offsetFromCenter = (eventOffsetX - targetRect.width / 2) / 2; // Reduce the effect to make it subtle
+    const offsetFromCenter = (eventOffsetX - targetRect.width / 2) / 2;
     x.set(offsetFromCenter);
   };
 
   return (
     <>
-      {isMounted ? (
+      {isMounted && (
         <div className="hidden">
-          <img
-            src={src}
-            width={width}
-            height={height}
-            alt="hidden image"
-          />
+          <img src={src} width={width} height={height} alt="hidden image" />
         </div>
-      ) : null}
+      )}
 
       <HoverCardPrimitive.Root
         openDelay={50}
@@ -134,7 +124,7 @@ export const LinkPreview = ({
                   style={{ fontSize: 0 }}
                 >
                   <img
-                    src={isStatic ? imageSrc : src}
+                    src={src} // Simplified logic: 'src' is already calculated correctly above
                     width={width}
                     height={height}
                     className="rounded-lg"

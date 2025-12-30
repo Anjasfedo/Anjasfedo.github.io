@@ -1,8 +1,6 @@
 "use client";
 import React, { useMemo, memo } from "react";
 import { cn } from "@/lib/utils";
-import { BentoGrid, BentoGridItem } from "./ui/bento-grid";
-import { AnimatedTooltip } from "./ui/animated-tooltip";
 import {
   IconCode,
   IconMapPin,
@@ -14,6 +12,8 @@ import {
   IconActivity,
 } from "@tabler/icons-react";
 import { motion } from "motion/react";
+import { AnimatedTooltip } from "../ui/animated-tooltip";
+import { BentoGrid, BentoGridItem } from "../ui/bento-grid";
 
 // ============================================================================
 // --- STATIC DATA ---

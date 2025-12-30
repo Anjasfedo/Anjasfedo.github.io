@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { TextGenerateEffect } from "./ui/text-generate-effect";
 import { BackgroundLines } from "@/components/ui/background-lines";
 import { cn } from "@/lib/utils";
+import { TextGenerateEffect } from "../ui/text-generate-effect";
 
 // Move outside component to prevent recreation on re-renders
 const roles = [
