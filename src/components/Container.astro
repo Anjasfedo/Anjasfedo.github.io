@@ -1,0 +1,66 @@
+---
+/**
+ * Container - Responsive layout wrapper
+ *
+ * - Mobile: Full width with horizontal padding
+ * - Desktop: Centered with max-width for optimal readability
+ */
+const { className = "" } = Astro.props;
+---
+
+<div class="container bg-red-500 {className}">
+  <slot />
+</div>
+
+<style>
+  .container {
+    /* Mobile: Full width with padding */
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+
+    /* Tablet and up: Add max-width and center */
+    max-width: 100%;
+  }
+
+  /* Small tablets (640px and up) */
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+    }
+  }
+
+  /* Tablets (768px and up) */
+  @media (min-width: 768px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+      max-width: 768px;
+    }
+  }
+
+  /* Laptops (1024px and up) */
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+
+  /* Desktops (1280px and up) */
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  /* Large desktops (1536px and up) */
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1400px;
+    }
+  }
+</style>
