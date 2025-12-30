@@ -2,6 +2,7 @@
 import "../styles/global.css";
 // Import the WRAPPER, not the generic UI component
 import { FloatingDockWrapper } from "../components/floating-dock-wrapper";
+import { Footer } from "../components/Footer";
 ---
 
 <!doctype html>
@@ -17,6 +18,8 @@ import { FloatingDockWrapper } from "../components/floating-dock-wrapper";
     <FloatingDockWrapper client:load />
 
     <slot />
+
+    <Footer client:visible />
   </body>
 </html>
 
@@ -25,7 +28,15 @@ import { FloatingDockWrapper } from "../components/floating-dock-wrapper";
   body {
     margin: 0;
     width: 100%;
-    /* Keep this to test the scrolling behavior of the dock */
-    height: 100vh;
+    min-height: 100vh;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  body > * {
+    flex-shrink: 0;
   }
 </style>
