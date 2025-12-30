@@ -8,7 +8,7 @@
 const { className = "" } = Astro.props;
 ---
 
-<div class="container bg-red-500 {className}">
+<div class="container {className}">
   <slot />
 </div>
 
@@ -16,8 +16,6 @@ const { className = "" } = Astro.props;
   .container {
     /* Mobile: Full width with padding */
     width: 100%;
-    padding-left: 1rem;
-    padding-right: 1rem;
     margin-left: auto;
     margin-right: auto;
 
