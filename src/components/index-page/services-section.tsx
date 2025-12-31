@@ -46,56 +46,13 @@ const iconMap: Record<string, React.ReactNode> = {
 // --- DEFAULT DATA ---
 // ============================================================================
 
-const defaultServices: ServiceItem[] = [
-  {
-    title: "Frontend Development",
-    description: "Building modern, responsive web applications with React, Vue, Astro, and cutting-edge CSS frameworks.",
-    icon: "IconBrandReact",
-  },
-  {
-    title: "Backend Development",
-    description: "Creating robust server-side applications with Node.js, Python, and scalable database architectures.",
-    icon: "IconServer",
-  },
-  {
-    title: "Full Stack Solutions",
-    description: "End-to-end development services from database design to polished user interfaces.",
-    icon: "IconDeviceDesktop",
-  },
-  {
-    title: "UI/UX Design",
-    description: "Crafting intuitive, accessible interfaces with smooth animations and delightful user experiences.",
-    icon: "IconPalette",
-  },
-  {
-    title: "Performance Optimization",
-    description: "Boosting website speed, Core Web Vitals, and overall performance for better user engagement.",
-    icon: "IconSpeedboat",
-  },
-  {
-    title: "Code Review & Consulting",
-    description: "Expert code reviews, architecture consulting, and best practices guidance for your projects.",
-    icon: "IconCode",
-  },
-  {
-    title: "API Development",
-    description: "Designing and building RESTful and GraphQL APIs with proper documentation and security.",
-    icon: "IconApi",
-  },
-  {
-    title: "Progressive Web Apps",
-    description: "Creating installable web apps with offline capabilities and native-like experiences.",
-    icon: "IconAppWindow",
-  },
-];
-
 export function ServicesSection({
-  content
+  content,
 }: {
   content?: ServicesSectionContent;
 }) {
   // Use content from props or fall back to defaults
-  const servicesData = content?.services || defaultServices;
+  const servicesData = content?.services || [];
 
   // Convert service items to include actual icon components
   const services = servicesData.map((service) => ({
@@ -116,8 +73,8 @@ export function ServicesSection({
             Services & Offerings
           </h2>
           <p className="text-neutral-600 dark:text-neutral-400 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed">
-            Specialized web development services tailored to bring your ideas to life
-            with modern technologies and best practices.
+            Specialized web development services tailored to bring your ideas to
+            life with modern technologies and best practices.
           </p>
         </motion.div>
 
@@ -149,7 +106,7 @@ const Service = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.05 }}
-      // Updated className: 
+      // Updated className:
       // 1. Added 'items-center text-center' for mobile, 'lg:items-start lg:text-left' for desktop
       // 2. Controlled borders to appear only on desktop or specifically on mobile
       className={cn(

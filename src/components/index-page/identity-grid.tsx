@@ -9,6 +9,11 @@ import {
   IconBrandGithub,
   IconBrandLinkedin,
   IconBrandTwitter,
+  IconCoffee,
+  IconCloud,
+  IconDeviceDesktop,
+  IconDeviceGamepad2,
+  IconCamera,
   IconActivity,
 } from "@tabler/icons-react";
 import { motion } from "motion/react";
@@ -35,151 +40,66 @@ interface TechStackItem {
   image: string;
 }
 
-interface ConnectItem {
-  id: number;
-  name: string;
-  designation: string;
-  icon: React.ReactNode;
-  image: string;
-}
-
 interface IdentityGridContent {
   education?: EducationItem[];
   techStack?: TechStackItem[];
 }
 
 // ============================================================================
-// --- DEFAULT DATA ---
+// --- SUB-COMPONENTS ---
 // ============================================================================
 
-const defaultEducationData: EducationItem[] = [
-  {
-    id: 1,
-    school: "University of Indonesia",
-    degree: "B.S. Computer Science",
-    year: "2019 - 2023",
-    logo: "https://api.dicebear.com/7.x/identicon/svg?seed=UI",
-    details: "Focused on Web Architecture and Distributed Systems.",
-  },
-  {
-    id: 2,
-    school: "State Vocational School",
-    degree: "Information Technology",
-    year: "2016 - 2019",
-    logo: "https://api.dicebear.com/7.x/identicon/svg?seed=School",
-    details: "Learned the fundamentals of networking and algorithm logic.",
-  },
-];
+const MarqueeContainer = ({
+  children,
+  className,
+  direction = "up",
+  speed = "normal",
+}: {
+  children: React.ReactNode;
+  className?: string;
+  direction?: "up" | "down";
+  speed?: "fast" | "normal" | "slow";
+}) => {
+  const duration =
+    speed === "fast" ? "20s" : speed === "normal" ? "40s" : "60s";
 
-const defaultTechStack: TechStackItem[] = [
-  {
-    id: 1,
-    name: "React",
-    designation: "UI Library",
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-  },
-  {
-    id: 2,
-    name: "Next.js",
-    designation: "Fullstack Framework",
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-  },
-  {
-    id: 3,
-    name: "TypeScript",
-    designation: "Type Safety",
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-  },
-  {
-    id: 4,
-    name: "Tailwind CSS",
-    designation: "Styling",
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg",
-  },
-  {
-    id: 5,
-    name: "Laravel",
-    designation: "Backend",
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
-  },
-  {
-    id: 6,
-    name: "PostgreSQL",
-    designation: "Database",
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
-  },
-  {
-    id: 7,
-    name: "Docker",
-    designation: "Deployment",
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
-  },
-  {
-    id: 8,
-    name: "Node.js",
-    designation: "Runtime",
-    image:
-      "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-  },
-];
+  return (
+    <div className={cn("relative h-64 overflow-hidden w-full p-4", className)}>
+      <div className="absolute top-0 left-0 right-0 h-8 bg-gradient-to-b from-white dark:from-neutral-900 to-transparent z-20 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white dark:from-neutral-900 to-transparent z-20 pointer-events-none" />
+      <div
+        className={cn(
+          "flex flex-col",
+          direction === "up" ? "animate-scroll-up" : "animate-scroll-down"
+        )}
+        style={{ animationDuration: duration }}
+      >
+        {children}
+        {children}
+      </div>
+    </div>
+  );
+};
 
-const connectItems = [
-  {
-    id: 1,
-    name: "GitHub",
-    designation: "Open Source",
-    icon: <IconBrandGithub className="h-6 w-6" />,
-    image: "",
-  },
-  {
-    id: 2,
-    name: "LinkedIn",
-    designation: "Professional",
-    icon: <IconBrandLinkedin className="h-6 w-6" />,
-    image: "",
-  },
-  {
-    id: 3,
-    name: "Twitter",
-    designation: "Updates",
-    icon: <IconBrandTwitter className="h-6 w-6" />,
-    image: "",
-  },
-] as const;
-
-// ============================================================================
-// --- MEMOIZED SKELETON COMPONENTS ---
-// ============================================================================
-
-// 1. EDUCATION SKELETON (Indigo/Purple Gradient)
 const SkeletonEducation = memo(
   ({ educationData }: { educationData: EducationItem[] }) => (
-    <div className="flex flex-1 w-full h-full min-h-[300px] rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 border border-neutral-200 dark:border-white/10 relative overflow-hidden group/edu">
-      {/* FIXED: Changed justify-center to justify-start and added overflow-y-auto for safety */}
-      <div className="px-3 md:px-6 h-full flex flex-col justify-start py-4 md:py-8 relative z-10 antialiased overflow-y-auto scrollbar-hide">
+    // FIXED: Changed min-h-[300px] to min-h-[180px] md:min-h-[300px] to reduce mobile height
+    <div className="flex flex-1 w-full h-full  rounded-xl bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 border border-neutral-200 dark:border-white/10 relative overflow-hidden group/edu">
+      <MarqueeContainer className="px-3 md:px-6 py-4" speed="slow">
         {educationData.map((item) => (
           <div
             key={item.id}
-            className="flex items-start gap-3 md:gap-6 group mb-6 md:mb-8 last:mb-0"
+            className="flex items-start gap-3 md:gap-6 group mb-6 md:mb-8 last:mb-6"
           >
             <div className="relative shrink-0">
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-1.5 md:p-2 flex items-center justify-center shadow-sm z-20 relative transition-all duration-300 group-hover:rotate-6 group-hover:scale-110">
+              <div className="w-8 h-8 md:w-12 md:h-12 rounded-xl border border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-1.5 md:p-2 flex items-center justify-center shadow-sm z-20 relative transition-all duration-300 group-hover:rotate-6 group-hover:scale-110">
                 <img
                   src={item.logo}
                   alt={item.school}
                   className="w-full h-full object-contain"
                 />
               </div>
-              <div className="absolute inset-0 bg-blue-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
-
             <div className="flex flex-col min-w-0 flex-1">
               <span className="text-[9px] md:text-[10px] font-bold text-blue-500 bg-blue-500/10 px-1.5 md:px-2 py-0.5 rounded w-fit mb-1">
                 {item.year}
@@ -196,17 +116,78 @@ const SkeletonEducation = memo(
             </div>
           </div>
         ))}
-      </div>
-      <div className="absolute top-0 right-0 w-32 h-32 bg-grid-black/[0.02] dark:bg-grid-white/[0.02] z-0" />
+      </MarqueeContainer>
     </div>
   )
 );
 SkeletonEducation.displayName = "SkeletonEducation";
 
-// 2. TECH STACK SKELETON (Slate/Gray Gradient)
+const SkeletonInterests = memo(() => {
+  const rawInterests = [
+    { id: 1, label: "Cloud Tech", color: "text-blue-500", icon: <IconCloud /> },
+    {
+      id: 2,
+      label: "Open Source",
+      color: "text-purple-500",
+      icon: <IconDeviceDesktop />,
+    },
+    { id: 3, label: "Coffee", color: "text-amber-600", icon: <IconCoffee /> },
+    {
+      id: 4,
+      label: "Photography",
+      color: "text-pink-500",
+      icon: <IconCamera />,
+    },
+    {
+      id: 5,
+      label: "Gaming",
+      color: "text-emerald-500",
+      icon: <IconDeviceGamepad2 />,
+    },
+    { id: 6, label: "Writing", color: "text-sky-500", icon: <IconSignature /> },
+    { id: 7, label: "Travel", color: "text-orange-500", icon: <IconMapPin /> },
+    { id: 8, label: "Music", color: "text-rose-500", icon: <IconActivity /> },
+  ];
+
+  return (
+    // FIXED: Added min-h-[180px] md:min-h-[300px] here as well
+    <div className="group flex flex-1 w-full h-full  rounded-xl bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 border border-neutral-200 dark:border-white/10 p-4 relative overflow-hidden">
+      <MarqueeContainer
+        className="px-3 md:px-6 py-4"
+        direction="up"
+        speed="slow"
+      >
+        {/* FIXED: Changed grid-cols-1 to grid-cols-2 on mobile so items pack tighter vertically */}
+        <div className="grid grid-cols-2 gap-3 pb-3 items-center">
+          {rawInterests.map((interest) => (
+            <motion.div
+              key={interest.id}
+              whileHover={{ scale: 1.05 }}
+              className="relative group/interest cursor-pointer"
+            >
+              <div className="flex items-center gap-2 p-2 rounded-xl bg-white/50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 backdrop-blur-sm hover:border-amber-500/50 hover:bg-white dark:hover:bg-neutral-800 transition-all">
+                <div className={cn("shrink-0 scale-90", interest.color)}>
+                  {interest.icon}
+                </div>
+                <span className="text-[10px] font-bold dark:text-neutral-300 text-neutral-700 truncate">
+                  {interest.label}
+                </span>
+              </div>
+              <div className="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/interest:opacity-100 transition-opacity bg-black text-white text-[9px] px-2 py-1 rounded-md pointer-events-none whitespace-nowrap z-50">
+                {interest.label}
+                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-black rotate-45" />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </MarqueeContainer>
+    </div>
+  );
+});
+SkeletonInterests.displayName = "SkeletonInterests";
+
 const SkeletonTech = memo(({ techStack }: { techStack: TechStackItem[] }) => (
-  <div className="flex flex-1 w-full h-full items-center justify-center p-4 md:p-6 rounded-xl bg-gradient-to-br from-slate-50 to-neutral-50 dark:from-slate-950/30 dark:to-neutral-950/30 border border-neutral-200 dark:border-white/10">
-    <div className="absolute inset-0 bg-dot-black/[0.1] dark:bg-dot-white/[0.1] z-0" />
+  <div className="flex flex-1 w-full h-full items-center justify-center p-4 md:p-6 rounded-xl bg-gradient-to-br from-slate-50 to-neutral-50 dark:from-slate-950/30 dark:to-neutral-950/30 border border-neutral-200 dark:border-white/10 relative">
     <div className="flex flex-wrap justify-center items-center gap-2 md:gap-3 z-10 w-full">
       <AnimatedTooltip items={techStack} />
     </div>
@@ -215,128 +196,105 @@ const SkeletonTech = memo(({ techStack }: { techStack: TechStackItem[] }) => (
 SkeletonTech.displayName = "SkeletonTech";
 
 const SkeletonLocation = memo(() => (
-  <div className="group flex flex-1 w-full h-full rounded-xl bg-neutral-100 dark:bg-neutral-900 flex-col items-center justify-center relative overflow-hidden border border-neutral-200 dark:border-white/10 min-h-48 md:min-h-0">
+  <div className="group flex flex-1 w-full h-full rounded-xl bg-neutral-100 dark:bg-neutral-900 flex-col items-center justify-center relative overflow-hidden border border-neutral-200 dark:border-white/10 transition-all duration-300">
     <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127395.732442434!2d102.2131908866782!3d-3.805901306443694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e36b01f37e19035%3A0x3039d80b220cc30!2sBengkulu%20City%2C%20Bengkulu!5e0!3m2!1sen!2sid!4v1710000000000!5m2!1sen!2sid"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127357.54582046892!2d102.22728989531553!3d-3.818921124619567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e36b0204739506b%3A0x401e8f1fc28c110!2sBengkulu%2C%20Bengkulu%20City%2C%20Bengkulu!5e0!3m2!1sen!2sid!4v1710000000000!5m2!1sen!2sid"
       width="100%"
       height="100%"
       style={{ border: 0 }}
       allowFullScreen
-      className="absolute inset-0 w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 dark:invert opacity-70 group-hover:opacity-100 scale-110 group-hover:scale-100 pointer-events-none"
+      loading="lazy"
+      className="absolute inset-0 grayscale group-hover:grayscale-0 dark:invert opacity-70 group-hover:opacity-100 scale-110 group-hover:scale-100 transition-all duration-700 ease-in-out pointer-events-none"
     />
-    <div className="absolute inset-0 z-10 bg-gradient-to-t from-white/50 via-transparent to-transparent dark:from-black/50 group-hover:opacity-0 transition-opacity" />
-    <div className="absolute bottom-2 md:bottom-4 right-2 md:right-4 z-20 px-2 md:px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/10 text-[9px] md:text-[10px] font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity">
+
+    {/* Gradient overlay that disappears on hover */}
+    <div className="absolute inset-0 bg-gradient-to-t from-white/50 via-transparent to-transparent dark:from-black/50 group-hover:opacity-0 transition-opacity duration-500" />
+
+    <div className="relative z-20 text-center px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/10 text-white text-[10px] font-bold group-hover:scale-110 transition-transform duration-300">
       Bengkulu, ID
     </div>
   </div>
 ));
 SkeletonLocation.displayName = "SkeletonLocation";
 
-const SkeletonConnect = memo(() => (
-  <div className="flex flex-1 w-full h-full rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border border-neutral-200 dark:border-white/10 flex-col items-center justify-center p-3 md:p-4 relative">
-    {/* Contained Background Pattern */}
-    <div className="absolute inset-0 overflow-hidden rounded-xl">
-      <div className="absolute inset-0 bg-grid-black/[0.05] dark:bg-grid-white/[0.05] z-0" />
+const SkeletonConnect = memo(() => {
+  const connectItems = [
+    {
+      id: 1,
+      name: "GitHub",
+      designation: "Open Source",
+      icon: <IconBrandGithub className="h-6 w-6" />,
+      image: "",
+    },
+    {
+      id: 2,
+      name: "LinkedIn",
+      designation: "Professional",
+      icon: <IconBrandLinkedin className="h-6 w-6" />,
+      image: "",
+    },
+    {
+      id: 3,
+      name: "Twitter",
+      designation: "Updates",
+      icon: <IconBrandTwitter className="h-6 w-6" />,
+      image: "",
+    },
+  ];
+  return (
+    <div className="flex flex-1 w-full h-full rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border border-neutral-200 dark:border-white/10 flex-col items-center justify-center p-3 md:p-4 min-h-32 md:min-h-0">
+      <div className="flex flex-row items-center justify-center w-full z-10">
+        <AnimatedTooltip items={connectItems} />
+      </div>
     </div>
-    {/* Uncontained Tooltips */}
-    <div className="flex flex-row items-center justify-center w-full z-10">
-      <AnimatedTooltip items={connectItems} />
-    </div>
-  </div>
-));
+  );
+});
 SkeletonConnect.displayName = "SkeletonConnect";
-
-// 3. UPDATED STATUS SKELETON (Emerald/Green Gradient)
-const SkeletonStatus = memo(() => (
-  <div className="group flex flex-1 w-full h-full rounded-xl bg-gradient-to-br from-emerald-50 to-green-50 dark:from-emerald-950/30 dark:to-green-950/30 border border-neutral-200 dark:border-white/10 flex-col items-center justify-center p-4 relative overflow-hidden">
-    <div className="absolute inset-0 bg-dot-black/[0.1] dark:bg-dot-white/[0.1] z-0" />
-    <div className="z-10 flex flex-col items-center gap-3 md:gap-4 relative">
-      <div className="relative flex items-center justify-center">
-        <div className="absolute w-12 h-12 bg-emerald-500/30 rounded-full animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite]" />
-        <div className="absolute w-12 h-12 bg-emerald-500/10 rounded-full" />
-        <div className="relative w-4 h-4 bg-emerald-500 rounded-full border-[3px] border-white dark:border-black shadow-sm" />
-      </div>
-      <div className="text-center">
-        <h3 className="font-bold text-md md:text-lg text-neutral-800 dark:text-neutral-100 mb-1">
-          Available for Work
-        </h3>
-        <p className="text-[10px] md:text-xs text-neutral-500 dark:text-neutral-400 max-w-[150px] mx-auto leading-relaxed">
-          Accepting new projects & contracts.
-        </p>
-      </div>
-      <a
-        href="mailto:hello@example.com"
-        className="mt-1 px-4 py-1.5 rounded-full bg-white/50 dark:bg-neutral-900/50 backdrop-blur-sm text-neutral-600 dark:text-neutral-300 text-[10px] md:text-xs font-bold border border-neutral-200 dark:border-neutral-800 transition-all hover:scale-105 hover:bg-emerald-500 hover:text-white hover:border-emerald-500 shadow-sm"
-      >
-        Hire Me
-      </a>
-    </div>
-  </div>
-));
-SkeletonStatus.displayName = "SkeletonStatus";
-
-// ============================================================================
-// --- MAIN IDENTITY GRID COMPONENT ---
-// ============================================================================
 
 export const IdentityGrid = memo(function IdentityGrid({
   content,
 }: {
   content?: IdentityGridContent;
 }) {
-  // Use content from props or fall back to defaults
-  const educationData = content?.education || defaultEducationData;
-  const techStackData = content?.techStack || defaultTechStack;
+  const educationData = content?.education || [];
+  const techStackData = content?.techStack || [];
 
   const items = useMemo(
     () => [
       {
         title: "The Tech Stack",
-        description: (
-          <span className="text-xs md:text-sm">
-            Technologies I use to build scalable products.
-          </span>
-        ),
+        description: "Technologies I use to build scalable products.",
         header: <SkeletonTech techStack={techStackData} />,
         className: "md:col-span-3",
         icon: <IconCode className="h-4 w-4 text-neutral-500" />,
       },
       {
         title: "Location",
-        description: <span className="text-xs md:text-sm">Bengkulu, ID.</span>,
+        description: "Bengkulu, ID.",
         header: <SkeletonLocation />,
         className: "md:col-span-1",
         icon: <IconMapPin className="h-4 w-4 text-neutral-500" />,
       },
       {
         title: "Connect",
-        description: (
-          <span className="text-xs md:text-sm">
-            Let's build something together.
-          </span>
-        ),
+        description: "Let's build something together.",
         header: <SkeletonConnect />,
         className: "md:col-span-2",
         icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
       },
       {
         title: "Education",
-        description: (
-          <span className="text-xs md:text-sm">My academic journey.</span>
-        ),
+        description: "My academic journey.",
         header: <SkeletonEducation educationData={educationData} />,
-        // FIXED: added row-span-2 to give it double height
-        className: "md:col-span-2 md:row-span-2",
+        className: "md:col-span-2",
         icon: <IconSchool className="h-4 w-4 text-neutral-500" />,
       },
       {
-        title: "Status",
-        description: (
-          <span className="text-xs md:text-sm">Current availability.</span>
-        ),
-        header: <SkeletonStatus />,
-        className: "md:col-span-1 h-[300px] md:h-full",
-        icon: <IconActivity className="h-4 w-4 text-neutral-500" />,
+        title: "Interests",
+        description: "What drives my curiosity.",
+        header: <SkeletonInterests />,
+        className: "md:col-span-1",
+        icon: <IconCoffee className="h-4 w-4 text-neutral-500" />,
       },
     ],
     [educationData, techStackData]
@@ -344,16 +302,8 @@ export const IdentityGrid = memo(function IdentityGrid({
 
   return (
     <div className="relative min-h-fit !h-auto bg-white dark:bg-black">
-      <div
-        className={cn(
-          "absolute inset-0",
-          "[background-size:40px_40px]",
-          "[background-image:linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)]",
-          "dark:[background-image:linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)]"
-        )}
-      />
+      <div className="absolute inset-0 [background-size:40px_40px] [background-image:linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)] dark:[background-image:linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)]" />
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black" />
-
       <section className="py-12 md:py-20 relative z-10">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <motion.h2
@@ -364,8 +314,7 @@ export const IdentityGrid = memo(function IdentityGrid({
           >
             Identity & Expertise
           </motion.h2>
-
-          <BentoGrid className="max-w-6xl mx-auto grid-cols-1 md:grid-cols-3 md:auto-rows-[20rem] lg:auto-rows-[22rem] gap-3 md:gap-4">
+          <BentoGrid className="max-w-6xl mx-auto md:auto-rows-[18rem] lg:auto-rows-[20rem] gap-4">
             {items.map((item, i) => (
               <BentoGridItem
                 key={i}

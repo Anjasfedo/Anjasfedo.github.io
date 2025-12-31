@@ -82,6 +82,27 @@ html {
       transform: translate(calc(-50% - 0.5rem));
     }
   }
+
+  --animate-scroll-up: scroll-up 40s linear infinite;
+  --animate-scroll-down: scroll-down 40s linear infinite;
+
+  @keyframes scroll-up {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-50%);
+    }
+  }
+
+  @keyframes scroll-down {
+    from {
+      transform: translateY(-50%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
 }
 
 :root {
@@ -162,7 +183,8 @@ html {
   *,
   *::before,
   *::after {
-    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-property: color, background-color, border-color,
+      text-decoration-color, fill, stroke;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 300ms;
   }

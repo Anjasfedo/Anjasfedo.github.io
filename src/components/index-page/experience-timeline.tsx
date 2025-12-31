@@ -24,6 +24,7 @@ interface TimelineItem {
 }
 
 interface ExperienceTimelineContent {
+  experienceTitle: string;
   timeline?: TimelineItem[];
 }
 
@@ -204,7 +205,7 @@ export const ExperienceTimeline = memo(function ExperienceTimeline({
             className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-8 md:mb-12 text-center"
           >
             {/* Use title from MDX or default */}
-            {content?.title || "Work Experience"}
+            {content?.experienceTitle && "Work Experience"}
           </motion.h2>
           {/* ... rest of your header section ... */}
         </div>
