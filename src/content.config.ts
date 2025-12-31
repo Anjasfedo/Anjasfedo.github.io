@@ -3,7 +3,7 @@ import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
 const projects = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/projects" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/projects" }),
   schema: z.object({
     title: z.string(),
     slug: z.string(),
@@ -296,7 +296,7 @@ const privacyPage = defineCollection({
 });
 
 const certificates = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/certificates" }),
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/certificates" }),
   schema: z.object({
     title: z.string(),
     slug: z.string(),
