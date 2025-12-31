@@ -18,6 +18,9 @@ export async function getStaticPaths() {
   return paths;
 }
 
+// Get the page content
+const page = Astro.props;
+const pageContent = page.data;
 
 // Fetch all projects from the content collection
 const allProjectsCollection = await getCollection("projects");
@@ -59,7 +62,7 @@ const projectsData = allProjectsCollection.map((project) => ({
     </div>
 
     <div class="relative z-10 w-full pt-20">
-      <ProjectsPage client:load projects={projectsData} />
+      <ProjectsPage client:load projects={projectsData} content={pageContent} />
     </div>
   </div>
 </Layout>

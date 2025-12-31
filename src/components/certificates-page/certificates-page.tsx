@@ -22,6 +22,21 @@ import { LinkPreview } from "@/components/ui/link-preview";
 export type CertificateSkill = string;
 export type CertificateIssuer = string;
 
+export interface CertificatesPageContent {
+  pageTitle?: string;
+  pageDescription?: string;
+  searchPlaceholder?: string;
+  resetFiltersText?: string;
+  issuerLabel?: string;
+  skillsFilterLabel?: string;
+  allSkillsText?: string;
+  selectedCount?: string;
+  noCertificatesFoundText?: string;
+  loadMoreText?: string;
+  credentialLinkText?: string;
+  mediaLinkText?: string;
+}
+
 export interface Certificate {
   id: string;
   slug: string;
@@ -50,6 +65,7 @@ interface FilterBarProps {
   onClearFilters: () => void;
   availableSkills: CertificateSkill[];
   availableIssuers: CertificateIssuer[];
+  content?: CertificatesPageContent;
 }
 
 const FilterBar = ({
@@ -63,6 +79,7 @@ const FilterBar = ({
   onClearFilters,
   availableSkills,
   availableIssuers,
+  content,
 }: FilterBarProps) => {
   const [showSkillDropdown, setShowSkillDropdown] = useState(false)
 
@@ -82,7 +99,7 @@ const FilterBar = ({
             <IconSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
             <input
               type="text"
-              placeholder="Search by title, issuer, or skill..."
+              placeholder={content?.searchPlaceholder || "Search by title, issuer, or skill..."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-3 rounded-xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-black text-neutral-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all"
@@ -93,14 +110,14 @@ const FilterBar = ({
               onClick={onClearFilters}
               className="px-4 py-3 rounded-xl bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-red-100 dark:border-red-900/30 flex items-center gap-2 text-sm font-bold"
             >
-              <IconX className="w-4 h-4" /> Reset Filters
+              <IconX className="w-4 h-4" /> {content?.resetFiltersText || "Reset Filters"}
             </button>
           )}
         </div>
 
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1">
-            <label className="block text-xs font-bold uppercase tracking-wider text-neutral-500 mb-2">Issuer</label>
+            <label className="block text-xs font-bold uppercase tracking-wider text-neutral-500 mb-2">{content?.issuerLabel || "Issuer"}</label>
             <div className="flex flex-wrap gap-2">
               {availableIssuers.map((issuer: string) => (
                 <button
@@ -120,13 +137,13 @@ const FilterBar = ({
           </div>
 
           <div className="flex-1 relative">
-            <label className="block text-xs font-bold uppercase tracking-wider text-neutral-500 mb-2">Skills Filter</label>
+            <label className="block text-xs font-bold uppercase tracking-wider text-neutral-500 mb-2">{content?.skillsFilterLabel || "Skills Filter"}</label>
             <button
               onClick={() => setShowSkillDropdown(!showSkillDropdown)}
               className="w-full px-4 py-3 rounded-xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-black flex items-center justify-between"
             >
               <span className="text-sm truncate">
-                {selectedSkills.length > 0 ? `${selectedSkills.length} selected` : "All Skills"}
+                {selectedSkills.length > 0 ? `${selectedSkills.length} ${content?.selectedCount || "selected"}` : content?.allSkillsText || "All Skills"}
               </span>
               <IconChevronDown className={cn("w-4 h-4 transition-transform", showSkillDropdown && "rotate-180")} />
             </button>
@@ -164,7 +181,7 @@ const FilterBar = ({
 // --- MAIN COMPONENT ---
 // ============================================================================
 
-export function CertificatesPage({ certificates }: { certificates: Certificate[] }) {
+export function CertificatesPage({ certificates, content }: { certificates: Certificate[]; content?: CertificatesPageContent }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedIssuer, setSelectedIssuer] = useState<CertificateIssuer>("All");
   const [selectedSkills, setSelectedSkills] = useState<CertificateSkill[]>([]);
@@ -252,7 +269,7 @@ export function CertificatesPage({ certificates }: { certificates: Certificate[]
                   url={cert.credential}
                   className="inline-flex items-center gap-1 text-[10px] font-black text-neutral-900 dark:text-white hover:text-blue-500 transition-colors uppercase tracking-tight"
                 >
-                  Credential <IconExternalLink className="w-3 h-3" />
+                  {content?.credentialLinkText || "Credential"} <IconExternalLink className="w-3 h-3" />
                 </LinkPreview>
               )}
 
@@ -263,7 +280,7 @@ export function CertificatesPage({ certificates }: { certificates: Certificate[]
                     url={cert.media}
                     className="inline-flex items-center gap-1 text-[10px] font-black text-neutral-900 dark:text-white hover:text-blue-500 transition-colors uppercase tracking-tight"
                   >
-                    Media <IconCamera className="w-3 h-3" />
+                    {content?.mediaLinkText || "Media"} <IconCamera className="w-3 h-3" />
                   </LinkPreview>
                 </>
               )}
@@ -277,9 +294,9 @@ export function CertificatesPage({ certificates }: { certificates: Certificate[]
   return (
     <div className="relative z-10 flex w-full flex-col items-center justify-center gap-8 py-16 md:py-24">
       <div className="text-center space-y-4 px-4">
-        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white">Expertise Certified</h1>
+        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white">{content?.pageTitle || "Expertise Certified"}</h1>
         <p className="text-neutral-500 dark:text-neutral-400 max-w-xl mx-auto text-sm md:text-base">
-          Verifiable credentials from global institutions in Machine Learning and Software Engineering.
+          {content?.pageDescription || "Verifiable credentials from global institutions in Machine Learning and Software Engineering."}
         </p>
       </div>
 
@@ -290,6 +307,7 @@ export function CertificatesPage({ certificates }: { certificates: Certificate[]
         availableSkills={availableSkills} availableIssuers={availableIssuers}
         activeFiltersCount={(searchQuery ? 1 : 0) + (selectedIssuer !== "All" ? 1 : 0) + selectedSkills.length}
         onClearFilters={() => { setSearchQuery(""); setSelectedIssuer("All"); setSelectedSkills([]); }}
+        content={content}
       />
 
       <div className="w-full max-w-7xl mx-auto px-4">
@@ -301,7 +319,7 @@ export function CertificatesPage({ certificates }: { certificates: Certificate[]
           ) : (
             <div className="text-center py-20 bg-neutral-50 dark:bg-neutral-900/50 rounded-3xl border border-dashed border-neutral-300 dark:border-neutral-800">
               <IconAward className="w-12 h-12 mx-auto text-neutral-300 mb-4" />
-              <p className="text-neutral-500">No matching certificates found.</p>
+              <p className="text-neutral-500">{content?.noCertificatesFoundText || "No matching certificates found."}</p>
             </div>
           )}
         </AnimatePresence>
@@ -312,7 +330,7 @@ export function CertificatesPage({ certificates }: { certificates: Certificate[]
           onClick={() => setVisibleCount(v => v + 6)}
           className="px-10 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold shadow-xl transition-transform active:scale-95"
         >
-          Load More
+          {content?.loadMoreText || "Load More"}
         </button>
       )}
     </div>

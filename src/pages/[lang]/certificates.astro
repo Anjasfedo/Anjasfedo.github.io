@@ -15,6 +15,10 @@ export async function getStaticPaths() {
   return paths;
 }
 
+// Get the page content
+const page = Astro.props;
+const pageContent = page.data;
+
 // Fetch all certificates from the content collection
 const allCertificatesCollection = await getCollection("certificates");
 
@@ -50,7 +54,7 @@ const certificatesData = allCertificatesCollection.map((certificate) => ({
     </div>
 
     <div class="relative z-10 w-full pt-20">
-      <CertificatesPage client:load certificates={certificatesData} />
+      <CertificatesPage client:load certificates={certificatesData} content={pageContent} />
     </div>
   </div>
 </Layout>

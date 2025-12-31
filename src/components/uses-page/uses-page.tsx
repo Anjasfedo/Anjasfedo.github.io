@@ -71,6 +71,7 @@ interface SoftwareCategory {
 }
 
 interface UsesPageContent {
+  title?: string;
   description?: string;
   hardware?: {
     laptop: HardwareCategory;
@@ -235,7 +236,9 @@ export const UsesPage = React.memo(function UsesPage({
   const softwareData = useMemo(() => {
     if (!content?.software) return null;
 
-    const processSoftwareItems = (items: SoftwareItem[]): ProcessedSoftwareItem[] =>
+    const processSoftwareItems = (
+      items: SoftwareItem[]
+    ): ProcessedSoftwareItem[] =>
       items.map((item) => ({
         ...item,
         icon: getIconComponent(item.icon),
@@ -273,7 +276,9 @@ export const UsesPage = React.memo(function UsesPage({
   if (!hardwareData || !softwareData) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <p className="text-neutral-600 dark:text-neutral-400">No content available</p>
+        <p className="text-neutral-600 dark:text-neutral-400">
+          No content available
+        </p>
       </div>
     );
   }
@@ -285,7 +290,7 @@ export const UsesPage = React.memo(function UsesPage({
           "absolute inset-0",
           "[background-size:20px_20px]",
           "[background-image:radial-gradient(#d4d4d4_1px,transparent_1px)]",
-          "dark:[background-image:radial-gradient(#404040_1px,transparent_1px)]",
+          "dark:[background-image:radial-gradient(#404040_1px,transparent_1px)]"
         )}
       />
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"></div>
@@ -298,7 +303,7 @@ export const UsesPage = React.memo(function UsesPage({
         >
           <div className="flex items-center justify-center gap-3 mb-4">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white">
-              Uses
+              {content?.title || "Uses"}
             </h1>
           </div>
           <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto leading-relaxed">

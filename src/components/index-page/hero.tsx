@@ -112,31 +112,52 @@ export function Hero({
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-          {/* Avatar Section */}
-          {/* Avatar Section */}
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="flex flex-col items-center mb-8"
+            whileHover="hover" // This triggers the "hover" variant in all child motion components
+            className="flex flex-col items-center mb-8 cursor-pointer"
           >
             <div className="relative mb-4">
-              {/* Animated glow effect behind the avatar */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full blur opacity-30 animate-pulse"></div>
+              {/* Animated glow effect - intensified on hover */}
+              <motion.div
+                variants={{
+                  hover: {
+                    scale: 1.15,
+                    opacity: 0.6,
+                    filter: "blur(12px)",
+                  },
+                }}
+                className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full blur opacity-30 animate-pulse transition-all duration-500"
+              ></motion.div>
 
-              <img
-                src="/profile-circle.webp" // Updated to your circular WebP
+              <motion.img
+                variants={{
+                  hover: {
+                    y: -5,
+                    scale: 1.05,
+                    rotate: 2, // Subtle tilt for personality
+                  },
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                src="/profile-circle.webp"
                 alt="M. Anjasfedo Afridiansah"
-                className="relative w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-[3px] border-white dark:border-neutral-900 shadow-lg"
-                loading="eager" // Load this immediately as it's above the fold
+                className="relative w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-[3px] border-white dark:border-neutral-900 shadow-lg z-10"
+                loading="eager"
               />
 
-              {/* Status Indicator (Online/Available) */}
-              <div className="absolute bottom-1 right-1 p-1 bg-white dark:bg-gray-900 rounded-full shadow-sm">
+              {/* Status Indicator */}
+              <motion.div
+                variants={{
+                  hover: { scale: 1.2, x: 2, y: 2 },
+                }}
+                className="absolute bottom-1 right-1 p-1 bg-white dark:bg-gray-900 rounded-full shadow-sm z-20"
+              >
                 <span className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
                 </span>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
 

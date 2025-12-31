@@ -270,12 +270,49 @@ const termsPage = defineCollection({
 
 const projectsPage = defineCollection({
   loader: glob({ pattern: "**/index.mdx", base: "./src/content/projects-page" }),
-
-
+  schema: z.object({
+    title: z.string(),
+    order: z.number(),
+    // Hero section
+    pageTitle: z.string(), // e.g., "All Projects"
+    pageDescription: z.string(), // e.g., "Explore my collection of projects..."
+    // Filter section
+    searchPlaceholder: z.string(), // e.g., "Search projects..."
+    resetFiltersText: z.string(), // e.g., "Reset Filters"
+    statusLabel: z.string(), // e.g., "Status"
+    technologiesLabel: z.string(), // e.g., "Technologies"
+    selectTechnologiesText: z.string(), // e.g., "Select technologies"
+    selectedCount: z.string(), // e.g., "selected"
+    // Empty state
+    noProjectsFoundText: z.string(), // e.g., "No matching projects found."
+    // Load more
+    loadMoreText: z.string(), // e.g., "Load More Projects"
+  }),
 });
 
 const certificatesPage = defineCollection({
-  loader: glob({ pattern: "**/index.mdx", base: "./src/content/certificates-page" })
+  loader: glob({ pattern: "**/index.mdx", base: "./src/content/certificates-page" }),
+  schema: z.object({
+    title: z.string(),
+    order: z.number(),
+    // Hero section
+    pageTitle: z.string(), // e.g., "Expertise Certified"
+    pageDescription: z.string(), // e.g., "Verifiable credentials from..."
+    // Filter section
+    searchPlaceholder: z.string(), // e.g., "Search by title, issuer, or skill..."
+    resetFiltersText: z.string(), // e.g., "Reset Filters"
+    issuerLabel: z.string(), // e.g., "Issuer"
+    skillsFilterLabel: z.string(), // e.g., "Skills Filter"
+    allSkillsText: z.string(), // e.g., "All Skills"
+    selectedCount: z.string(), // e.g., "selected"
+    // Empty state
+    noCertificatesFoundText: z.string(), // e.g., "No matching certificates found."
+    // Load more
+    loadMoreText: z.string(), // e.g., "Load More"
+    // Link labels
+    credentialLinkText: z.string(), // e.g., "Credential"
+    mediaLinkText: z.string(), // e.g., "Media"
+  }),
 });
 
 // Privacy page content collection
