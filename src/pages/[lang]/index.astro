@@ -5,6 +5,7 @@ import { IdentityGrid } from "../../components/index-page/identity-grid";
 import { ExperienceTimeline } from "../../components/index-page/experience-timeline";
 import { ServicesSection } from "../../components/index-page/services-section";
 import { getCollection } from "astro:content";
+import { getLangFromUrl } from "@/i18n/utils";
 
 export async function getStaticPaths() {
   const pages = await getCollection("indexPage");
@@ -19,6 +20,8 @@ export async function getStaticPaths() {
 
 const page = Astro.props;
 const content = page.data;
+
+const lang = getLangFromUrl(Astro.url);
 ---
 
 <Layout>
@@ -27,12 +30,27 @@ const content = page.data;
     content={{
       roles: content.roles,
       headline: content.headline,
+      heroSubtitle: content.heroSubtitle,
+      viewMyWorkText: content.viewMyWorkText,
+      getInTouchText: content.getInTouchText,
     }}
+    lang={lang}
   />
 
   <IdentityGrid
     client:visible
     content={{
+      identityGridTitle: content.identityGridTitle,
+      techStackTitle: content.techStackTitle,
+      techStackDescription: content.techStackDescription,
+      locationTitle: content.locationTitle,
+      locationDescription: content.locationDescription,
+      connectTitle: content.connectTitle,
+      connectDescription: content.connectDescription,
+      educationTitle: content.educationTitle,
+      educationDescription: content.educationDescription,
+      interestsTitle: content.interestsTitle,
+      interestsDescription: content.interestsDescription,
       education: content.education,
       techStack: content.techStack,
       location: content.location,

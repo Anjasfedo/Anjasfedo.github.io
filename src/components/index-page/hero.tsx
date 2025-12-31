@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { BackgroundLines } from "@/components/ui/background-lines";
 import { cn } from "@/lib/utils";
 import { TextGenerateEffect } from "../ui/text-generate-effect";
+import type { Language } from "@/i18n/ui";
 
 interface Role {
   label: string;
@@ -12,7 +13,10 @@ interface Role {
 
 interface HeroContent {
   roles?: Role[];
-  headline?: string; // Added this
+  headline?: string;
+  heroSubtitle?: string;
+  viewMyWorkText?: string;
+  getInTouchText?: string;
 }
 
 const RoleCard = React.memo(
@@ -53,9 +57,11 @@ RoleCard.displayName = "RoleCard";
 export function Hero({
   className,
   content,
+  lang,
 }: {
   className?: string;
   content?: HeroContent;
+  lang: Language;
 }) {
   // Use a fallback to empty array but ensure it updates when content arrives
   const roles = useMemo(() => content?.roles || [], [content?.roles]);
@@ -145,7 +151,7 @@ export function Hero({
 
           <div className="flex flex-col items-center justify-center mb-12">
             <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-6 font-medium">
-              I specialize in:
+              {content?.heroSubtitle || "I specialize in:"}
             </p>
             <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto mb-8">
               {roles.map((role, idx) => (
@@ -176,16 +182,16 @@ export function Hero({
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
             <a
-              href="/projects"
+              href={`/${lang}/projects`}
               className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full font-semibold shadow-lg hover:opacity-90 transition-all"
             >
-              View My Work
+              {content?.viewMyWorkText || "View My Work"}
             </a>
             <a
               href="mailto:fedoafridiansah@gmail.com"
               className="px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-full font-semibold border border-gray-300 dark:border-neutral-700 hover:border-purple-500 transition-all"
             >
-              Get In Touch
+              {content?.getInTouchText || "Get In Touch"}
             </a>
           </div>
         </div>

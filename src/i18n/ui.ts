@@ -33,6 +33,14 @@ export const ui = {
     "nav.experience": "Experience",
     "nav.services": "Services",
     "nav.uses": "Uses",
+    // Footer translations
+    "footer.cta.title": "Ready to start?",
+    "footer.cta.desc": "Currently accepting new projects and collaborations. Let’s turn your vision into a digital reality.",
+    "footer.cta.button": "Start a Conversation",
+    "footer.rights": "ALL RIGHTS RESERVED.",
+    "footer.links.privacy": "Privacy",
+    "footer.links.terms": "Terms",
+    "footer.links.sitemap": "Sitemap",
   },
   id: {
     "nav.about": "Tentang",
@@ -41,6 +49,14 @@ export const ui = {
     "nav.experience": "Pengalaman",
     "nav.services": "Layanan",
     "nav.uses": "Peralatan",
+    // Footer translations
+    "footer.cta.title": "Siap untuk mulai?",
+    "footer.cta.desc": "Menerima proyek dan kolaborasi baru. Mari wujudkan visi digital Anda menjadi kenyataan.",
+    "footer.cta.button": "Mulai Percakapan",
+    "footer.rights": "HAK CIPTA DILINDUNGI.",
+    "footer.links.privacy": "Privasi",
+    "footer.links.terms": "Ketentuan",
+    "footer.links.sitemap": "Sitemap",
   },
 } as const;
 

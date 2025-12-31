@@ -10,18 +10,19 @@ import {
   IconMail,
   IconChevronRight,
 } from "@tabler/icons-react";
+import { useTranslations } from "@/i18n/utils";
+import type { Language } from "@/i18n/ui";
 
-export function Footer() {
-  // Logic remains for settling points, but we'll focus on X-axis now
+interface FooterProps {
+  lang: Language;
+}
+
+export function Footer({ lang }: FooterProps) {
+  const t = useTranslations(lang);
   const [settleX, setSettleX] = useState(0);
 
   useEffect(() => {
-    const handleResize = () => {
-      // Typically for horizontal center, 0 is the neutral point in Framer Motion
-      // if the parent container is flex-col items-center.
-      setSettleX(0);
-    };
-
+    const handleResize = () => setSettleX(0);
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -37,7 +38,7 @@ export function Footer() {
     {
       name: "LinkedIn",
       icon: <IconBrandLinkedin className="w-5 h-5" />,
-      href: "https://linkedin.com",
+      href: "https://linkedin.com/in/anjasfedo",
       color: "hover:bg-blue-600",
     },
     {
@@ -58,26 +59,18 @@ export function Footer() {
     <footer className="bg-slate-950 w-full overflow-hidden">
       <LampContainer className="">
         <div className="flex flex-col items-center justify-end w-full h-full mx-auto px-6">
-          {/* Main Footer CTA - Updated Animation */}
           <motion.div
-            // CHANGE: Start from -200px (left) and 0.2 opacity
             initial={{ opacity: 0, x: -200 }}
-            // CHANGE: Animate to settleX (center)
             whileInView={{ opacity: 1, x: settleX }}
-            viewport={{ once: true }} // Optional: only animate once
-            transition={{
-              delay: 0.3,
-              duration: 1, // Slightly longer for a smoother horizontal sweep
-              ease: "easeOut",
-            }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 1, ease: "easeOut" }}
             className="text-center mb-16 md:mb-24 mt-12"
           >
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight bg-gradient-to-b from-slate-100 to-slate-500 bg-clip-text text-transparent mb-6">
-              Ready to start?
+              {t("footer.cta.title")}
             </h2>
             <p className="text-neutral-400 text-sm md:text-base max-w-md mx-auto mb-10 leading-relaxed">
-              Currently accepting new projects and collaborations. Let’s turn
-              your vision into a digital reality.
+              {t("footer.cta.desc")}
             </p>
 
             <motion.a
@@ -86,25 +79,22 @@ export function Footer() {
               whileTap={{ scale: 0.95 }}
               className="group relative inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full font-bold text-sm transition-all hover:bg-cyan-400 shadow-[0_0_30px_rgba(255,255,255,0.1)]"
             >
-              Start a Conversation
+              {t("footer.cta.button")}
               <IconChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </motion.a>
           </motion.div>
 
-          {/* Bottom Bar Section */}
           <div className="w-full pt-10 pb-10 border-t border-slate-800/60">
             <div className="flex flex-col md:flex-row justify-between items-center gap-8 md:gap-4">
-              {/* Branding */}
               <div className="flex flex-col items-center md:items-start order-2 md:order-1">
                 <p className="text-slate-100 font-bold text-xl mb-1 tracking-tighter">
                   ANJAS<span className="text-cyan-500">FEDO</span>
                 </p>
                 <p className="text-slate-500 text-[10px] md:text-xs font-medium tracking-wide">
-                  © {new Date().getFullYear()} ALL RIGHTS RESERVED.
+                  © {new Date().getFullYear()} {t("footer.rights")}
                 </p>
               </div>
 
-              {/* Socials */}
               <div className="flex items-center gap-4 order-1 md:order-2">
                 {socialLinks.map((social) => (
                   <a
@@ -123,25 +113,24 @@ export function Footer() {
                 ))}
               </div>
 
-              {/* Links */}
               <div className="flex items-center gap-6 order-3">
                 <a
-                  href="/privacy"
+                  href={`/${lang}/privacy`}
                   className="text-slate-500 hover:text-cyan-400 text-[10px] md:text-xs font-bold transition-colors uppercase tracking-[0.2em]"
                 >
-                  Privacy
+                  {t("footer.links.privacy")}
                 </a>
                 <a
-                  href="/terms"
+                  href={`/${lang}/terms`}
                   className="text-slate-500 hover:text-cyan-400 text-[10px] md:text-xs font-bold transition-colors uppercase tracking-[0.2em]"
                 >
-                  Terms
+                  {t("footer.links.terms")}
                 </a>
                 <a
                   href="/sitemap-index.xml"
                   className="text-slate-500 hover:text-cyan-400 text-[10px] md:text-xs font-bold transition-colors uppercase tracking-[0.2em]"
                 >
-                  Sitemap
+                  {t("footer.links.sitemap")}
                 </a>
               </div>
             </div>

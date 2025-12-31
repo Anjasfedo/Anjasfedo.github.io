@@ -37,6 +37,9 @@ const indexPage = defineCollection({
 
     // Hero section
     headline: z.string(),
+    heroSubtitle: z.string(), // e.g., "I specialize in:"
+    viewMyWorkText: z.string(), // e.g., "View My Work"
+    getInTouchText: z.string(), // e.g., "Get In Touch"
     roles: z.array(
       z.object({
         label: z.string(),
@@ -45,6 +48,17 @@ const indexPage = defineCollection({
     ),
 
     // Identity grid section
+    identityGridTitle: z.string(), // e.g., "Identity & Expertise"
+    techStackTitle: z.string(), // e.g., "The Tech Stack"
+    techStackDescription: z.string(), // e.g., "Technologies I use to build scalable products."
+    locationTitle: z.string(), // e.g., "Location"
+    locationDescription: z.string(), // e.g., "Indonesia, Bengkulu."
+    connectTitle: z.string(), // e.g., "Connect"
+    connectDescription: z.string(), // e.g., "Let's build something together."
+    educationTitle: z.string(), // e.g., "Education"
+    educationDescription: z.string(), // e.g., "My academic journey."
+    interestsTitle: z.string(), // e.g., "Interests"
+    interestsDescription: z.string(), // e.g., "What drives my curiosity."
     education: z.array(
       z.object({
         id: z.number(),

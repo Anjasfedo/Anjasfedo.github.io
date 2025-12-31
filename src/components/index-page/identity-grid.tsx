@@ -66,6 +66,17 @@ interface InterestItem {
 }
 
 interface IdentityGridContent {
+  identityGridTitle?: string;
+  techStackTitle?: string;
+  techStackDescription?: string;
+  locationTitle?: string;
+  locationDescription?: string;
+  connectTitle?: string;
+  connectDescription?: string;
+  educationTitle?: string;
+  educationDescription?: string;
+  interestsTitle?: string;
+  interestsDescription?: string;
   education?: EducationItem[];
   techStack?: TechStackItem[];
   location?: LocationItem;
@@ -313,42 +324,42 @@ export const IdentityGrid = memo(function IdentityGrid({
   const items = useMemo(
     () => [
       {
-        title: "The Tech Stack",
-        description: "Technologies I use to build scalable products.",
+        title: content?.techStackTitle || "The Tech Stack",
+        description: content?.techStackDescription || "Technologies I use to build scalable products.",
         header: <SkeletonTech techStack={techStackData} />,
         className: "md:col-span-3",
         icon: <IconCode className="h-4 w-4 text-neutral-500" />,
       },
       {
-        title: "Location",
-        description: "Indonesia, Bengkulu.",
+        title: content?.locationTitle || "Location",
+        description: content?.locationDescription || "Indonesia, Bengkulu.",
         header: <SkeletonLocation locationData={locationData} />,
         className: "md:col-span-1",
         icon: <IconMapPin className="h-4 w-4 text-neutral-500" />,
       },
       {
-        title: "Connect",
-        description: "Let's build something together.",
+        title: content?.connectTitle || "Connect",
+        description: content?.connectDescription || "Let's build something together.",
         header: <SkeletonConnect connectData={connectData} />,
         className: "md:col-span-2",
         icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
       },
       {
-        title: "Education",
-        description: "My academic journey.",
+        title: content?.educationTitle || "Education",
+        description: content?.educationDescription || "My academic journey.",
         header: <SkeletonEducation educationData={educationData} />,
         className: "md:col-span-2",
         icon: <IconSchool className="h-4 w-4 text-neutral-500" />,
       },
       {
-        title: "Interests",
-        description: "What drives my curiosity.",
+        title: content?.interestsTitle || "Interests",
+        description: content?.interestsDescription || "What drives my curiosity.",
         header: <SkeletonInterests interestsData={interestsData} />,
         className: "md:col-span-1",
         icon: <IconCoffee className="h-4 w-4 text-neutral-500" />,
       },
     ],
-    [educationData, techStackData, locationData, connectData, interestsData]
+    [content, educationData, techStackData, locationData, connectData, interestsData]
   );
 
   return (
@@ -363,7 +374,7 @@ export const IdentityGrid = memo(function IdentityGrid({
             viewport={{ once: true }}
             className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-8 md:mb-12 text-center"
           >
-            Identity & Expertise
+            {content?.identityGridTitle || "Identity & Expertise"}
           </motion.h2>
           <BentoGrid className="max-w-6xl mx-auto gap-4">
             {items.map((item, i) => (
