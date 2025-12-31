@@ -11,7 +11,8 @@ export const BentoGrid = ({
   return (
     <div
       className={cn(
-        "mx-auto grid max-w-7xl grid-cols-1 gap-4 md:auto-rows-[18rem] md:grid-cols-3",
+        // Use auto-rows-auto to let items grow with content
+        "mx-auto grid max-w-7xl grid-cols-1 gap-4 md:grid-cols-3 auto-rows-auto",
         className
       )}
     >
@@ -36,18 +37,20 @@ export const BentoGridItem = ({
   return (
     <div
       className={cn(
-        // FIXED:
-        // 1. 'group/bento' handles hover state.
-        // 2. 'hover:z-50' forces this specific card to sit on top of all neighbors when hovered.
-        // 3. 'relative' establishes the stacking context.
-        "row-span-1 relative rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 dark:bg-black dark:border-white/[0.2] bg-white border border-neutral-200 justify-between flex flex-col space-y-4 hover:z-50",
+        // Removed h-full to allow natural growth, added min-h for consistent look
+        "row-span-1 relative rounded-xl group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none p-4 dark:bg-black dark:border-white/[0.2] bg-white border border-neutral-200 flex flex-col justify-between space-y-4 hover:z-50 min-h-[18rem]",
         className
       )}
     >
-      {header}
-      <div className="group-hover/bento:translate-x-2 transition duration-200 relative z-20">
+      {/* Content wrapper */}
+      <div className="flex flex-col flex-1 w-full">
+        {header}
+      </div>
+
+      {/* Label wrapper - z-index ensures it stays on top */}
+      <div className="group-hover/bento:translate-x-2 transition duration-200 relative z-30 bg-white/50 dark:bg-black/50 backdrop-blur-sm p-1 rounded-lg">
         {icon}
-        <div className="font-sans font-bold text-neutral-600 dark:text-neutral-200 mb-2 mt-2">
+        <div className="font-sans font-bold text-neutral-600 dark:text-neutral-200 mb-1 mt-2">
           {title}
         </div>
         <div className="font-sans font-normal text-neutral-600 text-xs dark:text-neutral-300">

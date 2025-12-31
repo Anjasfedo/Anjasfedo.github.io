@@ -1,8 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { PrivacyPage } from "../components/privacy-page/privacy-page";
+import { getCollection } from "astro:content";
+
+// Fetch the privacy page content
+const privacyEntries = await getCollection("privacyPage");
+
+// Safely check if we have data
+if (privacyEntries.length === 0) {
+  throw new Error(
+    "Could not find index.mdx in src/content/privacy-page/. Check your file path and pattern."
+  );
+}
+
+const content = privacyEntries[0].data;
 ---
 
 <Layout title="Privacy Policy | M. Anjasfedo Afridiansah">
-  <PrivacyPage client:load />
+  <PrivacyPage client:load content={content} />
 </Layout>
