@@ -49,6 +49,24 @@ const indexPage = defineCollection({
             designation: z.string(),
             image: z.string(),
         })),
+        location: z.object({
+            label: z.string(),
+            country: z.string(),
+            city: z.string(),
+            mapEmbedUrl: z.string(),
+        }).optional(),
+        connect: z.array(z.object({
+            id: z.number(),
+            name: z.string(),
+            designation: z.string(),
+            icon: z.string(),
+        })).optional(),
+        interests: z.array(z.object({
+            id: z.number(),
+            label: z.string(),
+            color: z.string(),
+            icon: z.string(),
+        })).optional(),
 
         // Experience timeline section
         experienceTitle: z.string(),

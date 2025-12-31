@@ -40,14 +40,57 @@ interface TechStackItem {
   image: string;
 }
 
+interface LocationItem {
+  label: string;
+  country: string;
+  city: string;
+  mapEmbedUrl: string;
+}
+
+interface ConnectItem {
+  id: number;
+  name: string;
+  designation: string;
+  icon: string;
+}
+
+interface InterestItem {
+  id: number;
+  label: string;
+  color: string;
+  icon: string;
+}
+
 interface IdentityGridContent {
   education?: EducationItem[];
   techStack?: TechStackItem[];
+  location?: LocationItem;
+  connect?: ConnectItem[];
+  interests?: InterestItem[];
 }
 
 // ============================================================================
 // --- SUB-COMPONENTS ---
 // ============================================================================
+
+// Icon mapping helper
+const iconMap: Record<string, React.ReactElement> = {
+  IconBrandGithub: <IconBrandGithub className="h-6 w-6" />,
+  IconBrandLinkedin: <IconBrandLinkedin className="h-6 w-6" />,
+  IconBrandTwitter: <IconBrandTwitter className="h-6 w-6" />,
+  IconCloud: <IconCloud />,
+  IconDeviceDesktop: <IconDeviceDesktop />,
+  IconCoffee: <IconCoffee />,
+  IconCamera: <IconCamera />,
+  IconDeviceGamepad2: <IconDeviceGamepad2 />,
+  IconSignature: <IconSignature />,
+  IconMapPin: <IconMapPin />,
+  IconActivity: <IconActivity />,
+};
+
+const getIconComponent = (iconName: string): React.ReactElement => {
+  return iconMap[iconName] || null;
+};
 
 const MarqueeContainer = ({
   children,
@@ -122,32 +165,11 @@ const SkeletonEducation = memo(
 );
 SkeletonEducation.displayName = "SkeletonEducation";
 
-const SkeletonInterests = memo(() => {
-  const rawInterests = [
-    { id: 1, label: "Cloud Tech", color: "text-blue-500", icon: <IconCloud /> },
-    {
-      id: 2,
-      label: "Open Source",
-      color: "text-purple-500",
-      icon: <IconDeviceDesktop />,
-    },
-    { id: 3, label: "Coffee", color: "text-amber-600", icon: <IconCoffee /> },
-    {
-      id: 4,
-      label: "Photography",
-      color: "text-pink-500",
-      icon: <IconCamera />,
-    },
-    {
-      id: 5,
-      label: "Gaming",
-      color: "text-emerald-500",
-      icon: <IconDeviceGamepad2 />,
-    },
-    { id: 6, label: "Writing", color: "text-sky-500", icon: <IconSignature /> },
-    { id: 7, label: "Travel", color: "text-orange-500", icon: <IconMapPin /> },
-    { id: 8, label: "Music", color: "text-rose-500", icon: <IconActivity /> },
-  ];
+const SkeletonInterests = memo(({ interestsData }: { interestsData: InterestItem[] }) => {
+  const rawInterests = interestsData.map((interest) => ({
+    ...interest,
+    icon: getIconComponent(interest.icon),
+  }));
 
   return (
     // FIXED: Added min-h-[180px] md:min-h-[300px] here as well
@@ -195,10 +217,10 @@ const SkeletonTech = memo(({ techStack }: { techStack: TechStackItem[] }) => (
 ));
 SkeletonTech.displayName = "SkeletonTech";
 
-const SkeletonLocation = memo(() => (
+const SkeletonLocation = memo(({ locationData }: { locationData: LocationItem }) => (
   <div className="group flex flex-1 w-full h-full rounded-xl bg-neutral-100 dark:bg-neutral-900 flex-col items-center justify-center relative overflow-hidden border border-neutral-200 dark:border-white/10 transition-all duration-300">
     <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127357.5438865668!2d102.22124536214532!3d-3.8185611422774945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e36b01f37e19039%3A0x3039d80b220cc40!2sBengkulu%2C%20Bengkulu%20City%2C%20Bengkulu!5e0!3m2!1sen!2sid!4v1715848200000!5m2!1sen!2sid"
+      src={locationData.mapEmbedUrl}
       width="100%"
       height="100%"
       style={{ border: 0 }}
@@ -221,40 +243,18 @@ const SkeletonLocation = memo(() => (
           <IconMapPin className="w-5 h-5 text-white" stroke={2.5} />
         </div>
       </div>
-
-      {/* Added label back for better context on mobile */}
-      <div className="px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/10 text-white text-[10px] font-bold mt-2 shadow-2xl">
-        Bengkulu, ID
-      </div>
     </div>
   </div>
 ));
 SkeletonLocation.displayName = "SkeletonLocation";
 
-const SkeletonConnect = memo(() => {
-  const connectItems = [
-    {
-      id: 1,
-      name: "GitHub",
-      designation: "Open Source",
-      icon: <IconBrandGithub className="h-6 w-6" />,
-      image: "",
-    },
-    {
-      id: 2,
-      name: "LinkedIn",
-      designation: "Professional",
-      icon: <IconBrandLinkedin className="h-6 w-6" />,
-      image: "",
-    },
-    {
-      id: 3,
-      name: "Twitter",
-      designation: "Updates",
-      icon: <IconBrandTwitter className="h-6 w-6" />,
-      image: "",
-    },
-  ];
+const SkeletonConnect = memo(({ connectData }: { connectData: ConnectItem[] }) => {
+  const connectItems = connectData.map((item) => ({
+    ...item,
+    icon: getIconComponent(item.icon),
+    image: "",
+  }));
+
   return (
     <div className="flex flex-1 w-full h-full rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border border-neutral-200 dark:border-white/10 flex-col items-center justify-center p-3 md:p-4 min-h-32 md:min-h-0">
       <div className="flex flex-row items-center justify-center w-full z-10">
@@ -273,6 +273,52 @@ export const IdentityGrid = memo(function IdentityGrid({
   const educationData = content?.education || [];
   const techStackData = content?.techStack || [];
 
+  // Default location data
+  const defaultLocation: LocationItem = {
+    label: "Bengkulu, ID",
+    country: "Indonesia",
+    city: "Bengkulu",
+    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127357.5438865668!2d102.22124536214532!3d-3.8185611422774945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e36b01f37e19039%3A0x3039d80b220cc40!2sBengkulu%2C%20Bengkulu%20City%2C%20Bengkulu!5e0!3m2!1sen!2sid!4v1715848200000!5m2!1sen!2sid",
+  };
+
+  // Default connect data
+  const defaultConnect: ConnectItem[] = [
+    {
+      id: 1,
+      name: "GitHub",
+      designation: "Open Source",
+      icon: "IconBrandGithub",
+    },
+    {
+      id: 2,
+      name: "LinkedIn",
+      designation: "Professional",
+      icon: "IconBrandLinkedin",
+    },
+    {
+      id: 3,
+      name: "Twitter",
+      designation: "Updates",
+      icon: "IconBrandTwitter",
+    },
+  ];
+
+  // Default interests data
+  const defaultInterests: InterestItem[] = [
+    { id: 1, label: "Cloud Tech", color: "text-blue-500", icon: "IconCloud" },
+    { id: 2, label: "Open Source", color: "text-purple-500", icon: "IconDeviceDesktop" },
+    { id: 3, label: "Coffee", color: "text-amber-600", icon: "IconCoffee" },
+    { id: 4, label: "Photography", color: "text-pink-500", icon: "IconCamera" },
+    { id: 5, label: "Gaming", color: "text-emerald-500", icon: "IconDeviceGamepad2" },
+    { id: 6, label: "Writing", color: "text-sky-500", icon: "IconSignature" },
+    { id: 7, label: "Travel", color: "text-orange-500", icon: "IconMapPin" },
+    { id: 8, label: "Music", color: "text-rose-500", icon: "IconActivity" },
+  ];
+
+  const locationData = content?.location || defaultLocation;
+  const connectData = content?.connect || defaultConnect;
+  const interestsData = content?.interests || defaultInterests;
+
   const items = useMemo(
     () => [
       {
@@ -285,14 +331,14 @@ export const IdentityGrid = memo(function IdentityGrid({
       {
         title: "Location",
         description: "Indonesia, Bengkulu.",
-        header: <SkeletonLocation />,
+        header: <SkeletonLocation locationData={locationData} />,
         className: "md:col-span-1",
         icon: <IconMapPin className="h-4 w-4 text-neutral-500" />,
       },
       {
         title: "Connect",
         description: "Let's build something together.",
-        header: <SkeletonConnect />,
+        header: <SkeletonConnect connectData={connectData} />,
         className: "md:col-span-2",
         icon: <IconSignature className="h-4 w-4 text-neutral-500" />,
       },
@@ -306,12 +352,12 @@ export const IdentityGrid = memo(function IdentityGrid({
       {
         title: "Interests",
         description: "What drives my curiosity.",
-        header: <SkeletonInterests />,
+        header: <SkeletonInterests interestsData={interestsData} />,
         className: "md:col-span-1",
         icon: <IconCoffee className="h-4 w-4 text-neutral-500" />,
       },
     ],
-    [educationData, techStackData]
+    [educationData, techStackData, locationData, connectData, interestsData]
   );
 
   return (
