@@ -151,7 +151,7 @@ const SkeletonInterests = memo(() => {
 
   return (
     // FIXED: Added min-h-[180px] md:min-h-[300px] here as well
-    <div className="group flex flex-1 w-full h-full  rounded-xl bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 border border-neutral-200 dark:border-white/10 p-4 relative overflow-hidden">
+    <div className="group flex flex-1 w-full h-full  rounded-xl bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-950/20 dark:to-orange-950/20 border border-neutral-200 dark:border-white/10 relative overflow-hidden">
       <MarqueeContainer
         className="px-3 md:px-6 py-4"
         direction="up"
