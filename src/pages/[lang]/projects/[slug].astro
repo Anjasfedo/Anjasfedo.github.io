@@ -7,21 +7,20 @@ import type {
   ProjectTag,
 } from "@/components/projects-page/projects-page";
 
-// Generate static paths for all projects
+// Generate static paths for all projects based on their language
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
 
-  // Generate paths for both languages
-  const paths = projects.flatMap((project) => [
-    {
-      params: { lang: "en", slug: project.data.slug },
+  // Generate paths matching the project's language folder
+  const paths = projects.map((project) => {
+    // Extract language from the project ID (e.g., "en/ai-content-generator" -> "en")
+    const lang = project.id.split("/")[0];
+
+    return {
+      params: { lang, slug: project.data.slug },
       props: { project },
-    },
-    {
-      params: { lang: "id", slug: project.data.slug },
-      props: { project },
-    },
-  ]);
+    };
+  });
 
   return paths;
 }

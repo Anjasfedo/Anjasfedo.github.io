@@ -1,0 +1,40 @@
+---
+title: "AI Content Generator"
+slug: "ai-content-generator"
+description: "Platform pembuatan konten cerdas yang ditenagai oleh LLM dengan kemampuan fine-tuning kustom."
+longDescription: "Membangun platform pembuatan konten bertenaga AI menggunakan model GPT OpenAI. Fitur mencakup fine-tuning kustom, dukungan multi-bahasa, dan kolaborasi real-time."
+status: ["Production", "Featured"]
+tags: ["React", "Next.js", "TypeScript", "OpenAI", "PostgreSQL", "Python"]
+image: "https://picsum.photos/seed/project1/800/600"
+images:
+  - "https://picsum.photos/seed/project1-1/1200/800"
+  - "https://picsum.photos/seed/project1-2/1200/800"
+video: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+colorClass: "bg-gradient-to-br from-indigo-900/90 to-purple-900/90"
+github: "https://github.com"
+demo: "https://demo.com"
+pubDate: 2024-01-15
+---
+
+import { IconBulb } from "@tabler/icons-react";
+
+## Ikhtisar
+
+Proyek ini adalah platform pembuatan konten AI yang komprehensif. Dengan memanfaatkan **GPT-4**, kami memungkinkan pengguna untuk mengubah prompt sederhana menjadi salinan marketing tingkat profesional.
+
+> ### Misi
+>
+> Untuk menjembatani kesenjangan antara kemampuan AI yang kompleks dengan alur kerja pengguna yang intuitif.
+
+## Fitur Utama
+
+- **Fine-tuning Kustom**: Latih model dengan data Anda sendiri.
+- **Kolaborasi Real-time**: Dibangun dengan WebSockets dan CRDTs.
+
+```typescript
+// Contoh implementasi streaming kami
+const streamResponse = async (prompt: string) => {
+  const response = await ai.generate(prompt);
+  return response.stream();
+};
+```

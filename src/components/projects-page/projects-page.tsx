@@ -3,7 +3,13 @@
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
-import { IconSearch, IconX, IconChevronDown, IconCapProjecting } from "@tabler/icons-react";
+import {
+  IconSearch,
+  IconX,
+  IconChevronDown,
+  IconCapProjecting,
+} from "@tabler/icons-react";
+import type { Language } from "@/i18n/ui";
 
 // ============================================================================
 // --- TYPES ---
@@ -101,7 +107,8 @@ const FilterBar = ({
               onClick={onClearFilters}
               className="px-4 py-3 rounded-xl bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-red-100 dark:border-red-900/30 flex items-center gap-2 text-sm font-bold"
             >
-              <IconX className="w-4 h-4" /> {content?.resetFiltersText || "Reset Filters"}
+              <IconX className="w-4 h-4" />{" "}
+              {content?.resetFiltersText || "Reset Filters"}
             </button>
           )}
         </div>
@@ -132,7 +139,10 @@ const FilterBar = ({
           <div className="flex-1 relative">
             <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
               {content?.technologiesLabel || "Technologies"}{" "}
-              {selectedTags.length > 0 && `(${selectedTags.length} ${content?.selectedCount || "selected"})`}
+              {selectedTags.length > 0 &&
+                `(${selectedTags.length} ${
+                  content?.selectedCount || "selected"
+                })`}
             </label>
             <div className="relative">
               <button
@@ -141,7 +151,9 @@ const FilterBar = ({
               >
                 <span className="text-neutral-900 dark:text-white truncate pr-4">
                   {selectedTags.length > 0
-                    ? `${selectedTags.length} ${content?.selectedCount || "selected"}`
+                    ? `${selectedTags.length} ${
+                        content?.selectedCount || "selected"
+                      }`
                     : content?.selectTechnologiesText || "Select technologies"}
                 </span>
                 <IconChevronDown
@@ -195,6 +207,7 @@ const ProjectCard = React.forwardRef<
   HTMLDivElement,
   {
     project: Project;
+    lang: Language;
     index: number;
     isFocused: boolean;
     isBlurred: boolean;
@@ -203,7 +216,7 @@ const ProjectCard = React.forwardRef<
   }
 >(
   (
-    { project, index, isFocused, isBlurred, onMouseEnter, onMouseLeave },
+    { project, lang, index, isFocused, isBlurred, onMouseEnter, onMouseLeave },
     _ref
   ) => {
     const getStatusColor = (status: string) => {
@@ -231,7 +244,7 @@ const ProjectCard = React.forwardRef<
     };
 
     return (
-      <a href={`/projects/${project.slug}`} onClick={handleNavigation}>
+      <a href={`/${lang}/projects/${project.slug}`} onClick={handleNavigation}>
         <motion.div
           ref={_ref}
           initial={{ opacity: 0, y: 20 }}
@@ -330,7 +343,15 @@ ProjectCard.displayName = "ProjectCard";
 // --- MAIN PROJECTS PAGE ---
 // ============================================================================
 
-export function ProjectsPage({ projects, content }: { projects: Project[]; content?: ProjectsPageContent }) {
+export function ProjectsPage({
+  projects,
+  content,
+  lang,
+}: {
+  projects: Project[];
+  content?: ProjectsPageContent;
+  lang: Language;
+}) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedStatus, setSelectedStatus] = useState<ProjectStatus>("All");
   const [selectedTags, setSelectedTags] = useState<ProjectTag[]>([]);
@@ -440,7 +461,8 @@ export function ProjectsPage({ projects, content }: { projects: Project[]; conte
           {content?.pageTitle || "All Projects"}
         </h1>
         <p className="text-neutral-600 dark:text-neutral-400 text-sm md:text-base max-w-2xl mx-auto">
-          {content?.pageDescription || "Explore my collection of projects, experiments, and open-source contributions."}
+          {content?.pageDescription ||
+            "Explore my collection of projects, experiments, and open-source contributions."}
         </p>
       </motion.div>
 
@@ -484,6 +506,7 @@ export function ProjectsPage({ projects, content }: { projects: Project[]; conte
                   ref={(el) => {
                     cardRefs.current[index] = el;
                   }}
+                  lang={lang}
                   isFocused={isCardFocused(index)}
                   isBlurred={isCardBlurred(index)}
                   onMouseEnter={() => setHovered(index)}
@@ -494,7 +517,9 @@ export function ProjectsPage({ projects, content }: { projects: Project[]; conte
           ) : (
             <div className="text-center py-20 bg-neutral-50 dark:bg-neutral-900/50 rounded-3xl border border-dashed border-neutral-300 dark:border-neutral-800">
               <IconCapProjecting className="w-12 h-12 mx-auto text-neutral-300 mb-4" />
-              <p className="text-neutral-500">{content?.noProjectsFoundText || "No matching projects found."}</p>
+              <p className="text-neutral-500">
+                {content?.noProjectsFoundText || "No matching projects found."}
+              </p>
             </div>
           )}
         </AnimatePresence>
@@ -507,7 +532,8 @@ export function ProjectsPage({ projects, content }: { projects: Project[]; conte
           whileTap={{ scale: 0.95 }}
           className="px-8 py-4 bg-black dark:bg-white rounded-full text-white dark:text-black font-semibold flex items-center gap-2"
         >
-          {content?.loadMoreText || "Load More Projects"} <IconChevronDown className="w-5 h-5" />
+          {content?.loadMoreText || "Load More Projects"}{" "}
+          <IconChevronDown className="w-5 h-5" />
         </motion.button>
       )}
     </div>

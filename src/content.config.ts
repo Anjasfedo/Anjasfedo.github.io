@@ -3,7 +3,13 @@ import { glob } from "astro/loaders";
 import { z } from "astro/zod";
 
 const projects = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/projects" }),
+  loader: glob({
+    pattern: "**/*.{md,mdx}", base: "./src/content/projects", generateId: ({ entry }) => {
+      // entry is the relative path, e.g., "en/my-project.mdx"
+      // We'll turn it into "en/my-project"
+      return entry.replace(/\.[^/.]+$/, "");
+    }
+  }),
   schema: z.object({
     title: z.string(),
     slug: z.string(),
