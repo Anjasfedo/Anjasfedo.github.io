@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
-import { IconSearch, IconX, IconChevronDown, IconAward, IconCapProjecting } from "@tabler/icons-react";
+import { IconSearch, IconX, IconChevronDown, IconCapProjecting } from "@tabler/icons-react";
 
 // ============================================================================
 // --- TYPES ---

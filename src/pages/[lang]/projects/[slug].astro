@@ -11,10 +11,19 @@ import type {
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
 
-  return projects.map((project) => ({
-    params: { slug: project.data.slug },
-    props: { project },
-  }));
+  // Generate paths for both languages
+  const paths = projects.flatMap((project) => [
+    {
+      params: { lang: "en", slug: project.data.slug },
+      props: { project },
+    },
+    {
+      params: { lang: "id", slug: project.data.slug },
+      props: { project },
+    },
+  ]);
+
+  return paths;
 }
 
 // Get the project from props (returned by getStaticPaths)

@@ -4,8 +4,6 @@ import { Timeline } from "@/components/ui/timeline";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
-import { IconDownload, IconFileText } from "@tabler/icons-react";
-
 // ============================================================================
 // --- TYPES & INTERFACES ---
 // ============================================================================

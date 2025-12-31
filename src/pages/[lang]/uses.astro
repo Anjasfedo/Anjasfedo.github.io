@@ -3,22 +3,21 @@ import Layout from "../../layouts/Layout.astro";
 import { UsesPage } from "../../components/uses-page/uses-page";
 import { getCollection } from "astro:content";
 
-// Fetch the uses page content
-const usesEntries = await getCollection("usesPage");
+export async function getStaticPaths() {
+  const pages = await getCollection("usesPage");
 
-// Safely check if we have data
-if (usesEntries.length === 0) {
-  throw new Error(
-    "Could not find index.mdx in src/content/uses-page/. Check your file path and pattern."
-  );
+  const paths = pages.map((page) => {
+    const [lang, ...slug] = page.id.split("/");
+    return { params: { lang, slug: slug.join("/") || undefined }, props: page };
+  });
+
+  return paths;
 }
 
-const content = usesEntries[0].data;
+const page = Astro.props;
+const content = page.data;
 ---
 
 <Layout title="Uses | M. Anjasfedo Afridiansah">
-  <UsesPage
-    client:load
-    content={content}
-  />
+  <UsesPage client:load content={content} />
 </Layout>

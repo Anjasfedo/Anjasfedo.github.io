@@ -3,17 +3,19 @@ import Layout from "../../layouts/Layout.astro";
 import { TermsPage } from "../../components/terms-page/terms-page";
 import { getCollection } from "astro:content";
 
-// Fetch the terms page content
-const termsEntries = await getCollection("termsPage");
+export async function getStaticPaths() {
+  const pages = await getCollection("termsPage");
 
-// Safely check if we have data
-if (termsEntries.length === 0) {
-  throw new Error(
-    "Could not find index.mdx in src/content/terms-page/. Check your file path and pattern."
-  );
+  const paths = pages.map((page) => {
+    const [lang, ...slug] = page.id.split("/");
+    return { params: { lang, slug: slug.join("/") || undefined }, props: page };
+  });
+
+  return paths;
 }
 
-const content = termsEntries[0].data;
+const page = Astro.props;
+const content = page.data;
 ---
 
 <Layout title="Terms of Service | M. Anjasfedo Afridiansah">

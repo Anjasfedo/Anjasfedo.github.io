@@ -7,6 +7,18 @@ import type {
 } from "../../components/projects-page/projects-page";
 import { getCollection } from "astro:content";
 
+export async function getStaticPaths() {
+  const pages = await getCollection("projectsPage");
+
+  const paths = pages.map((page) => {
+    const [lang, ...slug] = page.id.split("/");
+    return { params: { lang, slug: slug.join("/") || undefined }, props: page };
+  });
+
+  return paths;
+}
+
+
 // Fetch all projects from the content collection
 const allProjectsCollection = await getCollection("projects");
 

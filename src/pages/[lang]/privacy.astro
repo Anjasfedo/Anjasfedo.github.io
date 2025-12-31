@@ -3,17 +3,19 @@ import Layout from "../../layouts/Layout.astro";
 import { PrivacyPage } from "../../components/privacy-page/privacy-page";
 import { getCollection } from "astro:content";
 
-// Fetch the privacy page content
-const privacyEntries = await getCollection("privacyPage");
+export async function getStaticPaths() {
+  const pages = await getCollection("privacyPage");
 
-// Safely check if we have data
-if (privacyEntries.length === 0) {
-  throw new Error(
-    "Could not find index.mdx in src/content/privacy-page/. Check your file path and pattern."
-  );
+  const paths = pages.map((page) => {
+    const [lang, ...slug] = page.id.split("/");
+    return { params: { lang, slug: slug.join("/") || undefined }, props: page };
+  });
+
+  return paths;
 }
 
-const content = privacyEntries[0].data;
+const page = Astro.props;
+const content = page.data;
 ---
 
 <Layout title="Privacy Policy | M. Anjasfedo Afridiansah">

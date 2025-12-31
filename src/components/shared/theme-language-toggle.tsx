@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { IconSun, IconMoon, IconArrowUp } from "@tabler/icons-react";
+import { IconSun, IconMoon, IconArrowUp, IconGlobe } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 
 type Language = "en" | "id";
@@ -59,8 +59,8 @@ const MeteorShower = ({ theme }: { theme: "light" | "dark" }) => {
 
 export const ThemeLanguageToggle = () => {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
-  // const [language, setLanguage] = useState<Language>("en");
-  // const [isOpen, setIsOpen] = useState(false);
+  const [language, setLanguage] = useState<Language>("en");
+  const [isOpen, setIsOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   // Transition State
@@ -71,7 +71,7 @@ export const ThemeLanguageToggle = () => {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
-    // const savedLanguage = localStorage.getItem("language") as Language | null;
+    const savedLanguage = localStorage.getItem("language") as Language | null;
 
     if (savedTheme) {
       setTheme(savedTheme);
@@ -84,9 +84,9 @@ export const ThemeLanguageToggle = () => {
       document.documentElement.classList.toggle("dark", prefersDark);
     }
 
-    // if (savedLanguage) {
-    //   setLanguage(savedLanguage);
-    // }
+    if (savedLanguage) {
+      setLanguage(savedLanguage);
+    }
   }, []);
 
   useEffect(() => {
@@ -121,6 +121,27 @@ export const ThemeLanguageToggle = () => {
     }, 1000); // Allow meteors to finish falling
   };
 
+  const changeLanguage = (newLang: Language) => {
+    setLanguage(newLang);
+    localStorage.setItem("language", newLang);
+    setIsOpen(false);
+
+    // Get current path and replace language segment
+    const currentPath = window.location.pathname;
+    const pathSegments = currentPath.split("/").filter(Boolean);
+
+    // Check if the current path starts with a language code
+    if (pathSegments.length > 0 && (pathSegments[0] === "en" || pathSegments[0] === "id")) {
+      pathSegments[0] = newLang;
+    } else {
+      // If no language code in path, prepend it
+      pathSegments.unshift(newLang);
+    }
+
+    const newPath = "/" + pathSegments.join("/");
+    window.location.href = newPath;
+  };
+
   return (
     <>
       {/* --- METEOR ANIMATION LAYER --- */}
@@ -131,7 +152,7 @@ export const ThemeLanguageToggle = () => {
       </AnimatePresence>
 
       {/* --- BACKGROUND OVERLAY (Clip Path) --- */}
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {transitionState.isActive && (
           <motion.div
             initial={{ clipPath: "circle(0% at 100% 0%)" }}
@@ -144,7 +165,7 @@ export const ThemeLanguageToggle = () => {
             )}
           />
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
 
       <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3">
         {/* Scroll to Top */}
@@ -198,7 +219,7 @@ export const ThemeLanguageToggle = () => {
         </motion.button>
 
         {/* Language Toggle */}
-        {/* <div className="relative">
+        <div className="relative">
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
@@ -227,11 +248,7 @@ export const ThemeLanguageToggle = () => {
                 ].map((lang) => (
                   <button
                     key={lang.code}
-                    onClick={() => {
-                      setLanguage(lang.code as Language);
-                      localStorage.setItem("language", lang.code);
-                      setIsOpen(false);
-                    }}
+                    onClick={() => changeLanguage(lang.code as Language)}
                     className={cn(
                       "w-full px-4 py-3 text-left text-sm font-medium transition-colors flex items-center justify-between",
                       "hover:bg-neutral-100 dark:hover:bg-neutral-800",
@@ -252,7 +269,7 @@ export const ThemeLanguageToggle = () => {
               </motion.div>
             )}
           </AnimatePresence>
-        </div> */}
+        </div>
       </div>
     </>
   );

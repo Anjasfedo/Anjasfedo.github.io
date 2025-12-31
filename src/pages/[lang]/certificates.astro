@@ -4,6 +4,17 @@ import { CertificatesPage } from "../../components/certificates-page/certificate
 import type { CertificateSkill } from "../../components/certificates-page/certificates-page";
 import { getCollection } from "astro:content";
 
+export async function getStaticPaths() {
+  const pages = await getCollection("certificatesPage");
+
+  const paths = pages.map((page) => {
+    const [lang, ...slug] = page.id.split("/");
+    return { params: { lang, slug: slug.join("/") || undefined }, props: page };
+  });
+
+  return paths;
+}
+
 // Fetch all certificates from the content collection
 const allCertificatesCollection = await getCollection("certificates");
 

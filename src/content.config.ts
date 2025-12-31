@@ -27,9 +27,9 @@ const projects = defineCollection({
 
 // Index page content collection - single file with all content
 const indexPage = defineCollection({
-loader: glob({ 
-    pattern: "**/index.{md,mdx}", 
-    base: "./src/content/index-page" 
+  loader: glob({
+    pattern: "**/index.{md,mdx}",
+    base: "./src/content/index-page"
   }),
   schema: z.object({
     title: z.string(),
@@ -254,6 +254,16 @@ const termsPage = defineCollection({
   }),
 });
 
+const projectsPage = defineCollection({
+  loader: glob({ pattern: "**/index.mdx", base: "./src/content/projects-page" }),
+
+
+});
+
+const certificatesPage = defineCollection({
+  loader: glob({ pattern: "**/index.mdx", base: "./src/content/certificates-page" })
+});
+
 // Privacy page content collection
 const privacyPage = defineCollection({
   loader: glob({ pattern: "**/index.mdx", base: "./src/content/privacy-page" }),
@@ -288,9 +298,11 @@ const certificates = defineCollection({
 
 export const collections = {
   projects,
+  certificates,
   indexPage,
   usesPage,
   termsPage,
   privacyPage,
-  certificates,
+  projectsPage,     // Add this
+  certificatesPage, // Add this
 };
