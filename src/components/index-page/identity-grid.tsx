@@ -198,12 +198,13 @@ SkeletonTech.displayName = "SkeletonTech";
 const SkeletonLocation = memo(() => (
   <div className="group flex flex-1 w-full h-full rounded-xl bg-neutral-100 dark:bg-neutral-900 flex-col items-center justify-center relative overflow-hidden border border-neutral-200 dark:border-white/10 transition-all duration-300">
     <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127357.54582046892!2d102.22728989531553!3d-3.818921124619567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e36b0204739506b%3A0x401e8f1fc28c110!2sBengkulu%2C%20Bengkulu%20City%2C%20Bengkulu!5e0!3m2!1sen!2sid!4v1710000000000!5m2!1sen!2sid"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127357.5438865668!2d102.22124536214532!3d-3.8185611422774945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e36b01f37e19039%3A0x3039d80b220cc40!2sBengkulu%2C%20Bengkulu%20City%2C%20Bengkulu!5e0!3m2!1sen!2sid!4v1715848200000!5m2!1sen!2sid"
       width="100%"
       height="100%"
       style={{ border: 0 }}
       allowFullScreen
       loading="lazy"
+      referrerPolicy="no-referrer-when-downgrade"
       className="absolute inset-0 grayscale group-hover:grayscale-0 dark:invert opacity-70 group-hover:opacity-100 scale-110 group-hover:scale-100 transition-all duration-700 ease-in-out pointer-events-none"
     />
 
@@ -219,6 +220,11 @@ const SkeletonLocation = memo(() => (
         <div className="relative bg-blue-600 p-2 rounded-full shadow-lg border border-white/20">
           <IconMapPin className="w-5 h-5 text-white" stroke={2.5} />
         </div>
+      </div>
+
+      {/* Added label back for better context on mobile */}
+      <div className="px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/10 text-white text-[10px] font-bold mt-2 shadow-2xl">
+        Bengkulu, ID
       </div>
     </div>
   </div>
@@ -278,7 +284,7 @@ export const IdentityGrid = memo(function IdentityGrid({
       },
       {
         title: "Location",
-        description: "Bengkulu, ID.",
+        description: "Indonesia, Bengkulu.",
         header: <SkeletonLocation />,
         className: "md:col-span-1",
         icon: <IconMapPin className="h-4 w-4 text-neutral-500" />,
@@ -322,7 +328,7 @@ export const IdentityGrid = memo(function IdentityGrid({
           >
             Identity & Expertise
           </motion.h2>
-          <BentoGrid className="max-w-6xl mx-auto md:auto-rows-[18rem] lg:auto-rows-[20rem] gap-4">
+          <BentoGrid className="max-w-6xl mx-auto gap-4">
             {items.map((item, i) => (
               <BentoGridItem
                 key={i}
