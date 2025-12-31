@@ -94,4 +94,98 @@ const indexPage = defineCollection({
     })
 });
 
-export const collections = { projects, indexPage };
+// Uses page content collection
+const usesPage = defineCollection({
+    loader: glob({ pattern: "**/index.mdx", base: "./src/content/uses-page" }), schema: z.object({
+        title: z.string(),
+        order: z.number(),
+        description: z.string(),
+
+        // Hardware section
+        hardware: z.object({
+            laptop: z.object({
+                title: z.string(),
+                icon: z.string(),
+                items: z.array(z.object({
+                    name: z.string(),
+                    specs: z.string(),
+                    description: z.string(),
+                })),
+            }),
+            computer: z.object({
+                title: z.string(),
+                icon: z.string(),
+                items: z.array(z.object({
+                    name: z.string(),
+                    specs: z.string(),
+                    description: z.string(),
+                })),
+            }),
+            office: z.object({
+                title: z.string(),
+                icon: z.string(),
+                items: z.array(z.object({
+                    name: z.string(),
+                    specs: z.string(),
+                    description: z.string(),
+                })),
+            }),
+        }),
+
+        // Software section
+        software: z.object({
+            development: z.object({
+                title: z.string(),
+                icon: z.string(),
+                items: z.array(z.object({
+                    title: z.string(),
+                    description: z.string(),
+                    link: z.string(),
+                    icon: z.string(),
+                })),
+            }),
+            ai: z.object({
+                title: z.string(),
+                icon: z.string(),
+                items: z.array(z.object({
+                    title: z.string(),
+                    description: z.string(),
+                    link: z.string(),
+                    icon: z.string(),
+                })),
+            }),
+            design: z.object({
+                title: z.string(),
+                icon: z.string(),
+                items: z.array(z.object({
+                    title: z.string(),
+                    description: z.string(),
+                    link: z.string(),
+                    icon: z.string(),
+                })),
+            }),
+            productivity: z.object({
+                title: z.string(),
+                icon: z.string(),
+                items: z.array(z.object({
+                    title: z.string(),
+                    description: z.string(),
+                    link: z.string(),
+                    icon: z.string(),
+                })),
+            }),
+            communication: z.object({
+                title: z.string(),
+                icon: z.string(),
+                items: z.array(z.object({
+                    title: z.string(),
+                    description: z.string(),
+                    link: z.string(),
+                    icon: z.string(),
+                })),
+            }),
+        }),
+    })
+});
+
+export const collections = { projects, indexPage, usesPage };

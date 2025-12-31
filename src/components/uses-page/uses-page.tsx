@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useMemo, type ReactNode } from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import {
@@ -27,244 +27,92 @@ import {
   IconBrandDiscord,
   IconVideo,
   IconChecklist,
+  IconBrandTeams,
+  IconBrandZoom,
 } from "@tabler/icons-react";
 import { HoverEffect } from "../ui/card-hover-effect";
 
-// Hardware data organized by category
-const hardwareData = {
-  laptop: {
-    title: "Laptop (Personal)",
-    icon: <IconDeviceLaptop className="w-6 h-6" />,
-    items: [
-      {
-        name: 'MacBook Pro 14"',
-        specs: "M3 Pro, 18GB RAM, 512GB SSD",
-        description:
-          "My daily driver for development and freelance work. Portable yet powerful enough for full-stack development.",
-      },
-      {
-        name: "External Display",
-        specs: 'LG UltraGear 27" 144Hz',
-        description:
-          "Paired with my laptop for extended screen real estate during development sessions.",
-      },
-    ],
-  },
-  computer: {
-    title: "Computer (Personal)",
-    icon: <IconDeviceDesktop className="w-6 h-6" />,
-    items: [
-      {
-        name: "Custom Built PC",
-        specs: "AMD Ryzen 7 5800X, RTX 3070, 32GB RAM",
-        description:
-          "My main workstation for gaming, video editing, and heavier computational tasks.",
-      },
-      {
-        name: "Storage",
-        specs: "1TB NVMe SSD + 4TB HDD",
-        description:
-          "Fast NVMe for OS and applications, HDD for mass storage and backups.",
-      },
-      {
-        name: "Peripherals",
-        specs: "Keychron K2, Logitech MX Master 3",
-        description:
-          "Wireless mechanical keyboard and ergonomic mouse for comfortable long coding sessions.",
-      },
-    ],
-  },
-  office: {
-    title: "Office Computer (Work)",
-    icon: <IconDeviceDesktop className="w-6 h-6" />,
-    items: [
-      {
-        name: "Dell XPS Desktop",
-        specs: "Intel Core i7-12700, 16GB RAM, 512GB SSD",
-        description:
-          "Provided by the office for enterprise development work and team collaboration.",
-      },
-      {
-        name: "Dual Monitors",
-        specs: '2x Dell UltraSharp 24"',
-        description:
-          "Dual monitor setup for improved productivity when working on multiple projects simultaneously.",
-      },
-      {
-        name: "Ergonomic Setup",
-        specs: "Standing desk, ergonomic chair",
-        description:
-          "Office provides ergonomic furniture to maintain health during long work hours.",
-      },
-    ],
-  },
+// ============================================================================
+// --- TYPES & INTERFACES ---
+// ============================================================================
+
+interface HardwareItem {
+  name: string;
+  specs: string;
+  description: string;
+}
+
+interface HardwareCategory {
+  title: string;
+  icon: string;
+  items: HardwareItem[];
+}
+
+interface SoftwareItem {
+  title: string;
+  description: string;
+  link: string;
+  icon: string; // Must be string to be passed to getIconComponent
+}
+
+interface SoftwareCategory {
+  title: string;
+  icon: string;
+  items: SoftwareItem[];
+}
+
+interface UsesPageContent {
+  description?: string;
+  hardware?: {
+    laptop: HardwareCategory;
+    computer: HardwareCategory;
+    office: HardwareCategory;
+  };
+  software?: {
+    development: SoftwareCategory;
+    ai: SoftwareCategory;
+    design: SoftwareCategory;
+    productivity: SoftwareCategory;
+    communication: SoftwareCategory;
+  };
+}
+
+// ============================================================================
+// --- ICON MAPPING ---
+// ============================================================================
+
+const iconMap: Record<string, React.ReactElement> = {
+  IconDeviceLaptop: <IconDeviceLaptop className="w-6 h-6" />,
+  IconDeviceDesktop: <IconDeviceDesktop className="w-6 h-6" />,
+  IconCode: <IconCode className="w-6 h-6" />,
+  IconBrain: <IconBrain className="w-6 h-6" />,
+  IconPalette: <IconPalette className="w-6 h-6" />,
+  IconServer: <IconServer className="w-6 h-6" />,
+  IconTool: <IconTool className="w-6 h-6" />,
+  IconBrandVscode: <IconBrandVscode className="w-6 h-6" />,
+  IconBrandGithub: <IconBrandGithub className="w-6 h-6" />,
+  IconApi: <IconApi className="w-6 h-6" />,
+  IconBrandDocker: <IconBrandDocker className="w-6 h-6" />,
+  IconRobot: <IconRobot className="w-6 h-6" />,
+  IconBrandGoogle: <IconBrandGoogle className="w-6 h-6" />,
+  IconBrandFigma: <IconBrandFigma className="w-6 h-6" />,
+  IconBrandNotion: <IconBrandNotion className="w-6 h-6" />,
+  IconEdit: <IconEdit className="w-6 h-6" />,
+  IconTerminal: <IconTerminal className="w-6 h-6" />,
+  IconSearch: <IconSearch className="w-6 h-6" />,
+  IconBrowser: <IconBrowser className="w-6 h-6" />,
+  IconNotes: <IconNotes className="w-6 h-6" />,
+  IconBrandSlack: <IconBrandSlack className="w-6 h-6" />,
+  IconBrandDiscord: <IconBrandDiscord className="w-6 h-6" />,
+  IconVideo: <IconVideo className="w-6 h-6" />,
+  IconChecklist: <IconChecklist className="w-6 h-6" />,
+  IconBrandTeams: <IconBrandTeams className="w-6 h-6" />,
+  IconBrandZoom: <IconBrandZoom className="w-6 h-6" />,
 };
 
-// Software data organized by category - formatted for HoverEffect
-const softwareData = {
-  development: {
-    title: "Development Tools",
-    icon: <IconCode className="w-6 h-6" />,
-    items: [
-      {
-        title: "Visual Studio Code",
-        description:
-          "My primary code editor. Heavily customized with themes, extensions, and keybindings.",
-        link: "https://code.visualstudio.com",
-        icon: <IconBrandVscode className="w-6 h-6" />,
-      },
-      {
-        title: "Claude CLI",
-        description:
-          "AI-powered coding assistant integrated into my terminal for instant code review and generation.",
-        link: "https://claude.ai/code",
-        icon: <IconTerminal className="w-6 h-6" />,
-      },
-      {
-        title: "Git & GitHub",
-        description:
-          "Version control with GitHub CLI for seamless repository management and collaboration.",
-        link: "https://github.com",
-        icon: <IconBrandGithub className="w-6 h-6" />,
-      },
-      {
-        title: "Postman",
-        description:
-          "API testing and documentation tool for backend development and debugging.",
-        link: "https://www.postman.com",
-        icon: <IconApi className="w-6 h-6" />,
-      },
-      {
-        title: "Docker Desktop",
-        description:
-          "Container management for local development environment consistency.",
-        link: "https://www.docker.com",
-        icon: <IconBrandDocker className="w-6 h-6" />,
-      },
-    ],
-  },
-  ai: {
-    title: "AI & Automation",
-    icon: <IconBrain className="w-6 h-6" />,
-    items: [
-      {
-        title: "Claude (Anthropic)",
-        description:
-          "My go-to AI for code review, debugging, and architectural decisions. Deep understanding of complex codebases.",
-        link: "https://claude.ai",
-        icon: <IconBrain className="w-6 h-6" />,
-      },
-      {
-        title: "Google Gemini",
-        description:
-          "Alternative AI for brainstorming, research, and different perspectives on problem-solving.",
-        link: "https://gemini.google.com",
-        icon: <IconBrandGoogle className="w-6 h-6" />,
-      },
-      {
-        title: "GitHub Copilot",
-        description:
-          "AI pair programmer that suggests code completions and entire functions in real-time.",
-        link: "https://github.com/features/copilot",
-        icon: <IconRobot className="w-6 h-6" />,
-      },
-    ],
-  },
-  design: {
-    title: "Design & Planning",
-    icon: <IconPalette className="w-6 h-6" />,
-    items: [
-      {
-        title: "Figma",
-        description:
-          "UI/UX design tool for prototyping, wireframing, and creating design systems.",
-        link: "https://www.figma.com",
-        icon: <IconBrandFigma className="w-6 h-6" />,
-      },
-      {
-        title: "Notion",
-        description:
-          "All-in-one workspace for notes, project management, documentation, and knowledge base.",
-        link: "https://www.notion.so",
-        icon: <IconBrandNotion className="w-6 h-6" />,
-      },
-      {
-        title: "Excalidraw",
-        description:
-          "Virtual whiteboard for diagrams, system architecture, and rough sketches.",
-        link: "https://excalidraw.com",
-        icon: <IconEdit className="w-6 h-6" />,
-      },
-    ],
-  },
-  productivity: {
-    title: "Productivity & Utilities",
-    icon: <IconTool className="w-6 h-6" />,
-    items: [
-      {
-        title: "Warp Terminal",
-        description:
-          "Modern, AI-powered terminal with autocomplete and workflow commands.",
-        link: "https://www.warp.dev",
-        icon: <IconTerminal className="w-6 h-6" />,
-      },
-      {
-        title: "Raycast",
-        description:
-          "Productivity launcher and clipboard manager for macOS. Spotlight replacement on steroids.",
-        link: "https://www.raycast.com",
-        icon: <IconSearch className="w-6 h-6" />,
-      },
-      {
-        title: "Arc Browser",
-        description:
-          "Innovative web browser with built-in spaces, profiles, and productivity features.",
-        link: "https://arc.net",
-        icon: <IconBrowser className="w-6 h-6" />,
-      },
-      {
-        title: "Obsidian",
-        description:
-          "Markdown-based note-taking with graph view for personal knowledge management.",
-        link: "https://obsidian.md",
-        icon: <IconNotes className="w-6 h-6" />,
-      },
-    ],
-  },
-  communication: {
-    title: "Communication & Collaboration",
-    icon: <IconServer className="w-6 h-6" />,
-    items: [
-      {
-        title: "Slack",
-        description:
-          "Team communication platform for work channels and direct messaging.",
-        link: "https://slack.com",
-        icon: <IconBrandSlack className="w-6 h-6" />,
-      },
-      {
-        title: "Discord",
-        description:
-          "Community chat for developer communities, open source projects, and study groups.",
-        link: "https://discord.com",
-        icon: <IconBrandDiscord className="w-6 h-6" />,
-      },
-      {
-        title: "Zoom",
-        description:
-          "Video conferencing for remote work, client meetings, and team standups.",
-        link: "https://zoom.us",
-        icon: <IconVideo className="w-6 h-6" />,
-      },
-      {
-        title: "Linear",
-        description:
-          "Issue tracking and project management tool used by modern software teams.",
-        link: "https://linear.app",
-        icon: <IconChecklist className="w-6 h-6" />,
-      },
-    ],
-  },
+const getIconComponent = (iconName: string): React.ReactElement | null => {
+  if (!iconName) return null;
+  return iconMap[iconName] || null;
 };
 
 const HardwareCard = React.memo(
@@ -275,7 +123,7 @@ const HardwareCard = React.memo(
   }: {
     title: string;
     icon: React.ReactNode;
-    items: typeof hardwareData.laptop.items;
+    items: HardwareItem[];
   }) => (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -329,7 +177,7 @@ const SoftwareSection = React.memo(
   }: {
     title: string;
     icon: React.ReactNode;
-    items: typeof softwareData.development.items;
+    items: SoftwareItem[];
   }) => (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -351,7 +199,79 @@ const SoftwareSection = React.memo(
 
 SoftwareSection.displayName = "SoftwareSection";
 
-export const UsesPage = React.memo(function UsesPage() {
+export const UsesPage = React.memo(function UsesPage({
+  content,
+}: {
+  content?: UsesPageContent;
+}) {
+  // Process hardware data with icon mapping
+  const hardwareData = useMemo(() => {
+    if (!content?.hardware) return null;
+
+    return {
+      laptop: {
+        ...content.hardware.laptop,
+        icon: getIconComponent(content.hardware.laptop.icon),
+      },
+      computer: {
+        ...content.hardware.computer,
+        icon: getIconComponent(content.hardware.computer.icon),
+      },
+      office: {
+        ...content.hardware.office,
+        icon: getIconComponent(content.hardware.office.icon),
+      },
+    };
+  }, [content?.hardware]);
+
+  // Process software data with icon mapping
+  const softwareData = useMemo(() => {
+    if (!content?.software) return null;
+
+    const processSoftwareItems = (items: SoftwareItem[]) =>
+      items.map((item) => ({
+        ...item,
+        // TypeScript now knows item.icon is a string
+        icon: getIconComponent(item.icon),
+      }));
+
+    return {
+      development: {
+        ...content.software.development,
+        icon: getIconComponent(content.software.development.icon),
+        items: processSoftwareItems(content.software.development.items),
+      },
+      ai: {
+        ...content.software.ai,
+        icon: getIconComponent(content.software.ai.icon),
+        items: processSoftwareItems(content.software.ai.items),
+      },
+      design: {
+        ...content.software.design,
+        icon: getIconComponent(content.software.design.icon),
+        items: processSoftwareItems(content.software.design.items),
+      },
+      productivity: {
+        ...content.software.productivity,
+        icon: getIconComponent(content.software.productivity.icon),
+        items: processSoftwareItems(content.software.productivity.items),
+      },
+      communication: {
+        ...content.software.communication,
+        icon: getIconComponent(content.software.communication.icon),
+        items: processSoftwareItems(content.software.communication.items),
+      },
+    };
+  }, [content?.software]);
+
+  if (!hardwareData || !softwareData) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="text-neutral-600 dark:text-neutral-400">No content available</p>
+      </div>
+    );
+  }
+
   return (
     <section className="relative min-h-screen w-full flex items-center justify-center bg-white dark:bg-black overflow-hidden">
       {/* Dotted Background */}
@@ -379,9 +299,8 @@ export const UsesPage = React.memo(function UsesPage() {
             </h1>
           </div>
           <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto leading-relaxed">
-            This is a overview of my hardware and software setup that I use daily
-            for development, design, and productivity. Tools that help me build
-            things efficiently.
+            {content?.description ||
+              "This is a overview of my hardware and software setup that I use daily for development, design, and productivity. Tools that help me build things efficiently."}
           </p>
         </motion.div>
 
