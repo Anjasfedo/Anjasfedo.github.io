@@ -24,6 +24,8 @@ interface ServiceItem {
 }
 
 interface ServicesSectionContent {
+  servicesTitle: string;
+  servicesDescription: string;
   services?: ServiceItem[];
 }
 
@@ -69,13 +71,26 @@ export function ServicesSection({
           viewport={{ once: true }}
           className="text-center mb-16 md:mb-24"
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight">
-            Services & Offerings
-          </h2>
-          <p className="text-neutral-600 dark:text-neutral-400 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed">
-            Specialized web development services tailored to bring your ideas to
-            life with modern technologies and best practices.
-          </p>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-8 md:mb-4 text-center"
+          >
+            {content?.servicesTitle || "Our Services"}
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }} // Delay added for staggered effect
+            className="text-neutral-600 dark:text-neutral-400 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed text-center mb-12"
+          >
+            {content?.servicesDescription ||
+              "Specialized web development services tailored to bring your ideas to life with modern technologies and best practices."}
+          </motion.p>
         </motion.div>
 
         {/* Grid is kept standard, AuroraBackground handles the container */}

@@ -210,8 +210,16 @@ const SkeletonLocation = memo(() => (
     {/* Gradient overlay that disappears on hover */}
     <div className="absolute inset-0 bg-gradient-to-t from-white/50 via-transparent to-transparent dark:from-black/50 group-hover:opacity-0 transition-opacity duration-500" />
 
-    <div className="relative z-20 text-center px-3 py-1 rounded-full bg-black/80 backdrop-blur-md border border-white/10 text-white text-[10px] font-bold group-hover:scale-110 transition-transform duration-300">
-      Bengkulu, ID
+    {/* Map Pin Overlay */}
+    <div className="relative z-20 flex flex-col items-center gap-1 group-hover:scale-110 transition-transform duration-300">
+      <div className="relative">
+        {/* Animated Ping Effect */}
+        <span className="absolute inset-0 rounded-full bg-blue-500 animate-ping opacity-75 scale-150" />
+
+        <div className="relative bg-blue-600 p-2 rounded-full shadow-lg border border-white/20">
+          <IconMapPin className="w-5 h-5 text-white" stroke={2.5} />
+        </div>
+      </div>
     </div>
   </div>
 ));

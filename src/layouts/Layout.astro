@@ -1,9 +1,15 @@
 ---
 import "../styles/global.css";
-// Import the WRAPPER, not the generic UI component
 import { FloatingDockWrapper } from "../components/shared/floating-dock-wrapper";
 import { Footer } from "../components/shared/footer";
 import { ThemeLanguageToggle } from "../components/shared/theme-language-toggle";
+
+const title = "M. Anjasfedo Afridiansah | Software Engineer & ML Enthusiast";
+const description =
+  "M. Anjasfedo Afridiansah (Anjasfedo / Anjas / Fedo) is a Software Engineer based in Bengkulu specializing in Web, Mobile, and Machine Learning. Building scalable software and intelligent digital experiences.";
+const url = "https://anjasfedo.github.io";
+// Using the circular version for the main site image
+const image = `${url}/profile-circle.webp`;
 ---
 
 <!doctype html>
@@ -11,9 +17,66 @@ import { ThemeLanguageToggle } from "../components/shared/theme-language-toggle"
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <link rel="icon" type="image/webp" href="/profile-circle.webp" />
+    <link rel="apple-touch-icon" href="/profile-circle.webp" />
+
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="anjasfedo, anjas, fedo, bengkulu, website developer, web developer, mobile developer, software engineer, developer, machine learning, anjasfedo bengkulu, informatics unib"
+    />
+    <meta name="author" content="M. Anjasfedo Afridiansah" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={image} />
+
+    <link rel="canonical" href={url} />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "M. Anjasfedo Afridiansah",
+        "alternateName": ["Anjasfedo", "Anjas", "Fedo"],
+        "url": "https://anjasfedo.github.io",
+        "image": "https://anjasfedo.github.io/profile-circle.webp",
+        "jobTitle": "Software Engineer",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Bengkulu",
+          "addressCountry": "ID"
+        },
+        "description": "Software Engineer based in Bengkulu with expertise in Machine Learning, Full-Stack Web, and Mobile development.",
+        "sameAs": [
+          "https://github.com/anjasfedo",
+          "https://linkedin.com/in/anjasfedo"
+        ],
+        "knowsAbout": [
+          "Web Development",
+          "Mobile Development",
+          "Machine Learning",
+          "Software Engineering",
+          "Go",
+          "Laravel",
+          "React",
+          "Python"
+        ]
+      }
+    </script>
+
     <meta name="generator" content={Astro.generator} />
-    <title>M. Anjasfedo Afridiansah</title>
   </head>
   <body>
     <FloatingDockWrapper client:load />
@@ -24,21 +87,3 @@ import { ThemeLanguageToggle } from "../components/shared/theme-language-toggle"
     <Footer client:visible />
   </body>
 </html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    min-height: 100vh;
-  }
-
-  body {
-    display: flex;
-    flex-direction: column;
-  }
-
-  body > * {
-    flex-shrink: 0;
-  }
-</style>

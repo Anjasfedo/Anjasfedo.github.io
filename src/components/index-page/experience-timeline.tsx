@@ -25,6 +25,7 @@ interface TimelineItem {
 
 interface ExperienceTimelineContent {
   experienceTitle: string;
+  experienceDescription: string;
   timeline?: TimelineItem[];
 }
 
@@ -113,38 +114,6 @@ SubRole.displayName = "SubRole";
 // --- DEFAULT DATA ---
 // ============================================================================
 
-const defaultTimelineData: TimelineItem[] = [
-  {
-    title: "Present",
-    description: "I am currently managing a multi-faceted career path...",
-    content: [
-      {
-        title: "Senior Frontend Engineer",
-        company: "Tech Innovations Inc.",
-        date: "2025 - Present",
-        desc: "Leading architecture and frontend strategy.",
-      },
-      {
-        title: "Full Stack Freelancer",
-        company: "Independent",
-        date: "2024 - Present",
-        desc: "Specialized in Local-First synchronization.",
-      },
-    ],
-  },
-  {
-    title: "2024",
-    description: "A high-growth period where I balanced agency leadership...",
-    content: [
-      {
-        title: "Lead Web Developer",
-        company: "Creative Agency",
-        date: "2022 - 2024",
-        desc: "Managed a team of 5 developers for high-traffic media sites.",
-      },
-    ],
-  },
-];
 
 // Helper to convert TimelineItem to the structure expected by Timeline component
 const convertToTimelineData = (items: TimelineItem[]) => {
@@ -188,7 +157,7 @@ export const ExperienceTimeline = memo(function ExperienceTimeline({
 }) {
   // 1. Prioritize data from MDX (content.timeline)
   // 2. Fall back to default data if MDX is empty
-  const rawData = content?.timeline || defaultTimelineData;
+  const rawData = content?.timeline || [];
 
   // 3. Convert that data into the format the UI Timeline expects
   const convertedData = useMemo(
@@ -201,12 +170,25 @@ export const ExperienceTimeline = memo(function ExperienceTimeline({
       <section className="w-full relative z-10 pb-20">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <motion.h2
-            // ... same motion props
-            className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-8 md:mb-12 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-8 md:mb-4 text-center"
           >
-            {/* Use title from MDX or default */}
-            {content?.experienceTitle && "Work Experience"}
+            {content?.experienceTitle || "Work Experience"}
           </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }} // Delay added for staggered effect
+            className="text-neutral-600 dark:text-neutral-400 text-sm md:text-lg max-w-2xl mx-auto leading-relaxed text-center mb-12"
+          >
+            {content?.experienceDescription ||
+              "Specialized software engineering services tailored to bring your ideas to life with modern technologies and best practices."}
+          </motion.p>
           {/* ... rest of your header section ... */}
         </div>
 
