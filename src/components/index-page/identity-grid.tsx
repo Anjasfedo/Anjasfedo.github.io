@@ -255,18 +255,34 @@ const SkeletonConnect = memo(({ connectData }: { connectData: ConnectItem[] }) =
     <div className="flex flex-1 w-full h-full rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border border-neutral-200 dark:border-white/10 flex-col items-center justify-center p-3 md:p-4 min-h-32 md:min-h-0">
       <div className="flex flex-row items-center justify-center w-full z-10 gap-4">
         {connectData.map((item) => (
-          <LinkPreview key={item.id} url={item.url} className="group/connect relative flex items-center justify-center">
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              className="relative"
+          <div key={item.id} className="relative group/parent flex flex-col items-center">
+            <LinkPreview
+              url={item.url}
+              className="group/connect relative flex items-center justify-center"
             >
-              <div className="p-3 rounded-xl bg-white/50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 backdrop-blur-sm hover:border-blue-500/50 hover:bg-white dark:hover:bg-neutral-800 transition-all cursor-pointer">
-                <div className="text-neutral-700 dark:text-neutral-300">
-                  {getIconComponent(item.icon)}
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                className="relative"
+              >
+                <div className="p-3 rounded-xl bg-white/50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 backdrop-blur-sm hover:border-blue-500/50 hover:bg-white dark:hover:bg-neutral-800 transition-all cursor-pointer">
+                  <div className="text-neutral-700 dark:text-neutral-300">
+                    {getIconComponent(item.icon)}
+                  </div>
                 </div>
+              </motion.div>
+            </LinkPreview>
+
+            {/* Bottom Tooltip Label */}
+            <div className="absolute top-full mt-2 opacity-0 group-hover/parent:opacity-100 transition-all duration-300 pointer-events-none transform translate-y-1 group-hover/parent:translate-y-0">
+              <div className="px-2 py-1 rounded-md bg-white dark:bg-neutral-800 border border-neutral-200 dark:border-neutral-700 shadow-xl">
+                <p className="text-[10px] font-bold text-gray-900 dark:text-white whitespace-nowrap">
+                  {item.name}
+                </p>
               </div>
-            </motion.div>
-          </LinkPreview>
+              {/* Optional: Small triangle/arrow pointing up */}
+              <div className="w-2 h-2 bg-white dark:bg-neutral-800 border-l border-t border-neutral-200 dark:border-neutral-700 rotate-45 mx-auto -mt-1.5" />
+            </div>
+          </div>
         ))}
       </div>
     </div>
