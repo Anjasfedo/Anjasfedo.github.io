@@ -48,11 +48,20 @@ interface HardwareCategory {
   items: HardwareItem[];
 }
 
+// Data as it comes from MDX
 interface SoftwareItem {
   title: string;
   description: string;
   link: string;
-  icon: string; // Must be string to be passed to getIconComponent
+  icon: string;
+}
+
+// Data after it has been processed for the UI
+interface ProcessedSoftwareItem {
+  title: string;
+  description: string;
+  link: string;
+  icon: ReactNode;
 }
 
 interface SoftwareCategory {
@@ -177,7 +186,7 @@ const SoftwareSection = React.memo(
   }: {
     title: string;
     icon: React.ReactNode;
-    items: SoftwareItem[];
+    items: ProcessedSoftwareItem[]; // FIX: Use ProcessedSoftwareItem
   }) => (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -204,7 +213,6 @@ export const UsesPage = React.memo(function UsesPage({
 }: {
   content?: UsesPageContent;
 }) {
-  // Process hardware data with icon mapping
   const hardwareData = useMemo(() => {
     if (!content?.hardware) return null;
 
@@ -224,14 +232,12 @@ export const UsesPage = React.memo(function UsesPage({
     };
   }, [content?.hardware]);
 
-  // Process software data with icon mapping
   const softwareData = useMemo(() => {
     if (!content?.software) return null;
 
-    const processSoftwareItems = (items: SoftwareItem[]) =>
+    const processSoftwareItems = (items: SoftwareItem[]): ProcessedSoftwareItem[] =>
       items.map((item) => ({
         ...item,
-        // TypeScript now knows item.icon is a string
         icon: getIconComponent(item.icon),
       }));
 
@@ -274,7 +280,6 @@ export const UsesPage = React.memo(function UsesPage({
 
   return (
     <section className="relative min-h-screen w-full flex items-center justify-center bg-white dark:bg-black overflow-hidden">
-      {/* Dotted Background */}
       <div
         className={cn(
           "absolute inset-0",
@@ -283,11 +288,9 @@ export const UsesPage = React.memo(function UsesPage({
           "dark:[background-image:radial-gradient(#404040_1px,transparent_1px)]",
         )}
       />
-      {/* Radial gradient for the container to give a faded look */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"></div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 py-24 w-full">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -305,7 +308,6 @@ export const UsesPage = React.memo(function UsesPage({
         </motion.div>
 
         <div className="space-y-12">
-          {/* Hardware Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -334,7 +336,6 @@ export const UsesPage = React.memo(function UsesPage({
             </div>
           </motion.div>
 
-          {/* Software Section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

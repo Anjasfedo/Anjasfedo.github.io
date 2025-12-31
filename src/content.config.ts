@@ -188,4 +188,32 @@ const usesPage = defineCollection({
     })
 });
 
-export const collections = { projects, indexPage, usesPage };
+// Terms page content collection
+const termsPage = defineCollection({
+    loader: glob({ pattern: "**/index.mdx", base: "./src/content/terms-page" }), schema: z.object({
+        title: z.string(),
+        order: z.number(),
+        description: z.string(),
+        sections: z.array(z.object({
+            title: z.string(),
+            badge: z.string(),
+            content: z.string(), // HTML content stored as string
+        })),
+    })
+});
+
+// Privacy page content collection
+const privacyPage = defineCollection({
+    loader: glob({ pattern: "**/index.mdx", base: "./src/content/privacy-page" }), schema: z.object({
+        title: z.string(),
+        order: z.number(),
+        description: z.string(),
+        sections: z.array(z.object({
+            title: z.string(),
+            badge: z.string(),
+            content: z.string(), // HTML content stored as string
+        })),
+    })
+});
+
+export const collections = { projects, indexPage, usesPage, termsPage, privacyPage };
