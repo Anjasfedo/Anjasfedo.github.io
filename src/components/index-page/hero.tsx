@@ -107,19 +107,25 @@ export function Hero({
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
           {/* Avatar Section */}
+          {/* Avatar Section */}
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             className="flex flex-col items-center mb-8"
           >
             <div className="relative mb-4">
-              <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full blur opacity-30"></div>
+              {/* Animated glow effect behind the avatar */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full blur opacity-30 animate-pulse"></div>
+
               <img
-                src="https://picsum.photos/seed/portfolio-avatar/200/200"
-                alt="Profile"
+                src="/profile-circle.webp" // Updated to your circular WebP
+                alt="M. Anjasfedo Afridiansah"
                 className="relative w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-[3px] border-white dark:border-neutral-900 shadow-lg"
+                loading="eager" // Load this immediately as it's above the fold
               />
-              <div className="absolute bottom-1 right-1 p-1 bg-white dark:bg-gray-900 rounded-full">
+
+              {/* Status Indicator (Online/Available) */}
+              <div className="absolute bottom-1 right-1 p-1 bg-white dark:bg-gray-900 rounded-full shadow-sm">
                 <span className="relative flex h-3 w-3">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>

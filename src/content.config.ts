@@ -60,6 +60,7 @@ const indexPage = defineCollection({
             name: z.string(),
             designation: z.string(),
             icon: z.string(),
+            url: z.string(),
         })).optional(),
         interests: z.array(z.object({
             id: z.number(),

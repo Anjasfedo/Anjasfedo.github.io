@@ -19,6 +19,7 @@ import {
 import { motion } from "motion/react";
 import { AnimatedTooltip } from "../ui/animated-tooltip";
 import { BentoGrid, BentoGridItem } from "../ui/bento-grid";
+import { LinkPreview } from "../ui/link-preview";
 
 // ============================================================================
 // --- TYPES & INTERFACES ---
@@ -52,6 +53,7 @@ interface ConnectItem {
   name: string;
   designation: string;
   icon: string;
+  url: string;
 }
 
 interface InterestItem {
@@ -195,10 +197,6 @@ const SkeletonInterests = memo(({ interestsData }: { interestsData: InterestItem
                   {interest.label}
                 </span>
               </div>
-              <div className="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover/interest:opacity-100 transition-opacity bg-black text-white text-[9px] px-2 py-1 rounded-md pointer-events-none whitespace-nowrap z-50">
-                {interest.label}
-                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-black rotate-45" />
-              </div>
             </motion.div>
           ))}
         </div>
@@ -239,7 +237,7 @@ const SkeletonLocation = memo(({ locationData }: { locationData: LocationItem })
         {/* Animated Ping Effect */}
         <span className="absolute inset-0 rounded-full bg-blue-500 animate-ping opacity-75 scale-150" />
 
-        <div className="relative bg-blue-600 p-2 rounded-full shadow-lg border border-white/20">
+        <div className="relative bg-blue-600 p-0.5 rounded-full shadow-lg border border-white/20">
           <IconMapPin className="w-5 h-5 text-white" stroke={2.5} />
         </div>
       </div>
@@ -249,16 +247,23 @@ const SkeletonLocation = memo(({ locationData }: { locationData: LocationItem })
 SkeletonLocation.displayName = "SkeletonLocation";
 
 const SkeletonConnect = memo(({ connectData }: { connectData: ConnectItem[] }) => {
-  const connectItems = connectData.map((item) => ({
-    ...item,
-    icon: getIconComponent(item.icon),
-    image: "",
-  }));
-
   return (
     <div className="flex flex-1 w-full h-full rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 border border-neutral-200 dark:border-white/10 flex-col items-center justify-center p-3 md:p-4 min-h-32 md:min-h-0">
-      <div className="flex flex-row items-center justify-center w-full z-10">
-        <AnimatedTooltip items={connectItems} />
+      <div className="flex flex-row items-center justify-center w-full z-10 gap-4">
+        {connectData.map((item) => (
+          <LinkPreview key={item.id} url={item.url} className="group/connect relative flex items-center justify-center">
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              className="relative"
+            >
+              <div className="p-3 rounded-xl bg-white/50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 backdrop-blur-sm hover:border-blue-500/50 hover:bg-white dark:hover:bg-neutral-800 transition-all cursor-pointer">
+                <div className="text-neutral-700 dark:text-neutral-300">
+                  {getIconComponent(item.icon)}
+                </div>
+              </div>
+            </motion.div>
+          </LinkPreview>
+        ))}
       </div>
     </div>
   );
@@ -278,46 +283,12 @@ export const IdentityGrid = memo(function IdentityGrid({
     label: "Bengkulu, ID",
     country: "Indonesia",
     city: "Bengkulu",
-    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127357.5438865668!2d102.22124536214532!3d-3.8185611422774945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e36b01f37e19039%3A0x3039d80b220cc40!2sBengkulu%2C%20Bengkulu%20City%2C%20Bengkulu!5e0!3m2!1sen!2sid!4v1715848200000!5m2!1sen!2sid",
+    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127357.54582046892!2d102.22728989531553!3d-3.818921124619567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e36b0204739506b%3A0x401e8f1fc28c110!2sBengkulu%2C%20Bengkulu%20City%2C%20Bengkulu!5e0!3m2!1sen!2sid!4v1710000000000!5m2!1sen!2sid",
   };
 
-  // Default connect data
-  const defaultConnect: ConnectItem[] = [
-    {
-      id: 1,
-      name: "GitHub",
-      designation: "Open Source",
-      icon: "IconBrandGithub",
-    },
-    {
-      id: 2,
-      name: "LinkedIn",
-      designation: "Professional",
-      icon: "IconBrandLinkedin",
-    },
-    {
-      id: 3,
-      name: "Twitter",
-      designation: "Updates",
-      icon: "IconBrandTwitter",
-    },
-  ];
-
-  // Default interests data
-  const defaultInterests: InterestItem[] = [
-    { id: 1, label: "Cloud Tech", color: "text-blue-500", icon: "IconCloud" },
-    { id: 2, label: "Open Source", color: "text-purple-500", icon: "IconDeviceDesktop" },
-    { id: 3, label: "Coffee", color: "text-amber-600", icon: "IconCoffee" },
-    { id: 4, label: "Photography", color: "text-pink-500", icon: "IconCamera" },
-    { id: 5, label: "Gaming", color: "text-emerald-500", icon: "IconDeviceGamepad2" },
-    { id: 6, label: "Writing", color: "text-sky-500", icon: "IconSignature" },
-    { id: 7, label: "Travel", color: "text-orange-500", icon: "IconMapPin" },
-    { id: 8, label: "Music", color: "text-rose-500", icon: "IconActivity" },
-  ];
-
   const locationData = content?.location || defaultLocation;
-  const connectData = content?.connect || defaultConnect;
-  const interestsData = content?.interests || defaultInterests;
+  const connectData = content?.connect || [];
+  const interestsData = content?.interests || [];
 
   const items = useMemo(
     () => [
