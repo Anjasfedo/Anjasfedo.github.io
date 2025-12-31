@@ -3,6 +3,15 @@ import "../styles/global.css";
 import { FloatingDockWrapper } from "../components/shared/floating-dock-wrapper";
 import { Footer } from "../components/shared/footer";
 import { ThemeLanguageToggle } from "../components/shared/theme-language-toggle";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import {
+  IconUser,
+  IconCode,
+  IconBriefcase,
+  IconDeviceDesktop,
+  IconTerminal2,
+  IconAward,
+} from "@tabler/icons-react";
 
 const title = "M. Anjasfedo Afridiansah | Software Engineer & ML Enthusiast";
 const description =
@@ -10,6 +19,44 @@ const description =
 const url = "https://anjasfedo.github.io";
 // Using the circular version for the main site image
 const image = `${url}/profile-circle.webp`;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Centralize navigation logic here in Astro (Server Side)
+
+const navigationItems = [
+  {
+    title: t("nav.about"),
+    icon: "IconUser", // Just a string
+    href: `/${lang}/`,
+  },
+  {
+    title: t("nav.projects"),
+    icon: "IconCode",
+    href: `/${lang}/projects`,
+  },
+  {
+    title: t("nav.certificates"),
+    icon: "IconAward",
+    href: `/${lang}/certificates`,
+  },
+  {
+    title: t("nav.experience"),
+    icon: "IconBriefcase",
+    href: `/${lang}/#experience`,
+  },
+  {
+    title: t("nav.services"),
+    icon: "IconTerminal2",
+    href: `/${lang}/#services`,
+  },
+  {
+    title: t("nav.uses"),
+    icon: "IconDeviceDesktop",
+    href: `/${lang}/uses`,
+  },
+];
 ---
 
 <!doctype html>
@@ -79,7 +126,7 @@ const image = `${url}/profile-circle.webp`;
     <meta name="generator" content={Astro.generator} />
   </head>
   <body>
-    <FloatingDockWrapper client:load />
+    <FloatingDockWrapper client:load items={navigationItems} />
     <ThemeLanguageToggle client:load />
 
     <slot />

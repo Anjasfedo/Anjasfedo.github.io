@@ -27,7 +27,10 @@ const projects = defineCollection({
 
 // Index page content collection - single file with all content
 const indexPage = defineCollection({
-  loader: glob({ pattern: "**/index.mdx", base: "./src/content/index-page" }),
+loader: glob({ 
+    pattern: "**/index.{md,mdx}", 
+    base: "./src/content/index-page" 
+  }),
   schema: z.object({
     title: z.string(),
     order: z.number(),

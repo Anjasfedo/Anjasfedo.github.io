@@ -1,0 +1,65 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { Hero } from "../../components/index-page/hero";
+import { IdentityGrid } from "../../components/index-page/identity-grid";
+import { ExperienceTimeline } from "../../components/index-page/experience-timeline";
+import { ServicesSection } from "../../components/index-page/services-section";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const pages = await getCollection("indexPage");
+
+  const paths = pages.map((page) => {
+    const [lang, ...slug] = page.id.split("/");
+    return { params: { lang, slug: slug.join("/") || undefined }, props: page };
+  });
+
+  return paths;
+}
+
+const page = Astro.props;
+const content = page.data;
+---
+
+<Layout>
+  <Hero
+    client:load
+    content={{
+      roles: content.roles,
+      headline: content.headline,
+    }}
+  />
+
+  <IdentityGrid
+    client:visible
+    content={{
+      education: content.education,
+      techStack: content.techStack,
+      location: content.location,
+      connect: content.connect,
+      interests: content.interests,
+    }}
+  />
+
+  <div id="experience">
+    <ExperienceTimeline
+      client:visible
+      content={{
+        experienceTitle: content.experienceTitle,
+        experienceDescription: content.experienceDescription,
+        timeline: content.timeline,
+      }}
+    />
+  </div>
+
+  <div id="services">
+    <ServicesSection
+      client:visible
+      content={{
+        servicesTitle: content.servicesTitle,
+        servicesDescription: content.servicesDescription,
+        services: content.services,
+      }}
+    />
+  </div>
+</Layout>

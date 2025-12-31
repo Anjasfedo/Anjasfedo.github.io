@@ -1,68 +1,29 @@
 "use client";
-import React from "react";
-import {
-  IconUser,
-  IconCode,
-  IconBriefcase,
-  IconDeviceDesktop,
-  IconTerminal2,
-  IconAward, // Added for Certificates
-} from "@tabler/icons-react";
+import React, { useMemo } from "react";
 import { FloatingDock } from "../ui/floating-dock-navbar";
+import { navIconMap } from "@/i18n/ui"; // Import your map
 
-export const navigationItems = [
-  {
-    title: "About",
-    icon: (
-      <IconUser className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-    ),
-    href: "/",
-  },
-  {
-    title: "Projects",
-    icon: (
-      <IconCode className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-    ),
-    href: "/projects",
-  },
-  {
-    title: "Certificates",
-    icon: (
-      <IconAward className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-    ),
-    href: "/certificates",
-  },
-  {
-    title: "Experience",
-    icon: (
-      <IconBriefcase className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-    ),
-    href: "/#experience",
-  },
-  {
-    title: "Services",
-    icon: (
-      <IconTerminal2 className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-    ),
-    href: "/#services",
-  },
-  {
-    title: "Uses",
-    icon: (
-      <IconDeviceDesktop className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-    ),
-    href: "/uses",
-  },
-];
+interface NavItem {
+  title: string;
+  icon: string; // Now a string name
+  href: string;
+}
 
-export const FloatingDockWrapper = () => {
-  return (
-    <div className="relative w-full">
-      <FloatingDock
-        items={navigationItems}
-        desktopClassName=""
-        mobileClassName=""
-      />
-    </div>
+export const FloatingDockWrapper = ({ items }: { items: NavItem[] }) => {
+  const processedItems = useMemo(() =>
+    items.map((item) => {
+      const IconComponent = navIconMap[item.icon];
+
+      return {
+        ...item,
+        // Render the component found in the map
+        icon: IconComponent ? (
+          <IconComponent className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+        ) : null
+      };
+    }),
+    [items]
   );
+
+  return <FloatingDock items={processedItems} />;
 };
