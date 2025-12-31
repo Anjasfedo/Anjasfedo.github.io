@@ -49,7 +49,7 @@ export function Footer() {
     {
       name: "Email",
       icon: <IconMail className="h-5 w-5" />,
-      href: "mailto:hello@example.com",
+      href: "mailto:fedoafridiansah@gmail.com",
       color: "hover:bg-red-500",
     },
   ];
@@ -81,7 +81,7 @@ export function Footer() {
             </p>
 
             <motion.a
-              href="mailto:hello@example.com"
+              href="mailto:fedoafridiansah@gmail.com"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="group relative inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full font-bold text-sm transition-all hover:bg-cyan-400 shadow-[0_0_30px_rgba(255,255,255,0.1)]"

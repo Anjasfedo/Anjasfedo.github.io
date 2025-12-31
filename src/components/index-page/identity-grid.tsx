@@ -15,6 +15,8 @@ import {
   IconDeviceGamepad2,
   IconCamera,
   IconActivity,
+  IconBrandInstagram,
+  IconMail,
 } from "@tabler/icons-react";
 import { motion } from "motion/react";
 import { AnimatedTooltip } from "../ui/animated-tooltip";
@@ -88,6 +90,8 @@ const iconMap: Record<string, React.ReactElement> = {
   IconSignature: <IconSignature />,
   IconMapPin: <IconMapPin />,
   IconActivity: <IconActivity />,
+  IconBrandInstagram: <IconBrandInstagram />,
+  IconMail: <IconMail />,
 };
 
 const getIconComponent = (iconName: string): React.ReactElement => {
