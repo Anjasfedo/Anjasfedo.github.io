@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import { Hero } from "../../components/index-page/hero";
 import { IdentityGrid } from "../../components/index-page/identity-grid";
 import { ExperienceTimeline } from "../../components/index-page/experience-timeline";
-import { ServicesSection } from "../../components/index-page/services-section";
+// import { ServicesSection } from "../../components/index-page/services-section";
 import { getCollection } from "astro:content";
 import { getLangFromUrl } from "@/i18n/utils";
 
@@ -70,7 +70,7 @@ const lang = getLangFromUrl(Astro.url);
     />
   </div>
 
-  <div id="services">
+  <!-- <div id="services">
     <ServicesSection
       client:visible
       content={{
@@ -79,5 +79,5 @@ const lang = getLangFromUrl(Astro.url);
         services: content.services,
       }}
     />
-  </div>
+  </div> -->
 </Layout>
