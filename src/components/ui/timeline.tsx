@@ -1,7 +1,6 @@
 "use client";
 import { useScroll, useTransform, motion, useSpring } from "motion/react";
 import React, { useEffect, useRef, useState } from "react";
-import { cn } from "@/lib/utils";
 
 interface TimelineEntry {
   title: string;

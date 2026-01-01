@@ -106,6 +106,7 @@ const FilterBar = ({
             <button
               onClick={onClearFilters}
               className="px-4 py-3 rounded-xl bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-red-100 dark:border-red-900/30 flex items-center gap-2 text-sm font-bold"
+              aria-label="Clear all filters"
             >
               <IconX className="w-4 h-4" />{" "}
               {content?.resetFiltersText || "Reset Filters"}
@@ -118,11 +119,12 @@ const FilterBar = ({
             <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
               {content?.statusLabel || "Status"}
             </label>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by project status">
               {availableStatuses.map((status) => (
                 <button
                   key={status}
                   onClick={() => setSelectedStatus(status)}
+                  aria-pressed={selectedStatus === status}
                   className={cn(
                     "px-3 py-1.5 rounded-lg text-sm font-medium transition-all",
                     selectedStatus === status
@@ -148,6 +150,8 @@ const FilterBar = ({
               <button
                 onClick={() => setShowTagDropdown(!showTagDropdown)}
                 className="w-full px-4 py-3 rounded-xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-black text-left flex items-center justify-between hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-colors"
+                aria-expanded={showTagDropdown}
+                aria-haspopup="listbox"
               >
                 <span className="text-neutral-900 dark:text-white truncate pr-4">
                   {selectedTags.length > 0
@@ -171,12 +175,16 @@ const FilterBar = ({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10 }}
                     className="absolute z-[100] w-full mt-2 p-3 bg-white dark:bg-neutral-950 border border-neutral-200 dark:border-white/10 rounded-xl shadow-2xl max-h-80 overflow-y-auto"
+                    role="listbox"
+                    aria-label="Select technologies"
                   >
                     <div className="flex flex-wrap gap-2">
                       {availableTags.map((tag) => (
                         <button
                           key={tag}
                           onClick={() => toggleTag(tag)}
+                          role="option"
+                          aria-selected={selectedTags.includes(tag)}
                           className={cn(
                             "px-3 py-1.5 rounded-lg text-xs font-medium transition-all border border-transparent",
                             selectedTags.includes(tag)
@@ -244,7 +252,7 @@ const ProjectCard = React.forwardRef<
     };
 
     return (
-      <a href={`/${lang}/projects/${project.slug}`} onClick={handleNavigation}>
+      <a href={`/${lang}/projects/${project.slug}`} onClick={handleNavigation} aria-label={`View ${project.name} project details`}>
         <motion.div
           ref={_ref}
           initial={{ opacity: 0, y: 20 }}
@@ -531,6 +539,7 @@ export function ProjectsPage({
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className="px-8 py-4 bg-black dark:bg-white rounded-full text-white dark:text-black font-semibold flex items-center gap-2"
+          aria-label="Load more projects"
         >
           {content?.loadMoreText || "Load More Projects"}{" "}
           <IconChevronDown className="w-5 h-5" />

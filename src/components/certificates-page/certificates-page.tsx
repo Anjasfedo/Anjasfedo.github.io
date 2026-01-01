@@ -109,6 +109,7 @@ const FilterBar = ({
             <button
               onClick={onClearFilters}
               className="px-4 py-3 rounded-xl bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-red-100 dark:border-red-900/30 flex items-center gap-2 text-sm font-bold"
+              aria-label="Clear all filters"
             >
               <IconX className="w-4 h-4" /> {content?.resetFiltersText || "Reset Filters"}
             </button>
@@ -118,11 +119,12 @@ const FilterBar = ({
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1">
             <label className="block text-xs font-bold uppercase tracking-wider text-neutral-500 mb-2">{content?.issuerLabel || "Issuer"}</label>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by certificate issuer">
               {availableIssuers.map((issuer: string) => (
                 <button
                   key={issuer}
                   onClick={() => setSelectedIssuer(issuer)}
+                  aria-pressed={selectedIssuer === issuer}
                   className={cn(
                     "px-3 py-1.5 rounded-lg text-xs font-bold transition-all",
                     selectedIssuer === issuer
@@ -141,6 +143,8 @@ const FilterBar = ({
             <button
               onClick={() => setShowSkillDropdown(!showSkillDropdown)}
               className="w-full px-4 py-3 rounded-xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-black flex items-center justify-between"
+              aria-expanded={showSkillDropdown}
+              aria-haspopup="listbox"
             >
               <span className="text-sm truncate">
                 {selectedSkills.length > 0 ? `${selectedSkills.length} ${content?.selectedCount || "selected"}` : content?.allSkillsText || "All Skills"}
@@ -152,11 +156,15 @@ const FilterBar = ({
                 <motion.div
                   initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}
                   className="absolute z-[60] w-full mt-2 p-3 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-white/10 rounded-xl shadow-2xl max-h-60 overflow-y-auto flex flex-wrap gap-2"
+                  role="listbox"
+                  aria-label="Select skills"
                 >
                   {availableSkills.map((skill: string) => (
                     <button
                       key={skill}
                       onClick={() => toggleSkill(skill)}
+                      role="option"
+                      aria-selected={selectedSkills.includes(skill)}
                       className={cn(
                         "px-2 py-1 rounded text-[10px] font-bold border transition-all",
                         selectedSkills.includes(skill)
@@ -329,6 +337,7 @@ export function CertificatesPage({ certificates, content }: { certificates: Cert
         <button
           onClick={() => setVisibleCount(v => v + 6)}
           className="px-10 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold shadow-xl transition-transform active:scale-95"
+          aria-label="Load more certificates"
         >
           {content?.loadMoreText || "Load More"}
         </button>

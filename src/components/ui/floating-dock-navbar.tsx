@@ -123,6 +123,7 @@ const FloatingDockMobile = ({
                     handleNavClick(e, item.href);
                     setTimeout(() => setOpen(false), 150);
                   }}
+                  aria-label={item.title}
                   className="group flex items-center gap-4 h-16 px-4 rounded-2xl bg-gray-50/50 dark:bg-neutral-800/50 border border-transparent dark:border-white/5 transition-all overflow-hidden"
                 >
                   {/* Magnified Icon Container */}
@@ -151,6 +152,8 @@ const FloatingDockMobile = ({
 
       <button
         onClick={() => setOpen(!open)}
+        aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+        aria-expanded={open}
         className="flex h-12 w-12 items-center justify-center rounded-full bg-white dark:bg-neutral-900 border border-gray-200 dark:border-white/10 shadow-lg backdrop-blur-md active:scale-90 transition-transform"
       >
         {open ? (
@@ -223,7 +226,7 @@ function IconContainer({
   const [hovered, setHovered] = useState(false);
 
   return (
-    <a href={href} onClick={(e) => handleNavClick(e, href)}>
+    <a href={href} onClick={(e) => handleNavClick(e, href)} aria-label={title}>
       <motion.div
         ref={ref}
         style={{ width, height }}

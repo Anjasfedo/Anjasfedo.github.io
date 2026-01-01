@@ -78,6 +78,7 @@ export function Footer({ lang }: FooterProps) {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="group relative inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full font-bold text-sm transition-all hover:bg-cyan-400 shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+              aria-label="Send email to fedoafridiansah@gmail.com"
             >
               {t("footer.cta.button")}
               <IconChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -107,6 +108,7 @@ export function Footer({ lang }: FooterProps) {
                       "hover:text-white hover:border-slate-500 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)]",
                       social.color
                     )}
+                    aria-label={`Visit ${social.name} profile`}
                   >
                     {social.icon}
                   </a>

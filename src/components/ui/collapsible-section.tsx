@@ -20,6 +20,8 @@ export const CollapsibleSection = React.memo(
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="w-full text-left group"
+          aria-expanded={isOpen}
+          aria-controls={`collapsible-content-${title.replace(/\s+/g, '-').toLowerCase()}`}
         >
           {badge && (
             <span className="bg-black dark:bg-white text-white dark:text-black rounded-full text-sm w-fit px-4 mx-1 py-1 mb-4 inline-block">
@@ -48,6 +50,7 @@ export const CollapsibleSection = React.memo(
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className="overflow-hidden"
+              id={`collapsible-content-${title.replace(/\s+/g, '-').toLowerCase()}`}
             >
               <div className="pt-4 text-neutral-600 dark:text-neutral-400 prose prose-sm dark:prose-invert max-w-none">
                 {children}

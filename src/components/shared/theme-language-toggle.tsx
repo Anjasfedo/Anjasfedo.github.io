@@ -195,6 +195,7 @@ export const ThemeLanguageToggle = () => {
                 onClick={scrollToTop}
                 onMouseEnter={() => setShowTooltip("scroll")}
                 onMouseLeave={() => setShowTooltip(null)}
+                aria-label="Scroll to top"
                 className={cn(
                   "p-3 rounded-full shadow-lg backdrop-blur-md",
                   "bg-white/90 dark:bg-neutral-900/90",
@@ -231,6 +232,7 @@ export const ThemeLanguageToggle = () => {
             onClick={toggleTheme}
             onMouseEnter={() => setShowTooltip("theme")}
             onMouseLeave={() => setShowTooltip(null)}
+            aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
             className={cn(
               "p-3 rounded-full shadow-lg backdrop-blur-md",
               "bg-white/90 dark:bg-neutral-900/90",
@@ -283,6 +285,8 @@ export const ThemeLanguageToggle = () => {
             onClick={() => setIsOpen(!isOpen)}
             onMouseEnter={() => setShowTooltip("language")}
             onMouseLeave={() => setShowTooltip(null)}
+            aria-label="Change language"
+            aria-expanded={isOpen}
             className={cn(
               "p-3 rounded-full shadow-lg backdrop-blur-md",
               "bg-white/90 dark:bg-neutral-900/90",
@@ -322,6 +326,8 @@ export const ThemeLanguageToggle = () => {
                   <button
                     key={lang.code}
                     onClick={() => changeLanguage(lang.code as Language)}
+                    aria-label={`Switch to ${lang.label}`}
+                    aria-pressed={language === lang.code}
                     className={cn(
                       "w-full px-4 py-3 text-left text-sm font-medium transition-colors flex items-center justify-between",
                       "hover:bg-neutral-100 dark:hover:bg-neutral-800",

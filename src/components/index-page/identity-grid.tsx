@@ -236,6 +236,7 @@ const SkeletonLocation = memo(
   ({ locationData }: { locationData: LocationItem }) => (
     <div className="group flex flex-1 w-full h-full rounded-xl bg-neutral-100 dark:bg-neutral-900 flex-col items-center justify-center relative overflow-hidden border border-neutral-200 dark:border-white/10 transition-all duration-300">
       <iframe
+        title={locationData.label}
         src={locationData.mapEmbedUrl}
         width="100%"
         height="100%"

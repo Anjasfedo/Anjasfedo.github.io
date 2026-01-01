@@ -46,6 +46,7 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
             whileHover={{ x: -4 }}
             whileTap={{ scale: 0.98 }}
             className="inline-flex items-center gap-2 text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+            aria-label="Return to projects page"
           >
             <IconArrowLeft className="w-5 h-5" />
             <span className="font-medium">Back to Projects</span>
@@ -86,6 +87,8 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
                       ? "border-blue-500 scale-105 shadow-md shadow-blue-500/20"
                       : "border-transparent opacity-60 hover:opacity-100"
                   )}
+                  aria-label={`View project image ${idx + 1}`}
+                  aria-pressed={activeImage === img}
                 >
                   <img
                     src={img}
@@ -130,7 +133,9 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
                 <a
                   href={project.github}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-xl font-bold hover:opacity-90 transition-opacity"
+                  aria-label={`View ${project.name} source code on GitHub`}
                 >
                   <IconBrandGithub className="w-5 h-5" /> GitHub
                 </a>
@@ -139,7 +144,9 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
                 <a
                   href={project.demo}
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-xl font-bold hover:bg-blue-600 transition-colors shadow-lg shadow-blue-500/25"
+                  aria-label={`View live demo of ${project.name}`}
                 >
                   <IconExternalLink className="w-5 h-5" /> Live Demo
                 </a>
@@ -175,6 +182,7 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
               </div>
               <div className="relative aspect-video rounded-xl overflow-hidden border border-neutral-200 dark:border-white/10 shadow-lg">
                 <iframe
+                  title={project.name}
                   src={project.video}
                   className="absolute inset-0 w-full h-full"
                   allowFullScreen
