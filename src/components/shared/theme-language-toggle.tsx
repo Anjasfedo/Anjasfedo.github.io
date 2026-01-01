@@ -69,21 +69,15 @@ export const ThemeLanguageToggle = () => {
     toTheme: "light" | "dark";
   }>({ isActive: false, toTheme: "dark" });
 
+  // Inside ThemeLanguageToggle.tsx
+
   useEffect(() => {
-    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
+    // 1. Sync React state with the class already applied by the head script
+    const isDark = document.documentElement.classList.contains("dark");
+    setTheme(isDark ? "dark" : "light");
+
+    // 2. Handle Language sync
     const savedLanguage = localStorage.getItem("language") as Language | null;
-
-    if (savedTheme) {
-      setTheme(savedTheme);
-      document.documentElement.classList.toggle("dark", savedTheme === "dark");
-    } else {
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      setTheme(prefersDark ? "dark" : "light");
-      document.documentElement.classList.toggle("dark", prefersDark);
-    }
-
     if (savedLanguage) {
       setLanguage(savedLanguage);
     }
@@ -131,7 +125,10 @@ export const ThemeLanguageToggle = () => {
     const pathSegments = currentPath.split("/").filter(Boolean);
 
     // Check if the current path starts with a language code
-    if (pathSegments.length > 0 && (pathSegments[0] === "en" || pathSegments[0] === "id")) {
+    if (
+      pathSegments.length > 0 &&
+      (pathSegments[0] === "en" || pathSegments[0] === "id")
+    ) {
       pathSegments[0] = newLang;
     } else {
       // If no language code in path, prepend it

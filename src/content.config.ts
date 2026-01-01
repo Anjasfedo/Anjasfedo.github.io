@@ -31,6 +31,27 @@ const projects = defineCollection({
   }),
 });
 
+const certificates = defineCollection({
+  loader: glob({
+    pattern: "**/*.{md,mdx}", base: "./src/content/certificates", generateId: ({ entry }) => {
+      // entry is the relative path, e.g., "en/my-project.mdx"
+      // We'll turn it into "en/my-project"
+      return entry.replace(/\.[^/.]+$/, "");
+    }
+  }),
+  schema: z.object({
+    title: z.string(),
+    slug: z.string(),
+    issuer: z.string(),
+    description: z.string().optional(),
+    skills: z.array(z.string()).optional(),
+    media: z.string().optional(),
+    credential: z.string().optional(), // URL to credential
+    issueDate: z.coerce.date(),
+    expirationDate: z.coerce.date().optional(),
+  }),
+});
+
 // Index page content collection - single file with all content
 const indexPage = defineCollection({
   loader: glob({
@@ -335,21 +356,6 @@ const privacyPage = defineCollection({
         content: z.string(), // HTML content stored as string
       })
     ),
-  }),
-});
-
-const certificates = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/certificates" }),
-  schema: z.object({
-    title: z.string(),
-    slug: z.string(),
-    issuer: z.string(),
-    description: z.string().optional(),
-    skills: z.array(z.string()).optional(),
-    media: z.string().optional(),
-    credential: z.string().optional(), // URL to credential
-    issueDate: z.coerce.date(),
-    expirationDate: z.coerce.date().optional(),
   }),
 });
 
