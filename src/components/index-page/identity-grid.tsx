@@ -385,10 +385,10 @@ export const IdentityGrid = memo(function IdentityGrid({
   );
 
   return (
-    <div className="relative min-h-fit !h-auto bg-white dark:bg-black">
+    <div className="relative min-h-fit !h-auto bg-white dark:bg-black z-0">
       <div className="absolute inset-0 [background-size:40px_40px] [background-image:linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)] dark:[background-image:linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)]" />
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black" />
-      <section className="py-12 md:py-20 relative z-10">
+      <section className="py-12 md:py-20 relative z-0">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}

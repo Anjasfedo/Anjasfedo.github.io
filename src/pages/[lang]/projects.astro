@@ -32,9 +32,25 @@ const projectsData = allProjects
     id: project.id,
     name: project.data.title,
   }));
+
+// SEO Configuration
+const seoConfig = {
+  en: {
+    title: "Projects | M. Anjasfedo Afridiansah - Software Engineer Portfolio",
+    description: "Explore the portfolio of M. Anjasfedo Afridiansah. Web and mobile development projects including AI content generators, e-commerce analytics, task management apps, and more. Built with React, Go, Laravel, and modern technologies.",
+    keywords: "anjasfedo projects, web development projects, mobile apps, react projects, go projects, laravel projects, machine learning projects, ai content generator, ecommerce analytics, task management app, portfolio projects, bengkulu developer"
+  },
+  id: {
+    title: "Proyek | M. Anjasfedo Afridiansah - Software Engineer Portfolio",
+    description: "Jelajahi portofolio M. Anjasfedo Afridiansah. Proyek pengembangan web dan mobile termasuk generator konten AI, analitik e-commerce, aplikasi manajemen tugas, dan lainnya. Dibuat dengan React, Go, Laravel, dan teknologi modern.",
+    keywords: "proyek anjasfedo, proyek web development, aplikasi mobile, proyek react, proyek go, proyek laravel, proyek machine learning, generator konten ai, analitik ecommerce, aplikasi manajemen tugas, portofolio proyek, developer bengkulu"
+  }
+};
+
+const seo = seoConfig[lang as Language];
 ---
 
-<Layout title="Projects | M. Anjasfedo Afridiansah">
+<Layout title={seo.title} description={seo.description} keywords={seo.keywords}>
   <div
     class="relative min-h-screen w-full flex flex-col items-center bg-white dark:bg-neutral-950 transition-colors duration-300 overflow-hidden"
   >

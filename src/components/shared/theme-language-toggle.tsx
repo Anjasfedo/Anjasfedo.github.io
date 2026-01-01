@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { IconSun, IconMoon, IconArrowUp, IconGlobe } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
@@ -62,6 +62,8 @@ export const ThemeLanguageToggle = () => {
   const [language, setLanguage] = useState<Language>("en");
   const [isOpen, setIsOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [showTooltip, setShowTooltip] = useState<string | null>(null);
+  const languageMenuRef = useRef<HTMLDivElement>(null);
 
   // Transition State
   const [transitionState, setTransitionState] = useState<{
@@ -88,6 +90,23 @@ export const ThemeLanguageToggle = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close language menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (languageMenuRef.current && !languageMenuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -168,36 +187,57 @@ export const ThemeLanguageToggle = () => {
         {/* Scroll to Top */}
         <AnimatePresence>
           {showScrollTop && (
-            <motion.button
-              initial={{ opacity: 0, scale: 0.8, x: 20 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              exit={{ opacity: 0, scale: 0.8, x: 20 }}
-              onClick={scrollToTop}
-              className={cn(
-                "p-3 rounded-full shadow-lg backdrop-blur-md",
-                "bg-white/90 dark:bg-neutral-900/90",
-                "border border-neutral-200 dark:border-white/10",
-                "text-neutral-700 dark:text-neutral-200",
-                "hover:scale-110 transition-all duration-200"
-              )}
-            >
-              <IconArrowUp className="w-5 h-5" />
-            </motion.button>
+            <div className="relative">
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8, x: 20 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                exit={{ opacity: 0, scale: 0.8, x: 20 }}
+                onClick={scrollToTop}
+                onMouseEnter={() => setShowTooltip("scroll")}
+                onMouseLeave={() => setShowTooltip(null)}
+                className={cn(
+                  "p-3 rounded-full shadow-lg backdrop-blur-md",
+                  "bg-white/90 dark:bg-neutral-900/90",
+                  "border border-neutral-200 dark:border-white/10",
+                  "text-neutral-700 dark:text-neutral-200",
+                  "hover:scale-110 transition-all duration-200"
+                )}
+              >
+                <IconArrowUp className="w-5 h-5" />
+              </motion.button>
+
+              {/* Tooltip */}
+              <AnimatePresence>
+                {showTooltip === "scroll" && (
+                  <motion.div
+                    initial={{ opacity: 0, x: 10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 10 }}
+                    className="absolute top-1/2 -translate-y-1/2 right-full mr-3 px-3 py-1.5 rounded-md bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-xs font-medium whitespace-nowrap"
+                  >
+                    Scroll to Top
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           )}
         </AnimatePresence>
 
         {/* Theme Toggle */}
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={toggleTheme}
-          className={cn(
-            "p-3 rounded-full shadow-lg backdrop-blur-md",
-            "bg-white/90 dark:bg-neutral-900/90",
-            "border border-neutral-200 dark:border-white/10",
-            "transition-colors duration-200"
-          )}
-        >
+        <div className="relative">
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={toggleTheme}
+            onMouseEnter={() => setShowTooltip("theme")}
+            onMouseLeave={() => setShowTooltip(null)}
+            className={cn(
+              "p-3 rounded-full shadow-lg backdrop-blur-md",
+              "bg-white/90 dark:bg-neutral-900/90",
+              "border border-neutral-200 dark:border-white/10",
+              "transition-colors duration-200"
+            )}
+          >
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={theme}
@@ -213,14 +253,36 @@ export const ThemeLanguageToggle = () => {
               )}
             </motion.div>
           </AnimatePresence>
-        </motion.button>
+
+          {/* Tooltip */}
+          <AnimatePresence>
+            {showTooltip === "theme" && (
+              <motion.div
+                initial={{ opacity: 0, x: 10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 10 }}
+                className="absolute top-1/2 -translate-y-1/2 right-full mr-3 px-3 py-1.5 rounded-md bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-xs font-medium whitespace-nowrap"
+              >
+                {theme === "light" ? "Switch to Dark" : "Switch to Light"}
+              </motion.div>
+            )}
+          </AnimatePresence>
+          </motion.button>
+        </div>
 
         {/* Language Toggle */}
-        <div className="relative">
+        <div
+          ref={languageMenuRef}
+          className="relative"
+          onMouseEnter={() => setIsOpen(true)}
+          onMouseLeave={() => setIsOpen(false)}
+        >
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(!isOpen)}
+            onMouseEnter={() => setShowTooltip("language")}
+            onMouseLeave={() => setShowTooltip(null)}
             className={cn(
               "p-3 rounded-full shadow-lg backdrop-blur-md",
               "bg-white/90 dark:bg-neutral-900/90",
@@ -230,6 +292,20 @@ export const ThemeLanguageToggle = () => {
           >
             <IconGlobe className="w-5 h-5" />
           </motion.button>
+
+          {/* Tooltip */}
+          <AnimatePresence>
+            {showTooltip === "language" && !isOpen && (
+              <motion.div
+                initial={{ opacity: 0, x: 10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 10 }}
+                className="absolute top-1/2 -translate-y-1/2 right-full mr-3 px-3 py-1.5 rounded-md bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-xs font-medium whitespace-nowrap"
+              >
+                Change Language
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <AnimatePresence>
             {isOpen && (

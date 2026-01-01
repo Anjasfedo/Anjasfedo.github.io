@@ -5,12 +5,27 @@ import { Footer } from "../components/shared/footer";
 import { ThemeLanguageToggle } from "../components/shared/theme-language-toggle";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
-const title = "M. Anjasfedo Afridiansah | Software Engineer & ML Enthusiast";
-const description =
-  "M. Anjasfedo Afridiansah (Anjasfedo / Anjas / Fedo) is a Software Engineer based in Bengkulu specializing in Web, Mobile, and Machine Learning. Building scalable software and intelligent digital experiences.";
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  keywords?: string;
+  noindex?: boolean;
+  ogType?: string;
+}
+
+const {
+  title = "M. Anjasfedo Afridiansah | Software Engineer & ML Enthusiast",
+  description = "M. Anjasfedo Afridiansah (Anjasfedo / Anjas / Fedo) is a Software Engineer based in Bengkulu specializing in Web, Mobile, and Machine Learning. Building scalable software and intelligent digital experiences.",
+  image = "https://anjasfedo.github.io/profile-circle.webp",
+  keywords = "anjasfedo, anjas, fedo, bengkulu, website developer, web developer, mobile developer, software engineer, developer, machine learning, anjasfedo bengkulu, informatics unib, open to project, freelance developer",
+  noindex = false,
+  ogType = "website",
+} = Astro.props;
+
 const url = "https://anjasfedo.github.io";
-// Using the circular version for the main site image
-const image = `${url}/profile-circle.webp`;
+const currentPath = Astro.url.pathname;
+const fullUrl = `${url}${currentPath}`;
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -52,7 +67,7 @@ const navigationItems = [
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang} dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -60,28 +75,47 @@ const navigationItems = [
     <link rel="icon" type="image/webp" href="/profile-circle.webp" />
     <link rel="apple-touch-icon" href="/profile-circle.webp" />
 
+    <!-- Primary SEO Meta Tags -->
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <meta
-      name="keywords"
-      content="anjasfedo, anjas, fedo, bengkulu, website developer, web developer, mobile developer, software engineer, developer, machine learning, anjasfedo bengkulu, informatics unib"
-    />
+    <meta name="keywords" content={keywords} />
     <meta name="author" content="M. Anjasfedo Afridiansah" />
+    <meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow"} />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={url} />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={fullUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
+    <meta property="og:locale" content={lang === "id" ? "id_ID" : "en_US"} />
+    <meta property="og:site_name" content="M. Anjasfedo Afridiansah Portfolio" />
 
+    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={url} />
+    <meta property="twitter:url" content={fullUrl} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={image} />
 
-    <link rel="canonical" href={url} />
+    <!-- Canonical URL -->
+    <link rel="canonical" href={fullUrl} />
+
+    <!-- Alternate Language Links -->
+    {lang === "en" && (
+      <>
+        <link rel="alternate" hreflang="en" href={`${url}/en/${currentPath.replace("/en/", "").replace("/id/", "")}`} />
+        <link rel="alternate" hreflang="id" href={`${url}/id/${currentPath.replace("/en/", "").replace("/id/", "")}`} />
+      </>
+    )}
+    {lang === "id" && (
+      <>
+        <link rel="alternate" hreflang="en" href={`${url}/en/${currentPath.replace("/en/", "").replace("/id/", "")}`} />
+        <link rel="alternate" hreflang="id" href={`${url}/id/${currentPath.replace("/en/", "").replace("/id/", "")}`} />
+      </>
+    )}
+    <link rel="alternate" hreflang="x-default" href={`${url}/en/${currentPath.replace("/en/", "").replace("/id/", "")}`} />
 
     <script type="application/ld+json">
       {

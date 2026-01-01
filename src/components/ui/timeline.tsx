@@ -40,7 +40,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
       className="w-full bg-transparent font-sans md:px-10"
       ref={containerRef}
     >
-      <div ref={ref} className="relative max-w-7xl mx-auto pb-20">
+      <div ref={ref} className="relative max-w-7xl mx-auto">
         {data.map((item, index) => (
           <TimelineItem key={index} item={item} />
         ))}
@@ -89,7 +89,7 @@ const TimelineItem = ({ item }: { item: TimelineEntry }) => {
   return (
     <div
       ref={targetRef}
-      className="flex justify-start pt-10 md:pt-40 md:gap-10"
+      className="flex justify-start pt-10 md:pt-20 md:gap-10"
     >
       <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
         {/* Outer Dot Container */}

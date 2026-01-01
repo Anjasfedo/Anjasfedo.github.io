@@ -153,6 +153,9 @@ const indexPage = defineCollection({
           .optional(),
       })
     ),
+    cvButtonText: z.string(),
+    cvButtonUrl: z.string(),
+    cvDescription: z.string(),
 
     // Services section
     servicesTitle: z.string(),

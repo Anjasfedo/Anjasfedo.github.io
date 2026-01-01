@@ -296,7 +296,7 @@ export function CertificatesPage({ certificates, content }: { certificates: Cert
       <div className="text-center space-y-4 px-4">
         <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white">{content?.pageTitle || "Expertise Certified"}</h1>
         <p className="text-neutral-500 dark:text-neutral-400 max-w-xl mx-auto text-sm md:text-base">
-          {content?.pageDescription || "Verifiable credentials from global institutions in Machine Learning and Software Engineering."}
+          {content?.pageDescription || "Verifiable credentials in Machine Learning and Software Engineering."}
         </p>
       </div>
 

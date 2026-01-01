@@ -29,11 +29,26 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content } = await render(project);
 
+// Extract language from project ID
+
 // Set page metadata
 const title = `${project.data.title} | Project | M. Anjasfedo Afridiansah`;
+const description = project.data.longDescription || project.data.description;
+const keywords = [
+  project.data.title,
+  ...project.data.tags,
+  "anjasfedo projects",
+  "web development",
+  "mobile development",
+  "software engineer portfolio",
+  "bengkulu developer"
+].join(", ");
+
+// Use project image if available, otherwise use default
+const image = project.data.image || "https://anjasfedo.github.io/profile-circle.webp";
 ---
 
-<Layout title={title}>
+<Layout title={title} description={description} keywords={keywords} image={image}>
   <div
     class="relative min-h-screen w-full bg-white dark:bg-neutral-950 transition-colors duration-300 overflow-hidden"
   >

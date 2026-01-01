@@ -488,7 +488,7 @@ export function ProjectsPage({
         content={content}
       />
 
-      <div className="relative z-0 w-full px-4">
+      <div className="relative z-0 w-full px-4 max-w-7xl">
         <AnimatePresence mode="wait">
           {filteredProjects.length > 0 ? (
             <motion.div

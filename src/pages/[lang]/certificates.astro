@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import { CertificatesPage } from "../../components/certificates-page/certificates-page";
 import { getCollection } from "astro:content";
+import type { Language } from "@/i18n/ui";
 
 export async function getStaticPaths() {
   const pages = await getCollection("certificatesPage");
@@ -32,9 +33,25 @@ const certificatesData = allCertificatesCollection
     id: certificate.id,
     name: certificate.data.title,
   }));
+
+// SEO Configuration
+const seoConfig = {
+  en: {
+    title: "Certificates | M. Anjasfedo Afridiansah - Professional Certifications",
+    description: "View professional certifications and achievements of M. Anjasfedo Afridiansah. Certified in AWS Solutions Architect, Google Cloud Professional, Meta Front-End Developer, and Microsoft Azure Fundamentals.",
+    keywords: "anjasfedo certificates, AWS certified solutions architect, Google Cloud professional, Meta front-end developer, Microsoft Azure fundamentals, professional certifications, software engineer certifications, cloud certifications, web developer certificates"
+  },
+  id: {
+    title: "Sertifikat | M. Anjasfedo Afridiansah - Sertifikasi Profesional",
+    description: "Lihat sertifikasi profesional dan prestasi M. Anjasfedo Afridiansah. Bersertifikat dalam AWS Solutions Architect, Google Cloud Professional, Meta Front-End Developer, dan Microsoft Azure Fundamentals.",
+    keywords: "sertifikat anjasfedo, AWS certified solutions architect, Google Cloud professional, Meta front-end developer, Microsoft Azure fundamentals, sertifikasi profesional, sertifikasi software engineer, sertifikasi cloud, sertifikat web developer"
+  }
+};
+
+const seo = seoConfig[lang as Language];
 ---
 
-<Layout title="Certificates | M. Anjasfedo Afridiansah">
+<Layout title={seo.title} description={seo.description} keywords={seo.keywords}>
   <div
     class="relative min-h-screen w-full flex flex-col items-center bg-white dark:bg-neutral-950 transition-colors duration-300 overflow-hidden"
   >

@@ -3,6 +3,7 @@ import React, { memo, useMemo } from "react";
 import { Timeline } from "@/components/ui/timeline";
 import { BackgroundBeamsWithCollision } from "@/components/ui/background-beams-with-collision";
 import { motion } from "motion/react";
+import { IconDownload } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 // ============================================================================
 // --- TYPES & INTERFACES ---
@@ -25,6 +26,9 @@ interface ExperienceTimelineContent {
   experienceTitle: string;
   experienceDescription: string;
   timeline?: TimelineItem[];
+  cvButtonText?: string;
+  cvButtonUrl?: string;
+  cvDescription?: string;
 }
 
 // ============================================================================
@@ -192,7 +196,30 @@ export const ExperienceTimeline = memo(function ExperienceTimeline({
 
         <Timeline data={convertedData} />
 
-        {/* ... Download CV section ... */}
+        {/* Download CV Section */}
+        <div className="max-w-7xl mx-auto px-4 md:px-6 mt-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col items-center justify-center gap-6"
+          >
+            <p className="text-neutral-600 dark:text-neutral-400 text-center">
+              {content?.cvDescription || "Interested in working together? Download my CV to learn more about my experience and skills."}
+            </p>
+            <motion.a
+              href={content?.cvButtonUrl || "/M-Anjasfedo-Afridiansah-CV.pdf"}
+              download
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white rounded-full font-semibold text-lg transition-all hover:shadow-xl hover:shadow-blue-500/25 flex items-center gap-3"
+            >
+              <IconDownload className="w-5 h-5" strokeWidth={2} />
+              <span>{content?.cvButtonText || "Download CV"}</span>
+            </motion.a>
+          </motion.div>
+        </div>
       </section>
     </BackgroundBeamsWithCollision>
   );

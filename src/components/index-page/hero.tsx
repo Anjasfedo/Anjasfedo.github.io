@@ -101,7 +101,7 @@ export function Hero({
     <BackgroundLines className="min-h-screen bg-white dark:bg-neutral-950">
       <section
         className={cn(
-          "relative min-h-screen flex items-center justify-center py-20 overflow-hidden",
+          "relative min-h-screen flex items-center justify-center py-20 overflow-hidden z-10",
           className
         )}
       >
@@ -202,18 +202,22 @@ export function Hero({
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
-            <a
+            <motion.a
               href={`/${lang}/projects`}
-              className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full font-semibold shadow-lg hover:opacity-90 transition-all"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl hover:shadow-purple-500/25 transition-all"
             >
               {content?.viewMyWorkText || "View My Work"}
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="mailto:fedoafridiansah@gmail.com"
-              className="px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-full font-semibold border border-gray-300 dark:border-neutral-700 hover:border-purple-500 transition-all"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="px-8 py-4 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-full font-semibold border border-gray-300 dark:border-neutral-700 hover:border-purple-500 hover:shadow-lg hover:shadow-purple-500/25 transition-all"
             >
               {content?.getInTouchText || "Get In Touch"}
-            </a>
+            </motion.a>
           </div>
         </div>
       </section>
