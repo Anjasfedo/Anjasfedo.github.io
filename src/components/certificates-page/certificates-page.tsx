@@ -10,7 +10,7 @@ import {
   IconAward,
   IconCalendar,
   IconExternalLink,
-  IconCamera
+  IconCamera,
 } from "@tabler/icons-react";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
 import { LinkPreview } from "@/components/ui/link-preview";
@@ -81,7 +81,7 @@ const FilterBar = ({
   availableIssuers,
   content,
 }: FilterBarProps) => {
-  const [showSkillDropdown, setShowSkillDropdown] = useState(false)
+  const [showSkillDropdown, setShowSkillDropdown] = useState(false);
 
   const toggleSkill = (skill: CertificateSkill) => {
     if (selectedSkills.includes(skill)) {
@@ -99,7 +99,10 @@ const FilterBar = ({
             <IconSearch className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
             <input
               type="text"
-              placeholder={content?.searchPlaceholder || "Search by title, issuer, or skill..."}
+              placeholder={
+                content?.searchPlaceholder ||
+                "Search by title, issuer, or skill..."
+              }
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-3 rounded-xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-black text-neutral-900 dark:text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all"
@@ -111,15 +114,22 @@ const FilterBar = ({
               className="px-4 py-3 rounded-xl bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-red-100 dark:border-red-900/30 flex items-center gap-2 text-sm font-bold"
               aria-label="Clear all filters"
             >
-              <IconX className="w-4 h-4" /> {content?.resetFiltersText || "Reset Filters"}
+              <IconX className="w-4 h-4" />{" "}
+              {content?.resetFiltersText || "Reset Filters"}
             </button>
           )}
         </div>
 
         <div className="flex flex-col md:flex-row gap-4">
           <div className="flex-1">
-            <label className="block text-xs font-bold uppercase tracking-wider text-neutral-500 mb-2">{content?.issuerLabel || "Issuer"}</label>
-            <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by certificate issuer">
+            <label className="block text-xs font-bold uppercase tracking-wider text-neutral-500 mb-2">
+              {content?.issuerLabel || "Issuer"}
+            </label>
+            <div
+              className="flex flex-wrap gap-2"
+              role="group"
+              aria-label="Filter by certificate issuer"
+            >
               {availableIssuers.map((issuer: string) => (
                 <button
                   key={issuer}
@@ -129,7 +139,7 @@ const FilterBar = ({
                     "px-3 py-1.5 rounded-lg text-xs font-bold transition-all",
                     selectedIssuer === issuer
                       ? "bg-blue-600 text-white"
-                      : "bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200"
+                      : "bg-neutral-100 dark:bg-neutral-900 text-neutral-600 dark:text-neutral-400 hover:bg-neutral-200",
                   )}
                 >
                   {issuer}
@@ -139,7 +149,9 @@ const FilterBar = ({
           </div>
 
           <div className="flex-1 relative">
-            <label className="block text-xs font-bold uppercase tracking-wider text-neutral-500 mb-2">{content?.skillsFilterLabel || "Skills Filter"}</label>
+            <label className="block text-xs font-bold uppercase tracking-wider text-neutral-500 mb-2">
+              {content?.skillsFilterLabel || "Skills Filter"}
+            </label>
             <button
               onClick={() => setShowSkillDropdown(!showSkillDropdown)}
               className="w-full px-4 py-3 rounded-xl border border-neutral-200 dark:border-white/10 bg-white dark:bg-black flex items-center justify-between"
@@ -147,14 +159,23 @@ const FilterBar = ({
               aria-haspopup="listbox"
             >
               <span className="text-sm truncate">
-                {selectedSkills.length > 0 ? `${selectedSkills.length} ${content?.selectedCount || "selected"}` : content?.allSkillsText || "All Skills"}
+                {selectedSkills.length > 0
+                  ? `${selectedSkills.length} ${content?.selectedCount || "selected"}`
+                  : content?.allSkillsText || "All Skills"}
               </span>
-              <IconChevronDown className={cn("w-4 h-4 transition-transform", showSkillDropdown && "rotate-180")} />
+              <IconChevronDown
+                className={cn(
+                  "w-4 h-4 transition-transform",
+                  showSkillDropdown && "rotate-180",
+                )}
+              />
             </button>
             <AnimatePresence>
               {showSkillDropdown && (
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
                   className="absolute z-[60] w-full mt-2 p-3 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-white/10 rounded-xl shadow-2xl max-h-60 overflow-y-auto flex flex-wrap gap-2"
                   role="listbox"
                   aria-label="Select skills"
@@ -169,7 +190,7 @@ const FilterBar = ({
                         "px-2 py-1 rounded text-[10px] font-bold border transition-all",
                         selectedSkills.includes(skill)
                           ? "bg-blue-600 border-blue-600 text-white"
-                          : "border-neutral-200 dark:border-neutral-700 text-neutral-500"
+                          : "border-neutral-200 dark:border-neutral-700 text-neutral-500",
                       )}
                     >
                       {skill}
@@ -189,9 +210,16 @@ const FilterBar = ({
 // --- MAIN COMPONENT ---
 // ============================================================================
 
-export function CertificatesPage({ certificates, content }: { certificates: Certificate[]; content?: CertificatesPageContent }) {
+export function CertificatesPage({
+  certificates,
+  content,
+}: {
+  certificates: Certificate[];
+  content?: CertificatesPageContent;
+}) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedIssuer, setSelectedIssuer] = useState<CertificateIssuer>("All");
+  const [selectedIssuer, setSelectedIssuer] =
+    useState<CertificateIssuer>("All");
   const [selectedSkills, setSelectedSkills] = useState<CertificateSkill[]>([]);
   const [visibleCount, setVisibleCount] = useState(6);
 
@@ -210,31 +238,42 @@ export function CertificatesPage({ certificates, content }: { certificates: Cert
 
   const filteredCertificates = useMemo(() => {
     return certificates.filter((cert) => {
-      const matchesSearch = searchQuery === "" ||
+      const matchesSearch =
+        searchQuery === "" ||
         cert.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         cert.issuer.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesIssuer = selectedIssuer === "All" || cert.issuer === selectedIssuer;
-      const matchesSkills = selectedSkills.length === 0 ||
-        selectedSkills.every(s => cert.skills?.includes(s));
+      const matchesIssuer =
+        selectedIssuer === "All" || cert.issuer === selectedIssuer;
+      const matchesSkills =
+        selectedSkills.length === 0 ||
+        selectedSkills.every((s) => cert.skills?.includes(s));
 
       return matchesSearch && matchesIssuer && matchesSkills;
     });
   }, [certificates, searchQuery, selectedIssuer, selectedSkills]);
 
   // Format data for HoverEffect
+  // Format data for HoverEffect
   const items = useMemo(() => {
     return filteredCertificates.slice(0, visibleCount).map((cert) => {
-      const formattedIssueDate = new Intl.DateTimeFormat("en-US", {
+      const dateOptions: Intl.DateTimeFormatOptions = {
         year: "numeric",
-        month: "short"
-      }).format(cert.issueDate);
+        month: "short",
+      };
 
-      const formattedExpirationDate = cert.expirationDate
-        ? new Intl.DateTimeFormat("en-US", {
-          year: "numeric",
-          month: "short"
-        }).format(cert.expirationDate)
-        : null;
+      const formattedIssueDate = new Intl.DateTimeFormat(
+        "en-US",
+        dateOptions,
+      ).format(new Date(cert.issueDate));
+
+      // Aligning 'expireDate' from Keystatic with the UI
+      const expireDate = cert.expirationDate || (cert as any).expireDate;
+
+      const formattedExpirationDate = expireDate
+        ? new Intl.DateTimeFormat("en-US", dateOptions).format(
+            new Date(expireDate),
+          )
+        : "No Expiration";
 
       return {
         title: cert.title,
@@ -242,15 +281,20 @@ export function CertificatesPage({ certificates, content }: { certificates: Cert
           <div className="flex flex-col gap-3 h-full">
             {/* Header Info */}
             <div className="flex items-center justify-between text-[10px] font-bold">
-              <span className="text-blue-500 uppercase tracking-widest">{cert.issuer}</span>
-              <div className="flex items-center gap-1 text-neutral-500">
+              <span className="text-blue-500 uppercase tracking-widest">
+                {cert.issuer}
+              </span>
+              <div className="flex items-center gap-1 text-neutral-500 bg-neutral-100 dark:bg-white/5 px-2 py-0.5 rounded-full">
                 <IconCalendar className="w-3 h-3" />
                 <span>{formattedIssueDate}</span>
-                {formattedExpirationDate && (
-                  <>
-                    <span className="mx-0.5">-</span>{formattedExpirationDate}
-                  </>
-                )}
+                <span className="opacity-40 px-1">•</span>
+                <span
+                  className={cn(
+                    !expireDate && "text-emerald-500 dark:text-emerald-400",
+                  )}
+                >
+                  {formattedExpirationDate}
+                </span>
               </div>
             </div>
 
@@ -271,26 +315,25 @@ export function CertificatesPage({ certificates, content }: { certificates: Cert
             </div>
 
             {/* Action Footer */}
-            <div className="pt-3 flex flex-wrap items-center gap-x-4 gap-y-2">
+            <div className="pt-3 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-neutral-100 dark:border-white/5">
               {cert.credential && (
                 <LinkPreview
                   url={cert.credential}
                   className="inline-flex items-center gap-1 text-[10px] font-black text-neutral-900 dark:text-white hover:text-blue-500 transition-colors uppercase tracking-tight"
                 >
-                  {content?.credentialLinkText || "Credential"} <IconExternalLink className="w-3 h-3" />
+                  {content?.credentialLinkText || "Credential"}{" "}
+                  <IconExternalLink className="w-3 h-3" />
                 </LinkPreview>
               )}
 
               {cert.media && (
-                <>
-                  <span className="w-1 h-1 rounded-full bg-neutral-300 dark:bg-neutral-700 hidden sm:block" />
-                  <LinkPreview
-                    url={cert.media}
-                    className="inline-flex items-center gap-1 text-[10px] font-black text-neutral-900 dark:text-white hover:text-blue-500 transition-colors uppercase tracking-tight"
-                  >
-                    {content?.mediaLinkText || "Media"} <IconCamera className="w-3 h-3" />
-                  </LinkPreview>
-                </>
+                <LinkPreview
+                  url={cert.media}
+                  className="inline-flex items-center gap-1 text-[10px] font-black text-neutral-900 dark:text-white hover:text-blue-500 transition-colors uppercase tracking-tight"
+                >
+                  {content?.mediaLinkText || "Media"}{" "}
+                  <IconCamera className="w-3 h-3" />
+                </LinkPreview>
               )}
             </div>
           </div>
@@ -298,36 +341,62 @@ export function CertificatesPage({ certificates, content }: { certificates: Cert
         link: cert.credential || "#",
       };
     });
-  }, [filteredCertificates, visibleCount]);
+  }, [filteredCertificates, visibleCount, content]);
   return (
     <div className="relative z-10 flex w-full flex-col items-center justify-center gap-8 py-16 md:py-24">
       <div className="text-center space-y-4 px-4">
-        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white">{content?.pageTitle || "Expertise Certified"}</h1>
+        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white">
+          {content?.pageTitle || "Expertise Certified"}
+        </h1>
         <p className="text-neutral-500 dark:text-neutral-400 max-w-xl mx-auto text-sm md:text-base">
-          {content?.pageDescription || "Verifiable credentials in Machine Learning and Software Engineering."}
+          {content?.pageDescription ||
+            "Verifiable credentials in Machine Learning and Software Engineering."}
         </p>
       </div>
 
       <FilterBar
-        searchQuery={searchQuery} setSearchQuery={setSearchQuery}
-        selectedIssuer={selectedIssuer} setSelectedIssuer={setSelectedIssuer}
-        selectedSkills={selectedSkills} setSelectedSkills={setSelectedSkills}
-        availableSkills={availableSkills} availableIssuers={availableIssuers}
-        activeFiltersCount={(searchQuery ? 1 : 0) + (selectedIssuer !== "All" ? 1 : 0) + selectedSkills.length}
-        onClearFilters={() => { setSearchQuery(""); setSelectedIssuer("All"); setSelectedSkills([]); }}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        selectedIssuer={selectedIssuer}
+        setSelectedIssuer={setSelectedIssuer}
+        selectedSkills={selectedSkills}
+        setSelectedSkills={setSelectedSkills}
+        availableSkills={availableSkills}
+        availableIssuers={availableIssuers}
+        activeFiltersCount={
+          (searchQuery ? 1 : 0) +
+          (selectedIssuer !== "All" ? 1 : 0) +
+          selectedSkills.length
+        }
+        onClearFilters={() => {
+          setSearchQuery("");
+          setSelectedIssuer("All");
+          setSelectedSkills([]);
+        }}
         content={content}
       />
 
       <div className="w-full max-w-7xl mx-auto px-4">
         <AnimatePresence mode="wait">
           {items.length > 0 ? (
-            <motion.div key="grid" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <HoverEffect items={items} className="grid grid-cols-1 pt-0 md:grid-cols-2 lg:grid-cols-3 gap-4" />
+            <motion.div
+              key="grid"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <HoverEffect
+                items={items}
+                className="grid grid-cols-1 pt-0 md:grid-cols-2 lg:grid-cols-3 gap-4"
+              />
             </motion.div>
           ) : (
             <div className="text-center py-20 bg-neutral-50 dark:bg-neutral-900/50 rounded-3xl border border-dashed border-neutral-300 dark:border-neutral-800">
               <IconAward className="w-12 h-12 mx-auto text-neutral-300 mb-4" />
-              <p className="text-neutral-500">{content?.noCertificatesFoundText || "No matching certificates found."}</p>
+              <p className="text-neutral-500">
+                {content?.noCertificatesFoundText ||
+                  "No matching certificates found."}
+              </p>
             </div>
           )}
         </AnimatePresence>
@@ -335,7 +404,7 @@ export function CertificatesPage({ certificates, content }: { certificates: Cert
 
       {filteredCertificates.length > visibleCount && (
         <button
-          onClick={() => setVisibleCount(v => v + 6)}
+          onClick={() => setVisibleCount((v) => v + 6)}
           className="px-10 py-4 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold shadow-xl transition-transform active:scale-95"
           aria-label="Load more certificates"
         >
