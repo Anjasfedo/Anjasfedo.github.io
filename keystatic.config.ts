@@ -29,11 +29,17 @@ export default config({
                     }
                 ),
                 images: fields.array(
-                    fields.image({ label: 'Image', directory: 'public/images/projects', }),
+                    fields.image({ label: 'Image', directory: 'public/images/projects', publicPath: '/images/projects/', }),
                     {
                         label: 'Images'
                     }),
-                content: fields.mdx({ label: 'Content' }),
+                content: fields.markdoc({
+                    label: 'Content', options: {
+                        image: {
+                            directory: 'public/images/projects', publicPath: '/images/projects/'
+                        }
+                    }
+                }),
             },
         }),
         certificates: collection({

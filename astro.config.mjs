@@ -4,7 +4,6 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import keystatic from "@keystatic/astro";
-import mdx from "@astrojs/mdx";
 
 import markdoc from "@astrojs/markdoc";
 
@@ -18,5 +17,5 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  integrations: [react(), sitemap(), mdx(), markdoc(), keystatic()],
+  integrations: [react(), sitemap(), markdoc(), keystatic()],
 });

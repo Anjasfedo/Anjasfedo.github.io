@@ -4,8 +4,6 @@ import { ProjectsPage } from "../components/projects-page/projects-page";
 import { getCollection } from "astro:content";
 
 // Get the page content
-const pages = await getCollection("projectsPage");
-const pageContent = pages[0].data;
 
 // Fetch ALL projects
 const allProjects = await getCollection("projects");
@@ -16,11 +14,15 @@ const projectsData = allProjects.map((project) => ({
   name: project.data.title,
 }));
 
+console.log(projectsData);
+
 // SEO Configuration
 const seo = {
   title: "Projects | M. Anjasfedo Afridiansah - Software Engineer Portfolio",
-  description: "Explore the portfolio of M. Anjasfedo Afridiansah. Web and mobile development projects including AI content generators, e-commerce analytics, task management apps, and more. Built with React, Go, Laravel, and modern technologies.",
-  keywords: "anjasfedo projects, web development projects, mobile apps, react projects, go projects, laravel projects, machine learning projects, ai content generator, ecommerce analytics, task management app, portfolio projects, bengkulu developer"
+  description:
+    "Explore the portfolio of M. Anjasfedo Afridiansah. Web and mobile development projects including AI content generators, e-commerce analytics, task management apps, and more. Built with React, Go, Laravel, and modern technologies.",
+  keywords:
+    "anjasfedo projects, web development projects, mobile apps, react projects, go projects, laravel projects, machine learning projects, ai content generator, ecommerce analytics, task management app, portfolio projects, bengkulu developer",
 };
 ---
 
@@ -41,11 +43,7 @@ const seo = {
     </div>
 
     <div class="relative z-10 w-full pt-20">
-      <ProjectsPage
-        client:load
-        projects={projectsData}
-        content={pageContent}
-      />
+      <ProjectsPage client:load projects={projectsData} />
     </div>
   </div>
 </Layout>

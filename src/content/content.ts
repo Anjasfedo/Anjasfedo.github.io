@@ -1,11 +1,15 @@
 // @ts-ignore
 import { defineCollection, z } from 'astro:content';
 
-const posts = defineCollection({
-  // Type-check frontmatter using a schema
+const projects = defineCollection({
   schema: z.object({
     title: z.string(),
+    status: z.array(
+      z.enum(["Production", "Development", "Concept", "On Hold"])
+    ),
+    tags: z.array(z.string()),
+    images: z.array(z.string()),
   }),
 });
 
-export const collections = { posts };
+export const collections = { projects };

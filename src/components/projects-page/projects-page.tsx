@@ -32,17 +32,11 @@ export interface ProjectsPageContent {
 
 export interface Project {
   id: string;
+  title: string;
   slug: string;
-  name: string;
-  description: string;
-  longDescription: string;
   status: ProjectStatus[];
   tags: ProjectTag[];
-  image: string;
   images?: string[];
-  video?: string;
-  colorClass: string;
-  github?: string;
   demo?: string;
 }
 
@@ -118,7 +112,11 @@ const FilterBar = ({
             <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
               {content?.statusLabel || "Status"}
             </label>
-            <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by project status">
+            <div
+              className="flex flex-wrap gap-2"
+              role="group"
+              aria-label="Filter by project status"
+            >
               {availableStatuses.map((status) => (
                 <button
                   key={status}
@@ -128,7 +126,7 @@ const FilterBar = ({
                     "px-3 py-1.5 rounded-lg text-sm font-medium transition-all",
                     selectedStatus === status
                       ? "bg-blue-500 text-white shadow-lg shadow-blue-500/25"
-                      : "bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800"
+                      : "bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800",
                   )}
                 >
                   {status}
@@ -162,7 +160,7 @@ const FilterBar = ({
                 <IconChevronDown
                   className={cn(
                     "w-5 h-5 text-neutral-400 transition-transform",
-                    showTagDropdown && "rotate-180"
+                    showTagDropdown && "rotate-180",
                   )}
                 />
               </button>
@@ -188,7 +186,7 @@ const FilterBar = ({
                             "px-3 py-1.5 rounded-lg text-xs font-medium transition-all border border-transparent",
                             selectedTags.includes(tag)
                               ? "bg-blue-500 text-white shadow-md"
-                              : "bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 border-neutral-200 dark:border-white/5"
+                              : "bg-neutral-100 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-800 border-neutral-200 dark:border-white/5",
                           )}
                         >
                           {tag}
@@ -223,7 +221,7 @@ const ProjectCard = React.forwardRef<
 >(
   (
     { project, index, isFocused, isBlurred, onMouseEnter, onMouseLeave },
-    _ref
+    _ref,
   ) => {
     const getStatusColor = (status: string) => {
       switch (status) {
@@ -245,12 +243,16 @@ const ProjectCard = React.forwardRef<
     const handleNavigation = () => {
       sessionStorage.setItem(
         "projects-scroll-position",
-        window.scrollY.toString()
+        window.scrollY.toString(),
       );
     };
 
     return (
-      <a href={`/projects/${project.slug}`} onClick={handleNavigation} aria-label={`View ${project.name} project details`}>
+      <a
+        href={`/projects/${project.slug}`}
+        onClick={handleNavigation}
+        aria-label={`View ${project.title} project details`}
+      >
         <motion.div
           ref={_ref}
           initial={{ opacity: 0, y: 20 }}
@@ -262,19 +264,18 @@ const ProjectCard = React.forwardRef<
           whileTap={{ scale: 0.98 }}
           className={cn(
             "relative rounded-xl overflow-hidden min-h-80 md:min-h-96 transition-all duration-500 ease-out cursor-pointer group",
-            isBlurred && "blur-sm scale-[0.98] opacity-70 grayscale-[0.5]"
+            isBlurred && "blur-sm scale-[0.98] opacity-70 grayscale-[0.5]",
           )}
         >
           <img
-            src={project.image}
-            alt={project.name}
+            src={project.images?.[0] ?? "/placeholder-image.jpg"}
+            alt={project.title}
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
           <div
             className={cn(
               "absolute inset-0 transition-opacity duration-500",
-              project.colorClass,
-              isFocused ? "opacity-30" : "opacity-70"
+              isFocused ? "opacity-30" : "opacity-70",
             )}
           />
           <div
@@ -282,7 +283,7 @@ const ProjectCard = React.forwardRef<
               "absolute inset-0 flex flex-col justify-between p-6 transition-all duration-500",
               isFocused
                 ? "bg-black/40"
-                : "bg-gradient-to-t from-black/90 via-black/50 to-transparent"
+                : "bg-gradient-to-t from-black/90 via-black/50 to-transparent",
             )}
           >
             <div className="flex flex-wrap gap-2 relative z-10">
@@ -294,7 +295,7 @@ const ProjectCard = React.forwardRef<
                     getStatusColor(status),
                     isFocused
                       ? "bg-opacity-30 border-opacity-50"
-                      : "bg-opacity-10 border-opacity-20"
+                      : "bg-opacity-10 border-opacity-20",
                   )}
                 >
                   {status}
@@ -307,10 +308,10 @@ const ProjectCard = React.forwardRef<
                   "text-white font-semibold tracking-tight transition-all duration-300",
                   isFocused
                     ? "text-xl md:text-2xl lg:text-3xl"
-                    : "text-lg md:text-xl"
+                    : "text-lg md:text-xl",
                 )}
               >
-                {project.name}
+                {project.title}
               </h2>
               <AnimatePresence>
                 {isFocused && (
@@ -320,9 +321,6 @@ const ProjectCard = React.forwardRef<
                     exit={{ opacity: 0, height: 0 }}
                     className="space-y-3 overflow-hidden"
                   >
-                    <p className="text-white/90 text-sm md:text-base leading-relaxed line-clamp-3">
-                      {project.description}
-                    </p>
                     <div className="flex flex-wrap gap-2 pt-2">
                       {project.tags.slice(0, 4).map((tag) => (
                         <span
@@ -341,7 +339,7 @@ const ProjectCard = React.forwardRef<
         </motion.div>
       </a>
     );
-  }
+  },
 );
 ProjectCard.displayName = "ProjectCard";
 
@@ -382,8 +380,7 @@ export function ProjectsPage({
     return projects.filter((project) => {
       const matchesSearch =
         searchQuery === "" ||
-        project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        project.description.toLowerCase().includes(searchQuery.toLowerCase());
+        project.title.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesStatus =
         selectedStatus === "All" || project.status.includes(selectedStatus);
       const matchesTags =
@@ -410,7 +407,7 @@ export function ProjectsPage({
         if (!card) return;
         const rect = card.getBoundingClientRect();
         const distance = Math.abs(
-          viewportCenter - (rect.top + rect.height / 2)
+          viewportCenter - (rect.top + rect.height / 2),
         );
         if (distance < minDistance) {
           minDistance = distance;
