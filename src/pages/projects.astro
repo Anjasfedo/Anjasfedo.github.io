@@ -10,12 +10,8 @@ const allProjects = await getCollection("projects");
 
 const projectsData = allProjects.map((project) => ({
   ...project.data,
-  id: project.id,
-  name: project.data.title,
+  slug: project.slug || project.id.replace(".mdoc", ""),
 }));
-
-console.log(projectsData);
-
 // SEO Configuration
 const seo = {
   title: "Projects | M. Anjasfedo Afridiansah - Software Engineer Portfolio",

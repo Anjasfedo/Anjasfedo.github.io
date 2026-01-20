@@ -12,6 +12,7 @@ export default config({
             format: { contentField: 'content' },
             schema: {
                 title: fields.slug({ name: { label: 'Title' } }),
+                description: fields.text({ label: 'Description' }),
                 status: fields.multiselect({
                     label: 'Status',
                     options: [

@@ -33,6 +33,7 @@ export interface ProjectsPageContent {
 export interface Project {
   id: string;
   title: string;
+  description: string;
   slug: string;
   status: ProjectStatus[];
   tags: ProjectTag[];
@@ -227,13 +228,11 @@ const ProjectCard = React.forwardRef<
       switch (status) {
         case "Production":
           return "bg-green-500/20 text-green-400 border-green-500/30";
-        case "Beta":
+        case "Concept":
           return "bg-blue-500/20 text-blue-400 border-blue-500/30";
-        case "Alpha":
+        case "Development":
           return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
-        case "Archived":
-          return "bg-gray-500/20 text-gray-400 border-gray-500/30";
-        case "Featured":
+        case "On Hold":
           return "bg-purple-500/20 text-purple-400 border-purple-500/30";
         default:
           return "bg-neutral-500/20 text-neutral-400 border-neutral-500/30";
@@ -321,6 +320,9 @@ const ProjectCard = React.forwardRef<
                     exit={{ opacity: 0, height: 0 }}
                     className="space-y-3 overflow-hidden"
                   >
+                    <p className="text-white/90 text-sm md:text-base leading-relaxed line-clamp-3">
+                      {project.description}
+                    </p>
                     <div className="flex flex-wrap gap-2 pt-2">
                       {project.tags.slice(0, 4).map((tag) => (
                         <span

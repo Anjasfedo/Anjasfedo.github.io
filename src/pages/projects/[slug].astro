@@ -11,14 +11,12 @@ import type {
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
 
-  const paths = projects.map((project) => {
-    return {
-      params: { slug: project.data.slug },
-      props: { project },
-    };
-  });
-
-  return paths;
+  return projects.map((project) => ({
+    // Use project.id or project.slug.
+    // project.id often looks like 'filename.mdoc'
+    params: { slug: project.slug || project.id.replace(".mdoc", "") },
+    props: { project },
+  }));
 }
 
 // Get the project from props (returned by getStaticPaths)
@@ -27,7 +25,6 @@ const { Content } = await render(project);
 
 // Set page metadata
 const title = `${project.data.title} | Project | M. Anjasfedo Afridiansah`;
-const description = project.data.longDescription || project.data.description;
 const keywords = [
   project.data.title,
   ...project.data.tags,
@@ -35,14 +32,15 @@ const keywords = [
   "web development",
   "mobile development",
   "software engineer portfolio",
-  "bengkulu developer"
+  "bengkulu developer",
 ].join(", ");
 
 // Use project image if available, otherwise use default
-const image = project.data.image || "https://anjasfedo.github.io/profile-circle.webp";
+const image =
+  project.data.image || "https://anjasfedo.github.io/profile-circle.webp";
 ---
 
-<Layout title={title} description={description} keywords={keywords} image={image}>
+<Layout title={title} keywords={keywords} image={image}>
   <div
     class="relative min-h-screen w-full bg-white dark:bg-neutral-950 transition-colors duration-300 overflow-hidden"
   >
@@ -62,18 +60,12 @@ const image = project.data.image || "https://anjasfedo.github.io/profile-circle.
         client:load
         project={{
           id: project.id,
-          slug: project.data.slug,
-          name: project.data.title,
+          slug: project.slug || project.id.replace(".mdoc", ""),
+          title: project.data.title,
           description: project.data.description,
-          longDescription: project.data.longDescription,
           status: project.data.status as ProjectStatus[],
           tags: project.data.tags as ProjectTag[],
-          image: project.data.image,
           images: project.data.images,
-          video: project.data.video,
-          colorClass: project.data.colorClass,
-          github: project.data.github,
-          demo: project.data.demo,
         }}
       />
 

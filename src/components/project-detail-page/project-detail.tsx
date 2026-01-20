@@ -18,21 +18,21 @@ interface ProjectDetailProps {
 export const ProjectDetail = ({ project }: ProjectDetailProps) => {
   // --- GALLERY STATE ---
   // We combine the main thumbnail and the gallery images into one list
-  const allImages = [project.image, ...(project.images || [])];
+  const allImages = project.images || [];
   const [activeImage, setActiveImage] = useState(allImages[0]);
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case "Production":
-        return "bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20";
-      case "Beta":
-        return "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20";
-      case "Alpha":
-        return "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 border-yellow-500/20";
-      case "Featured":
-        return "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20";
+        return "bg-green-500/20 text-green-400 border-green-500/30";
+      case "Concept":
+        return "bg-blue-500/20 text-blue-400 border-blue-500/30";
+      case "Development":
+        return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
+      case "On Hold":
+        return "bg-purple-500/20 text-purple-400 border-purple-500/30";
       default:
-        return "bg-neutral-500/10 text-neutral-600 dark:text-neutral-400 border-neutral-500/20";
+        return "bg-neutral-500/20 text-neutral-400 border-neutral-500/30";
     }
   };
 
@@ -85,7 +85,7 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
                     "relative w-20 h-20 md:w-24 md:h-24 rounded-xl overflow-hidden border-2 transition-all",
                     activeImage === img
                       ? "border-blue-500 scale-105 shadow-md shadow-blue-500/20"
-                      : "border-transparent opacity-60 hover:opacity-100"
+                      : "border-transparent opacity-60 hover:opacity-100",
                   )}
                   aria-label={`View project image ${idx + 1}`}
                   aria-pressed={activeImage === img}
@@ -112,7 +112,7 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
                   key={status}
                   className={cn(
                     "px-3 py-1 text-xs font-semibold rounded-full border",
-                    getStatusColor(status)
+                    getStatusColor(status),
                   )}
                 >
                   {status}
@@ -121,37 +121,12 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
             </div>
 
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white tracking-tight">
-              {project.name}
+              {project.title}
             </h1>
 
             <p className="text-xl text-neutral-600 dark:text-neutral-400 leading-relaxed">
               {project.description}
             </p>
-
-            <div className="flex flex-wrap gap-4 pt-4">
-              {project.github && (
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 rounded-xl font-bold hover:opacity-90 transition-opacity"
-                  aria-label={`View ${project.name} source code on GitHub`}
-                >
-                  <IconBrandGithub className="w-5 h-5" /> GitHub
-                </a>
-              )}
-              {project.demo && (
-                <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-xl font-bold hover:bg-blue-600 transition-colors shadow-lg shadow-blue-500/25"
-                  aria-label={`View live demo of ${project.name}`}
-                >
-                  <IconExternalLink className="w-5 h-5" /> Live Demo
-                </a>
-              )}
-            </div>
 
             <div className="pt-6">
               <h4 className="text-sm font-bold text-neutral-400 uppercase tracking-widest mb-3">
@@ -169,37 +144,6 @@ export const ProjectDetail = ({ project }: ProjectDetailProps) => {
               </div>
             </div>
           </motion.div>
-        </div>
-
-        {/* BOTTOM SECTION: Video & Long Description */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 pt-12 border-t border-neutral-200 dark:border-white/10">
-          {/* Demo Video Sidebar */}
-          {project.video && (
-            <div className="space-y-4">
-              <div className="flex items-center gap-2 text-neutral-900 dark:text-white">
-                <IconVideo className="w-5 h-5" />
-                <h3 className="font-bold">Project Preview</h3>
-              </div>
-              <div className="relative aspect-video rounded-xl overflow-hidden border border-neutral-200 dark:border-white/10 shadow-lg">
-                <iframe
-                  title={project.name}
-                  src={project.video}
-                  className="absolute inset-0 w-full h-full"
-                  allowFullScreen
-                />
-              </div>
-            </div>
-          )}
-          <div className="lg:col-span-2 space-y-8">
-            <div className="prose prose-neutral dark:prose-invert max-w-none">
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-                About this Project
-              </h2>
-              <p className="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                {project.longDescription}
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
