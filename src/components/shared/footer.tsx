@@ -9,6 +9,7 @@ import {
   IconBrandTwitter,
   IconMail,
   IconChevronRight,
+  IconBrandInstagram,
 } from "@tabler/icons-react";
 
 export function Footer() {
@@ -35,6 +36,12 @@ export function Footer() {
       color: "hover:bg-blue-600",
     },
     {
+      name: "Instagram",
+      icon: <IconBrandInstagram className="w-5 h-5" />,
+      href: "https://www.instagram.com/anjas_fedo/",
+      color: "hover:bg-sky-500",
+    },
+    {
       name: "Email",
       icon: <IconMail className="h-5 w-5" />,
       href: "mailto:fedoafridiansah@gmail.com",
@@ -57,7 +64,8 @@ export function Footer() {
               Ready to start?
             </h2>
             <p className="text-neutral-400 text-sm md:text-base max-w-md mx-auto mb-10 leading-relaxed">
-              Currently accepting new projects and collaborations. Let's turn your vision into a digital reality.
+              Currently accepting new projects and collaborations. Let's turn
+              your vision into a digital reality.
             </p>
 
             <motion.a
@@ -93,7 +101,7 @@ export function Footer() {
                     className={cn(
                       "p-3 rounded-2xl bg-slate-900 border border-slate-800 text-slate-400 transition-all duration-300",
                       "hover:text-white hover:border-slate-500 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)]",
-                      social.color
+                      social.color,
                     )}
                     aria-label={`Visit ${social.name} profile`}
                   >
