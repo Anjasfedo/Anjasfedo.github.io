@@ -35,12 +35,6 @@ export function Footer() {
       color: "hover:bg-blue-600",
     },
     {
-      name: "Twitter",
-      icon: <IconBrandTwitter className="w-5 h-5" />,
-      href: "https://twitter.com",
-      color: "hover:bg-sky-500",
-    },
-    {
       name: "Email",
       icon: <IconMail className="h-5 w-5" />,
       href: "mailto:fedoafridiansah@gmail.com",

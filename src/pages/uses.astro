@@ -1,10 +1,183 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { UsesPage } from "../components/uses-page/uses-page";
-import { getCollection } from "astro:content";
 
-const pages = await getCollection("usesPage");
-const content = pages[0].data;
+const content = {
+  title: "Uses",
+  description: "This is a overview of my hardware and software setup that I use daily for development, design, and productivity. Tools that help me build things efficiently.",
+
+  hardware: {
+    laptop: {
+      title: "Mobility Setup",
+      icon: "IconDeviceLaptop",
+      items: [
+        {
+          name: "Acer Aspire 3 A314",
+          specs: "12GB DDR4 RAM (4GB + 8GB Extended), 256GB SSD",
+          description: "My dedicated mobility device for field-work and remote coding. Hardware-upgraded with extended memory to ensure smooth performance for full-stack tasks while on the go."
+        }
+      ]
+    },
+    computer: {
+      title: "Home Workstation",
+      icon: "IconDeviceDesktop",
+      items: [
+        {
+          name: "Custom Built PC",
+          specs: "AMD Ryzen 5 5600GT, 16GB DDR4 RAM",
+          description: "A reliable secondary engineering hub optimized for local development, server testing, and managing CI/CD pipelines."
+        },
+        {
+          name: "Storage & Speed",
+          specs: "512GB NVMe SSD",
+          description: "High-speed NVMe storage ensuring rapid boot times and fast access to large project files and datasets."
+        },
+        {
+          name: "Visuals & Input",
+          specs: "Xiaomi A27i Display, RGB Gaming Peripherals",
+          description: "A high-fidelity 27\" display paired with responsive tactile input devices for precise navigation and long coding sessions."
+        }
+      ]
+    },
+    office: {
+      title: "Enterprise Workstation",
+      icon: "IconDeviceDesktop",
+      items: [
+        {
+          name: "Development Powerhouse",
+          specs: "Intel Core i5-12400F, 32GB T-Force DDR4 RAM (8x4), NVIDIA RTX 3050 6GB",
+          description: "A high-performance workstation built for heavy multitasking. The 32GB quad-channel memory allows for seamless execution of multiple Docker containers and concurrent microservices."
+        },
+        {
+          name: "Hybrid OS Environment",
+          specs: "512GB NVMe (Ubuntu) + 1TB NVMe (Windows)",
+          description: "A dual-boot setup utilizing Ubuntu for core software engineering and Linux-native toolchains, with Windows for enterprise documentation and team collaboration."
+        },
+        {
+          name: "Dual Productivity Display",
+          specs: "2x LG 24\" Monitors",
+          description: "Professional dual-screen configuration for a streamlined workflow—maintaining source code on one display while monitoring terminals and documentation on the other."
+        },
+        {
+          name: "Core Peripherals",
+          specs: "Logitech Precision Kit",
+          description: "Standardized Logitech input devices for reliable, low-latency performance during intensive development sprints."
+        }
+      ]
+    }
+  },
+
+  software: {
+    development: {
+      title: "Development Tools",
+      icon: "IconCode",
+      items: [
+        {
+          title: "Visual Studio Code",
+          description: "My primary code editor. Heavily customized with themes, extensions, and keybindings.",
+          link: "https://code.visualstudio.com",
+          icon: "IconBrandVscode"
+        },
+        {
+          title: "Claude CLI",
+          description: "AI-powered coding assistant integrated into my terminal for instant code review and generation.",
+          link: "https://claude.ai/code",
+          icon: "IconTerminal"
+        },
+        {
+          title: "Git & GitHub",
+          description: "Version control with GitHub CLI for seamless repository management and collaboration.",
+          link: "https://github.com",
+          icon: "IconBrandGithub"
+        },
+        {
+          title: "Postman",
+          description: "API testing and documentation tool for backend development and debugging.",
+          link: "https://www.postman.com",
+          icon: "IconApi"
+        },
+        {
+          title: "Docker Desktop",
+          description: "Container management for local development environment consistency.",
+          link: "https://www.docker.com",
+          icon: "IconBrandDocker"
+        }
+      ]
+    },
+    ai: {
+      title: "AI & Automation",
+      icon: "IconBrain",
+      items: [
+        {
+          title: "Google Gemini",
+          description: "Alternative AI for brainstorming, research, and different perspectives on problem-solving.",
+          link: "https://gemini.google.com",
+          icon: "IconBrandGoogle"
+        }
+      ]
+    },
+    design: {
+      title: "Design & Planning",
+      icon: "IconPalette",
+      items: [
+        {
+          title: "Figma",
+          description: "UI/UX design tool for prototyping, wireframing, and creating design systems.",
+          link: "https://www.figma.com",
+          icon: "IconBrandFigma"
+        },
+        {
+          title: "Notion",
+          description: "All-in-one workspace for notes, project management, documentation, and knowledge base.",
+          link: "https://www.notion.so",
+          icon: "IconBrandNotion"
+        },
+        {
+          title: "Excalidraw",
+          description: "Virtual whiteboard for diagrams, system architecture, and rough sketches.",
+          link: "https://excalidraw.com",
+          icon: "IconEdit"
+        }
+      ]
+    },
+    productivity: {
+      title: "Productivity & Utilities",
+      icon: "IconTool",
+      items: [
+        {
+          title: "Obsidian",
+          description: "Markdown-based note-taking with graph view for personal knowledge management.",
+          link: "https://obsidian.md",
+          icon: "IconNotes"
+        }
+      ]
+    },
+    communication: {
+      title: "Communication & Collaboration",
+      icon: "IconMessages",
+      items: [
+        {
+          title: "Microsoft Teams",
+          description: "Enterprise collaboration suite for cross-departmental communication, document co-authoring, and corporate meetings.",
+          link: "https://www.microsoft.com/microsoft-teams",
+          icon: "IconBrandTeams"
+        },
+        {
+          title: "Google Meet",
+          description: "High-fidelity video conferencing for agile standups, technical sprint planning, and client presentations.",
+          link: "https://meet.google.com",
+          icon: "IconVideo"
+        },
+        {
+          title: "Zoom",
+          description: "Dedicated video conferencing for stable, large-scale remote workshops and technical webinars.",
+          link: "https://zoom.us",
+          icon: "IconBrandZoom"
+        }
+      ]
+    }
+  }
+};
 
 // SEO Configuration
 const seo = {
