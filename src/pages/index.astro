@@ -1,1 +1,80 @@
-<meta http-equiv="refresh" content="0;url=/en/" />
+---
+import Layout from "../layouts/Layout.astro";
+import { Hero } from "../components/index-page/hero";
+import { IdentityGrid } from "../components/index-page/identity-grid";
+import { ExperienceTimeline } from "../components/index-page/experience-timeline";
+import { getCollection } from "astro:content";
+
+const pages = await getCollection("indexPage");
+const page = pages[0];
+const content = page.data;
+
+// SEO Configuration
+const seo = {
+  title: "M. Anjasfedo Afridiansah | Software Engineer & ML Enthusiast",
+  description:
+    "M. Anjasfedo Afridiansah (Anjasfedo) is an experienced Software Engineer from Bengkulu, Indonesia. Specializing in Web Development, Mobile Development, and Machine Learning. Open to projects and collaborations.",
+  keywords:
+    "anjasfedo, anjas, fedo, bengkulu, software engineer, web developer, mobile developer, machine learning, react, go, laravel, python, open to project, freelance developer, indonesia, experienced developer",
+};
+---
+
+<Layout title={seo.title} description={seo.description} keywords={seo.keywords}>
+  <Hero
+    client:load
+    content={{
+      roles: content.roles,
+      headline: content.headline,
+      heroSubtitle: content.heroSubtitle,
+      viewMyWorkText: content.viewMyWorkText,
+      getInTouchText: content.getInTouchText,
+    }}
+  />
+
+  <IdentityGrid
+    client:visible
+    content={{
+      identityGridTitle: content.identityGridTitle,
+      techStackTitle: content.techStackTitle,
+      techStackDescription: content.techStackDescription,
+      locationTitle: content.locationTitle,
+      locationDescription: content.locationDescription,
+      connectTitle: content.connectTitle,
+      connectDescription: content.connectDescription,
+      educationTitle: content.educationTitle,
+      educationDescription: content.educationDescription,
+      interestsTitle: content.interestsTitle,
+      interestsDescription: content.interestsDescription,
+      education: content.education,
+      techStack: content.techStack,
+      location: content.location,
+      connect: content.connect,
+      interests: content.interests,
+    }}
+  />
+
+  <div id="experience">
+    <ExperienceTimeline
+      client:visible
+      content={{
+        experienceTitle: content.experienceTitle,
+        experienceDescription: content.experienceDescription,
+        timeline: content.timeline,
+        cvButtonText: content.cvButtonText,
+        cvButtonUrl: content.cvButtonUrl,
+        cvDescription: content.cvDescription,
+      }}
+    />
+  </div>
+
+  <!-- <div id="services">
+    <ServicesSection
+      client:visible
+      content={{
+        servicesTitle: content.servicesTitle,
+        servicesDescription: content.servicesDescription,
+        services: content.services,
+      }}
+    />
+  </div> -->
+</Layout>

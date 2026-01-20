@@ -1,11 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { IconSun, IconMoon, IconArrowUp, IconGlobe } from "@tabler/icons-react";
+import { IconSun, IconMoon, IconArrowUp } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
-
-type Language = "en" | "id";
 
 // --- METEOR COMPONENT ---
 // Renders a burst of falling particles
@@ -57,13 +55,10 @@ const MeteorShower = ({ theme }: { theme: "light" | "dark" }) => {
   );
 };
 
-export const ThemeLanguageToggle = () => {
+export const ThemeToggle = () => {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
-  const [language, setLanguage] = useState<Language>("en");
-  const [isOpen, setIsOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [showTooltip, setShowTooltip] = useState<string | null>(null);
-  const languageMenuRef = useRef<HTMLDivElement>(null);
 
   // Transition State
   const [transitionState, setTransitionState] = useState<{
@@ -71,18 +66,10 @@ export const ThemeLanguageToggle = () => {
     toTheme: "light" | "dark";
   }>({ isActive: false, toTheme: "dark" });
 
-  // Inside ThemeLanguageToggle.tsx
-
   useEffect(() => {
-    // 1. Sync React state with the class already applied by the head script
+    // Sync React state with the class already applied by the head script
     const isDark = document.documentElement.classList.contains("dark");
     setTheme(isDark ? "dark" : "light");
-
-    // 2. Handle Language sync
-    const savedLanguage = localStorage.getItem("language") as Language | null;
-    if (savedLanguage) {
-      setLanguage(savedLanguage);
-    }
   }, []);
 
   useEffect(() => {
@@ -90,23 +77,6 @@ export const ThemeLanguageToggle = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Close language menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (languageMenuRef.current && !languageMenuRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -134,30 +104,6 @@ export const ThemeLanguageToggle = () => {
     }, 1000); // Allow meteors to finish falling
   };
 
-  const changeLanguage = (newLang: Language) => {
-    setLanguage(newLang);
-    localStorage.setItem("language", newLang);
-    setIsOpen(false);
-
-    // Get current path and replace language segment
-    const currentPath = window.location.pathname;
-    const pathSegments = currentPath.split("/").filter(Boolean);
-
-    // Check if the current path starts with a language code
-    if (
-      pathSegments.length > 0 &&
-      (pathSegments[0] === "en" || pathSegments[0] === "id")
-    ) {
-      pathSegments[0] = newLang;
-    } else {
-      // If no language code in path, prepend it
-      pathSegments.unshift(newLang);
-    }
-
-    const newPath = "/" + pathSegments.join("/");
-    window.location.href = newPath;
-  };
-
   return (
     <>
       {/* --- METEOR ANIMATION LAYER --- */}
@@ -166,22 +112,6 @@ export const ThemeLanguageToggle = () => {
           <MeteorShower theme={transitionState.toTheme} />
         )}
       </AnimatePresence>
-
-      {/* --- BACKGROUND OVERLAY (Clip Path) --- */}
-      {/* <AnimatePresence>
-        {transitionState.isActive && (
-          <motion.div
-            initial={{ clipPath: "circle(0% at 100% 0%)" }}
-            animate={{ clipPath: "circle(150% at 100% 0%)" }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
-            className={cn(
-              "fixed inset-0 z-[100] pointer-events-none",
-              transitionState.toTheme === "dark" ? "bg-neutral-950" : "bg-white"
-            )}
-          />
-        )}
-      </AnimatePresence> */}
 
       <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3">
         {/* Scroll to Top */}
@@ -270,84 +200,6 @@ export const ThemeLanguageToggle = () => {
             )}
           </AnimatePresence>
           </motion.button>
-        </div>
-
-        {/* Language Toggle */}
-        <div
-          ref={languageMenuRef}
-          className="relative"
-          onMouseEnter={() => setIsOpen(true)}
-          onMouseLeave={() => setIsOpen(false)}
-        >
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsOpen(!isOpen)}
-            onMouseEnter={() => setShowTooltip("language")}
-            onMouseLeave={() => setShowTooltip(null)}
-            aria-label="Change language"
-            aria-expanded={isOpen}
-            className={cn(
-              "p-3 rounded-full shadow-lg backdrop-blur-md",
-              "bg-white/90 dark:bg-neutral-900/90",
-              "border border-neutral-200 dark:border-white/10",
-              "text-neutral-700 dark:text-neutral-200"
-            )}
-          >
-            <IconGlobe className="w-5 h-5" />
-          </motion.button>
-
-          {/* Tooltip */}
-          <AnimatePresence>
-            {showTooltip === "language" && !isOpen && (
-              <motion.div
-                initial={{ opacity: 0, x: 10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 10 }}
-                className="absolute top-1/2 -translate-y-1/2 right-full mr-3 px-3 py-1.5 rounded-md bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-xs font-medium whitespace-nowrap"
-              >
-                Change Language
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <AnimatePresence>
-            {isOpen && (
-              <motion.div
-                initial={{ opacity: 0, x: 10, scale: 0.95 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                exit={{ opacity: 0, x: 10, scale: 0.95 }}
-                className="absolute top-0 right-14 w-32 rounded-lg shadow-xl backdrop-blur-md bg-white/95 dark:bg-neutral-900/95 border border-neutral-200 dark:border-white/10 overflow-hidden"
-              >
-                {[
-                  { code: "en", label: "English" },
-                  { code: "id", label: "Indonesia" },
-                ].map((lang) => (
-                  <button
-                    key={lang.code}
-                    onClick={() => changeLanguage(lang.code as Language)}
-                    aria-label={`Switch to ${lang.label}`}
-                    aria-pressed={language === lang.code}
-                    className={cn(
-                      "w-full px-4 py-3 text-left text-sm font-medium transition-colors flex items-center justify-between",
-                      "hover:bg-neutral-100 dark:hover:bg-neutral-800",
-                      language === lang.code
-                        ? "text-neutral-900 dark:text-white"
-                        : "text-neutral-500 dark:text-neutral-400"
-                    )}
-                  >
-                    <span>{lang.label}</span>
-                    {language === lang.code && (
-                      <motion.div
-                        layoutId="activeLang"
-                        className="w-1.5 h-1.5 rounded-full bg-neutral-900 dark:bg-white"
-                      />
-                    )}
-                  </button>
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
         </div>
       </div>
     </>

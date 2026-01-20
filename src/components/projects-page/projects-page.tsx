@@ -9,7 +9,6 @@ import {
   IconChevronDown,
   IconCapProjecting,
 } from "@tabler/icons-react";
-import type { Language } from "@/i18n/ui";
 
 // ============================================================================
 // --- TYPES ---
@@ -215,7 +214,6 @@ const ProjectCard = React.forwardRef<
   HTMLDivElement,
   {
     project: Project;
-    lang: Language;
     index: number;
     isFocused: boolean;
     isBlurred: boolean;
@@ -224,7 +222,7 @@ const ProjectCard = React.forwardRef<
   }
 >(
   (
-    { project, lang, index, isFocused, isBlurred, onMouseEnter, onMouseLeave },
+    { project, index, isFocused, isBlurred, onMouseEnter, onMouseLeave },
     _ref
   ) => {
     const getStatusColor = (status: string) => {
@@ -252,7 +250,7 @@ const ProjectCard = React.forwardRef<
     };
 
     return (
-      <a href={`/${lang}/projects/${project.slug}`} onClick={handleNavigation} aria-label={`View ${project.name} project details`}>
+      <a href={`/projects/${project.slug}`} onClick={handleNavigation} aria-label={`View ${project.name} project details`}>
         <motion.div
           ref={_ref}
           initial={{ opacity: 0, y: 20 }}
@@ -354,11 +352,9 @@ ProjectCard.displayName = "ProjectCard";
 export function ProjectsPage({
   projects,
   content,
-  lang,
 }: {
   projects: Project[];
   content?: ProjectsPageContent;
-  lang: Language;
 }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedStatus, setSelectedStatus] = useState<ProjectStatus>("All");
@@ -514,7 +510,6 @@ export function ProjectsPage({
                   ref={(el) => {
                     cardRefs.current[index] = el;
                   }}
-                  lang={lang}
                   isFocused={isCardFocused(index)}
                   isBlurred={isCardBlurred(index)}
                   onMouseEnter={() => setHovered(index)}

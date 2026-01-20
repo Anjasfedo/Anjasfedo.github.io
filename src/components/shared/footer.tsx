@@ -10,15 +10,8 @@ import {
   IconMail,
   IconChevronRight,
 } from "@tabler/icons-react";
-import { useTranslations } from "@/i18n/utils";
-import type { Language } from "@/i18n/ui";
 
-interface FooterProps {
-  lang: Language;
-}
-
-export function Footer({ lang }: FooterProps) {
-  const t = useTranslations(lang);
+export function Footer() {
   const [settleX, setSettleX] = useState(0);
 
   useEffect(() => {
@@ -67,10 +60,10 @@ export function Footer({ lang }: FooterProps) {
             className="text-center mb-16 md:mb-24 mt-12"
           >
             <h2 className="text-4xl md:text-6xl font-bold tracking-tight bg-gradient-to-b from-slate-100 to-slate-500 bg-clip-text text-transparent mb-6">
-              {t("footer.cta.title")}
+              Ready to start?
             </h2>
             <p className="text-neutral-400 text-sm md:text-base max-w-md mx-auto mb-10 leading-relaxed">
-              {t("footer.cta.desc")}
+              Currently accepting new projects and collaborations. Let's turn your vision into a digital reality.
             </p>
 
             <motion.a
@@ -80,7 +73,7 @@ export function Footer({ lang }: FooterProps) {
               className="group relative inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-full font-bold text-sm transition-all hover:bg-cyan-400 shadow-[0_0_30px_rgba(255,255,255,0.1)]"
               aria-label="Send email to fedoafridiansah@gmail.com"
             >
-              {t("footer.cta.button")}
+              Start a Conversation
               <IconChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </motion.a>
           </motion.div>
@@ -92,7 +85,7 @@ export function Footer({ lang }: FooterProps) {
                   ANJAS<span className="text-cyan-500">FEDO</span>
                 </p>
                 <p className="text-slate-500 text-[10px] md:text-xs font-medium tracking-wide">
-                  © {new Date().getFullYear()} {t("footer.rights")}
+                  © {new Date().getFullYear()} ALL RIGHTS RESERVED.
                 </p>
               </div>
 
@@ -117,22 +110,10 @@ export function Footer({ lang }: FooterProps) {
 
               <div className="flex items-center gap-6 order-3">
                 <a
-                  href={`/${lang}/privacy`}
-                  className="text-slate-500 hover:text-cyan-400 text-[10px] md:text-xs font-bold transition-colors uppercase tracking-[0.2em]"
-                >
-                  {t("footer.links.privacy")}
-                </a>
-                <a
-                  href={`/${lang}/terms`}
-                  className="text-slate-500 hover:text-cyan-400 text-[10px] md:text-xs font-bold transition-colors uppercase tracking-[0.2em]"
-                >
-                  {t("footer.links.terms")}
-                </a>
-                <a
                   href="/sitemap-index.xml"
                   className="text-slate-500 hover:text-cyan-400 text-[10px] md:text-xs font-bold transition-colors uppercase tracking-[0.2em]"
                 >
-                  {t("footer.links.sitemap")}
+                  Sitemap
                 </a>
               </div>
             </div>

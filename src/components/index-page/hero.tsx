@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "motion/react";
 import { BackgroundLines } from "@/components/ui/background-lines";
 import { cn } from "@/lib/utils";
 import { TextGenerateEffect } from "../ui/text-generate-effect";
-import type { Language } from "@/i18n/ui";
 
 interface Role {
   label: string;
@@ -57,11 +56,9 @@ RoleCard.displayName = "RoleCard";
 export function Hero({
   className,
   content,
-  lang,
 }: {
   className?: string;
   content?: HeroContent;
-  lang: Language;
 }) {
   // Use a fallback to empty array but ensure it updates when content arrives
   const roles = useMemo(() => content?.roles || [], [content?.roles]);
@@ -169,7 +166,7 @@ export function Hero({
               className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 dark:text-white leading-tight"
             />
           </div>
-
+{/* 
           <div className="flex flex-col items-center justify-center mb-12">
             <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-6 font-medium">
               {content?.heroSubtitle || "I specialize in:"}
@@ -198,12 +195,12 @@ export function Hero({
                 </motion.p>
               </AnimatePresence>
             </div>
-          </div>
+          </div> */}
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
             <motion.a
-              href={`/${lang}/projects`}
+              href="/projects"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full font-semibold shadow-lg hover:shadow-xl hover:shadow-purple-500/25 transition-all"

@@ -1,0 +1,51 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { CertificatesPage } from "../components/certificates-page/certificates-page";
+import { getCollection } from "astro:content";
+
+// Get the page content
+const pages = await getCollection("certificatesPage");
+const pageContent = pages[0].data;
+
+// Fetch ALL certificates from the content collection
+const allCertificatesCollection = await getCollection("certificates");
+
+const certificatesData = allCertificatesCollection.map((certificate) => ({
+  ...certificate.data,
+  id: certificate.id,
+  name: certificate.data.title,
+}));
+
+// SEO Configuration
+const seo = {
+  title: "Certificates | M. Anjasfedo Afridiansah - Professional Certifications",
+  description: "View professional certifications and achievements of M. Anjasfedo Afridiansah. Certified in AWS Solutions Architect, Google Cloud Professional, Meta Front-End Developer, and Microsoft Azure Fundamentals.",
+  keywords: "anjasfedo certificates, AWS certified solutions architect, Google Cloud professional, Meta front-end developer, Microsoft Azure fundamentals, professional certifications, software engineer certifications, cloud certifications, web developer certificates"
+};
+---
+
+<Layout title={seo.title} description={seo.description} keywords={seo.keywords}>
+  <div
+    class="relative min-h-screen w-full flex flex-col items-center bg-white dark:bg-neutral-950 transition-colors duration-300 overflow-hidden"
+  >
+    {/* Grid Background */}
+    <div
+      class="absolute inset-0 [background-size:40px_40px] [background-image:linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)] dark:[background-image:linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)]"
+    >
+    </div>
+
+    {/* Radial Mask */}
+    <div
+      class="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-neutral-950 transition-colors duration-300"
+    >
+    </div>
+
+    <div class="relative z-10 w-full pt-20">
+      <CertificatesPage
+        client:load
+        certificates={certificatesData}
+        content={pageContent}
+      />
+    </div>
+  </div>
+</Layout>

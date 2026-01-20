@@ -7,17 +7,13 @@ import type {
   ProjectTag,
 } from "@/components/projects-page/projects-page";
 
-// Generate static paths for all projects based on their language
+// Generate static paths for all projects
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
 
-  // Generate paths matching the project's language folder
   const paths = projects.map((project) => {
-    // Extract language from the project ID (e.g., "en/ai-content-generator" -> "en")
-    const lang = project.id.split("/")[0];
-
     return {
-      params: { lang, slug: project.data.slug },
+      params: { slug: project.data.slug },
       props: { project },
     };
   });
@@ -28,8 +24,6 @@ export async function getStaticPaths() {
 // Get the project from props (returned by getStaticPaths)
 const { project } = Astro.props;
 const { Content } = await render(project);
-
-// Extract language from project ID
 
 // Set page metadata
 const title = `${project.data.title} | Project | M. Anjasfedo Afridiansah`;

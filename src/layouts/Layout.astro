@@ -2,8 +2,7 @@
 import "../styles/global.css";
 import { FloatingDockWrapper } from "../components/shared/floating-dock-wrapper";
 import { Footer } from "../components/shared/footer";
-import { ThemeLanguageToggle } from "../components/shared/theme-language-toggle";
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import { ThemeToggle } from "../components/shared/theme-toggle";
 
 interface Props {
   title?: string;
@@ -27,47 +26,33 @@ const url = "https://anjasfedo.github.io";
 const currentPath = Astro.url.pathname;
 const fullUrl = `${url}${currentPath}`;
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-
-// Centralize navigation logic here in Astro (Server Side)
-
+// Navigation items
 const navigationItems = [
   {
-    title: t("nav.about"),
-    icon: "IconUser", // Just a string
-    href: `/${lang}/`,
+    title: "About",
+    icon: "IconUser",
+    href: "/",
   },
   {
-    title: t("nav.projects"),
+    title: "Projects",
     icon: "IconCode",
-    href: `/${lang}/projects`,
+    href: "/projects",
   },
   {
-    title: t("nav.certificates"),
+    title: "Certificates",
     icon: "IconAward",
-    href: `/${lang}/certificates`,
+    href: "/certificates",
   },
-  // {
-  //   title: t("nav.experience"),
-  //   icon: "IconBriefcase",
-  //   href: `/${lang}/#experience`,
-  // },
-  // {
-  //   title: t("nav.services"),
-  //   icon: "IconTerminal2",
-  //   href: `/${lang}/#services`,
-  // },
   {
-    title: t("nav.uses"),
+    title: "Uses",
     icon: "IconDeviceDesktop",
-    href: `/${lang}/uses`,
+    href: "/uses",
   },
 ];
 ---
 
 <!doctype html>
-<html lang={lang} dir="ltr">
+<html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -89,7 +74,7 @@ const navigationItems = [
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
-    <meta property="og:locale" content={lang === "id" ? "id_ID" : "en_US"} />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="M. Anjasfedo Afridiansah Portfolio" />
 
     <!-- Twitter -->
@@ -101,21 +86,6 @@ const navigationItems = [
 
     <!-- Canonical URL -->
     <link rel="canonical" href={fullUrl} />
-
-    <!-- Alternate Language Links -->
-    {lang === "en" && (
-      <>
-        <link rel="alternate" hreflang="en" href={`${url}/en/${currentPath.replace("/en/", "").replace("/id/", "")}`} />
-        <link rel="alternate" hreflang="id" href={`${url}/id/${currentPath.replace("/en/", "").replace("/id/", "")}`} />
-      </>
-    )}
-    {lang === "id" && (
-      <>
-        <link rel="alternate" hreflang="en" href={`${url}/en/${currentPath.replace("/en/", "").replace("/id/", "")}`} />
-        <link rel="alternate" hreflang="id" href={`${url}/id/${currentPath.replace("/en/", "").replace("/id/", "")}`} />
-      </>
-    )}
-    <link rel="alternate" hreflang="x-default" href={`${url}/en/${currentPath.replace("/en/", "").replace("/id/", "")}`} />
 
     <script type="application/ld+json">
       {
@@ -175,10 +145,10 @@ const navigationItems = [
   </head>
   <body>
     <FloatingDockWrapper client:load items={navigationItems} />
-    <ThemeLanguageToggle client:load />
+    <ThemeToggle client:load />
 
     <slot />
 
-    <Footer client:visible lang={lang} />
+    <Footer client:visible />
   </body>
 </html>
