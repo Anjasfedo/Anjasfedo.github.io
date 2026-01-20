@@ -1,6 +1,6 @@
 "use client";
-import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import React from "react";
+import { motion } from "motion/react";
 import { BackgroundLines } from "@/components/ui/background-lines";
 import { cn } from "@/lib/utils";
 import { TextGenerateEffect } from "../ui/text-generate-effect";
@@ -60,36 +60,6 @@ export function Hero({
   className?: string;
   content?: HeroContent;
 }) {
-  // Use a fallback to empty array but ensure it updates when content arrives
-  const roles = useMemo(() => content?.roles || [], [content?.roles]);
-
-  const [activeRoleIndex, setActiveRoleIndex] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
-
-  // Interval logic
-  useEffect(() => {
-    if (isHovered || roles.length === 0) return;
-
-    const interval = setInterval(() => {
-      setActiveRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 2500);
-
-    return () => clearInterval(interval);
-  }, [isHovered, roles.length]);
-
-  const activeDescription = useMemo(
-    () => roles[activeRoleIndex]?.description || "Crafting digital excellence.",
-    [activeRoleIndex, roles]
-  );
-
-  const handleMouseEnter = useCallback((index: number) => {
-    setIsHovered(true);
-    setActiveRoleIndex(index);
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    setIsHovered(false);
-  }, []);
 
   // Use a key on TextGenerateEffect to force re-render if the headline changes
   const headline = content?.headline || "Hi, I'm Anjasfedo.";
@@ -166,36 +136,6 @@ export function Hero({
               className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 dark:text-white leading-tight"
             />
           </div>
-{/* 
-          <div className="flex flex-col items-center justify-center mb-12">
-            <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-6 font-medium">
-              {content?.heroSubtitle || "I specialize in:"}
-            </p>
-            <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto mb-8">
-              {roles.map((role, idx) => (
-                <RoleCard
-                  key={role.label}
-                  role={role}
-                  isActive={idx === activeRoleIndex}
-                  onMouseEnter={() => handleMouseEnter(idx)}
-                  onMouseLeave={handleMouseLeave}
-                />
-              ))}
-            </div>
-            <div className="h-16 flex items-center justify-center w-full max-w-2xl px-4">
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={activeRoleIndex}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="text-lg md:text-xl text-gray-800 dark:text-gray-200 text-center font-medium"
-                >
-                  {activeDescription}
-                </motion.p>
-              </AnimatePresence>
-            </div>
-          </div> */}
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">

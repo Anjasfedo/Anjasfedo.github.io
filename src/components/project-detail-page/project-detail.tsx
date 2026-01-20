@@ -4,12 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import type { Project } from "../projects-page/projects-page";
-import {
-  IconArrowLeft,
-  IconBrandGithub,
-  IconExternalLink,
-  IconVideo,
-} from "@tabler/icons-react";
+import { IconArrowLeft } from "@tabler/icons-react";
 
 interface ProjectDetailProps {
   project: Project;

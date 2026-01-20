@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils";
 import {
   IconBrandGithub,
   IconBrandLinkedin,
-  IconBrandTwitter,
   IconMail,
   IconChevronRight,
   IconBrandInstagram,
