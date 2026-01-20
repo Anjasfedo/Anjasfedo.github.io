@@ -73,7 +73,6 @@ const FilterBar = ({
   content,
 }: FilterBarProps) => {
   const [showTagDropdown, setShowTagDropdown] = useState(false);
-
   const toggleTag = (tag: ProjectTag) => {
     if (selectedTags.includes(tag)) {
       setSelectedTags(selectedTags.filter((t) => t !== tag));

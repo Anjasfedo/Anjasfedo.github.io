@@ -5,55 +5,6 @@ import { motion, AnimatePresence } from "motion/react";
 import { IconSun, IconMoon, IconArrowUp } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
 
-// --- METEOR COMPONENT ---
-// Renders a burst of falling particles
-const MeteorShower = ({ theme }: { theme: "light" | "dark" }) => {
-  // Generate stable random values for the meteors
-  const meteors = new Array(12).fill(true).map((_, idx) => ({
-    id: idx,
-    left: Math.floor(Math.random() * 100) + "%", // Random horizontal start
-    delay: Math.random() * 0.2, // Slight randomization in start time
-    duration: Math.random() * 0.5 + 0.5, // Different speeds
-  }));
-
-  return (
-    <div className="fixed inset-0 z-[110] pointer-events-none overflow-hidden">
-      {meteors.map((meteor) => (
-        <motion.span
-          key={meteor.id}
-          initial={{
-            opacity: 1,
-            top: -100,
-            x: 0,
-            y: 0,
-          }}
-          animate={{
-            opacity: 0,
-            top: "120vh", // Falls off screen
-            x: -200, // Moves slightly left for angle
-          }}
-          transition={{
-            duration: meteor.duration,
-            delay: meteor.delay,
-            ease: "easeIn",
-          }}
-          style={{
-            left: meteor.left,
-            position: "absolute",
-          }}
-          className={cn(
-            "w-[2px] h-20 md:h-32 rotate-[215deg] shadow-lg",
-            // Light Mode -> Dark Meteors (Black)
-            // Dark Mode -> Light Meteors (White)
-            theme === "light"
-              ? "bg-gradient-to-b from-neutral-800 to-transparent"
-              : "bg-gradient-to-b from-white to-transparent"
-          )}
-        />
-      ))}
-    </div>
-  );
-};
 
 export const ThemeToggle = () => {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
@@ -106,12 +57,6 @@ export const ThemeToggle = () => {
 
   return (
     <>
-      {/* --- METEOR ANIMATION LAYER --- */}
-      <AnimatePresence>
-        {transitionState.isActive && (
-          <MeteorShower theme={transitionState.toTheme} />
-        )}
-      </AnimatePresence>
 
       <div className="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3">
         {/* Scroll to Top */}

@@ -40,7 +40,13 @@ export default config({
             path: 'src/content/projects/*',
             format: { contentField: 'content' },
             schema: {
-                title: fields.slug({ name: { label: 'Title' } }),
+                title: fields.slug({
+                    name: {
+                        label: 'Title', validation: {
+                            isRequired: true
+                        }
+                    }
+                }),
                 description: fields.text({ label: 'Description' }),
                 status: fields.multiselect({
                     label: 'Status',
@@ -55,13 +61,23 @@ export default config({
                 tags: fields.array(
                     fields.text({ label: 'Tag' }),
                     {
-                        label: 'Tags'
+                        label: 'Tags',
+                        validation: {
+                            length: {
+                                min: 1
+                            }
+                        }
                     }
                 ),
                 images: fields.array(
                     fields.image({ label: 'Image', directory: 'public/images/projects', publicPath: '/images/projects/', }),
                     {
-                        label: 'Images'
+                        label: 'Images',
+                        validation: {
+                            length: {
+                                min: 1
+                            }
+                        }
                     }),
                 content: fields.markdoc({
                     label: 'Content', options: {
@@ -78,19 +94,54 @@ export default config({
             path: 'src/content/certificates/*',
             format: { contentField: 'content' },
             schema: {
-                title: fields.slug({ name: { label: 'Title' } }),
-                description: fields.text({ label: 'Description' }),
-                issuer: fields.text({ label: 'Issuer' }),
+                title: fields.slug({
+                    name: {
+                        label: 'Title', validation: {
+                            isRequired: true
+                        }
+                    }
+                }),
+                description: fields.text({
+                    label: 'Description', validation: {
+                        isRequired: true
+                    }
+                }),
+                issuer: fields.text({
+                    label: 'Issuer', validation: {
+                        isRequired: true
+                    }
+                }),
                 skills: fields.array(
                     fields.text({ label: 'Skill' }),
                     {
-                        label: 'Skills'
+                        label: 'Skills',
+                        validation: {
+                            length: {
+                                min: 1
+                            }
+                        }
                     }
                 ),
-                media: fields.file({ label: 'Media', directory: 'public/images/certificates', publicPath: '/images/certificates/', }),
-                credential: fields.text({ label: 'Credential URL' }),
-                issueDate: fields.date({ label: 'Issue Date' }),
-                expireDate: fields.date({ label: 'Expire Date' }),
+                media: fields.file({
+                    label: 'Media', directory: 'public/images/certificates', publicPath: '/images/certificates/', validation: {
+                        isRequired: true
+                    }
+                }),
+                credential: fields.text({
+                    label: 'Credential URL', validation: {
+                        isRequired: true
+                    }
+                }),
+                issueDate: fields.date({
+                    label: 'Issue Date', validation: {
+                        isRequired: true
+                    }
+                }),
+                expireDate: fields.date({
+                    label: 'Expire Date', validation: {
+                        isRequired: true
+                    }
+                }),
                 content: fields.markdoc({
                     label: 'Content',
                 }),

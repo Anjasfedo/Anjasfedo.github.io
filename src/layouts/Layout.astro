@@ -11,6 +11,7 @@ interface Props {
   keywords?: string;
   noindex?: boolean;
   ogType?: string;
+  showNav?: boolean;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   keywords = "anjasfedo, anjas, fedo, bengkulu, website developer, web developer, mobile developer, software engineer, developer, machine learning, anjasfedo bengkulu, informatics unib, open to project, freelance developer",
   noindex = false,
   ogType = "website",
+  showNav = true,
 } = Astro.props;
 
 const url = "https://anjasfedo.github.io";
@@ -144,7 +146,7 @@ const navigationItems = [
     <meta name="generator" content={Astro.generator} />
   </head>
   <body>
-    <FloatingDockWrapper client:load items={navigationItems} />
+    {showNav && <FloatingDockWrapper client:load items={navigationItems} />}
     <ThemeToggle client:load />
 
     <slot />

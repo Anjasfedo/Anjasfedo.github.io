@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useMemo } from "react";
 import {
   motion,
   AnimatePresence,
@@ -43,6 +43,51 @@ export const FloatingDock = ({
 }) => {
   const { scrollY } = useScroll();
   const [visible, setVisible] = useState(true);
+  // Initialize with empty string, will be set immediately in useEffect on client
+  const [currentPath, setCurrentPath] = useState("");
+
+  // Update current path on mount and when URL changes
+  React.useEffect(() => {
+    // Immediately set the path on client-side mount
+    setCurrentPath(window.location.pathname);
+
+    const updatePath = () => setCurrentPath(window.location.pathname);
+
+    // Listen for popstate events (back/forward buttons)
+    window.addEventListener("popstate", updatePath);
+
+    // Listen for Astro navigation events - after-swap fires earliest
+    const handleAfterSwap = () => {
+      updatePath();
+    };
+    window.addEventListener("astro:after-swap", handleAfterSwap);
+
+    // Also listen for page-load as backup
+    const handlePageLoad = () => {
+      updatePath();
+    };
+    window.addEventListener("astro:page-load", handlePageLoad);
+
+    return () => {
+      window.removeEventListener("popstate", updatePath);
+      window.removeEventListener("astro:after-swap", handleAfterSwap);
+      window.removeEventListener("astro:page-load", handlePageLoad);
+    };
+  }, []);
+
+  // Determine active item
+  const activeHref = useMemo(() => {
+    // Check if current path matches any href
+    const exactMatch = items.find((item) => item.href === currentPath);
+    if (exactMatch) return exactMatch.href;
+
+    // Check for partial matches (e.g., /projects/abc should highlight /projects)
+    const partialMatch = items.find((item) => {
+      if (item.href === "/") return false;
+      return currentPath.startsWith(item.href);
+    });
+    return partialMatch?.href || null;
+  }, [currentPath, items]);
 
   useMotionValueEvent(scrollY, "change", (current) => {
     const previous = scrollY.getPrevious() ?? 0;
@@ -78,8 +123,8 @@ export const FloatingDock = ({
           desktopClassName
         )}
       >
-        <FloatingDockDesktop items={items} className={desktopClassName} />
-        <FloatingDockMobile items={items} className={mobileClassName} />
+        <FloatingDockDesktop items={items} className={desktopClassName} activeHref={activeHref} />
+        <FloatingDockMobile items={items} className={mobileClassName} activeHref={activeHref} />
       </motion.div>
     </AnimatePresence>
   );
@@ -91,9 +136,11 @@ export const FloatingDock = ({
 const FloatingDockMobile = ({
   items,
   className,
+  activeHref,
 }: {
   items: { title: string; icon: React.ReactNode; href: string }[];
   className?: string;
+  activeHref: string | null;
 }) => {
   const [open, setOpen] = useState(false);
   return (
@@ -104,48 +151,69 @@ const FloatingDockMobile = ({
             layoutId="nav"
             className="absolute inset-x-0 top-full mt-4 flex flex-col gap-3 bg-white/95 dark:bg-neutral-900/95 border border-gray-200 dark:border-white/10 p-3 rounded-[2rem] shadow-2xl backdrop-blur-xl min-w-[220px]"
           >
-            {items.map((item, idx) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, scale: 0.8, x: -10 }}
-                animate={{ opacity: 1, scale: 1, x: 0 }}
-                exit={{
-                  opacity: 0,
-                  scale: 0.8,
-                  x: -10,
-                  transition: { delay: idx * 0.02 },
-                }}
-                transition={{ delay: (items.length - 1 - idx) * 0.05 }}
-              >
-                <a
-                  href={item.href}
-                  onClick={(e) => {
-                    handleNavClick(e, item.href);
-                    setTimeout(() => setOpen(false), 150);
+            {items.map((item, idx) => {
+              const isActive = activeHref === item.href;
+              return (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, scale: 0.8, x: -10 }}
+                  animate={{ opacity: 1, scale: 1, x: 0 }}
+                  exit={{
+                    opacity: 0,
+                    scale: 0.8,
+                    x: -10,
+                    transition: { delay: idx * 0.02 },
                   }}
-                  aria-label={item.title}
-                  className="group flex items-center gap-4 h-16 px-4 rounded-2xl bg-gray-50/50 dark:bg-neutral-800/50 border border-transparent dark:border-white/5 transition-all overflow-hidden"
+                  transition={{ delay: (items.length - 1 - idx) * 0.05 }}
                 >
-                  {/* Magnified Icon Container */}
-                  <motion.div
-                    whileTap={{ scale: 1.4, rotate: 5 }}
-                    className="h-10 w-10 flex items-center justify-center rounded-xl bg-white dark:bg-neutral-900 border border-gray-200 dark:border-white/10 shadow-md transition-shadow active:shadow-inner"
+                  <a
+                    href={item.href}
+                    onClick={(e) => {
+                      handleNavClick(e, item.href);
+                      setTimeout(() => setOpen(false), 150);
+                    }}
+                    aria-label={item.title}
+                    className={cn(
+                      "group flex items-center gap-4 h-16 px-4 rounded-2xl transition-all overflow-hidden",
+                      isActive
+                        ? "bg-blue-50/80 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800"
+                        : "bg-gray-50/50 dark:bg-neutral-800/50 border-transparent dark:border-white/5"
+                    )}
                   >
-                    <div className="h-6 w-6 text-neutral-600 dark:text-neutral-300">
-                      {item.icon}
-                    </div>
-                  </motion.div>
+                    {/* Magnified Icon Container */}
+                    <motion.div
+                      whileTap={{ scale: 1.4, rotate: 5 }}
+                      className={cn(
+                        "h-10 w-10 flex items-center justify-center rounded-xl border shadow-md transition-shadow active:shadow-inner",
+                        isActive
+                          ? "bg-blue-100 dark:bg-blue-900/30 border-blue-300 dark:border-blue-700"
+                          : "bg-white dark:bg-neutral-900 border-gray-200 dark:border-white/10"
+                      )}
+                    >
+                      <div className={cn(
+                        "h-6 w-6",
+                        isActive ? "text-blue-600 dark:text-blue-400" : "text-neutral-600 dark:text-neutral-300"
+                      )}>
+                        {item.icon}
+                      </div>
+                    </motion.div>
 
-                  {/* Magnified Label */}
-                  <motion.span
-                    whileTap={{ scale: 1.1, x: 5 }}
-                    className="text-base font-bold text-neutral-700 dark:text-neutral-200 tracking-tight"
-                  >
-                    {item.title}
-                  </motion.span>
-                </a>
-              </motion.div>
-            ))}
+                    {/* Magnified Label */}
+                    <motion.span
+                      whileTap={{ scale: 1.1, x: 5 }}
+                      className={cn(
+                        "text-base font-bold tracking-tight",
+                        isActive
+                          ? "text-blue-700 dark:text-blue-300"
+                          : "text-neutral-700 dark:text-neutral-200"
+                      )}
+                    >
+                      {item.title}
+                    </motion.span>
+                  </a>
+                </motion.div>
+              );
+            })}
           </motion.div>
         )}
       </AnimatePresence>
@@ -172,9 +240,11 @@ const FloatingDockMobile = ({
 const FloatingDockDesktop = ({
   items,
   className,
+  activeHref,
 }: {
   items: { title: string; icon: React.ReactNode; href: string }[];
   className?: string;
+  activeHref: string | null;
 }) => {
   const mouseX = useMotionValue(Infinity);
 
@@ -188,7 +258,12 @@ const FloatingDockDesktop = ({
       )}
     >
       {items.map((item) => (
-        <IconContainer mouseX={mouseX} key={item.title} {...item} />
+        <IconContainer
+          mouseX={mouseX}
+          key={item.title}
+          {...item}
+          isActive={activeHref === item.href}
+        />
       ))}
     </motion.div>
   );
@@ -199,11 +274,13 @@ function IconContainer({
   title,
   icon,
   href,
+  isActive,
 }: {
   mouseX: MotionValue;
   title: string;
   icon: React.ReactNode;
   href: string;
+  isActive: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -226,14 +303,20 @@ function IconContainer({
   const [hovered, setHovered] = useState(false);
 
   return (
-    <a href={href} onClick={(e) => handleNavClick(e, href)} aria-label={title}>
+    <a href={href} onClick={(e) => handleNavClick(e, href)} aria-label={title} aria-current={isActive ? "page" : undefined}>
       <motion.div
         ref={ref}
         style={{ width, height }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="relative flex aspect-square items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800 border border-gray-200 dark:border-white/10 shadow-sm"
+        className={cn(
+          "relative flex aspect-square items-center justify-center rounded-full border shadow-sm transition-colors",
+          isActive
+            ? "bg-blue-100 dark:bg-blue-900/30 border-blue-400 dark:border-blue-500"
+            : "bg-gray-100 dark:bg-neutral-800 border-gray-200 dark:border-white/10"
+        )}
       >
+
         <AnimatePresence>
           {hovered && (
             <motion.div
@@ -248,7 +331,10 @@ function IconContainer({
         </AnimatePresence>
         <motion.div
           style={{ width: widthIcon, height: heightIcon }}
-          className="flex items-center justify-center"
+          className={cn(
+            "flex items-center justify-center",
+            isActive ? "text-blue-600 dark:text-blue-400" : ""
+          )}
         >
           {icon}
         </motion.div>

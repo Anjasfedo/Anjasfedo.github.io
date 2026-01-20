@@ -47,7 +47,7 @@ export interface Certificate {
   media?: string;
   credential?: string;
   issueDate: Date;
-  expirationDate?: Date;
+  expireDate?: Date;
 }
 
 // ============================================================================
@@ -267,7 +267,7 @@ export function CertificatesPage({
       ).format(new Date(cert.issueDate));
 
       // Aligning 'expireDate' from Keystatic with the UI
-      const expireDate = cert.expirationDate || (cert as any).expireDate;
+      const expireDate = cert.expireDate || (cert as any).expireDate;
 
       const formattedExpirationDate = expireDate
         ? new Intl.DateTimeFormat("en-US", dateOptions).format(
