@@ -3,7 +3,11 @@ title: Additional Coursework
 description: Supplementary courses and foundational certifications across cloud, web development, and programming.
 ---
 
-### Amazon Web Services
+## Overview
+
+Supplementary coursework across cloud platforms (AWS, GCP), programming fundamentals, and web development from various learning platforms.
+
+## Amazon Web Services
 
 | Course | Issued |
 |---|---|
@@ -21,7 +25,7 @@ description: Supplementary courses and foundational certifications across cloud,
 | AWS Educate Machine Learning — DeepRacer | Nov 2023 |
 | AWS Educate Web Builder | Nov 2023 |
 
-### Google Cloud Skill Badges
+## Google Cloud Skill Badges
 
 | Course | Issued |
 |---|---|
@@ -41,7 +45,7 @@ description: Supplementary courses and foundational certifications across cloud,
 | Observability in Google Cloud | May 2024 |
 | Application Development with Cloud Run | May 2024 |
 
-### Dicoding Indonesia
+## Dicoding Indonesia
 
 | Course | Issued |
 |---|---|
@@ -67,7 +71,7 @@ description: Supplementary courses and foundational certifications across cloud,
 | Belajar Membuat Aplikasi Back-End untuk Pemula | Dec 2023 |
 | Belajar Membuat Aplikasi Flutter untuk Pemula | Jan 2025 |
 
-### CODEPOLITAN
+## CODEPOLITAN
 
 | Course | Issued |
 |---|---|
@@ -93,7 +97,7 @@ description: Supplementary courses and foundational certifications across cloud,
 | Belajar Dasar CSS | Jan 2024 |
 | Belajar Dasar HTML | Jan 2024 |
 
-### Udemy
+## Udemy
 
 | Course | Issued |
 |---|---|
@@ -105,7 +109,7 @@ description: Supplementary courses and foundational certifications across cloud,
 | Java 21 Programming Masterclass: Fundamentals for Beginners | Apr 2025 |
 | PHP Tutorial Beginner to Advanced | Mar 2025 |
 
-### LinkedIn Learning
+## LinkedIn Learning
 
 | Course | Issued |
 |---|---|
