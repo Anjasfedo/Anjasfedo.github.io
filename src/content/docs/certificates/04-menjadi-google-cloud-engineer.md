@@ -7,7 +7,7 @@ description: Dicoding Academy cloud engineering track — GCP architecture, depl
 
 **Issuer:** Dicoding Indonesia | **Issued:** May 2024 (expires May 2027)
 
-## Overview
+## About
 
 A comprehensive cloud engineering track focused on Google Cloud Platform. Covers core infrastructure, application deployment, scaling and automation, Kubernetes, Terraform, and observability.
 

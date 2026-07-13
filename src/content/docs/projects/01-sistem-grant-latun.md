@@ -7,7 +7,7 @@ description: Full-featured grant management platform for coastal and marine cons
 
 **Role:** Full-stack Developer | **URL:** [grant.latun.or.id](https://grant.latun.or.id/)
 
-## Overview
+## About
 
 A comprehensive grant management system built for **LATUN**, an organization focused on coastal and marine conservation in Indonesia. The platform handles the full lifecycle of grant programs — from publishing calls for proposals to disbursement, reporting, and compliance.
 

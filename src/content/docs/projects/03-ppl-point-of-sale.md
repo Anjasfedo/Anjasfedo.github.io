@@ -7,7 +7,7 @@ description: Web-based POS system built with Laravel for the Software Developmen
 
 **Role:** Full-stack Developer | **Period:** Sep 2023 - Dec 2023 | **Status:** Completed
 
-## Overview
+## About
 
 A **Point of Sale (POS)** web application built for the Software Development Project (PPL) course at Universitas Bengkulu. The project followed a structured software engineering lifecycle — from requirements gathering and system design to implementation, testing, and delivery.
 

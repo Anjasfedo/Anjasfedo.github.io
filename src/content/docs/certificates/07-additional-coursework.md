@@ -3,7 +3,7 @@ title: Additional Coursework
 description: Supplementary courses and foundational certifications across cloud, web development, and programming.
 ---
 
-## Overview
+## About
 
 Supplementary coursework across cloud platforms (AWS, GCP), programming fundamentals, and web development from various learning platforms.
 

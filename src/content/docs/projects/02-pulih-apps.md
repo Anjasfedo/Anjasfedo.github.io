@@ -7,7 +7,7 @@ description: Capstone project at Bangkit Academy — a cloud-backed platform bui
 
 **Role:** Cloud Computing Cohort | **Period:** May 2024 - Jun 2024 | **Status:** Completed
 
-## Overview
+## About
 
 Pulih Apps was the capstone project for Bangkit Academy 2024, built by a cross-functional team of machine learning, mobile, and cloud computing cohorts.
 

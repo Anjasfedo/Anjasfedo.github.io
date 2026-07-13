@@ -7,7 +7,7 @@ description: Four-course series covering cloud fundamentals, infrastructure, net
 
 **Issuer:** Google | **Issued:** Mar 2024
 
-## Overview
+## About
 
 A foundational series covering the core pillars of Google Cloud Platform: cloud concepts, infrastructure design, networking and security, and data, ML, and AI services on GCP.
 

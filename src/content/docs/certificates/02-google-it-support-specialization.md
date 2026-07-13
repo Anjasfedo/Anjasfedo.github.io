@@ -7,7 +7,7 @@ description: Professional IT support certificate by Google — covering networki
 
 **Issuer:** Google | **Issued:** Jul 2024
 
-## Overview
+## About
 
 A multi-course professional specialization that builds foundational IT skills for support roles. Covers computer networking, operating systems, system administration, IT infrastructure services, and security fundamentals.
 

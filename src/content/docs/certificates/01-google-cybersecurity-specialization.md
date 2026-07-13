@@ -7,7 +7,7 @@ description: Comprehensive cybersecurity career certificate by Google — coveri
 
 **Issuer:** Google | **Issued:** Jul 2024
 
-## Overview
+## About
 
 A multi-course professional specialization covering the full spectrum of cybersecurity operations. The program covers threat analysis, network security, detection and response, asset management, and automation with Python.
 

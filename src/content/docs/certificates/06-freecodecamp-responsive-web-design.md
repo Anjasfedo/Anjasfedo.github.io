@@ -7,7 +7,7 @@ description: freeCodeCamp 300-hour curriculum covering HTML5, CSS, responsive de
 
 **Issuer:** freeCodeCamp | **Issued:** Mar 2023
 
-## Overview
+## About
 
 Completed freeCodeCamp's responsive web design curriculum — approximately 300 hours covering semantic HTML5, CSS layouts (flexbox, grid), responsive design principles, accessibility best practices, and visual design.
 
