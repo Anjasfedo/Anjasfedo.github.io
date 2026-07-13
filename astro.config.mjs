@@ -24,11 +24,10 @@ export default defineConfig({
 							border-radius: 50% !important;
 							object-fit: cover !important;
 						}
-						.content img[alt="Anjasfedo profile photo"] {
+						img[alt="Anjasfedo profile photo"] {
 							max-width: 150px !important;
-							max-height: 150px !important;
 							width: 150px !important;
-							height: 150px !important;
+							height: auto !important;
 							border-radius: 50% !important;
 							object-fit: cover !important;
 						}

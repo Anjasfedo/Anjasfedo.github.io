@@ -1,9 +1,13 @@
 ---
 title: Software Developer — Aranus Technology
 description: Aranus Technology · Part-time · Jun 2024 - Present · On-site (Bengkulu, Indonesia)
+startDate: 2024-06
+endDate: present
 ---
 
 ![Aranus Technology logo](../../../assets/images/icon-aranus.webp)
+
+**Jun 2024 — Present**
 
 ## Role
 

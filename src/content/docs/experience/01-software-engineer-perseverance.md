@@ -1,9 +1,13 @@
 ---
 title: Software Engineer — Perseverance Technology
 description: Perseverance Technology Co., Ltd. · Part-time · Jul 2024 - Present · Remote (New Taipei, Taiwan)
+startDate: 2024-07
+endDate: present
 ---
 
 ![Perseverance Technology logo](../../../assets/images/perseverance%20logo.png)
+
+**Jul 2024 — Present**
 
 ## Role
 

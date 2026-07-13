@@ -1,9 +1,13 @@
 ---
 title: DevOps Engineer (Intern) — Elitery
 description: Elitery · Internship · Nov 2024 - Dec 2024 · Remote
+startDate: 2024-11
+endDate: 2024-12
 ---
 
 ![Elitery logo](../../../assets/images/elitery%20logo.jpg)
+
+**Nov 2024 — Dec 2024**
 
 ## Role
 
