@@ -17,27 +17,15 @@ hero:
       variant: minimal
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 
 ## Explore
 
 <CardGrid stagger>
-	<Card title="About" icon="information">
-		Who I am, my tech stack, education, and interests.
-	</Card>
-	<Card title="Experience" icon="briefcase">
-		My professional journey from frontend engineering to cloud architecture.
-	</Card>
-	<Card title="Projects" icon="code">
-		Collection of projects, experiments, and open-source contributions.
-	</Card>
-	<Card title="Certificates" icon="certificate">
-		Verifiable credentials in cloud, software engineering, and more.
-	</Card>
-	<Card title="Uses" icon="device-desktop">
-		Hardware and software tools I use daily.
-	</Card>
-	<Card title="Contact" icon="mail">
-		Get in touch — let's build something together.
-	</Card>
+	<LinkCard title="About" description="Who I am, my tech stack, education, and interests." href="/about/" />
+	<LinkCard title="Experience" description="My professional journey from frontend engineering to cloud architecture." href="/experience/" />
+	<LinkCard title="Projects" description="Collection of projects, experiments, and open-source contributions." href="/projects/" />
+	<LinkCard title="Certificates" description="Verifiable credentials in cloud, software engineering, and more." href="/certificates/" />
+	<LinkCard title="Uses" description="Hardware and software tools I use daily." href="/uses/" />
+	<LinkCard title="Contact" description="Get in touch — let's build something together." href="/contact/" />
 </CardGrid>
