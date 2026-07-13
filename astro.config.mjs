@@ -14,6 +14,27 @@ export default defineConfig({
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/anjasfedo' }],
 			head: [
 				{
+					tag: 'style',
+					content: `
+						.hero img {
+							max-width: 150px !important;
+							max-height: 150px !important;
+							width: 150px !important;
+							height: 150px !important;
+							border-radius: 50% !important;
+							object-fit: cover !important;
+						}
+						.content img[alt="Anjasfedo profile photo"] {
+							max-width: 150px !important;
+							max-height: 150px !important;
+							width: 150px !important;
+							height: 150px !important;
+							border-radius: 50% !important;
+							object-fit: cover !important;
+						}
+					`,
+				},
+				{
 					tag: 'script',
 					attrs: { type: 'application/ld+json' },
 					content: JSON.stringify({
