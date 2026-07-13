@@ -1,6 +1,6 @@
 ---
 title: Contact
-description: Let's build something together.
+description: GitHub, LinkedIn, Instagram, and email — get in touch with M. Anjasfedo Afridiansah.
 ---
 
 Let's build something together.
