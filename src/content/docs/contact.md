@@ -1,0 +1,17 @@
+---
+title: Contact
+description: Let's build something together.
+---
+
+Let's build something together.
+
+## Connect
+
+- **GitHub** — [Anjasfedo](https://github.com/anjasfedo)
+- **LinkedIn** — [M. Anjasfedo Afridiansah](https://linkedin.com/in/m-anjasfedo-afridiansah)
+- **Instagram** — [anjas_fedo](https://www.instagram.com/anjas_fedo/)
+- **Email** — [fedoafridiansah@gmail.com](mailto:fedoafridiansah@gmail.com)
+
+## Location
+
+Bengkulu, Indonesia
