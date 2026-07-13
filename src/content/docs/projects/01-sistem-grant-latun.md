@@ -7,7 +7,11 @@ description: Full-featured grant management platform for coastal and marine cons
 
 **Role:** Full-stack Developer | **URL:** [grant.latun.or.id](https://grant.latun.or.id/)
 
+## Overview
+
 A comprehensive grant management system built for **LATUN**, an organization focused on coastal and marine conservation in Indonesia. The platform handles the full lifecycle of grant programs — from publishing calls for proposals to disbursement, reporting, and compliance.
+
+## Interfaces
 
 Two distinct interfaces serve different user roles:
 
@@ -15,7 +19,7 @@ Two distinct interfaces serve different user roles:
 
 **Mitra (Partner) Portal** — Institutions register, complete their profile, upload verification documents, browse available grant programs, and submit proposals through a 6-step wizard. After approval, partners manage reports and self-assessments through the same portal.
 
-### Key Features
+## Key Features
 
 - **Program Management** — Create and manage grant programs with configurable budgets, deadlines, KAK (TOR), and RAB templates
 - **6-Step Proposal Wizard** — Guides partners through general info, beneficiaries, narrative, alignment, budget, and review before submission
