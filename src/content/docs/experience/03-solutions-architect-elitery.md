@@ -1,5 +1,5 @@
 ---
-title: Solutions Architect (Intern)
+title: Solutions Architect (Intern) — Elitery
 description: Elitery · Internship · Dec 2024 - Jan 2025 · Remote
 ---
 

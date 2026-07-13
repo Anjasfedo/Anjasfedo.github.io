@@ -1,5 +1,5 @@
 ---
-title: DevOps Engineer (Intern)
+title: DevOps Engineer (Intern) — Elitery
 description: Elitery · Internship · Nov 2024 - Dec 2024 · Remote
 ---
 

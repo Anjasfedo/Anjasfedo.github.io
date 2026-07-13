@@ -1,5 +1,5 @@
 ---
-title: Assistant Lecturer (Framework Programming)
+title: Assistant Lecturer (Framework Programming) — Universitas Bengkulu
 description: Universitas Bengkulu · Contract · Aug 2024 - Dec 2024 · Hybrid
 ---
 

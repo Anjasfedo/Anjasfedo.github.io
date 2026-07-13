@@ -1,5 +1,5 @@
 ---
-title: Frontend Engineer (Intern)
+title: Frontend Engineer (Intern) — LANGIT
 description: Langgeng Inovasi Teknologi (LANGIT) · Internship · Jun 2024 - Aug 2024 · Remote
 ---
 

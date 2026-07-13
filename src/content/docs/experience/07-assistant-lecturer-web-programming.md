@@ -1,5 +1,5 @@
 ---
-title: Assistant Lecturer (Web Programming)
+title: Assistant Lecturer (Web Programming) — Universitas Bengkulu
 description: Universitas Bengkulu · Contract · Jan 2024 - Jun 2024 · Hybrid
 ---
 
