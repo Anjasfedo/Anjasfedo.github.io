@@ -3,6 +3,8 @@ title: Sistem Grant LATUN
 description: Full-featured grant management platform for coastal and marine conservation programs in Indonesia.
 ---
 
+![Sistem Grant LATUN screenshot](../../../assets/images/grant%20latun%20ss.png)
+
 **Role:** Full-stack Developer | **URL:** [grant.latun.or.id](https://grant.latun.or.id/)
 
 A comprehensive grant management system built for **LATUN**, an organization focused on coastal and marine conservation in Indonesia. The platform handles the full lifecycle of grant programs — from publishing calls for proposals to disbursement, reporting, and compliance.

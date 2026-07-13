@@ -3,6 +3,8 @@ title: Pulih Apps
 description: Capstone project at Bangkit Academy — a cloud-backed platform built with Django and GCP.
 ---
 
+![Pulih Apps screenshot](../../../assets/images/ss%20pulih.png)
+
 **Role:** Cloud Computing Cohort | **Period:** May 2024 - Jun 2024 | **Status:** Completed
 
 Pulih Apps was the capstone project for Bangkit Academy 2024, built by a跨-functional team of machine learning, mobile, and cloud computing cohorts. I served as the **Cloud Computing** member, responsible for designing and deploying the backend infrastructure.

@@ -3,6 +3,8 @@ title: Google Cybersecurity Specialization
 description: Comprehensive cybersecurity career certificate by Google — covering networks, threats, detection, and automation.
 ---
 
+![Google logo](../../../assets/images/google_logo.jpg)
+
 **Issuer:** Google | **Issued:** Jul 2024
 
 A multi-course professional specialization covering the full spectrum of cybersecurity operations. The program covers threat analysis, network security, detection and response, asset management, and automation with Python.
