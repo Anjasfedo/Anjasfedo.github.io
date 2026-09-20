@@ -3,17 +3,18 @@
 @import "tailwindcss";
 
 @theme {
-	/* Colors — Linear midnight system */
-	--color-void: #08090a;
-	--color-carbon: #0f1011;
-	--color-obsidian: #161718;
-	--color-graphite: #23252a;
-	--color-smoke: #383b3f;
-	--color-ash: #62666d;
-	--color-fog: #8a8f98;
-	--color-mist: #d0d6e0;
-	--color-bone: #e5e5e6;
-	--color-paper: #ffffff;
+	/* Colors — Linear daylight system (same roles, light values) */
+	--color-void: #fafaf8;
+	--color-carbon: #ffffff;
+	--color-obsidian: #f1f0ec;
+	--color-graphite: #e3e2de;
+	--color-smoke: #d3d2ce;
+	--color-ash: #6f6e68;
+	--color-fog: #a3a29b;
+	--color-mist: #292825;
+	--color-bone: #17171a;
+	--color-paper: #121215;
+	--color-pitch: #08090a;
 	--color-acid-lime: #e4f222;
 	--color-pulse-green: #27a644;
 	--color-coral-red: #eb5757;
@@ -56,14 +57,14 @@
 	--radius-xl: 12px;
 	--radius-full: 9999px;
 
-	/* Shadows — elevation via hairlines + subtle insets */
-	--shadow-sm: rgba(0, 0, 0, 0.4) 0px 2px 4px 0px;
-	--shadow-md: rgba(0, 0, 0, 0.2) 0px 0px 12px 0px inset;
-	--shadow-subtle: rgb(35, 37, 42) 0px 0px 0px 1px inset;
-	--shadow-subtle-2: rgba(0, 0, 0, 0.2) 0px 0px 0px 1px;
+	/* Shadows — elevation via hairlines + soft diffusion */
+	--shadow-sm: rgba(18, 18, 16, 0.08) 0px 2px 4px 0px;
+	--shadow-md: rgba(18, 18, 16, 0.06) 0px 0px 12px 0px inset;
+	--shadow-subtle: rgba(18, 18, 16, 0.1) 0px 0px 0px 1px inset;
+	--shadow-subtle-2: rgba(18, 18, 16, 0.12) 0px 0px 0px 1px;
 	--shadow-cta: rgba(0, 0, 0, 0.01) 0px 5px 2px 0px, rgba(0, 0, 0, 0.04) 0px 3px 2px 0px, rgba(0, 0, 0, 0.07) 0px 1px 1px 0px, rgba(0, 0, 0, 0.08) 0px 0px 1px 0px;
-	--shadow-xl: rgba(8, 9, 10, 0.6) 0px 4px 32px 0px;
-	--shadow-card: rgba(255, 255, 255, 0.03) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.04) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.6) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 4px 4px 0px;
+	--shadow-xl: rgba(18, 18, 16, 0.12) 0px 8px 32px 0px;
+	--shadow-card: rgba(18, 18, 16, 0.08) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.7) 0px 1px 0px 0px inset, rgba(18, 18, 16, 0.1) 0px 1px 2px 0px, rgba(18, 18, 16, 0.06) 0px 8px 24px 0px;
 
 	/* Layout */
 	--breakpoint-page: 1200px;
@@ -80,7 +81,7 @@ body,
 }
 
 html {
-	color-scheme: dark;
+	color-scheme: light;
 }
 
 body {
@@ -97,5 +98,5 @@ body {
 
 ::selection {
 	background: var(--color-acid-lime);
-	color: var(--color-void);
+	color: var(--color-pitch);
 }

@@ -16,15 +16,15 @@ export const Route = createRootRoute({
 			},
 			{
 				name: "theme-color",
-				content: "#08090a",
+				content: "#fafaf8",
 			},
 			{
 				name: "description",
 				content:
-					"Midnight precision instrument — Linear-style design system demo.",
+					"Daylight precision instrument — Linear-style design system demo.",
 			},
 			{
-				title: "Linear-style — Midnight Precision",
+				title: "Linear-style — Daylight Precision",
 			},
 		],
 		links: [

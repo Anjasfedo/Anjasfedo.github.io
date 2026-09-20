@@ -22,7 +22,7 @@ const ISSUES = [
 	},
 	{
 		id: "ENG-2704",
-		title: "Kanban drag states on midnight canvas",
+		title: "Kanban drag states on paper canvas",
 		tag: "In Progress",
 		tint: "text-signal-teal",
 	},
@@ -51,9 +51,9 @@ function Logo() {
 				fill="none"
 				aria-hidden="true"
 			>
-				<rect x="1" y="1" width="7" height="7" rx="1.5" fill="#fff" />
-				<rect x="10" y="1" width="7" height="7" rx="3.5" fill="#8a8f98" />
-				<rect x="1" y="10" width="7" height="7" rx="3.5" fill="#8a8f98" />
+				<rect x="1" y="1" width="7" height="7" rx="1.5" fill="#121215" />
+				<rect x="10" y="1" width="7" height="7" rx="3.5" fill="#a3a29b" />
+				<rect x="1" y="10" width="7" height="7" rx="3.5" fill="#a3a29b" />
 				<rect x="10" y="10" width="7" height="7" rx="1.5" fill="#e4f222" />
 			</svg>
 			<span className="text-[16px] font-medium tracking-[-0.01em] text-paper">
@@ -104,7 +104,7 @@ function BadgeRow() {
 			{TAGS.map((tag) => (
 				<span
 					key={tag.label}
-					className="inline-flex items-center gap-1.5 rounded-badge bg-white/5 px-1.5 py-0.5 text-[12px] text-fog"
+					className="inline-flex items-center gap-1.5 rounded-badge bg-black/[0.04] px-1.5 py-0.5 text-[12px] text-fog"
 				>
 					<span className={`h-1.5 w-1.5 rounded-full ${tag.dot}`} />
 					{tag.label}
@@ -141,12 +141,12 @@ function ProductFrame() {
 								<span className="flex-1 truncate text-[13px] text-mist">
 									{issue.title}
 								</span>
-								<span className="hidden rounded-full bg-white/5 px-3 py-1 text-[12px] text-mist sm:block">
+								<span className="hidden rounded-full bg-black/[0.04] px-3 py-1 text-[12px] text-mist sm:block">
 									{issue.tag}
 								</span>
 							</li>
 						))}
-						<li className="flex items-center gap-3 bg-white/[0.02] px-4 py-3 shadow-sm">
+						<li className="flex items-center gap-3 bg-black/[0.02] px-4 py-3 shadow-sm">
 							<span className="font-mono text-[12px] text-ash">AI</span>
 							<span className="flex-1 text-[13px] text-fog">
 								Agent triaged 14 issues while you slept…
@@ -218,17 +218,17 @@ function Home() {
 						</a>
 					</div>
 					<h1 className="mt-8 max-w-3xl text-[48px] font-medium leading-[1] tracking-[-0.022em] text-paper md:text-heading-lg">
-						The midnight command center for product teams
+						The daylight command center for product teams
 					</h1>
 					<p className="mt-5 max-w-xl text-[16px] leading-[1.5] text-fog">
-						Issue tracking, kanban, and AI triage on a quiet near-black canvas.
-						One electric accent, hairline borders, zero ornament — the product
-						UI is the visual texture.
+						Issue tracking, kanban, and AI triage on a quiet paper canvas. One
+						electric accent, hairline borders, zero ornament — the product UI is
+						the visual texture.
 					</p>
 					<div id="cta" className="mt-8 flex flex-wrap items-center gap-4">
 						<a
 							href="#cta"
-							className="rounded-md bg-acid-lime px-4 py-2.5 text-[14px] font-medium tracking-[-0.011em] text-void shadow-cta transition-opacity hover:opacity-90"
+							className="rounded-md bg-acid-lime px-4 py-2.5 text-[14px] font-medium tracking-[-0.011em] text-pitch shadow-cta transition-opacity hover:opacity-90"
 						>
 							Start building
 						</a>
@@ -240,7 +240,7 @@ function Home() {
 					<div className="relative mt-12">
 						<div
 							aria-hidden="true"
-							className="absolute inset-x-0 -bottom-10 top-1/3 bg-gradient-to-b from-void via-mist/10 to-mist/25 blur-2xl"
+							className="absolute inset-x-0 -bottom-10 top-1/3 bg-gradient-to-b from-void via-graphite to-smoke/70 blur-2xl"
 						/>
 						<div className="relative">
 							<ProductFrame />
@@ -296,7 +296,7 @@ function Home() {
 								</button>
 								<button
 									type="button"
-									className="rounded-full bg-white/5 px-3 py-1 text-[12px] text-mist transition-colors hover:text-paper"
+									className="rounded-full bg-black/[0.04] px-3 py-1 text-[12px] text-mist transition-colors hover:text-paper"
 								>
 									Pill trigger
 								</button>
@@ -306,11 +306,11 @@ function Home() {
 							<input
 								type="text"
 								placeholder="Search issues, projects, agents…"
-								className="w-full flex-1 rounded-md border border-white/10 bg-white/[0.02] px-3.5 py-3 text-[14px] text-mist placeholder:text-fog focus:border-mist focus:outline-none"
+								className="w-full flex-1 rounded-md border border-black/10 bg-black/[0.02] px-3.5 py-3 text-[14px] text-mist placeholder:text-fog focus:border-mist focus:outline-none"
 							/>
 							<button
 								type="button"
-								className="shrink-0 rounded-md bg-acid-lime px-4 py-3 text-[14px] font-medium text-void transition-opacity hover:opacity-90"
+								className="shrink-0 rounded-md bg-acid-lime px-4 py-3 text-[14px] font-medium text-pitch transition-opacity hover:opacity-90"
 							>
 								⌘K Quick find
 							</button>
@@ -321,9 +321,9 @@ function Home() {
 				<footer className="flex flex-col gap-3 border-t border-graphite/70 py-8 text-[13px] text-ash sm:flex-row sm:items-center sm:justify-between">
 					<span className="font-mono text-[12px]">
 						{" "}
-						Midnight precision instrument — Inter + JetBrains Mono{" "}
+						Daylight precision instrument — Inter + JetBrains Mono{" "}
 					</span>
-					<span>Canvas #08090a · Hairlines #23252a · Accent #e4f222</span>
+					<span>Canvas #fafaf8 · Hairlines #e3e2de · Accent #e4f222</span>
 				</footer>
 			</main>
 		</div>

@@ -7,7 +7,7 @@ Fresh TanStack Start starter (React 19, Vite 8, Nitro, Tailwind v4). Single pack
 - `pnpm install` / `pnpm dev` (`vite dev --port 3000`) / `pnpm build` (`vite build`) / `pnpm preview`
 - Lint/format: `pnpm lint` (`biome lint`), `pnpm format`, `pnpm check` (`biome check` — use before finishing)
 - No test, typecheck, or lint-staged scripts exist. `tsc` is available via `node_modules` but has no script; don't invent one.
-- Serve production build: `node dist/server/index.mjs` (Nitro output, `dist/` is gitignored)
+- Serve production build: `node .output/server/index.mjs` (Nitro v3 output in `.output/`, gitignored via `.output` entry — README's `dist/` path is stale)
 
 ## Routing — file-based, generated
 
