@@ -478,7 +478,7 @@ Micro: 10px / 510 / lh 1.5 / ls default
   --shadow-subtle-2: rgba(18, 18, 16, 0.12) 0px 0px 0px 1px;
   --shadow-subtle-3: rgba(0, 0, 0, 0.01) 0px 5px 2px 0px, rgba(0, 0, 0, 0.04) 0px 3px 2px 0px, rgba(0, 0, 0, 0.07) 0px 1px 1px 0px, rgba(0, 0, 0, 0.08) 0px 0px 1px 0px;
   --shadow-xl: rgba(18, 18, 16, 0.12) 0px 8px 32px 0px;
-  --shadow-subtle-4: rgba(18, 18, 16, 0.08) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.7) 0px 1px 0px 0px inset, rgba(18, 18, 16, 0.1) 0px 1px 2px 0px, rgba(18, 18, 16, 0.06) 0px 8px 24px 0px;
+oo  --shadow-subtle-4: rgba(18, 18, 16, 0.08) 0px 0px 0px 1px inset, rgba(255, 255, 255, 0.7) 0px 1px 0px 0px inset, rgba(18, 18, 16, 0.1) 0px 1px 2px 0px, rgba(18, 18, 16, 0.06) 0px 8px 24px 0px;
   --shadow-subtle-5: rgba(18, 18, 16, 0.16) 0px 0px 0px 2px;
 }
 ```

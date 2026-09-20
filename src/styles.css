@@ -26,6 +26,9 @@
 	--font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 	--font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
+	/* Weights — Linear caps at 590; medium maps to 510 per spec */
+	--font-weight-medium: 510;
+
 	--text-caption: 13px;
 	--leading-caption: 1.2;
 	--text-body-sm: 15px;
@@ -99,4 +102,32 @@ body {
 ::selection {
 	background: var(--color-acid-lime);
 	color: var(--color-pitch);
+}
+
+@keyframes sheet-in {
+	from {
+		transform: translateY(24px);
+		opacity: 0;
+	}
+	to {
+		transform: none;
+		opacity: 1;
+	}
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.animate-sheet-in {
+	animation: sheet-in 200ms ease-out;
+}
+
+.animate-fade-in {
+	animation: fade-in 150ms ease-out;
 }
