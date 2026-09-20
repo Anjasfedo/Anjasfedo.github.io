@@ -104,9 +104,9 @@ body {
 	color: var(--color-pitch);
 }
 
-@keyframes sheet-in {
+@keyframes modal-in {
 	from {
-		transform: translateY(24px);
+		transform: scale(0.96) translateY(8px);
 		opacity: 0;
 	}
 	to {
@@ -124,8 +124,8 @@ body {
 	}
 }
 
-.animate-sheet-in {
-	animation: sheet-in 200ms ease-out;
+.animate-modal-in {
+	animation: modal-in 180ms ease-out;
 }
 
 .animate-fade-in {

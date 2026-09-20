@@ -327,7 +327,7 @@ function CertificatesPanel({
 	);
 }
 
-function BottomSheet({
+function DetailModal({
 	selection,
 	onClose,
 }: {
@@ -348,13 +348,12 @@ function BottomSheet({
 	}, [onClose]);
 
 	return (
-		<div className="fixed inset-0 z-50">
+		<div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
 			<div
 				className="animate-fade-in absolute inset-0 bg-black/40"
 				onClick={onClose}
 			/>
-			<div className="animate-sheet-in absolute inset-x-0 bottom-0 mx-auto max-h-[80dvh] w-full max-w-[560px] overflow-y-auto rounded-t-xl border border-graphite bg-carbon p-6 shadow-xl">
-				<div className="mx-auto mb-5 h-1 w-10 rounded-full bg-smoke" />
+			<div className="animate-modal-in relative max-h-[85dvh] w-full max-w-[560px] overflow-y-auto rounded-xl border border-graphite bg-carbon p-6 shadow-xl">
 				{selection.kind === "project" && (
 					<span className="flex h-10 w-10 items-center justify-center rounded-md bg-obsidian font-mono text-[12px] font-medium text-mist">
 						{selection.item.initial}
@@ -483,7 +482,7 @@ function Home() {
 				</section>
 			</main>
 			{selection && (
-				<BottomSheet selection={selection} onClose={() => setSelection(null)} />
+				<DetailModal selection={selection} onClose={() => setSelection(null)} />
 			)}
 		</div>
 	);
