@@ -22,3 +22,9 @@ Fresh TanStack Start starter (React 19, Vite 8, Nitro, Tailwind v4). Single pack
 - Biome scope is narrow (`biome.json` `files.includes`): only `src/**`, `.vscode/**`, `index.html`, `vite.config.ts`; `src/routeTree.gen.ts` and `src/styles.css` are explicitly excluded. Style: tabs, double quotes, organize-imports assist on.
 - Styling is Tailwind v4 via `@tailwindcss/vite` in `vite.config.ts`; global CSS `src/styles.css` is linked as `../styles.css?url` in `__root.tsx` head — keep that pattern.
 - Vite plugins order matters: `devtools()` → `nitro({ rollupConfig: { external: [/^@sentry\//] } })` → `tailwindcss()` → `tanstackStart()` → `viteReact()`. Don't reorder/remove without reason.
+
+## Design skill — Impeccable
+
+- Installed project-locally: `.opencode/skills/impeccable/SKILL.md` (v4.3.1) + `.opencode/commands/impeccable.md`. Invoke via `/impeccable <shape|audit|critique|polish|…> <target>` for any UI design/review work.
+- Before editing UI with the skill, run `.opencode/skills/impeccable/scripts/impeccable context` once per session (keep cwd at project root); it loads `PRODUCT.md`, `DESIGN.md`, and the surface brief.
+- Update with `pnpm dlx impeccable update`.
