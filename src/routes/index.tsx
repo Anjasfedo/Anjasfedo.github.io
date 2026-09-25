@@ -24,6 +24,7 @@ type Experience = {
 	blurb: string;
 	details: string;
 	range: string;
+	logo: string;
 	/** Month index (`year * 12 + (month - 1)`); `end: null` means present. */
 	start: number;
 	end: number | null;
@@ -38,6 +39,7 @@ const EXPERIENCES: Experience[] = [
 		details:
 			"Part-time, remote (New Taipei, Taiwan). Bridging traditional desktop software and modern AI — ML integration, software architecture, production code, tests & QA, code reviews. Translating complex requirements into scalable, maintainable solutions.",
 		range: "Jul 2024 — Present",
+		logo: "/perseverance-logo.png",
 		start: 2024 * 12 + 6, // Jul 2024
 		end: null, // Present
 	},
@@ -48,6 +50,7 @@ const EXPERIENCES: Experience[] = [
 		details:
 			"Part-time, on-site (Bengkulu, Indonesia). Full-stack across the SDLC: responsive UIs, server-side logic, database integrations; performance, security, and reliability as requirements evolve. Rapidly learning unfamiliar tech as project demands require.",
 		range: "Jun 2024 — Present",
+		logo: "/aranus-logo.webp",
 		start: 2024 * 12 + 5, // Jun 2024
 		end: null, // Present
 	},
@@ -58,6 +61,7 @@ const EXPERIENCES: Experience[] = [
 		details:
 			"Remote. Analyzed technical needs to select the right AWS services, balancing cost, performance, and security. Produced technical documentation and architecture diagrams; articulated trade-offs between cloud-native services.",
 		range: "Dec 2024 — Jan 2025",
+		logo: "/elitery-logo.jpg",
 		start: 2024 * 12 + 11, // Dec 2024
 		end: 2025 * 12 + 0, // Jan 2025
 	},
@@ -68,6 +72,7 @@ const EXPERIENCES: Experience[] = [
 		details:
 			"Remote. Configured EC2, S3, IAM, and networking; contributed to automated deployment pipelines and Infrastructure as Code to cut manual release overhead. Hands-on with monitoring, CI/CD, and keeping cloud environments secure and cost-efficient.",
 		range: "Nov 2024 — Dec 2024",
+		logo: "/elitery-logo.jpg",
 		start: 2024 * 12 + 10, // Nov 2024
 		end: 2024 * 12 + 11, // Dec 2024
 	},
@@ -78,6 +83,7 @@ const EXPERIENCES: Experience[] = [
 		details:
 			"Contract, hybrid. MVC architecture, MySQL, ORM from CRUD to full-stack apps, RESTful API design, routing, and Blade templating. Hands-on lab sessions and code reviews on professional full-stack workflows.",
 		range: "Aug 2024 — Dec 2024",
+		logo: "/unib-logo.jpg",
 		start: 2024 * 12 + 7, // Aug 2024
 		end: 2024 * 12 + 11, // Dec 2024
 	},
@@ -88,6 +94,7 @@ const EXPERIENCES: Experience[] = [
 		details:
 			"Remote (Bandung). Translated UI/UX wireframes into functional, responsive code; code reviews, sprint planning, Git workflows, and modern CSS. Clean, maintainable frontend code on real project timelines.",
 		range: "Jun 2024 — Aug 2024",
+		logo: "/langit-logo.jpg",
 		start: 2024 * 12 + 5, // Jun 2024
 		end: 2024 * 12 + 7, // Aug 2024
 	},
@@ -98,6 +105,7 @@ const EXPERIENCES: Experience[] = [
 		details:
 			"Contract, hybrid. State management, component architecture, hooks, async JavaScript, performance and accessibility best practices. Led labs, workshops, and debugging sessions with personalized student support.",
 		range: "Jan 2024 — Jun 2024",
+		logo: "/unib-logo.jpg",
 		start: 2024 * 12 + 0, // Jan 2024
 		end: 2024 * 12 + 5, // Jun 2024
 	},
@@ -631,16 +639,24 @@ function ExperienceModal({
 				className="animate-modal-in relative max-h-[85dvh] w-full max-w-[560px] overflow-y-auto rounded-xl border border-graphite bg-carbon p-6 shadow-xl"
 			>
 				<div className="flex items-start justify-between gap-4">
-					<div className="min-w-0">
-						<h2
-							id="experience-modal-title"
-							className="text-[20px] font-medium tracking-[-0.01em] text-paper"
-						>
-							{item.title}
-						</h2>
-						<p className="mt-1 font-mono text-[12px] text-ash">
-							{item.org} · {item.range}
-						</p>
+					<div className="flex min-w-0 items-start gap-3">
+						<img
+							src={item.logo}
+							alt={`${item.org} logo`}
+							loading="lazy"
+							className="h-10 w-10 shrink-0 rounded-badge border border-graphite bg-obsidian object-cover"
+						/>
+						<div className="min-w-0">
+							<h2
+								id="experience-modal-title"
+								className="text-[20px] font-medium tracking-[-0.01em] text-paper"
+							>
+								{item.title}
+							</h2>
+							<p className="mt-1 font-mono text-[12px] text-ash">
+								{item.org} · {item.range}
+							</p>
+						</div>
 					</div>
 					<button
 						type="button"
@@ -786,15 +802,23 @@ function ExperiencesPanel() {
 									onClick={() => setSelected(item)}
 									className="grid w-full cursor-pointer grid-cols-[220px_1fr] items-center gap-4 rounded-xl border border-graphite bg-carbon px-4 py-3 text-left shadow-subtle transition-colors hover:border-smoke focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper"
 								>
-									<span className="min-w-0">
-										<span className="block truncate text-sm font-medium text-paper">
-											{item.title}
-										</span>
-										<span className="mt-0.5 block truncate text-[13px] text-ash">
-											{item.org}
-										</span>
-										<span className="mt-1 block font-mono text-[10px] uppercase tabular-nums text-ash">
-											{item.range}
+									<span className="flex min-w-0 items-center gap-3">
+										<img
+											src={item.logo}
+											alt={`${item.org} logo`}
+											loading="lazy"
+											className="h-10 w-10 shrink-0 rounded-badge border border-graphite bg-obsidian object-cover"
+										/>
+										<span className="min-w-0">
+											<span className="block truncate text-sm font-medium text-paper">
+												{item.title}
+											</span>
+											<span className="mt-0.5 block truncate text-[13px] text-ash">
+												{item.org}
+											</span>
+											<span className="mt-1 block font-mono text-[10px] uppercase tabular-nums text-ash">
+												{item.range}
+											</span>
 										</span>
 									</span>
 									<span
@@ -828,15 +852,23 @@ function ExperiencesPanel() {
 						<button
 							type="button"
 							onClick={() => setSelected(item)}
-							className="block w-full cursor-pointer py-4 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper"
+							className="flex w-full cursor-pointer items-center gap-3 py-4 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper"
 						>
-							<h3 className="text-[15px] font-medium text-paper">
-								{item.title}{" "}
-								<span className="font-normal text-ash">@ {item.org}</span>
-							</h3>
-							<p className="mt-1 font-mono text-[11px] uppercase text-ash">
-								{item.range}
-							</p>
+							<img
+								src={item.logo}
+								alt={`${item.org} logo`}
+								loading="lazy"
+								className="h-10 w-10 shrink-0 rounded-badge border border-graphite bg-obsidian object-cover"
+							/>
+							<span className="min-w-0">
+								<h3 className="text-[15px] font-medium text-paper">
+									{item.title}{" "}
+									<span className="font-normal text-ash">@ {item.org}</span>
+								</h3>
+								<p className="mt-1 font-mono text-[11px] uppercase text-ash">
+									{item.range}
+								</p>
+							</span>
 						</button>
 					</li>
 				))}
@@ -893,33 +925,52 @@ function ProjectsPanel() {
 	);
 }
 
+const ISSUER_LOGOS: Record<string, string> = {
+	Google: "/google-logo.jpg",
+	"Dicoding Indonesia": "/dicoding-logo.jpg",
+	freeCodeCamp: "/freecodecamp-logo.jpg",
+};
+
 function CertificatesPanel() {
 	return (
 		<ul className="divide-y divide-graphite/70 border-y border-graphite/70">
-			{CERTIFICATES.map((cert) => (
-				<li
-					key={cert.name}
-					className="flex items-center justify-between gap-4 py-4"
-				>
-					<div className="min-w-0">
-						<h3
-							title={cert.name}
-							className="truncate text-[15px] font-medium text-paper"
-						>
-							{cert.name}
-						</h3>
-						<p
-							title={cert.issuer}
-							className="mt-0.5 truncate text-[13px] text-ash"
-						>
-							{cert.issuer}
-						</p>
-					</div>
-					<span className="shrink-0 font-mono text-[11px] tabular-nums text-ash">
-						{cert.year}
-					</span>
-				</li>
-			))}
+			{CERTIFICATES.map((cert) => {
+				const logo = ISSUER_LOGOS[cert.issuer];
+				return (
+					<li
+						key={cert.name}
+						className="flex items-center justify-between gap-4 py-4"
+					>
+						<div className="flex min-w-0 items-center gap-3">
+							{logo && (
+								<img
+									src={logo}
+									alt={`${cert.issuer} logo`}
+									loading="lazy"
+									className="h-10 w-10 shrink-0 rounded-badge border border-graphite bg-obsidian object-cover"
+								/>
+							)}
+							<div className="min-w-0">
+								<h3
+									title={cert.name}
+									className="truncate text-[15px] font-medium text-paper"
+								>
+									{cert.name}
+								</h3>
+								<p
+									title={cert.issuer}
+									className="mt-0.5 truncate text-[13px] text-ash"
+								>
+									{cert.issuer}
+								</p>
+							</div>
+						</div>
+						<span className="shrink-0 font-mono text-[11px] tabular-nums text-ash">
+							{cert.year}
+						</span>
+					</li>
+				);
+			})}
 		</ul>
 	);
 }
