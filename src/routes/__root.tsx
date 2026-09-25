@@ -21,13 +21,18 @@ export const Route = createRootRoute({
 			{
 				name: "description",
 				content:
-					"Daylight precision instrument — Linear-style design system demo.",
+					"Anjasfedo — Software Engineer from Bengkulu, Indonesia. Scalable, efficient software systems.",
 			},
 			{
-				title: "Linear-style — Daylight Precision",
+				title: "Anjasfedo — Software Engineer",
 			},
 		],
 		links: [
+			{
+				rel: "icon",
+				type: "image/webp",
+				href: "/profile-circle.webp",
+			},
 			{
 				rel: "stylesheet",
 				href: appCss,

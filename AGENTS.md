@@ -32,6 +32,12 @@ TanStack Start portfolio (React 19, Vite 8, Nitro, Tailwind v4). Single package,
 - Vite plugins order matters: `devtools()` → `nitro({ rollupConfig: { external: [/^@sentry\//] } })` → `tailwindcss()` → `tanstackStart()` → `viteReact()`. Don't reorder/remove without reason.
 - `reference/` is untracked and contains a separate nested Astro repo (`reference/Anjasfedo.github.io`, own `.git`, npm scripts). Ignore it for root work — never run its scripts from here or edit it unless asked.
 
+## Browser verification — Playwright MCP
+
+- `opencode.json` registers the `playwright` MCP (`@playwright/mcp@latest --browser chrome`, uses system Chrome — no browser download). MCP servers load at session start — restart OpenCode after changing it.
+- Prefer `browser_*` tools (navigate/screenshot/interact) against the dev server for UI checks over headless-Chrome CLI screenshots.
+- Dev port shifts when busy (`pnpm dev` fell back to `:3001` once) — confirm the actual URL from server output before driving the browser.
+
 ## Design skill — Impeccable
 
 - Installed project-locally: `.opencode/skills/impeccable/SKILL.md` (v4.3.1) + `.opencode/commands/impeccable.md`. Invoke via `/impeccable <shape|audit|critique|polish|…> <target>` for any UI design/review work.
