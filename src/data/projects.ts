@@ -45,6 +45,25 @@ export const PROJECTS: Project[] = [
 	},
 	// 2. Marine Conservation Platforms (LATUN Ecosystem)
 	{
+		name: "LATUN Website",
+		blurb: "Public landing page for marine conservation in Bengkulu.",
+		details:
+			"Full-stack Developer · latun.or.id — Sole contributor (140 commits) to the bilingual ID/EN landing page for Laut Untuk Negeri: programs (livelihood, marine, terrestrial), Berita, Agenda, Galeri, Video, Unduhan, Layanan, grant banner integration, newsletter, and contact.",
+		href: "https://latun.or.id/",
+		initial: "LA",
+		logo: `${import.meta.env.BASE_URL}latun-main-logo.png`,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}latun-landing-page.png`,
+				caption: "LATUN landing page hero section",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}latun-landing-github-statspng.png`,
+				caption: "Git commit contribution statistics (100% contribution)",
+			},
+		],
+	},
+	{
 		name: "Sistem Grant LATUN",
 		blurb: "Grant management platform for coastal & marine conservation.",
 		details:
@@ -64,25 +83,6 @@ export const PROJECTS: Project[] = [
 			},
 			{
 				src: `${import.meta.env.BASE_URL}grant-latun-github-stats.png`,
-				caption: "Git commit contribution statistics (100% contribution)",
-			},
-		],
-	},
-	{
-		name: "LATUN Website",
-		blurb: "Public landing page for marine conservation in Bengkulu.",
-		details:
-			"Full-stack Developer · latun.or.id — Sole contributor (140 commits) to the bilingual ID/EN landing page for Laut Untuk Negeri: programs (livelihood, marine, terrestrial), Berita, Agenda, Galeri, Video, Unduhan, Layanan, grant banner integration, newsletter, and contact.",
-		href: "https://latun.or.id/",
-		initial: "LA",
-		logo: `${import.meta.env.BASE_URL}latun-main-logo.png`,
-		images: [
-			{
-				src: `${import.meta.env.BASE_URL}latun-landing-page.png`,
-				caption: "LATUN landing page hero section",
-			},
-			{
-				src: `${import.meta.env.BASE_URL}latun-landing-github-statspng.png`,
 				caption: "Git commit contribution statistics (100% contribution)",
 			},
 		],
