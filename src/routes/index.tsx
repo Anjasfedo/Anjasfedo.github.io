@@ -5,14 +5,86 @@ export const Route = createFileRoute("/")({ component: Home });
 
 const PORTRAIT_URL = "/profile-circle.webp";
 
+function GitHubIcon({ className = "" }: { className?: string }) {
+	return (
+		<svg
+			viewBox="0 0 24 24"
+			fill="currentColor"
+			aria-hidden="true"
+			className={className}
+		>
+			<path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.15c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12v3.15c0 .3.21.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+		</svg>
+	);
+}
+
+function LinkedInIcon({ className = "" }: { className?: string }) {
+	return (
+		<svg
+			viewBox="0 0 24 24"
+			fill="currentColor"
+			aria-hidden="true"
+			className={className}
+		>
+			<path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.55V9h3.57v11.45Z" />
+		</svg>
+	);
+}
+
+function InstagramIcon({ className = "" }: { className?: string }) {
+	return (
+		<svg
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="2"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			aria-hidden="true"
+			className={className}
+		>
+			<rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+			<path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+			<line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+		</svg>
+	);
+}
+
+function EmailIcon({ className = "" }: { className?: string }) {
+	return (
+		<svg
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			strokeWidth="2"
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			aria-hidden="true"
+			className={className}
+		>
+			<rect width="20" height="16" x="2" y="4" rx="2" />
+			<path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+		</svg>
+	);
+}
+
 const LINKS = [
-	{ label: "GitHub", href: "https://github.com/anjasfedo" },
+	{
+		label: "GitHub",
+		href: "https://github.com/anjasfedo",
+		Icon: GitHubIcon,
+	},
 	{
 		label: "LinkedIn",
 		href: "https://linkedin.com/in/m-anjasfedo-afridiansah",
+		Icon: LinkedInIcon,
 	},
-	{ label: "Instagram", href: "https://www.instagram.com/anjas_fedo/" },
-	{ label: "Email", href: "mailto:fedoafridiansah@gmail.com" },
+	{
+		label: "Instagram",
+		href: "https://www.instagram.com/anjas_fedo/",
+		Icon: InstagramIcon,
+	},
+	{ label: "Email", href: "mailto:fedoafridiansah@gmail.com", Icon: EmailIcon },
 ];
 
 const TABS = ["Experiences", "Projects", "Certificates"] as const;
@@ -138,6 +210,9 @@ type Project = {
 	details: string;
 	href: string;
 	initial: string;
+	logo: string;
+	/** Dark tile background for light-on-transparent artwork. */
+	darkLogo?: boolean;
 };
 
 const PROJECTS: Project[] = [
@@ -148,6 +223,8 @@ const PROJECTS: Project[] = [
 			"Full-stack Developer · grant.latun.or.id — Admin panel plus Mitra portal, 6-step proposal wizard, 12-document verification workflow, dynamic DOCX legal generation (SK, SPK, RAB), reporting & self-assessments, guided tours, and notifications.",
 		href: "https://grant.latun.or.id/",
 		initial: "GL",
+		logo: "/latun-logo.png",
+		darkLogo: true,
 	},
 	{
 		name: "Pulih Apps",
@@ -156,6 +233,7 @@ const PROJECTS: Project[] = [
 			"Cloud Computing cohort · May — Jun 2024 — Designed and deployed the backend: Django REST Framework on Cloud Run with Cloud SQL (PostgreSQL). APIs, auth, IAM, and serverless deploy for a production-ready, scalable app.",
 		href: "https://github.com/C241-PS019/Pulih-Apps-CC",
 		initial: "PA",
+		logo: "/github-logo.svg",
 	},
 	{
 		name: "PPL Point of Sale",
@@ -164,6 +242,7 @@ const PROJECTS: Project[] = [
 			"Full-stack Developer · Sep — Dec 2023 — Point-of-sale web app for the Software Development Project course (Universitas Bengkulu). Laravel + MySQL with MVC, UML, and sprint planning — my first complete app built end-to-end.",
 		href: "https://github.com/Anjasfedo/PPL-Point-Of-Sale",
 		initial: "PS",
+		logo: "/github-logo.svg",
 	},
 ];
 
@@ -190,7 +269,7 @@ const CERTIFICATES: Certificate[] = [
 		year: "Mar 2024",
 	},
 	{
-		name: "Menjadi Google Cloud Engineer",
+		name: "Become a Google Cloud Engineer",
 		issuer: "Dicoding Indonesia",
 		year: "May 2024",
 	},
@@ -345,212 +424,212 @@ const CERTIFICATES: Certificate[] = [
 		year: "May 2024",
 	},
 	{
-		name: "Belajar Dasar Pemrograman Web",
+		name: "Learn Basic Web Programming",
 		issuer: "Dicoding Indonesia",
 		year: "Mar 2024",
 	},
 	{
-		name: "Belajar Dasar Pemrograman JavaScript",
+		name: "Learn Basic JavaScript Programming",
 		issuer: "Dicoding Indonesia",
 		year: "Apr 2024",
 	},
 	{
-		name: "Memulai Dasar Pemrograman untuk Menjadi Pengembang Software",
+		name: "Starting with Basic Programming to Become a Software Developer",
 		issuer: "Dicoding Indonesia",
 		year: "Feb 2024",
 	},
 	{
-		name: "Belajar Dasar Structured Query Language (SQL)",
+		name: "Learn Basic Structured Query Language (SQL)",
 		issuer: "Dicoding Indonesia",
 		year: "Oct 2023",
 	},
 	{
-		name: "Belajar Dasar Git dengan GitHub",
+		name: "Learn Basic Git with GitHub",
 		issuer: "Dicoding Indonesia",
 		year: "Feb 2024",
 	},
 	{
-		name: "Belajar Dasar AI",
+		name: "Learn Basic AI",
 		issuer: "Dicoding Indonesia",
 		year: "May 2024",
 	},
 	{
-		name: "Belajar Penerapan Machine Learning dengan Google Cloud",
+		name: "Learn Applied Machine Learning with Google Cloud",
 		issuer: "Dicoding Indonesia",
 		year: "May 2024",
 	},
 	{
-		name: "Belajar Membuat Aplikasi Back-End untuk Pemula dengan Google Cloud",
+		name: "Learn to Build Back-End Applications for Beginners with Google Cloud",
 		issuer: "Dicoding Indonesia",
 		year: "May 2024",
 	},
 	{
-		name: "Pengenalan ke Logika Pemrograman (Programming Logic 101)",
+		name: "Introduction to Programming Logic (Programming Logic 101)",
 		issuer: "Dicoding Indonesia",
 		year: "Feb 2024",
 	},
 	{
-		name: "Belajar Pemrograman Prosedural dengan Python",
+		name: "Learn Procedural Programming with Python",
 		issuer: "Dicoding Indonesia",
 		year: "Jan 2024",
 	},
 	{
-		name: "Memulai Pemrograman Dengan Java",
+		name: "Start Programming with Java",
 		issuer: "Dicoding Indonesia",
 		year: "Dec 2023",
 	},
 	{
-		name: "Memulai Pemrograman Dengan C",
+		name: "Start Programming with C",
 		issuer: "Dicoding Indonesia",
 		year: "Dec 2023",
 	},
 	{
-		name: "Belajar Prinsip Pemrograman SOLID",
+		name: "Learn SOLID Programming Principles",
 		issuer: "Dicoding Indonesia",
 		year: "Dec 2023",
 	},
 	{
-		name: "Belajar Pemrograman Fungsional dengan Haskell",
+		name: "Learn Functional Programming with Haskell",
 		issuer: "Dicoding Indonesia",
 		year: "Dec 2023",
 	},
 	{
-		name: "Belajar Membuat Aplikasi Web dengan React",
+		name: "Learn to Build Web Applications with React",
 		issuer: "Dicoding Indonesia",
 		year: "Dec 2023",
 	},
 	{
-		name: "Belajar Machine Learning untuk Pemula",
+		name: "Learn Machine Learning for Beginners",
 		issuer: "Dicoding Indonesia",
 		year: "Dec 2023",
 	},
 	{
-		name: "Belajar Membuat Front-End Web untuk Pemula",
+		name: "Learn to Build Front-End Web for Beginners",
 		issuer: "Dicoding Indonesia",
 		year: "Dec 2023",
 	},
 	{
-		name: "Belajar Dasar Visualisasi Data",
+		name: "Learn Basic Data Visualization",
 		issuer: "Dicoding Indonesia",
 		year: "Dec 2023",
 	},
 	{
-		name: "Memulai Pemrograman dengan Python",
+		name: "Start Programming with Python",
 		issuer: "Dicoding Indonesia",
 		year: "Dec 2023",
 	},
 	{
-		name: "Belajar Membuat Aplikasi Back-End untuk Pemula",
+		name: "Learn to Build Back-End Applications for Beginners",
 		issuer: "Dicoding Indonesia",
 		year: "Dec 2023",
 	},
 	{
-		name: "Belajar Membuat Aplikasi Flutter untuk Pemula",
+		name: "Learn to Build Flutter Applications for Beginners",
 		issuer: "Dicoding Indonesia",
 		year: "Jan 2025",
 	},
 	{
-		name: "Konsep Auth dan Implementasi di Express.js",
+		name: "Auth Concepts and Implementation in Express.js",
 		issuer: "CODEPOLITAN",
 		year: "Nov 2024",
 	},
 	{
-		name: "Manajemen Hot Data dengan Session di Express.js",
+		name: "Hot Data Management with Sessions in Express.js",
 		issuer: "CODEPOLITAN",
 		year: "Nov 2024",
 	},
 	{
-		name: "Implementasi Relasi Database MongoDB di Express, Mongoose",
+		name: "MongoDB Database Relation Implementation in Express, Mongoose",
 		issuer: "CODEPOLITAN",
 		year: "Nov 2024",
 	},
 	{
-		name: "Belajar Membuat Project Express.js Dengan MongoDB",
+		name: "Learn to Build an Express.js Project with MongoDB",
 		issuer: "CODEPOLITAN",
 		year: "Nov 2024",
 	},
 	{
-		name: "Belajar Menggunakan MongoDB di JavaScript",
+		name: "Learn to Use MongoDB in JavaScript",
 		issuer: "CODEPOLITAN",
 		year: "Nov 2024",
 	},
 	{
-		name: "Belajar RESTful dengan Express.js",
+		name: "Learn RESTful with Express.js",
 		issuer: "CODEPOLITAN",
 		year: "Nov 2024",
 	},
 	{
-		name: "Belajar Membuat Halaman Web Dinamis dengan Express.js dan EJS",
+		name: "Learn to Build Dynamic Web Pages with Express.js and EJS",
 		issuer: "CODEPOLITAN",
 		year: "Nov 2024",
 	},
 	{
-		name: "Belajar Dasar Node.js dan NPM",
+		name: "Learn Basic Node.js and NPM",
 		issuer: "CODEPOLITAN",
 		year: "Nov 2024",
 	},
 	{
-		name: "Belajar AJAX dan Web API",
+		name: "Learn AJAX and Web APIs",
 		issuer: "CODEPOLITAN",
 		year: "Nov 2024",
 	},
 	{
-		name: "Manajemen Route dan Cookies di Express.js",
+		name: "Route and Cookie Management in Express.js",
 		issuer: "CODEPOLITAN",
 		year: "Nov 2024",
 	},
 	{
-		name: "Belajar Relasi Data di MongoDB (Database Relationship)",
+		name: "Learn Data Relations in MongoDB (Database Relationship)",
 		issuer: "CODEPOLITAN",
 		year: "Oct 2024",
 	},
 	{
-		name: "Implementasi Error Handler di Express.js dan Mongoose",
+		name: "Error Handler Implementation in Express.js and Mongoose",
 		issuer: "CODEPOLITAN",
 		year: "Oct 2024",
 	},
 	{
-		name: "Implementasi Middleware pada Express.js",
+		name: "Middleware Implementation in Express.js",
 		issuer: "CODEPOLITAN",
 		year: "Oct 2024",
 	},
 	{
-		name: "Belajar MongoDB",
+		name: "Learn MongoDB",
 		issuer: "CODEPOLITAN",
 		year: "Sep 2024",
 	},
 	{
-		name: "Belajar Konsep OOP di JavaScript",
+		name: "Learn OOP Concepts in JavaScript",
 		issuer: "CODEPOLITAN",
 		year: "Aug 2024",
 	},
 	{
-		name: "Belajar JavaScript Asynchronous",
+		name: "Learn Asynchronous JavaScript",
 		issuer: "CODEPOLITAN",
 		year: "Jul 2024",
 	},
 	{
-		name: "Belajar JavaScript DOM",
+		name: "Learn JavaScript DOM",
 		issuer: "CODEPOLITAN",
 		year: "Jul 2024",
 	},
 	{
-		name: "Belajar JavaScript",
+		name: "Learn JavaScript",
 		issuer: "CODEPOLITAN",
 		year: "Jul 2024",
 	},
 	{
-		name: "Belajar Bootstrap CSS Framework",
+		name: "Learn Bootstrap CSS Framework",
 		issuer: "CODEPOLITAN",
 		year: "Jan 2024",
 	},
 	{
-		name: "Belajar Dasar CSS",
+		name: "Learn Basic CSS",
 		issuer: "CODEPOLITAN",
 		year: "Jan 2024",
 	},
 	{
-		name: "Belajar Dasar HTML",
+		name: "Learn Basic HTML",
 		issuer: "CODEPOLITAN",
 		year: "Jan 2024",
 	},
@@ -711,9 +790,18 @@ function ProjectModal({
 				aria-labelledby="project-modal-title"
 				className="animate-modal-in relative max-h-[85dvh] w-full max-w-[560px] overflow-y-auto rounded-xl border border-graphite bg-carbon p-6 shadow-xl"
 			>
-				<span className="flex h-10 w-10 items-center justify-center rounded-badge bg-obsidian text-[13px] font-medium text-paper">
-					{item.initial}
-				</span>
+				{item.logo ? (
+					<img
+						src={item.logo}
+						alt={`${item.name} logo`}
+						loading="lazy"
+						className={`h-10 w-10 shrink-0 rounded-badge border border-graphite object-cover ${item.darkLogo ? "bg-pitch" : "bg-obsidian"}`}
+					/>
+				) : (
+					<span className="flex h-10 w-10 items-center justify-center rounded-badge bg-obsidian text-[13px] font-medium text-paper">
+						{item.initial}
+					</span>
+				)}
 				<div className="mt-1 flex items-start justify-between gap-4">
 					<div className="min-w-0">
 						<h2
@@ -742,14 +830,6 @@ function ProjectModal({
 				<p className="mt-3 text-[15px] leading-relaxed text-mist">
 					{item.details}
 				</p>
-				<a
-					href={item.href}
-					target="_blank"
-					rel="noopener noreferrer"
-					className="mt-6 block rounded-md bg-acid-lime px-4 py-3 text-center text-[14px] font-medium tracking-[-0.011em] text-pitch shadow-cta transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper"
-				>
-					Open project →
-				</a>
 			</div>
 		</div>
 	);
@@ -890,15 +970,24 @@ function ProjectsPanel() {
 						<button
 							type="button"
 							onClick={() => setSelected(project)}
-							className="group flex h-full w-full cursor-pointer flex-col rounded-xl border border-graphite bg-carbon p-6 text-left transition-colors hover:border-smoke focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper"
+							className="flex h-full w-full cursor-pointer flex-col rounded-xl border border-graphite bg-carbon p-6 text-left transition-colors hover:border-smoke focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper"
 						>
 							<span className="flex items-center gap-3">
-								<span
-									aria-hidden="true"
-									className="flex h-10 w-10 shrink-0 items-center justify-center rounded-badge bg-obsidian text-[13px] font-medium text-paper"
-								>
-									{project.initial}
-								</span>
+								{project.logo ? (
+									<img
+										src={project.logo}
+										alt={`${project.name} logo`}
+										loading="lazy"
+										className={`h-10 w-10 shrink-0 rounded-badge border border-graphite object-cover ${project.darkLogo ? "bg-pitch" : "bg-obsidian"}`}
+									/>
+								) : (
+									<span
+										aria-hidden="true"
+										className="flex h-10 w-10 shrink-0 items-center justify-center rounded-badge bg-obsidian text-[13px] font-medium text-paper"
+									>
+										{project.initial}
+									</span>
+								)}
 								<span className="block min-w-0 text-[16px] font-medium tracking-[-0.01em] text-paper">
 									<span className="block truncate">{project.name}</span>
 								</span>
@@ -906,13 +995,8 @@ function ProjectsPanel() {
 							<span className="mt-4 block flex-1 text-[15px] leading-[1.6] text-ash">
 								{project.blurb}
 							</span>
-							<span className="mt-6 flex items-center justify-between gap-3 border-t border-graphite/70 pt-4">
-								<span className="block min-w-0 flex-1 truncate font-mono text-[12px] tracking-[-0.013em] text-ash">
-									{project.href.replace("https://", "")}
-								</span>
-								<span className="shrink-0 text-[13px] text-mist transition-colors group-hover:text-paper">
-									Details →
-								</span>
+							<span className="mt-6 block truncate border-t border-graphite/70 pt-4 font-mono text-[12px] tracking-[-0.013em] text-ash">
+								{project.href.replace("https://", "")}
 							</span>
 						</button>
 					</li>
@@ -1004,13 +1088,21 @@ function Home() {
 							production.
 						</p>
 						<div className="mt-6 flex flex-wrap items-center gap-2">
-							{LINKS.map((link) => (
+							{LINKS.map(({ label, href, Icon }) => (
 								<a
-									key={link.label}
-									href={link.href}
-									className="rounded-full border border-graphite bg-carbon px-4 py-2 text-[13px] text-mist transition-colors hover:border-smoke hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper"
+									key={label}
+									href={href}
+									aria-label={label}
+									title={label}
+									target={href.startsWith("mailto:") ? undefined : "_blank"}
+									rel={
+										href.startsWith("mailto:")
+											? undefined
+											: "noopener noreferrer"
+									}
+									className="flex h-10 w-10 items-center justify-center rounded-full border border-graphite bg-carbon text-mist transition-colors hover:border-smoke hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper"
 								>
-									{link.label}
+									<Icon className="h-[18px] w-[18px]" />
 								</a>
 							))}
 						</div>
