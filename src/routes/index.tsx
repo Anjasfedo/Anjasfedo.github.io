@@ -1,18 +1,47 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CertificatesPanel } from "../components/panels/CertificatesPanel";
 import { ExperiencesPanel } from "../components/panels/ExperiencesPanel";
 import { ProjectsPanel } from "../components/panels/ProjectsPanel";
 import { LINKS } from "../data/socialLinks";
+// Import TypeScript types
 import type { Tab } from "../types/portfolio";
+import { TAB_IDS, TABS } from "../types/portfolio";
 
 export const Route = createFileRoute("/")({ component: Home });
 
 const PORTRAIT_URL = `${import.meta.env.BASE_URL}profile-circle.webp`;
-const TABS: Tab[] = ["Experiences", "Projects", "Certificates"];
+
+// Helper to convert hash (e.g. "#projects") to Tab ("Projects")
+function getTabFromHash(): Tab {
+	if (typeof window === "undefined") return "Experiences";
+	const hash = window.location.hash.replace("#", "").toLowerCase();
+	const matchedTab = (Object.keys(TAB_IDS) as Tab[]).find(
+		(key) => TAB_IDS[key] === hash,
+	);
+	return matchedTab ?? "Experiences";
+}
 
 function Home() {
-	const [tab, setTab] = useState<Tab>("Experiences");
+	const [tab, setTab] = useState<Tab>(getTabFromHash);
+
+	// Sync tab when browser Back/Forward buttons are clicked
+	useEffect(() => {
+		const handleHashChange = () => {
+			setTab(getTabFromHash());
+		};
+		window.addEventListener("hashchange", handleHashChange);
+		return () => window.removeEventListener("hashchange", handleHashChange);
+	}, []);
+
+	// Handle tab clicks: update React state and URL hash without page jump
+	const handleTabChange = (newTab: Tab) => {
+		setTab(newTab);
+		const targetHash = `#${TAB_IDS[newTab]}`;
+		if (window.location.hash !== targetHash) {
+			window.history.pushState(null, "", targetHash);
+		}
+	};
 
 	return (
 		<div className="bg-void text-mist">
@@ -63,24 +92,34 @@ function Home() {
 						aria-label="Profile sections"
 						className="sticky top-0 z-10 flex gap-6 border-b border-graphite/70 bg-void pt-3"
 					>
-						{TABS.map((name) => (
-							<button
-								key={name}
-								type="button"
-								role="tab"
-								aria-selected={tab === name}
-								onClick={() => setTab(name)}
-								className={`-mb-px border-b-2 pb-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-paper ${
-									tab === name
-										? "border-paper text-paper"
-										: "border-transparent text-ash hover:text-mist"
-								}`}
-							>
-								{name}
-							</button>
-						))}
+						{TABS.map((name) => {
+							const tabId = TAB_IDS[name];
+							return (
+								<button
+									key={name}
+									id={`tab-${tabId}`}
+									type="button"
+									role="tab"
+									aria-selected={tab === name}
+									aria-controls={`panel-${tabId}`}
+									onClick={() => handleTabChange(name)}
+									className={`-mb-px border-b-2 pb-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-paper ${
+										tab === name
+											? "border-paper text-paper"
+											: "border-transparent text-ash hover:text-mist"
+									}`}
+								>
+									{name}
+								</button>
+							);
+						})}
 					</div>
-					<div className="mt-6" role="tabpanel">
+					<div
+						className="mt-6"
+						role="tabpanel"
+						id={`panel-${TAB_IDS[tab]}`}
+						aria-labelledby={`tab-${TAB_IDS[tab]}`}
+					>
 						{tab === "Experiences" && <ExperiencesPanel />}
 						{tab === "Projects" && <ProjectsPanel />}
 						{tab === "Certificates" && <CertificatesPanel />}

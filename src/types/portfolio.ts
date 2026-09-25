@@ -1,6 +1,13 @@
 import type { ComponentType } from "react";
 
-export type Tab = "Experiences" | "Projects" | "Certificates";
+export const TABS = ["Experiences", "Projects", "Certificates"] as const;
+export type Tab = (typeof TABS)[number];
+
+export const TAB_IDS: Record<Tab, string> = {
+	Experiences: "experiences",
+	Projects: "projects",
+	Certificates: "certificates",
+};
 
 export interface Experience {
 	title: string;
