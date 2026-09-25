@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export const Route = createFileRoute("/")({ component: Home });
 
-const PORTRAIT_URL = "/profile-circle.webp";
+const PORTRAIT_URL = `${import.meta.env.BASE_URL}profile-circle.webp`;
 
 function GitHubIcon({ className = "" }: { className?: string }) {
 	return (
@@ -111,7 +111,7 @@ const EXPERIENCES: Experience[] = [
 		details:
 			"Part-time, remote (New Taipei, Taiwan). Bridging traditional desktop software and modern AI — ML integration, software architecture, production code, tests & QA, code reviews. Translating complex requirements into scalable, maintainable solutions.",
 		range: "Jul 2024 — Present",
-		logo: "/perseverance-logo.png",
+		logo: `${import.meta.env.BASE_URL}perseverance-logo.png`,
 		start: 2024 * 12 + 6, // Jul 2024
 		end: null, // Present
 	},
@@ -122,7 +122,7 @@ const EXPERIENCES: Experience[] = [
 		details:
 			"Part-time, on-site (Bengkulu, Indonesia). Full-stack across the SDLC: responsive UIs, server-side logic, database integrations; performance, security, and reliability as requirements evolve. Rapidly learning unfamiliar tech as project demands require.",
 		range: "Jun 2024 — Present",
-		logo: "/aranus-logo.webp",
+		logo: `${import.meta.env.BASE_URL}aranus-logo.webp`,
 		start: 2024 * 12 + 5, // Jun 2024
 		end: null, // Present
 	},
@@ -133,7 +133,7 @@ const EXPERIENCES: Experience[] = [
 		details:
 			"Remote. Analyzed technical needs to select the right AWS services, balancing cost, performance, and security. Produced technical documentation and architecture diagrams; articulated trade-offs between cloud-native services.",
 		range: "Dec 2024 — Jan 2025",
-		logo: "/elitery-logo.jpg",
+		logo: `${import.meta.env.BASE_URL}elitery-logo.jpg`,
 		start: 2024 * 12 + 11, // Dec 2024
 		end: 2025 * 12 + 0, // Jan 2025
 	},
@@ -144,7 +144,7 @@ const EXPERIENCES: Experience[] = [
 		details:
 			"Remote. Configured EC2, S3, IAM, and networking; contributed to automated deployment pipelines and Infrastructure as Code to cut manual release overhead. Hands-on with monitoring, CI/CD, and keeping cloud environments secure and cost-efficient.",
 		range: "Nov 2024 — Dec 2024",
-		logo: "/elitery-logo.jpg",
+		logo: `${import.meta.env.BASE_URL}elitery-logo.jpg`,
 		start: 2024 * 12 + 10, // Nov 2024
 		end: 2024 * 12 + 11, // Dec 2024
 	},
@@ -155,7 +155,7 @@ const EXPERIENCES: Experience[] = [
 		details:
 			"Contract, hybrid. MVC architecture, MySQL, ORM from CRUD to full-stack apps, RESTful API design, routing, and Blade templating. Hands-on lab sessions and code reviews on professional full-stack workflows.",
 		range: "Aug 2024 — Dec 2024",
-		logo: "/unib-logo.jpg",
+		logo: `${import.meta.env.BASE_URL}unib-logo.jpg`,
 		start: 2024 * 12 + 7, // Aug 2024
 		end: 2024 * 12 + 11, // Dec 2024
 	},
@@ -166,7 +166,7 @@ const EXPERIENCES: Experience[] = [
 		details:
 			"Remote (Bandung). Translated UI/UX wireframes into functional, responsive code; code reviews, sprint planning, Git workflows, and modern CSS. Clean, maintainable frontend code on real project timelines.",
 		range: "Jun 2024 — Aug 2024",
-		logo: "/langit-logo.jpg",
+		logo: `${import.meta.env.BASE_URL}langit-logo.jpg`,
 		start: 2024 * 12 + 5, // Jun 2024
 		end: 2024 * 12 + 7, // Aug 2024
 	},
@@ -177,7 +177,7 @@ const EXPERIENCES: Experience[] = [
 		details:
 			"Contract, hybrid. State management, component architecture, hooks, async JavaScript, performance and accessibility best practices. Led labs, workshops, and debugging sessions with personalized student support.",
 		range: "Jan 2024 — Jun 2024",
-		logo: "/unib-logo.jpg",
+		logo: `${import.meta.env.BASE_URL}unib-logo.jpg`,
 		start: 2024 * 12 + 0, // Jan 2024
 		end: 2024 * 12 + 5, // Jun 2024
 	},
@@ -223,7 +223,7 @@ const PROJECTS: Project[] = [
 			"Full-stack Developer · latun.or.id — Bilingual ID/EN landing page for Laut Untuk Negeri: programs (livelihood, marine, terrestrial), Berita, Agenda, Galeri, Video, Unduhan, Layanan, grant banner integration, newsletter, and contact.",
 		href: "https://latun.or.id/",
 		initial: "LA",
-		logo: "/latun-main-logo.png",
+		logo: `${import.meta.env.BASE_URL}latun-main-logo.png`,
 	},
 	{
 		name: "Sistem Grant LATUN",
@@ -232,7 +232,7 @@ const PROJECTS: Project[] = [
 			"Full-stack Developer · grant.latun.or.id — Admin panel plus Mitra portal, 6-step proposal wizard, 12-document verification workflow, dynamic DOCX legal generation (SK, SPK, RAB), reporting & self-assessments, guided tours, and notifications.",
 		href: "https://grant.latun.or.id/",
 		initial: "GL",
-		logo: "/latun-grant-logo.png",
+		logo: `${import.meta.env.BASE_URL}latun-grant-logo.png`,
 		darkLogo: true,
 	},
 	{
@@ -242,7 +242,7 @@ const PROJECTS: Project[] = [
 			"Full-stack Developer · chikora.rafflesiaagro.com — Landing page for RafflesiaAgro's Chikora app: daily flock recording, real-time FCR & IOFC analytics, IoT sensor integration, harvest alerts, multi-device sync, and marketplace integration; docs, release notes, legal, plus Web app and store links.",
 		href: "https://chikora.rafflesiaagro.com/",
 		initial: "CH",
-		logo: "/chikora-logo.png",
+		logo: `${import.meta.env.BASE_URL}chikora-logo.png`,
 		darkLogo: true,
 	},
 	{
@@ -252,7 +252,7 @@ const PROJECTS: Project[] = [
 			"Cloud Computing cohort · May — Jun 2024 — Designed and deployed the backend: Django REST Framework on Cloud Run with Cloud SQL (PostgreSQL). APIs, auth, IAM, and serverless deploy for a production-ready, scalable app.",
 		href: "https://github.com/C241-PS019/Pulih-Apps-CC",
 		initial: "PA",
-		logo: "/github-logo.svg",
+		logo: `${import.meta.env.BASE_URL}github-logo.svg`,
 	},
 	{
 		name: "PPL Point of Sale",
@@ -261,7 +261,7 @@ const PROJECTS: Project[] = [
 			"Full-stack Developer · Sep — Dec 2023 — Point-of-sale web app for the Software Development Project course (Universitas Bengkulu). Laravel + MySQL with MVC, UML, and sprint planning — my first complete app built end-to-end.",
 		href: "https://github.com/Anjasfedo/PPL-Point-Of-Sale",
 		initial: "PS",
-		logo: "/github-logo.svg",
+		logo: `${import.meta.env.BASE_URL}github-logo.svg`,
 	},
 ];
 
@@ -1029,14 +1029,14 @@ function ProjectsPanel() {
 }
 
 const ISSUER_LOGOS: Record<string, string> = {
-	Google: "/google-logo.jpg",
-	"Google Cloud": "/google-cloud-logo.svg",
-	"Amazon Web Services": "/aws-logo.png",
-	"Dicoding Indonesia": "/dicoding-logo.jpg",
-	freeCodeCamp: "/freecodecamp-logo.jpg",
-	CODEPOLITAN: "/codepolitan-logo.png",
-	Udemy: "/udemy-logo.png",
-	"LinkedIn Learning": "/linkedin-learning-logo.svg",
+	Google: `${import.meta.env.BASE_URL}google-logo.jpg`,
+	"Google Cloud": `${import.meta.env.BASE_URL}google-cloud-logo.svg`,
+	"Amazon Web Services": `${import.meta.env.BASE_URL}aws-logo.png`,
+	"Dicoding Indonesia": `${import.meta.env.BASE_URL}dicoding-logo.jpg`,
+	freeCodeCamp: `${import.meta.env.BASE_URL}freecodecamp-logo.jpg`,
+	CODEPOLITAN: `${import.meta.env.BASE_URL}codepolitan-logo.png`,
+	Udemy: `${import.meta.env.BASE_URL}udemy-logo.png`,
+	"LinkedIn Learning": `${import.meta.env.BASE_URL}linkedin-learning-logo.svg`,
 };
 
 function CertificatesPanel() {
