@@ -55,7 +55,7 @@ export function ProjectModal({
 								{item.name}
 							</h2>
 							{item.deprecated && (
-								<span className="rounded-md border border-amber-500/30 bg-amber-500/10 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-amber-400">
+								<span className="rounded-md border border-graphite bg-obsidian px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-ash">
 									Deprecated
 								</span>
 							)}
