@@ -22,14 +22,16 @@ export interface Experience {
 }
 
 export interface Project {
-	name: string;
-	blurb: string;
-	details: string;
-	href: string;
-	initial: string;
-	logo: string;
-	/** Dark tile background for light-on-transparent artwork. */
-	darkLogo?: boolean;
+    name: string;
+    blurb: string;
+    details: string;
+    href: string;
+    initial: string;
+    logo: string;
+    /** Dark tile background for light-on-transparent artwork. */
+    darkLogo?: boolean;
+    /** Mark project as deprecated/inactive. */
+    deprecated?: boolean;
 }
 
 export interface Certificate {
