@@ -1,13 +1,13 @@
 import type { Certificate } from "../types/portfolio";
 
 export const ISSUER_LOGOS: Record<string, string> = {
-    Google: `${import.meta.env.BASE_URL}google-logo.jpg`,
+    Google: `${import.meta.env.BASE_URL}google-logo.webp`,
     "Google Cloud": `${import.meta.env.BASE_URL}google-cloud-logo.svg`,
-    "Amazon Web Services": `${import.meta.env.BASE_URL}aws-logo.png`,
-    "Dicoding Indonesia": `${import.meta.env.BASE_URL}dicoding-logo.jpg`,
-    freeCodeCamp: `${import.meta.env.BASE_URL}freecodecamp-logo.jpg`,
-    CODEPOLITAN: `${import.meta.env.BASE_URL}codepolitan-logo.png`,
-    Udemy: `${import.meta.env.BASE_URL}udemy-logo.png`,
+    "Amazon Web Services": `${import.meta.env.BASE_URL}aws-logo.webp`,
+    "Dicoding Indonesia": `${import.meta.env.BASE_URL}dicoding-logo.webp`,
+    freeCodeCamp: `${import.meta.env.BASE_URL}freecodecamp-logo.webp`,
+    CODEPOLITAN: `${import.meta.env.BASE_URL}codepolitan-logo.webp`,
+    Udemy: `${import.meta.env.BASE_URL}udemy-logo.webp`,
     "LinkedIn Learning": `${import.meta.env.BASE_URL}linkedin-learning-logo.svg`,
 };
 

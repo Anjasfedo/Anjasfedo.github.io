@@ -9,7 +9,7 @@ export const PROJECTS: Project[] = [
 			"Full-stack Developer · chikora.rafflesiaagro.com — Top contributor with 180+ commits (~46% of total commits) for RafflesiaAgro's Chikora web showcase. Highlighting daily flock recording, real-time FCR & IOFC analytics, IoT sensor integration, harvest alerts, multi-device sync, and marketplace integration.",
 		href: "https://chikora.rafflesiaagro.com/",
 		initial: "CH",
-		logo: `${import.meta.env.BASE_URL}chikora-logo.png`,
+		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
 		darkLogo: true,
 		images: [
 			{
@@ -17,7 +17,7 @@ export const PROJECTS: Project[] = [
 				caption: "Chikora landing page hero section",
 			},
 			{
-				src: `${import.meta.env.BASE_URL}chikora-rafflesiaagro-github-stats.png`,
+				src: `${import.meta.env.BASE_URL}chikora-rafflesiaagro-github-stats.webp`,
 				caption: "Git commit contribution statistics (Top contributor)",
 			},
 		],
@@ -29,7 +29,7 @@ export const PROJECTS: Project[] = [
 			"Mobile App Developer · App Store / Play Store — Architected and built the initial foundation (100% of early repository commits) for Chikora's cross-platform mobile application. Laid the initial codebase for daily flock logging, FCR/HDP analytics, feed tracking, mortality records, and offline sync prior to production expansion.",
 		href: "https://play.google.com/store/apps/details?id=com.rafflesiaagro.chikora",
 		initial: "CM",
-		logo: `${import.meta.env.BASE_URL}chikora-logo.png`,
+		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
 		darkLogo: true,
 		images: [
 			{
@@ -37,7 +37,7 @@ export const PROJECTS: Project[] = [
 				caption: "Chikora mobile app interface preview",
 			},
 			{
-				src: `${import.meta.env.BASE_URL}chikora-mobile-initial-github-stats.png`,
+				src: `${import.meta.env.BASE_URL}chikora-mobile-initial-github-stats.webp`,
 				caption:
 					"Git commit contribution statistics (Initial Mobile Repository)",
 			},
@@ -51,14 +51,14 @@ export const PROJECTS: Project[] = [
 			"Full-stack Developer · latun.or.id — Sole contributor (140 commits) to the bilingual ID/EN landing page for Laut Untuk Negeri: programs (livelihood, marine, terrestrial), Berita, Agenda, Galeri, Video, Unduhan, Layanan, grant banner integration, newsletter, and contact.",
 		href: "https://latun.or.id/",
 		initial: "LA",
-		logo: `${import.meta.env.BASE_URL}latun-main-logo.png`,
+		logo: `${import.meta.env.BASE_URL}latun-main-logo.webp`,
 		images: [
 			{
 				src: `${import.meta.env.BASE_URL}latun-landing-page.webp`,
 				caption: "LATUN landing page hero section",
 			},
 			{
-				src: `${import.meta.env.BASE_URL}latun-landing-github-stats.png`,
+				src: `${import.meta.env.BASE_URL}latun-landing-github-stats.webp`,
 				caption: "Git commit contribution statistics (100% contribution)",
 			},
 		],
@@ -70,7 +70,7 @@ export const PROJECTS: Project[] = [
 			"Full-stack Developer · grant.latun.or.id — Sole contributor (89 commits) to the grant management platform. Built Admin panel & Mitra portal, 6-step proposal wizard, 12-document verification workflow, dynamic DOCX legal generation (SK, SPK, RAB), reporting & self-assessments, guided tours, and notifications.",
 		href: "https://grant.latun.or.id/",
 		initial: "GL",
-		logo: `${import.meta.env.BASE_URL}latun-grant-logo.png`,
+		logo: `${import.meta.env.BASE_URL}latun-grant-logo.webp`,
 		darkLogo: true,
 		images: [
 			{
@@ -78,11 +78,11 @@ export const PROJECTS: Project[] = [
 				caption: "Sistem Grant LATUN landing page",
 			},
 			{
-				src: `${import.meta.env.BASE_URL}grant-latun-admin-dashboard-page.png`,
+				src: `${import.meta.env.BASE_URL}grant-latun-admin-dashboard-page.webp`,
 				caption: "Admin dashboard overview",
 			},
 			{
-				src: `${import.meta.env.BASE_URL}grant-latun-github-stats.png`,
+				src: `${import.meta.env.BASE_URL}grant-latun-github-stats.webp`,
 				caption: "Git commit contribution statistics (100% contribution)",
 			},
 		],
@@ -112,14 +112,14 @@ export const PROJECTS: Project[] = [
 			"Full-stack Developer · Jan 2025 – Nov 2025 · Upwork (Freelance) — Contributed 37 commits during the initial feature development of a 1,400+ commit codebase before handing off to the core team. Developed OpenAI vector similarity search with real-time SSE streaming for candidate matching, BullMQ CV parsing, Stripe subscription management, talent pools, and kanban pipelines in a Turborepo monorepo.",
 		href: "https://yena.ai",
 		initial: "YA",
-		logo: `${import.meta.env.BASE_URL}yena-logo.png`,
+		logo: `${import.meta.env.BASE_URL}yena-logo.webp`,
 		images: [
 			{
 				src: `${import.meta.env.BASE_URL}02d-yena-candidate-import-cv-review-data-processed.webp`,
 				caption: "CV parsing & automated candidate data extraction review",
 			},
 			{
-				src: `${import.meta.env.BASE_URL}07-yena-git-stats.png`,
+				src: `${import.meta.env.BASE_URL}07-yena-git-stats.webp`,
 				caption: "Git commit shortlog contribution statistics",
 			},
 		],
@@ -132,14 +132,14 @@ export const PROJECTS: Project[] = [
 			"Full-stack Developer · upmfmipa.unib.ac.id — Lead contributor with 130 commits (~53% of total commits) for Unit Penjaminan Mutu (UPM) FMIPA Universitas Bengkulu: SPMI documents, surveys, reports, downloads, SOPs, and administrative portal.",
 		href: "https://upmfmipa.unib.ac.id/",
 		initial: "UPM",
-		logo: `${import.meta.env.BASE_URL}unib-logo.jpg`,
+		logo: `${import.meta.env.BASE_URL}unib-logo.webp`,
 		images: [
 			{
 				src: `${import.meta.env.BASE_URL}upm-fmipa-unib-landing-page.webp`,
 				caption: "UPM FMIPA UNIB landing page hero section",
 			},
 			{
-				src: `${import.meta.env.BASE_URL}upm-fmipa-unib-github-stats.png`,
+				src: `${import.meta.env.BASE_URL}upm-fmipa-unib-github-stats.webp`,
 				caption: "Git commit contribution statistics (Top contributor)",
 			},
 		],
@@ -153,12 +153,12 @@ export const PROJECTS: Project[] = [
 			"Backend Developer · api.chikora.rafflesiaagro.com — Sole contributor (45 commits) to the legacy RESTful backend built with Go (Chi v5) router, supporting daily flock management, analytics, and mobile/web client synchronization for Chikora. Currently offline.",
 		href: "https://api.chikora.rafflesiaagro.com/",
 		initial: "AC",
-		logo: `${import.meta.env.BASE_URL}chikora-logo.png`,
+		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
 		darkLogo: true,
 		deprecated: true,
 		images: [
 			{
-				src: `${import.meta.env.BASE_URL}api-chikora-rafflesia-agro-git-stats.png`,
+				src: `${import.meta.env.BASE_URL}api-chikora-rafflesia-agro-git-stats.webp`,
 				caption: "Git commit contribution statistics (100% contribution)",
 			},
 		],
@@ -170,12 +170,12 @@ export const PROJECTS: Project[] = [
 			"IoT / Backend Developer · mqtt.rafflesiaagro.com — Sole contributor (28 commits) to the MQTT broker infrastructure bridging IoT sensors, actuator control systems, and backend services within the Aranus Farm / Rafflesia Agro smart poultry ecosystem. Currently offline.",
 		href: "https://mqtt.rafflesiaagro.com/",
 		initial: "MQ",
-		logo: `${import.meta.env.BASE_URL}chikora-logo.png`,
+		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
 		darkLogo: true,
 		deprecated: true,
 		images: [
 			{
-				src: `${import.meta.env.BASE_URL}mqtt-rafflesia-agro-git-stats.png`,
+				src: `${import.meta.env.BASE_URL}mqtt-rafflesia-agro-git-stats.webp`,
 				caption: "Git commit contribution statistics (100% contribution)",
 			},
 		],
@@ -187,12 +187,12 @@ export const PROJECTS: Project[] = [
 			"Backend Developer · api.rafflesiaagro.com — Sole contributor (126 commits) to the legacy REST API service supporting web and mobile apps across the former Aranus Farm and Rafflesia Agro livestock management ecosystem. Currently offline.",
 		href: "https://api.rafflesiaagro.com/",
 		initial: "RA",
-		logo: `${import.meta.env.BASE_URL}chikora-logo.png`,
+		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
 		darkLogo: true,
 		deprecated: true,
 		images: [
 			{
-				src: `${import.meta.env.BASE_URL}api-rafflesia-agro-git-stats.png`,
+				src: `${import.meta.env.BASE_URL}api-rafflesia-agro-git-stats.webp`,
 				caption: "Git commit contribution statistics (100% contribution)",
 			},
 		],
@@ -204,7 +204,7 @@ export const PROJECTS: Project[] = [
 			"Full-stack Developer · rafflesiaagro.com — Sole contributor (18 commits) to the corporate landing page presenting smart farming solutions, product portfolio, company profiles, and contact channels. Currently offline.",
 		href: "https://rafflesiaagro.com/",
 		initial: "RA",
-		logo: `${import.meta.env.BASE_URL}chikora-logo.png`,
+		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
 		darkLogo: true,
 		deprecated: true,
 		images: [
@@ -213,7 +213,7 @@ export const PROJECTS: Project[] = [
 				caption: "Rafflesia Agro landing page hero section",
 			},
 			{
-				src: `${import.meta.env.BASE_URL}rafflesiaagro-landing-website-git-stats.png`,
+				src: `${import.meta.env.BASE_URL}rafflesiaagro-landing-website-git-stats.webp`,
 				caption: "Git commit contribution statistics (100% contribution)",
 			},
 		],
@@ -234,7 +234,7 @@ export const PROJECTS: Project[] = [
 				caption: "Aranus Technology previous landing page hero section",
 			},
 			{
-				src: `${import.meta.env.BASE_URL}aranus-technology-landing-git-stats.png`,
+				src: `${import.meta.env.BASE_URL}aranus-technology-landing-git-stats.webp`,
 				caption: "Git commit contribution statistics (Previous repository)",
 			},
 		],
