@@ -10,6 +10,12 @@ import { TAB_IDS, TABS } from "../types/portfolio";
 
 export const Route = createFileRoute("/")({ component: Home });
 
+const PANELS: Record<Tab, () => React.ReactNode> = {
+	Experiences: ExperiencesPanel,
+	Projects: ProjectsPanel,
+	Certificates: CertificatesPanel,
+};
+
 const PORTRAIT_URL = `${import.meta.env.BASE_URL}profile-circle.webp`;
 
 // Helper to convert hash (e.g. "#projects") to Tab ("Projects")
@@ -23,10 +29,12 @@ function getTabFromHash(): Tab {
 }
 
 function Home() {
-	const [tab, setTab] = useState<Tab>(getTabFromHash);
+	// Start from the prerendered default; read the hash after hydration
+	const [tab, setTab] = useState<Tab>("Experiences");
 
-	// Sync tab when browser Back/Forward buttons are clicked
+	// Sync tab on load and when browser Back/Forward buttons are clicked
 	useEffect(() => {
+		setTab(getTabFromHash());
 		const handleHashChange = () => {
 			setTab(getTabFromHash());
 		};
@@ -49,7 +57,9 @@ function Home() {
 				<div className="grid items-center gap-10 md:grid-cols-[200px_1fr]">
 					<img
 						src={PORTRAIT_URL}
-						alt="Portrait of Anjasfedo"
+						alt="Portrait of M. Anjasfedo Afridiansah"
+						width={200}
+						height={200}
 						className="mx-auto aspect-square w-full max-w-[200px] rounded-full border border-graphite bg-carbon object-cover shadow-subtle"
 					/>
 					<div>
@@ -57,7 +67,7 @@ function Home() {
 							Anjasfedo
 						</h1>
 						<p className="mt-2 font-mono text-[13px] text-ash">
-							Software Engineer — Bengkulu, Indonesia
+							M. Anjasfedo Afridiansah · Software Engineer — Bengkulu, Indonesia
 						</p>
 						<p className="mt-4 max-w-md text-[16px] leading-[1.5] text-ash">
 							I lead mobile engineering and build full-stack systems end to end
@@ -114,16 +124,24 @@ function Home() {
 							);
 						})}
 					</div>
-					<div
-						className="mt-6"
-						role="tabpanel"
-						id={`panel-${TAB_IDS[tab]}`}
-						aria-labelledby={`tab-${TAB_IDS[tab]}`}
-					>
-						{tab === "Experiences" && <ExperiencesPanel />}
-						{tab === "Projects" && <ProjectsPanel />}
-						{tab === "Certificates" && <CertificatesPanel />}
-					</div>
+					{/* All panels stay in the HTML so crawlers index every tab */}
+					{TABS.map((name) => {
+						const tabId = TAB_IDS[name];
+						const Panel = PANELS[name];
+						return (
+							<div
+								key={name}
+								className="mt-6"
+								role="tabpanel"
+								id={`panel-${tabId}`}
+								aria-labelledby={`tab-${tabId}`}
+								hidden={tab !== name}
+							>
+								<h2 className="sr-only">{name}</h2>
+								<Panel />
+							</div>
+						);
+					})}
 				</section>
 			</main>
 		</div>

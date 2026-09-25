@@ -13,11 +13,11 @@ export const PROJECTS: Project[] = [
 		darkLogo: true,
 		images: [
 			{
-				src: `${import.meta.env.BASE_URL}chikora-rafflesiaagro-landing-page.png`,
+				src: `${import.meta.env.BASE_URL}chikora-rafflesiaagro-landing-page.webp`,
 				caption: "Chikora landing page hero section",
 			},
 			{
-				src: `${import.meta.env.BASE_URL}chikora-rafflesiaagro-github-statspng.png`,
+				src: `${import.meta.env.BASE_URL}chikora-rafflesiaagro-github-stats.png`,
 				caption: "Git commit contribution statistics (Top contributor)",
 			},
 		],
@@ -37,7 +37,7 @@ export const PROJECTS: Project[] = [
 				caption: "Chikora mobile app interface preview",
 			},
 			{
-				src: `${import.meta.env.BASE_URL}chikora-mobile-initial-githhub-stats.png`,
+				src: `${import.meta.env.BASE_URL}chikora-mobile-initial-github-stats.png`,
 				caption:
 					"Git commit contribution statistics (Initial Mobile Repository)",
 			},
@@ -54,11 +54,11 @@ export const PROJECTS: Project[] = [
 		logo: `${import.meta.env.BASE_URL}latun-main-logo.png`,
 		images: [
 			{
-				src: `${import.meta.env.BASE_URL}latun-landing-page.png`,
+				src: `${import.meta.env.BASE_URL}latun-landing-page.webp`,
 				caption: "LATUN landing page hero section",
 			},
 			{
-				src: `${import.meta.env.BASE_URL}latun-landing-github-statspng.png`,
+				src: `${import.meta.env.BASE_URL}latun-landing-github-stats.png`,
 				caption: "Git commit contribution statistics (100% contribution)",
 			},
 		],
@@ -74,7 +74,7 @@ export const PROJECTS: Project[] = [
 		darkLogo: true,
 		images: [
 			{
-				src: `${import.meta.env.BASE_URL}grant-latun-landing-page.png`,
+				src: `${import.meta.env.BASE_URL}grant-latun-landing-page.webp`,
 				caption: "Sistem Grant LATUN landing page",
 			},
 			{
@@ -98,7 +98,7 @@ export const PROJECTS: Project[] = [
 		logo: `${import.meta.env.BASE_URL}aranus-logo.webp`,
 		images: [
 			{
-				src: `${import.meta.env.BASE_URL}aranus-technology-coolify.png`,
+				src: `${import.meta.env.BASE_URL}aranus-technology-coolify.webp`,
 				caption:
 					"Coolify self-hosted dashboard & container deployment management",
 			},
@@ -115,7 +115,7 @@ export const PROJECTS: Project[] = [
 		logo: `${import.meta.env.BASE_URL}yena-logo.png`,
 		images: [
 			{
-				src: `${import.meta.env.BASE_URL}02d-yena-candidate-import-cv-review-data-processed.png`,
+				src: `${import.meta.env.BASE_URL}02d-yena-candidate-import-cv-review-data-processed.webp`,
 				caption: "CV parsing & automated candidate data extraction review",
 			},
 			{
@@ -135,7 +135,7 @@ export const PROJECTS: Project[] = [
 		logo: `${import.meta.env.BASE_URL}unib-logo.jpg`,
 		images: [
 			{
-				src: `${import.meta.env.BASE_URL}upm-fmipa-unib-landing-page.png`,
+				src: `${import.meta.env.BASE_URL}upm-fmipa-unib-landing-page.webp`,
 				caption: "UPM FMIPA UNIB landing page hero section",
 			},
 			{
@@ -209,11 +209,11 @@ export const PROJECTS: Project[] = [
 		deprecated: true,
 		images: [
 			{
-				src: `${import.meta.env.BASE_URL}rafflesiaagro-landing-page.png`,
+				src: `${import.meta.env.BASE_URL}rafflesiaagro-landing-page.webp`,
 				caption: "Rafflesia Agro landing page hero section",
 			},
 			{
-				src: `${import.meta.env.BASE_URL}rafflesiaagro-landing website-git-stats.png`,
+				src: `${import.meta.env.BASE_URL}rafflesiaagro-landing-website-git-stats.png`,
 				caption: "Git commit contribution statistics (100% contribution)",
 			},
 		],
@@ -230,7 +230,7 @@ export const PROJECTS: Project[] = [
 		deprecated: true,
 		images: [
 			{
-				src: `${import.meta.env.BASE_URL}aranus-technology-landing-page.png`,
+				src: `${import.meta.env.BASE_URL}aranus-technology-landing-page.webp`,
 				caption: "Aranus Technology previous landing page hero section",
 			},
 			{

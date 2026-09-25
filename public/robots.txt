@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://anjasfedo.github.io/sitemap.xml

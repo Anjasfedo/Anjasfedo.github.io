@@ -23,6 +23,8 @@ export function ProjectsPanel() {
 											src={project.logo}
 											alt={`${project.name} logo`}
 											loading="lazy"
+											width={40}
+											height={40}
 											className={`h-10 w-10 shrink-0 rounded-badge border border-graphite object-cover ${project.darkLogo ? "bg-pitch" : "bg-obsidian"}`}
 										/>
 									) : (

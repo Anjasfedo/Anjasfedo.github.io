@@ -56,6 +56,8 @@ export function ExperiencesPanel() {
                                             src={item.logo}
                                             alt={`${item.org} logo`}
                                             loading="lazy"
+                                            width={40}
+                                            height={40}
                                             className="h-10 w-10 shrink-0 rounded-badge border border-graphite bg-obsidian object-cover"
                                         />
                                         <span className="min-w-0">
@@ -107,6 +109,8 @@ export function ExperiencesPanel() {
                                 src={item.logo}
                                 alt={`${item.org} logo`}
                                 loading="lazy"
+                                width={40}
+                                height={40}
                                 className="h-10 w-10 shrink-0 rounded-badge border border-graphite bg-obsidian object-cover"
                             />
                             <span className="min-w-0">

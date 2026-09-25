@@ -49,6 +49,8 @@ export function ProjectModal({
 							src={item.logo}
 							alt={`${item.name} logo`}
 							loading="lazy"
+							width={40}
+							height={40}
 							className={`h-10 w-10 shrink-0 rounded-badge border border-graphite object-cover ${
 								item.darkLogo ? "bg-pitch" : "bg-obsidian"
 							}`}
