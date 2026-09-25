@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import type { Project } from "../../types/portfolio";
+import { CloseIcon } from "../icons";
 
 export function ProjectModal({
 	item,
@@ -31,90 +32,92 @@ export function ProjectModal({
 				role="dialog"
 				aria-modal="true"
 				aria-labelledby="project-modal-title"
-				className="animate-modal-in relative max-h-[85dvh] w-full max-w-[640px] overflow-y-auto rounded-xl border border-graphite bg-carbon p-6 shadow-xl"
+				className="animate-modal-in relative flex max-h-[85dvh] w-full max-w-[640px] flex-col overflow-hidden rounded-xl border border-graphite bg-carbon shadow-xl"
 			>
-				{item.logo ? (
-					<img
-						src={item.logo}
-						alt={`${item.name} logo`}
-						loading="lazy"
-						className={`h-10 w-10 shrink-0 rounded-badge border border-graphite object-cover ${
-							item.darkLogo ? "bg-pitch" : "bg-obsidian"
-						}`}
-					/>
-				) : (
-					<span className="flex h-10 w-10 items-center justify-center rounded-badge bg-obsidian text-[13px] font-medium text-paper">
-						{item.initial}
-					</span>
-				)}
-				<div className="mt-1 flex items-start justify-between gap-4">
-					<div className="min-w-0">
-						<div className="flex items-center gap-2">
-							<h2
-								id="project-modal-title"
-								className="text-[20px] font-medium tracking-[-0.01em] text-paper"
-							>
-								{item.name}
-							</h2>
-							{item.deprecated && (
-								<span className="rounded-md border border-graphite bg-obsidian px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-ash">
-									Deprecated
-								</span>
-							)}
-						</div>
-						<a
-							href={item.href}
-							target="_blank"
-							rel="noopener noreferrer"
-							className="mt-1 inline-block max-w-full truncate font-mono text-[12px] text-ash underline-offset-4 hover:text-paper hover:underline"
-						>
-							{item.href.replace(/^https?:\/\//, "")} ↗
-						</a>
-					</div>
-					<button
-						type="button"
-						onClick={onClose}
-						aria-label="Close"
-						autoFocus
-						className="shrink-0 rounded-full border border-graphite px-3 py-1.5 text-[13px] text-mist transition-colors hover:border-smoke hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper"
-					>
-						✕
-					</button>
-				</div>
-				<p className="mt-4 text-[15px] leading-relaxed text-ash">
-					{item.blurb}
-				</p>
-				<p className="mt-3 text-[15px] leading-relaxed text-mist">
-					{item.details}
-				</p>
-
-				{item.images && item.images.length > 0 && (
-					<div className="mt-6 flex flex-col gap-4 border-t border-graphite/70 pt-4">
-						<span className="font-mono text-[11px] uppercase tracking-wider text-ash">
-							Images
+				<button
+					type="button"
+					onClick={onClose}
+					aria-label="Close"
+					autoFocus
+					className="absolute top-5 right-5 z-10 flex h-11 w-11 items-center justify-center rounded-full border border-graphite bg-carbon text-mist transition-colors hover:border-smoke hover:text-paper focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper"
+				>
+					<CloseIcon className="h-4 w-4" />
+				</button>
+				<div className="overflow-y-auto overscroll-contain p-6">
+					{item.logo ? (
+						<img
+							src={item.logo}
+							alt={`${item.name} logo`}
+							loading="lazy"
+							className={`h-10 w-10 shrink-0 rounded-badge border border-graphite object-cover ${
+								item.darkLogo ? "bg-pitch" : "bg-obsidian"
+							}`}
+						/>
+					) : (
+						<span className="flex h-10 w-10 items-center justify-center rounded-badge bg-obsidian text-[13px] font-medium text-paper">
+							{item.initial}
 						</span>
-						<div className="flex flex-col gap-4">
-							{item.images.map((img, idx) => (
-								<figure
-									key={idx}
-									className="overflow-hidden rounded-lg border border-graphite bg-obsidian"
+					)}
+					<div className="mt-1 flex items-start justify-between gap-4">
+						<div className="min-w-0">
+							<div className="flex items-center gap-2">
+								<h2
+									id="project-modal-title"
+									className="text-[20px] font-medium tracking-[-0.01em] text-paper"
 								>
-									<img
-										src={img.src}
-										alt={img.caption || `${item.name} screenshot ${idx + 1}`}
-										loading="lazy"
-										className="w-full object-cover"
-									/>
-									{img.caption && (
-										<figcaption className="border-t border-graphite/50 p-2.5 text-center font-mono text-[11px] text-ash">
-											{img.caption}
-										</figcaption>
-									)}
-								</figure>
-							))}
+									{item.name}
+								</h2>
+								{item.deprecated && (
+									<span className="rounded-md border border-graphite bg-obsidian px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-ash">
+										Deprecated
+									</span>
+								)}
+							</div>
+							<a
+								href={item.href}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="mt-1 inline-block max-w-full truncate font-mono text-[12px] text-ash underline-offset-4 hover:text-paper hover:underline"
+							>
+								{item.href.replace(/^https?:\/\//, "")} ↗
+							</a>
 						</div>
 					</div>
-				)}
+					<p className="mt-4 text-[15px] leading-relaxed text-ash">
+						{item.blurb}
+					</p>
+					<p className="mt-3 text-[15px] leading-relaxed text-mist">
+						{item.details}
+					</p>
+
+					{item.images && item.images.length > 0 && (
+						<div className="mt-6 flex flex-col gap-4 border-t border-graphite/70 pt-4">
+							<span className="font-mono text-[11px] uppercase tracking-wider text-ash">
+								Images
+							</span>
+							<div className="flex flex-col gap-4">
+								{item.images.map((img, idx) => (
+									<figure
+										key={idx}
+										className="overflow-hidden rounded-lg border border-graphite bg-obsidian"
+									>
+										<img
+											src={img.src}
+											alt={img.caption || `${item.name} screenshot ${idx + 1}`}
+											loading="lazy"
+											className="w-full object-cover"
+										/>
+										{img.caption && (
+											<figcaption className="border-t border-graphite/50 p-2.5 text-center font-mono text-[11px] text-ash">
+												{img.caption}
+											</figcaption>
+										)}
+									</figure>
+								))}
+							</div>
+						</div>
+					)}
+				</div>
 			</div>
 		</div>
 	);

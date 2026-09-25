@@ -8,9 +8,9 @@ export function ProjectsPanel() {
 
 	return (
 		<>
-			<ul className="grid gap-3 sm:grid-cols-2">
+			<ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
 				{PROJECTS.map((project) => (
-					<li key={project.name}>
+					<li key={project.name} className="relative">
 						<button
 							type="button"
 							onClick={() => setSelected(project)}
@@ -47,18 +47,19 @@ export function ProjectsPanel() {
 							<span className="mt-4 block flex-1 text-[15px] leading-[1.6] text-ash">
 								{project.blurb}
 							</span>
-							<div className="mt-6 border-t border-graphite/70 pt-4">
-								<a
-									href={project.href}
-									target="_blank"
-									rel="noopener noreferrer"
-									onClick={(e) => e.stopPropagation()} // Prevents opening the modal when clicking the link
-									className="inline-block max-w-full truncate font-mono text-[12px] tracking-[-0.013em] text-ash underline-offset-4 hover:text-paper hover:underline"
-								>
-									{project.href.replace(/^https?:\/\//, "")} ↗
-								</a>
-							</div>
+							{/* Footer spacer; the link sits over it as a sibling, since <a> can't nest in <button> */}
+							<span className="mt-6 block border-t border-graphite/70 pt-4">
+								<span className="block h-[18px]" />
+							</span>
 						</button>
+						<a
+							href={project.href}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="absolute bottom-6 left-6 max-w-[calc(100%-3rem)] truncate font-mono text-[12px] leading-[18px] tracking-[-0.013em] text-ash underline-offset-4 hover:text-paper hover:underline"
+						>
+							{project.href.replace(/^https?:\/\//, "")} ↗
+						</a>
 					</li>
 				))}
 			</ul>
