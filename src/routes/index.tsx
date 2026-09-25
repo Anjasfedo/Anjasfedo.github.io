@@ -927,8 +927,13 @@ function ProjectsPanel() {
 
 const ISSUER_LOGOS: Record<string, string> = {
 	Google: "/google-logo.jpg",
+	"Google Cloud": "/google-cloud-logo.svg",
+	"Amazon Web Services": "/aws-logo.png",
 	"Dicoding Indonesia": "/dicoding-logo.jpg",
 	freeCodeCamp: "/freecodecamp-logo.jpg",
+	CODEPOLITAN: "/codepolitan-logo.png",
+	Udemy: "/udemy-logo.png",
+	"LinkedIn Learning": "/linkedin-learning-logo.svg",
 };
 
 function CertificatesPanel() {
