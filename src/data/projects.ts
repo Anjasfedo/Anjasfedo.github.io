@@ -125,15 +125,25 @@ export const PROJECTS: Project[] = [
 			},
 		],
 	},
-	{
-		name: "UPM FMIPA UNIB",
-		blurb: "Quality assurance unit website for FMIPA Universitas Bengkulu.",
-		details:
-			"Full-stack Developer · upmfmipa.unib.ac.id — Official website for Unit Penjaminan Mutu (UPM) FMIPA Universitas Bengkulu: SPMI documents, surveys, reports, downloads, SOPs, and administrative portal.",
-		href: "https://upmfmipa.unib.ac.id/",
-		initial: "UPM",
-		logo: `${import.meta.env.BASE_URL}unib-logo.jpg`,
-	},
+{
+        name: "UPM FMIPA UNIB",
+        blurb: "Quality assurance unit website for FMIPA Universitas Bengkulu.",
+        details:
+            "Full-stack Developer · upmfmipa.unib.ac.id — Lead contributor with 130 commits (~53% of total commits) for Unit Penjaminan Mutu (UPM) FMIPA Universitas Bengkulu: SPMI documents, surveys, reports, downloads, SOPs, and administrative portal.",
+        href: "https://upmfmipa.unib.ac.id/",
+        initial: "UPM",
+        logo: `${import.meta.env.BASE_URL}unib-logo.jpg`,
+        images: [
+            {
+                src: `${import.meta.env.BASE_URL}upm-fmipa-unib-landing-page.png`,
+                caption: "UPM FMIPA UNIB landing page hero section",
+            },
+            {
+                src: `${import.meta.env.BASE_URL}upm-fmipa-unib-github-stats.png`,
+                caption: "Git commit contribution statistics (Top contributor)",
+            },
+        ],
+    },
 	{
 		name: "Pulih Apps",
 		blurb: "Bangkit 2024 capstone — cloud backend on Django & GCP.",
