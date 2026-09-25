@@ -31,14 +31,16 @@ export function ProjectModal({
 				role="dialog"
 				aria-modal="true"
 				aria-labelledby="project-modal-title"
-				className="animate-modal-in relative max-h-[85dvh] w-full max-w-[560px] overflow-y-auto rounded-xl border border-graphite bg-carbon p-6 shadow-xl"
+				className="animate-modal-in relative max-h-[85dvh] w-full max-w-[640px] overflow-y-auto rounded-xl border border-graphite bg-carbon p-6 shadow-xl"
 			>
 				{item.logo ? (
 					<img
 						src={item.logo}
 						alt={`${item.name} logo`}
 						loading="lazy"
-						className={`h-10 w-10 shrink-0 rounded-badge border border-graphite object-cover ${item.darkLogo ? "bg-pitch" : "bg-obsidian"}`}
+						className={`h-10 w-10 shrink-0 rounded-badge border border-graphite object-cover ${
+							item.darkLogo ? "bg-pitch" : "bg-obsidian"
+						}`}
 					/>
 				) : (
 					<span className="flex h-10 w-10 items-center justify-center rounded-badge bg-obsidian text-[13px] font-medium text-paper">
@@ -80,6 +82,34 @@ export function ProjectModal({
 				<p className="mt-3 text-[15px] leading-relaxed text-mist">
 					{item.details}
 				</p>
+
+				{item.images && item.images.length > 0 && (
+					<div className="mt-6 flex flex-col gap-4 border-t border-graphite/70 pt-4">
+						<span className="font-mono text-[11px] uppercase tracking-wider text-ash">
+							Images
+						</span>
+						<div className="flex flex-col gap-4">
+							{item.images.map((img, idx) => (
+								<figure
+									key={idx}
+									className="overflow-hidden rounded-lg border border-graphite bg-obsidian"
+								>
+									<img
+										src={img.src}
+										alt={img.caption || `${item.name} screenshot ${idx + 1}`}
+										loading="lazy"
+										className="w-full object-cover"
+									/>
+									{img.caption && (
+										<figcaption className="border-t border-graphite/50 p-2.5 text-center font-mono text-[11px] text-ash">
+											{img.caption}
+										</figcaption>
+									)}
+								</figure>
+							))}
+						</div>
+					</div>
+				)}
 			</div>
 		</div>
 	);

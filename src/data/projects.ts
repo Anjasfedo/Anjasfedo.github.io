@@ -5,22 +5,63 @@ export const PROJECTS: Project[] = [
 		name: "Chikora",
 		blurb: "Landing page for broiler & layer farm management app.",
 		details:
-			"Full-stack Developer · chikora.rafflesiaagro.com — Landing page for RafflesiaAgro's Chikora app: daily flock recording, real-time FCR & IOFC analytics, IoT sensor integration, harvest alerts, multi-device sync, and marketplace integration; docs, release notes, legal, plus Web app and store links.",
+			"Full-stack Developer · chikora.rafflesiaagro.com — Top contributor with 180+ commits (~46% of total commits) for RafflesiaAgro's Chikora app landing page: daily flock recording, real-time FCR & IOFC analytics, IoT sensor integration, harvest alerts, multi-device sync, and marketplace integration; docs, release notes, legal, plus Web app and store links.",
 		href: "https://chikora.rafflesiaagro.com/",
 		initial: "CH",
 		logo: `${import.meta.env.BASE_URL}chikora-logo.png`,
 		darkLogo: true,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}chikora-rafflesiaagro-landing-page.png`,
+				caption: "Chikora landing page hero section",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}chikora-rafflesiaagro-github-statspng.png`,
+				caption: "Git commit contribution statistics (Top contributor)",
+			},
+		],
 	},
 	{
 		name: "Rafflesia Agro",
 		blurb: "Official landing page for agricultural technology company.",
 		details:
-			"Full-stack Developer · rafflesiaagro.com — Corporate landing page presenting smart farming solutions, product portfolio, company profiles, and contact channels. Currently offline.",
+			"Full-stack Developer · rafflesiaagro.com — Sole contributor (18 commits) to the corporate landing page presenting smart farming solutions, product portfolio, company profiles, and contact channels. Currently offline.",
 		href: "https://rafflesiaagro.com/",
 		initial: "RA",
 		logo: `${import.meta.env.BASE_URL}chikora-logo.png`,
 		darkLogo: true,
 		deprecated: true,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}rafflesiaagro-landing-page.png`,
+				caption: "Rafflesia Agro landing page hero section",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}rafflesiaagro-landing website-git-stats.png`,
+				caption: "Git commit contribution statistics (100% contribution)",
+			},
+		],
+	},
+	{
+		name: "Aranus Technology (Legacy)",
+		blurb:
+			"Previous landing page for software development agency (Old Version).",
+		details:
+			"Full-stack Developer · aranustech.co.id — Contributed 90+ commits (~36% of total commits) to the previous company website featuring IT services, portfolio, client testimonials, and contact channels. Superseded by a newer web layout version.",
+		href: "https://aranustech.co.id/",
+		initial: "AT",
+		logo: `${import.meta.env.BASE_URL}aranus-logo.webp`,
+		deprecated: true,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}aranus-technology-landing-page.png`,
+				caption: "Aranus Technology previous landing page hero section",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}aranus-technology-landing-git-stats.png`,
+				caption: "Git commit contribution statistics (Previous repository)",
+			},
+		],
 	},
 	{
 		name: "LATUN Website",
@@ -40,6 +81,25 @@ export const PROJECTS: Project[] = [
 		initial: "GL",
 		logo: `${import.meta.env.BASE_URL}latun-grant-logo.png`,
 		darkLogo: true,
+	},
+	{
+		name: "Yena AI",
+		blurb: "AI-powered recruitment SaaS platform built from the ground up.",
+		details:
+			"Full-stack Developer · Jan 2025 – Nov 2025 · Upwork (Freelance) — Contributed 37 commits to a 1,400+ commit codebase. Built using Next.js 14, Express.js, PostgreSQL, Redis, and Turborepo monorepo with ts-rest. Key features include OpenAI vector similarity search with real-time SSE streaming for candidate matching, BullMQ CV parsing, Stripe subscription management, talent pools, and kanban pipelines.",
+		href: "https://yena.ai",
+		initial: "YA",
+		logo: `${import.meta.env.BASE_URL}yena-logo.png`,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}02d-yena-candidate-import-cv-review-data-processed.png`,
+				caption: "CV parsing & automated candidate data extraction review",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}07-yena-git-stats.png`,
+				caption: "Git commit shortlog contribution statistics",
+			},
+		],
 	},
 	{
 		name: "UPM FMIPA UNIB",
