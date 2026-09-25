@@ -47,9 +47,17 @@ export function ProjectsPanel() {
 							<span className="mt-4 block flex-1 text-[15px] leading-[1.6] text-ash">
 								{project.blurb}
 							</span>
-							<span className="mt-6 block truncate border-t border-graphite/70 pt-4 font-mono text-[12px] tracking-[-0.013em] text-ash">
-								{project.href.replace("https://", "")}
-							</span>
+							<div className="mt-6 border-t border-graphite/70 pt-4">
+								<a
+									href={project.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									onClick={(e) => e.stopPropagation()} // Prevents opening the modal when clicking the link
+									className="inline-block max-w-full truncate font-mono text-[12px] tracking-[-0.013em] text-ash underline-offset-4 hover:text-paper hover:underline"
+								>
+									{project.href.replace(/^https?:\/\//, "")} ↗
+								</a>
+							</div>
 						</button>
 					</li>
 				))}

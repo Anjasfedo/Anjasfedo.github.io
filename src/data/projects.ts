@@ -67,20 +67,44 @@ export const PROJECTS: Project[] = [
 		name: "LATUN Website",
 		blurb: "Public landing page for marine conservation in Bengkulu.",
 		details:
-			"Full-stack Developer · latun.or.id — Bilingual ID/EN landing page for Laut Untuk Negeri: programs (livelihood, marine, terrestrial), Berita, Agenda, Galeri, Video, Unduhan, Layanan, grant banner integration, newsletter, and contact.",
+			"Full-stack Developer · latun.or.id — Sole contributor (140 commits) to the bilingual ID/EN landing page for Laut Untuk Negeri: programs (livelihood, marine, terrestrial), Berita, Agenda, Galeri, Video, Unduhan, Layanan, grant banner integration, newsletter, and contact.",
 		href: "https://latun.or.id/",
 		initial: "LA",
 		logo: `${import.meta.env.BASE_URL}latun-main-logo.png`,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}latun-landing-page.png`,
+				caption: "LATUN landing page hero section",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}latun-landing-github-statspng.png`,
+				caption: "Git commit contribution statistics (100% contribution)",
+			},
+		],
 	},
 	{
 		name: "Sistem Grant LATUN",
 		blurb: "Grant management platform for coastal & marine conservation.",
 		details:
-			"Full-stack Developer · grant.latun.or.id — Admin panel plus Mitra portal, 6-step proposal wizard, 12-document verification workflow, dynamic DOCX legal generation (SK, SPK, RAB), reporting & self-assessments, guided tours, and notifications.",
+			"Full-stack Developer · grant.latun.or.id — Sole contributor (89 commits) to the grant management platform: Admin panel plus Mitra portal, 6-step proposal wizard, 12-document verification workflow, dynamic DOCX legal generation (SK, SPK, RAB), reporting & self-assessments, guided tours, and notifications.",
 		href: "https://grant.latun.or.id/",
 		initial: "GL",
 		logo: `${import.meta.env.BASE_URL}latun-grant-logo.png`,
 		darkLogo: true,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}grant-latun-landing-page.png`,
+				caption: "Sistem Grant LATUN landing page",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}grant-latun-admin-dashboard-page.png`,
+				caption: "Admin dashboard overview",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}grant-latun-github-stats.png`,
+				caption: "Git commit contribution statistics (100% contribution)",
+			},
+		],
 	},
 	{
 		name: "Yena AI",

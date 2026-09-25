@@ -62,9 +62,14 @@ export function ProjectModal({
 								</span>
 							)}
 						</div>
-						<p className="mt-1 truncate font-mono text-[12px] text-ash">
-							{item.href.replace("https://", "")}
-						</p>
+						<a
+							href={item.href}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="mt-1 inline-block max-w-full truncate font-mono text-[12px] text-ash underline-offset-4 hover:text-paper hover:underline"
+						>
+							{item.href.replace(/^https?:\/\//, "")} ↗
+						</a>
 					</div>
 					<button
 						type="button"
