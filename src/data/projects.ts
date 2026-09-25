@@ -125,25 +125,76 @@ export const PROJECTS: Project[] = [
 			},
 		],
 	},
-{
-        name: "UPM FMIPA UNIB",
-        blurb: "Quality assurance unit website for FMIPA Universitas Bengkulu.",
-        details:
-            "Full-stack Developer · upmfmipa.unib.ac.id — Lead contributor with 130 commits (~53% of total commits) for Unit Penjaminan Mutu (UPM) FMIPA Universitas Bengkulu: SPMI documents, surveys, reports, downloads, SOPs, and administrative portal.",
-        href: "https://upmfmipa.unib.ac.id/",
-        initial: "UPM",
-        logo: `${import.meta.env.BASE_URL}unib-logo.jpg`,
-        images: [
-            {
-                src: `${import.meta.env.BASE_URL}upm-fmipa-unib-landing-page.png`,
-                caption: "UPM FMIPA UNIB landing page hero section",
-            },
-            {
-                src: `${import.meta.env.BASE_URL}upm-fmipa-unib-github-stats.png`,
-                caption: "Git commit contribution statistics (Top contributor)",
-            },
-        ],
-    },
+	{
+		name: "UPM FMIPA UNIB",
+		blurb: "Quality assurance unit website for FMIPA Universitas Bengkulu.",
+		details:
+			"Full-stack Developer · upmfmipa.unib.ac.id — Lead contributor with 130 commits (~53% of total commits) for Unit Penjaminan Mutu (UPM) FMIPA Universitas Bengkulu: SPMI documents, surveys, reports, downloads, SOPs, and administrative portal.",
+		href: "https://upmfmipa.unib.ac.id/",
+		initial: "UPM",
+		logo: `${import.meta.env.BASE_URL}unib-logo.jpg`,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}upm-fmipa-unib-landing-page.png`,
+				caption: "UPM FMIPA UNIB landing page hero section",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}upm-fmipa-unib-github-stats.png`,
+				caption: "Git commit contribution statistics (Top contributor)",
+			},
+		],
+	},
+	{
+		name: "API Rafflesia Agro (Legacy)",
+		blurb: "Legacy API backend for Aranus Farm & Rafflesia Agro ecosystem.",
+		details:
+			"Backend Developer · api.rafflesiaagro.com — Sole contributor (126 commits) to the legacy REST API service supporting web and mobile apps across the former Aranus Farm and Rafflesia Agro livestock management ecosystem. Currently offline.",
+		href: "https://api.rafflesiaagro.com/",
+		initial: "RA",
+		logo: `${import.meta.env.BASE_URL}chikora-logo.png`,
+		darkLogo: true,
+		deprecated: true,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}api-rafflesia-agro-git-stats.png`,
+				caption: "Git commit contribution statistics (100% contribution)",
+			},
+		],
+	},
+	{
+		name: "MQTT Server Rafflesia Agro (Legacy)",
+		blurb: "MQTT broker service for IoT sensors and actuator telemetry.",
+		details:
+			"IoT / Backend Developer · mqtt.rafflesiaagro.com — Sole contributor (28 commits) to the MQTT broker infrastructure bridging IoT sensors, actuator control systems, and backend services within the Aranus Farm / Rafflesia Agro smart poultry ecosystem. Currently offline.",
+		href: "https://mqtt.rafflesiaagro.com/",
+		initial: "MQ",
+		logo: `${import.meta.env.BASE_URL}chikora-logo.png`,
+		darkLogo: true,
+		deprecated: true,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}mqtt-rafflesia-agro-git-stats.png`,
+				caption: "Git commit contribution statistics (100% contribution)",
+			},
+		],
+	},
+	{
+		name: "API Chikora (Legacy)",
+		blurb: "Legacy Go backend API powering the Chikora web & mobile apps.",
+		details:
+			"Backend Developer · api.chikora.rafflesiaagro.com — Sole contributor (45 commits) to the legacy RESTful backend built with Go (Chi v5) router, supporting daily flock management, analytics, and mobile/web client synchronization for Chikora. Currently offline.",
+		href: "https://api.chikora.rafflesiaagro.com/",
+		initial: "AC",
+		logo: `${import.meta.env.BASE_URL}chikora-logo.png`,
+		darkLogo: true,
+		deprecated: true,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}api-chikora-rafflesia-agro-git-stats.png`,
+				caption: "Git commit contribution statistics (100% contribution)",
+			},
+		],
+	},
 	{
 		name: "Pulih Apps",
 		blurb: "Bangkit 2024 capstone — cloud backend on Django & GCP.",
