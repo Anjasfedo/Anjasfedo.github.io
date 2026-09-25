@@ -43,7 +43,6 @@ export const PROJECTS: Project[] = [
 			},
 		],
 	},
-
 	// 2. Marine Conservation Platforms (LATUN Ecosystem)
 	{
 		name: "Sistem Grant LATUN",
@@ -88,7 +87,23 @@ export const PROJECTS: Project[] = [
 			},
 		],
 	},
-
+	{
+		name: "Aranus Technology Cloud Infrastructure",
+		blurb:
+			"Self-hosted PaaS platform, Docker containerization, and automated CI/CD deployments.",
+		details:
+			"DevOps — Designed and deployed Aranus Technology's self-hosted Coolify PaaS environment. Authored production Dockerfiles and docker-compose.yml configurations across multiple microservices and client applications (POS, IoT tracking, databases), establishing automated containerized deployments, SSL routing, and server orchestration.",
+		href: "https://aranustech.co.id/",
+		initial: "AC",
+		logo: `${import.meta.env.BASE_URL}aranus-logo.webp`,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}aranus-technology-coolify.png`,
+				caption:
+					"Coolify self-hosted dashboard & container deployment management",
+			},
+		],
+	},
 	// 3. Collaborative / Freelance Client Development
 	{
 		name: "Yena AI",
@@ -109,7 +124,6 @@ export const PROJECTS: Project[] = [
 			},
 		],
 	},
-
 	// 4. Institutional & University Projects
 	{
 		name: "UPM FMIPA UNIB",
