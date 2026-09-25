@@ -15,7 +15,7 @@ export const EXPERIENCES: Experience[] = [
 	},
 	{
 		title: "Software Developer",
-		org: "Aranus Technology",
+		org: "CV Aranus Technology",
 		blurb: "End-to-end web apps — architecture to deploy and maintenance.",
 		details:
 			"Full-time, on-site (Bengkulu, Indonesia). Full-stack development across the SDLC: responsive UIs, server-side logic, database integrations, performance optimization, security, and long-term system reliability as requirements evolve.",
@@ -26,7 +26,7 @@ export const EXPERIENCES: Experience[] = [
 	},
 	{
 		title: "Solutions Architect Intern",
-		org: "Elitery",
+		org: "PT Data Sinergitama Jaya Tbk (Elitery)",
 		blurb: "Scalable AWS architectures tailored to client requirements.",
 		details:
 			"Remote. Analyzed technical needs to select the right AWS services, balancing cost, performance, and security. Produced technical documentation and architecture diagrams; articulated trade-offs between cloud-native services.",
@@ -37,7 +37,7 @@ export const EXPERIENCES: Experience[] = [
 	},
 	{
 		title: "DevOps Engineer Intern",
-		org: "Elitery",
+		org: "PT Data Sinergitama Jaya Tbk (Elitery)",
 		blurb: "AWS infrastructure, IaC, and deployment pipelines.",
 		details:
 			"Remote. Configured EC2, S3, IAM, and networking; contributed to automated deployment pipelines and Infrastructure as Code to cut manual release overhead. Hands-on with monitoring, CI/CD, and keeping cloud environments secure and cost-efficient.",
@@ -59,7 +59,7 @@ export const EXPERIENCES: Experience[] = [
 	},
 	{
 		title: "Frontend Engineer Intern",
-		org: "Langgeng Inovasi Teknologi",
+		org: "CV Langgeng Inovasi Teknologi",
 		blurb: "Wireframes to responsive frontend in an Agile team.",
 		details:
 			"Remote (Bandung). Translated UI/UX wireframes into functional, responsive code; code reviews, sprint planning, Git workflows, and modern CSS. Clean, maintainable frontend code on real project timelines.",
