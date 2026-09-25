@@ -2,49 +2,40 @@ import type { Experience } from "../types/portfolio";
 
 export const EXPERIENCES: Experience[] = [
 	{
-		title: "Mobile Team Lead",
-		org: "Perseverance Technology Co., Ltd.",
+		title: "Mobile Team Lead & Full-stack Developer",
+		org: "Perseverance Technology Indonesia (CV Aranus Technology)",
 		blurb:
-			"Cross-platform Flutter & native Android (Kotlin/C) and iOS (Swift) mobile apps.",
+			"Leading mobile team (Flutter/Native) & full-stack web architecture across global & regional entities.",
 		details:
-			"Full-time, remote (New Taipei, Taiwan). Leading the mobile engineering team focused on building high-performance cross-platform applications using Flutter, alongside native Android (Kotlin/C) and iOS (Swift) solutions. Responsible for mobile software architecture, code reviews, QA standards, and driving end-to-end technical execution for mobile products.",
-		range: "Jul 2024 — Present",
-		logo: `${import.meta.env.BASE_URL}perseverance-logo.webp`,
-		start: 2024 * 12 + 6,
-		end: null,
-	},
-	{
-		title: "Software Developer",
-		org: "CV Aranus Technology",
-		blurb: "End-to-end web apps — architecture to deploy and maintenance.",
-		details:
-			"Full-time, on-site (Bengkulu, Indonesia). Full-stack development across the SDLC: responsive UIs, server-side logic, database integrations, performance optimization, security, and long-term system reliability as requirements evolve.",
+			"Full-time, hybrid (Taiwan Remote & Indonesia On-site). Dual responsibility across Perseverance Technology Co., Ltd. (Mobile Engineering Team Lead for Flutter, Android Kotlin/C, and iOS Swift apps) and its Indonesian entity, Perseverance Technology Indonesia / CV Aranus Technology (Full-stack web architecture, server-side logic, cloud deployments, and system maintenance).",
 		range: "Jun 2024 — Present",
-		logo: `${import.meta.env.BASE_URL}aranus-logo.webp`,
+		logo: `${import.meta.env.BASE_URL}perseverance-logo.webp`,
 		start: 2024 * 12 + 5,
 		end: null,
 	},
 	{
-		title: "Solutions Architect Intern",
-		org: "PT Data Sinergitama Jaya Tbk (Elitery)",
-		blurb: "Scalable AWS architectures tailored to client requirements.",
+		title: "Software Engineer",
+		org: "PT Raflesia Agro Investama",
+		blurb:
+			"Smart poultry & livestock ecosystem (Chikora Web/Mobile, Go backends & MQTT broker).",
 		details:
-			"Remote. Analyzed technical needs to select the right AWS services, balancing cost, performance, and security. Produced technical documentation and architecture diagrams; articulated trade-offs between cloud-native services.",
-		range: "Dec 2024 — Jan 2025",
-		logo: `${import.meta.env.BASE_URL}elitery-logo.webp`,
-		start: 2024 * 12 + 11,
-		end: 2025 * 12 + 0,
+			"Software Engineer · Bengkulu, Indonesia. Engineered the technical core for Chikora's smart poultry platform: architected high-concurrency RESTful Go (Chi v5) backends, built real-time IoT MQTT telemetry broker pipelines for sensor/actuator synchronization, designed the initial cross-platform Flutter mobile foundation, and built the official web showcase.",
+		range: "Aug 2025 — Apr 2026",
+		logo: `${import.meta.env.BASE_URL}chikora-logo.png`,
+		start: 2025 * 12 + 7,
+		end: 2026 * 12 + 3,
 	},
 	{
-		title: "DevOps Engineer Intern",
+		title: "DevOps & Solutions Architect Intern",
 		org: "PT Data Sinergitama Jaya Tbk (Elitery)",
-		blurb: "AWS infrastructure, IaC, and deployment pipelines.",
+		blurb:
+			"AWS cloud architecture design, IaC, CI/CD pipelines, and infrastructure optimization.",
 		details:
-			"Remote. Configured EC2, S3, IAM, and networking; contributed to automated deployment pipelines and Infrastructure as Code to cut manual release overhead. Hands-on with monitoring, CI/CD, and keeping cloud environments secure and cost-efficient.",
-		range: "Nov 2024 — Dec 2024",
+			"Remote. Designed cost-efficient, scalable AWS cloud architectures and managed core infrastructure services (EC2, S3, IAM, VPC networking). Built automated CI/CD deployment pipelines and Infrastructure as Code (IaC) templates, produced technical architecture diagrams, and delivered cloud optimization strategies for clients.",
+		range: "Nov 2024 — Jan 2025",
 		logo: `${import.meta.env.BASE_URL}elitery-logo.webp`,
 		start: 2024 * 12 + 10,
-		end: 2024 * 12 + 11,
+		end: 2025 * 12 + 0,
 	},
 	{
 		title: "Assistant Lecturer — Framework Programming",
@@ -59,7 +50,7 @@ export const EXPERIENCES: Experience[] = [
 	},
 	{
 		title: "Frontend Engineer Intern",
-		org: "CV Langgeng Inovasi Teknologi",
+		org: "PT Langgeng Inovasi Teknologi",
 		blurb: "Wireframes to responsive frontend in an Agile team.",
 		details:
 			"Remote (Bandung). Translated UI/UX wireframes into functional, responsive code; code reviews, sprint planning, Git workflows, and modern CSS. Clean, maintainable frontend code on real project timelines.",

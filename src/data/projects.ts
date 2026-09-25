@@ -1,49 +1,6 @@
 import type { Project } from "../types/portfolio";
 
 export const PROJECTS: Project[] = [
-	// 1. Primary Active Products (RafflesiaAgro / Chikora Ecosystem)
-	{
-		name: "Chikora",
-		blurb: "Landing page for broiler & layer farm management platform.",
-		details:
-			"Full-stack Developer · chikora.rafflesiaagro.com — Top contributor with 180+ commits (~46% of total commits) for RafflesiaAgro's Chikora web showcase. Highlighting daily flock recording, real-time FCR & IOFC analytics, IoT sensor integration, harvest alerts, multi-device sync, and marketplace integration.",
-		href: "https://chikora.rafflesiaagro.com/",
-		initial: "CH",
-		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
-		darkLogo: true,
-		images: [
-			{
-				src: `${import.meta.env.BASE_URL}chikora-rafflesiaagro-landing-page.webp`,
-				caption: "Chikora landing page hero section",
-			},
-			{
-				src: `${import.meta.env.BASE_URL}chikora-rafflesiaagro-github-stats.webp`,
-				caption: "Git commit contribution statistics (Top contributor)",
-			},
-		],
-	},
-	{
-		name: "Chikora Mobile",
-		blurb: "Cross-platform mobile app for broiler & layer farm management.",
-		details:
-			"Mobile App Developer · App Store / Play Store — Architected and built the initial foundation (100% of early repository commits) for Chikora's cross-platform mobile application. Laid the initial codebase for daily flock logging, FCR/HDP analytics, feed tracking, mortality records, and offline sync prior to production expansion.",
-		href: "https://play.google.com/store/apps/details?id=com.rafflesiaagro.chikora",
-		initial: "CM",
-		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
-		darkLogo: true,
-		images: [
-			{
-				src: `${import.meta.env.BASE_URL}chikora-preview.webp`,
-				caption: "Chikora mobile app interface preview",
-			},
-			{
-				src: `${import.meta.env.BASE_URL}chikora-mobile-initial-github-stats.webp`,
-				caption:
-					"Git commit contribution statistics (Initial Mobile Repository)",
-			},
-		],
-	},
-	// 2. Marine Conservation Platforms (LATUN Ecosystem)
 	{
 		name: "LATUN Website",
 		blurb: "Public landing page for marine conservation in Bengkulu.",
@@ -84,6 +41,47 @@ export const PROJECTS: Project[] = [
 			{
 				src: `${import.meta.env.BASE_URL}grant-latun-github-stats.webp`,
 				caption: "Git commit contribution statistics (100% contribution)",
+			},
+		],
+	},
+	{
+		name: "Chikora",
+		blurb: "Landing page for broiler & layer farm management platform.",
+		details:
+			"Full-stack Developer · chikora.rafflesiaagro.com — Top contributor with 180+ commits (~46% of total commits) for RafflesiaAgro's Chikora web showcase. Highlighting daily flock recording, real-time FCR & IOFC analytics, IoT sensor integration, harvest alerts, multi-device sync, and marketplace integration.",
+		href: "https://chikora.rafflesiaagro.com/",
+		initial: "CH",
+		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
+		darkLogo: true,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}chikora-rafflesiaagro-landing-page.webp`,
+				caption: "Chikora landing page hero section",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}chikora-rafflesiaagro-github-stats.webp`,
+				caption: "Git commit contribution statistics (Top contributor)",
+			},
+		],
+	},
+	{
+		name: "Chikora Mobile",
+		blurb: "Cross-platform mobile app for broiler & layer farm management.",
+		details:
+			"Mobile App Developer · App Store / Play Store — Architected and built the initial foundation (100% of early repository commits) for Chikora's cross-platform mobile application. Laid the initial codebase for daily flock logging, FCR/HDP analytics, feed tracking, mortality records, and offline sync prior to production expansion.",
+		href: "https://play.google.com/store/apps/details?id=com.rafflesiaagro.chikora",
+		initial: "CM",
+		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
+		darkLogo: true,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}chikora-preview.webp`,
+				caption: "Chikora mobile app interface preview",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}chikora-mobile-initial-github-stats.webp`,
+				caption:
+					"Git commit contribution statistics (Initial Mobile Repository)",
 			},
 		],
 	},
