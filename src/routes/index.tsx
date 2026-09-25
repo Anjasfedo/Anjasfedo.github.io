@@ -465,13 +465,6 @@ function Home() {
 						className="mx-auto aspect-square w-full max-w-[200px] rounded-xl border border-graphite bg-carbon object-cover shadow-subtle"
 					/>
 					<div>
-						<p className="flex items-center gap-2 font-mono text-[12px] tracking-[-0.013em] text-ash uppercase">
-							<span
-								aria-hidden="true"
-								className="h-1.5 w-1.5 rounded-full bg-pulse-green"
-							/>
-							Available for roles
-						</p>
 						<h1 className="mt-3 text-[48px] leading-[1] font-medium tracking-[-0.022em] text-paper">
 							Your Name
 						</h1>
