@@ -15,13 +15,13 @@ export const EXPERIENCES: Experience[] = [
 	},
 	{
 		title: "Software Engineer",
-		org: "PT Raflesia Agro Investama",
+		org: "PT Rafflesia Agro Investama",
 		blurb:
-			"Smart poultry & livestock ecosystem (Chikora Web/Mobile, Go backends & MQTT broker).",
+			"Smart poultry & livestock ecosystem (Chikora Web/Mobile, Go backends & MQTT broker). Concurrent with Perseverance.",
 		details:
-			"Software Engineer · Bengkulu, Indonesia. Engineered the technical core for Chikora's smart poultry platform: architected high-concurrency RESTful Go (Chi v5) backends, built real-time IoT MQTT telemetry broker pipelines for sensor/actuator synchronization, designed the initial cross-platform Flutter mobile foundation, and built the official web showcase.",
+			"Part-time, on-site (Bengkulu), concurrent with the Perseverance Technology role above. Engineered the technical core for Chikora's smart poultry platform: architected high-concurrency RESTful Go (Chi v5) backends, built real-time IoT MQTT telemetry broker pipelines for sensor/actuator synchronization, designed the initial cross-platform Flutter mobile foundation, and built the official web showcase.",
 		range: "Aug 2025 — Apr 2026",
-		logo: `${import.meta.env.BASE_URL}chikora-logo.png`,
+		logo: `${import.meta.env.BASE_URL}rafflesiaagro-logo.webp`,
 		start: 2025 * 12 + 7,
 		end: 2026 * 12 + 3,
 	},

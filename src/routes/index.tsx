@@ -67,12 +67,13 @@ function Home() {
 							Anjasfedo
 						</h1>
 						<p className="mt-2 font-mono text-[13px] text-ash">
-							M. Anjasfedo Afridiansah · Software Engineer — Bengkulu, Indonesia
+							M. Anjasfedo Afridiansah · Mobile Team Lead & Full-stack Developer
+							— Bengkulu, Indonesia
 						</p>
 						<p className="mt-4 max-w-md text-[16px] leading-[1.5] text-ash">
-							I lead mobile engineering and build full-stack systems end to end
-							— Flutter and native apps, web platforms, Go and IoT backends, and
-							the AWS, GCP, and Docker infrastructure they run on.
+							Lead mobile engineering, ship full-stack systems end to end.
+							<br />
+							Flutter & native apps, Go/IoT backends, AWS/GCP/Docker infra.
 						</p>
 						<div className="mt-6 flex flex-wrap items-center gap-2">
 							{LINKS.map(({ label, href, Icon }) => (

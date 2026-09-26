@@ -48,7 +48,7 @@ export const PROJECTS: Project[] = [
 		name: "Chikora",
 		blurb: "Landing page for broiler & layer farm management platform.",
 		details:
-			"Full-stack Developer · chikora.rafflesiaagro.com — Top contributor with 180+ commits (~46% of total commits) for RafflesiaAgro's Chikora web showcase. Highlighting daily flock recording, real-time FCR & IOFC analytics, IoT sensor integration, harvest alerts, multi-device sync, and marketplace integration.",
+			"Full-stack Developer · chikora.rafflesiaagro.com — Top contributor with 180+ commits (~46% of total commits) for Rafflesia Agro's Chikora web showcase. Highlighting daily flock recording, real-time FCR & IOFC analytics, IoT sensor integration, harvest alerts, multi-device sync, and marketplace integration.",
 		href: "https://chikora.rafflesiaagro.com/",
 		initial: "CH",
 		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
@@ -148,7 +148,7 @@ export const PROJECTS: Project[] = [
 		name: "API Chikora (Legacy)",
 		blurb: "Legacy Go backend API powering the Chikora web & mobile apps.",
 		details:
-			"Backend Developer · api.chikora.rafflesiaagro.com — Sole contributor (45 commits) to the legacy RESTful backend built with Go (Chi v5) router, supporting daily flock management, analytics, and mobile/web client synchronization for Chikora. Currently offline.",
+			"Backend Developer · api.chikora.rafflesiaagro.com — Sole contributor (45 commits) to the legacy RESTful backend built with Go (Chi v5) router, supporting daily flock management, analytics, and mobile/web client synchronization for Chikora. Superseded by a newer backend version.",
 		href: "https://api.chikora.rafflesiaagro.com/",
 		initial: "AC",
 		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
@@ -162,7 +162,7 @@ export const PROJECTS: Project[] = [
 		],
 	},
 	{
-		name: "MQTT Server Rafflesia Agro (Legacy)",
+		name: "MQTT Server Rafflesia Agro",
 		blurb: "MQTT broker service for IoT sensors and actuator telemetry.",
 		details:
 			"IoT / Backend Developer · mqtt.rafflesiaagro.com — Sole contributor (28 commits) to the MQTT broker infrastructure bridging IoT sensors, actuator control systems, and backend services within the Aranus Farm / Rafflesia Agro smart poultry ecosystem. Currently offline.",
@@ -179,13 +179,13 @@ export const PROJECTS: Project[] = [
 		],
 	},
 	{
-		name: "API Rafflesia Agro (Legacy)",
-		blurb: "Legacy API backend for Aranus Farm & Rafflesia Agro ecosystem.",
+		name: "API Rafflesia Agro",
+		blurb: "API backend for Aranus Farm & Rafflesia Agro ecosystem.",
 		details:
-			"Backend Developer · api.rafflesiaagro.com — Sole contributor (126 commits) to the legacy REST API service supporting web and mobile apps across the former Aranus Farm and Rafflesia Agro livestock management ecosystem. Currently offline.",
+			"Backend Developer · api.rafflesiaagro.com — Sole contributor (126 commits) to the REST API service supporting web and mobile apps across the former Aranus Farm and Rafflesia Agro livestock management ecosystem. Currently offline.",
 		href: "https://api.rafflesiaagro.com/",
 		initial: "RA",
-		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
+		logo: `${import.meta.env.BASE_URL}rafflesiaagro-logo.webp`,
 		darkLogo: true,
 		deprecated: true,
 		images: [
@@ -196,13 +196,13 @@ export const PROJECTS: Project[] = [
 		],
 	},
 	{
-		name: "Rafflesia Agro",
-		blurb: "Official landing page for agricultural technology company.",
+		name: "Rafflesia Agro (Legacy)",
+		blurb: "Previous landing page for agricultural technology company.",
 		details:
-			"Full-stack Developer · rafflesiaagro.com — Sole contributor (18 commits) to the corporate landing page presenting smart farming solutions, product portfolio, company profiles, and contact channels. Currently offline.",
+			"Full-stack Developer · rafflesiaagro.com — Sole contributor (18 commits) to the corporate landing page presenting smart farming solutions, product portfolio, company profiles, and contact channels. Superseded by a newer site version.",
 		href: "https://rafflesiaagro.com/",
 		initial: "RA",
-		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
+		logo: `${import.meta.env.BASE_URL}rafflesiaagro-logo.webp`,
 		darkLogo: true,
 		deprecated: true,
 		images: [
