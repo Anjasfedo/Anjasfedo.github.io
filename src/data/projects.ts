@@ -28,7 +28,6 @@ export const PROJECTS: Project[] = [
 		href: "https://grant.latun.or.id/",
 		initial: "GL",
 		logo: `${import.meta.env.BASE_URL}latun-grant-logo.webp`,
-		darkLogo: true,
 		images: [
 			{
 				src: `${import.meta.env.BASE_URL}grant-latun-landing-page.webp`,
@@ -52,7 +51,6 @@ export const PROJECTS: Project[] = [
 		href: "https://chikora.rafflesiaagro.com/",
 		initial: "CH",
 		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
-		darkLogo: true,
 		images: [
 			{
 				src: `${import.meta.env.BASE_URL}chikora-rafflesiaagro-landing-page.webp`,
@@ -72,7 +70,6 @@ export const PROJECTS: Project[] = [
 		href: "https://play.google.com/store/apps/details?id=com.rafflesiaagro.chikora",
 		initial: "CM",
 		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
-		darkLogo: true,
 		images: [
 			{
 				src: `${import.meta.env.BASE_URL}chikora-preview.webp`,
@@ -152,7 +149,6 @@ export const PROJECTS: Project[] = [
 		href: "https://api.chikora.rafflesiaagro.com/",
 		initial: "AC",
 		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
-		darkLogo: true,
 		deprecated: true,
 		images: [
 			{
@@ -169,7 +165,6 @@ export const PROJECTS: Project[] = [
 		href: "https://mqtt.rafflesiaagro.com/",
 		initial: "MQ",
 		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
-		darkLogo: true,
 		deprecated: true,
 		images: [
 			{
@@ -186,7 +181,6 @@ export const PROJECTS: Project[] = [
 		href: "https://api.rafflesiaagro.com/",
 		initial: "RA",
 		logo: `${import.meta.env.BASE_URL}rafflesiaagro-logo.webp`,
-		darkLogo: true,
 		deprecated: true,
 		images: [
 			{
@@ -203,7 +197,6 @@ export const PROJECTS: Project[] = [
 		href: "https://rafflesiaagro.com/",
 		initial: "RA",
 		logo: `${import.meta.env.BASE_URL}rafflesiaagro-logo.webp`,
-		darkLogo: true,
 		deprecated: true,
 		images: [
 			{
