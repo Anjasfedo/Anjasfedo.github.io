@@ -14,7 +14,7 @@ export function EducationPanel() {
 						className="h-10 w-10 shrink-0 rounded-badge border border-graphite bg-obsidian object-cover"
 					/>
 					<div className="min-w-0 flex-1">
-						<div className="flex items-baseline justify-between gap-4">
+						<div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
 							<h3 className="text-[15px] font-medium text-paper">
 								{item.school}
 							</h3>
@@ -24,7 +24,7 @@ export function EducationPanel() {
 						</div>
 						<p className="mt-0.5 text-[13px] text-mist">{item.program}</p>
 						<p className="mt-0.5 text-[13px] text-ash">{item.location}</p>
-						<p className="mt-2 text-[13px] leading-relaxed text-mist">
+						<p className="mt-2 max-w-[65ch] text-[13px] leading-relaxed text-mist">
 							{item.blurb}
 						</p>
 					</div>

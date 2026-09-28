@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CertificatesPanel } from "../components/panels/CertificatesPanel";
 import { EducationPanel } from "../components/panels/EducationPanel";
 import { ExperiencesPanel } from "../components/panels/ExperiencesPanel";
@@ -33,6 +33,7 @@ function getTabFromHash(): Tab {
 function Home() {
 	// Start from the prerendered default; read the hash after hydration
 	const [tab, setTab] = useState<Tab>("Experiences");
+	const tablistRef = useRef<HTMLDivElement>(null);
 
 	// Sync tab on load and when browser Back/Forward buttons are clicked
 	useEffect(() => {
@@ -43,6 +44,17 @@ function Home() {
 		window.addEventListener("hashchange", handleHashChange);
 		return () => window.removeEventListener("hashchange", handleHashChange);
 	}, []);
+
+	// Tab strip scrolls horizontally on narrow screens: keep the active tab visible
+	useEffect(() => {
+		const list = tablistRef.current;
+		const active = document.getElementById(`tab-${TAB_IDS[tab]}`);
+		if (!list || !active) return;
+		list.scrollTo({
+			left: active.offsetLeft - (list.clientWidth - active.offsetWidth) / 2,
+			behavior: "smooth",
+		});
+	}, [tab]);
 
 	// Handle tab clicks: update React state and URL hash without page jump
 	const handleTabChange = (newTab: Tab) => {
@@ -101,9 +113,10 @@ function Home() {
 
 				<section className="mt-16">
 					<div
+						ref={tablistRef}
 						role="tablist"
 						aria-label="Profile sections"
-						className="sticky top-0 z-10 flex gap-6 border-b border-graphite/70 bg-void pt-3"
+						className="sticky top-0 z-10 -mx-6 flex gap-6 overflow-x-auto border-b border-graphite/70 bg-void px-6 [scrollbar-width:none] sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden"
 					>
 						{TABS.map((name) => {
 							const tabId = TAB_IDS[name];
@@ -116,7 +129,7 @@ function Home() {
 									aria-selected={tab === name}
 									aria-controls={`panel-${tabId}`}
 									onClick={() => handleTabChange(name)}
-									className={`-mb-px border-b-2 pb-2 text-sm font-medium whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-paper ${
+									className={`shrink-0 border-b-2 py-3 text-sm font-medium whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-paper ${
 										tab === name
 											? "border-paper text-paper"
 											: "border-transparent text-ash hover:text-mist"
