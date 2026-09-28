@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { CertificatesPanel } from "../components/panels/CertificatesPanel";
+import { EducationPanel } from "../components/panels/EducationPanel";
 import { ExperiencesPanel } from "../components/panels/ExperiencesPanel";
 import { ProjectsPanel } from "../components/panels/ProjectsPanel";
 import { LINKS } from "../data/socialLinks";
@@ -14,6 +15,7 @@ const PANELS: Record<Tab, () => React.ReactNode> = {
 	Experiences: ExperiencesPanel,
 	Projects: ProjectsPanel,
 	Certificates: CertificatesPanel,
+	Education: EducationPanel,
 };
 
 const PORTRAIT_URL = `${import.meta.env.BASE_URL}profile-circle.webp`;
