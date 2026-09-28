@@ -34,6 +34,7 @@ function Home() {
 	// Start from the prerendered default; read the hash after hydration
 	const [tab, setTab] = useState<Tab>("Experiences");
 	const tablistRef = useRef<HTMLDivElement>(null);
+	const touchStart = useRef<{ x: number; y: number } | null>(null);
 
 	// Sync tab on load and when browser Back/Forward buttons are clicked
 	useEffect(() => {
@@ -47,12 +48,14 @@ function Home() {
 
 	// Tab strip scrolls horizontally on narrow screens: keep the active tab visible
 	useEffect(() => {
-		const list = tablistRef.current;
 		const active = document.getElementById(`tab-${TAB_IDS[tab]}`);
-		if (!list || !active) return;
-		list.scrollTo({
-			left: active.offsetLeft - (list.clientWidth - active.offsetWidth) / 2,
+		if (!active) return;
+		// scrollIntoView centers reliably even on deep-link load where
+		// offsetLeft-based math races hydration/layout at 320px widths
+		active.scrollIntoView({
 			behavior: "smooth",
+			inline: "center",
+			block: "nearest",
 		});
 	}, [tab]);
 
@@ -63,6 +66,18 @@ function Home() {
 		if (window.location.hash !== targetHash) {
 			window.history.pushState(null, "", targetHash);
 		}
+	};
+
+	// Horizontal swipe on the panel area moves to the adjacent tab
+	const handleTouchEnd = (e: React.TouchEvent) => {
+		const start = touchStart.current;
+		touchStart.current = null;
+		if (!start || document.querySelector('[role="dialog"]')) return;
+		const dx = e.changedTouches[0].clientX - start.x;
+		const dy = e.changedTouches[0].clientY - start.y;
+		if (Math.abs(dx) < 60 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+		const next = TABS[TABS.indexOf(tab) + (dx < 0 ? 1 : -1)];
+		if (next) handleTabChange(next);
 	};
 
 	return (
@@ -141,23 +156,33 @@ function Home() {
 						})}
 					</div>
 					{/* All panels stay in the HTML so crawlers index every tab */}
-					{TABS.map((name) => {
-						const tabId = TAB_IDS[name];
-						const Panel = PANELS[name];
-						return (
-							<div
-								key={name}
-								className="mt-6"
-								role="tabpanel"
-								id={`panel-${tabId}`}
-								aria-labelledby={`tab-${tabId}`}
-								hidden={tab !== name}
-							>
-								<h2 className="sr-only">{name}</h2>
-								<Panel />
-							</div>
-						);
-					})}
+					<div
+						onTouchStart={(e) => {
+							touchStart.current = {
+								x: e.touches[0].clientX,
+								y: e.touches[0].clientY,
+							};
+						}}
+						onTouchEnd={handleTouchEnd}
+					>
+						{TABS.map((name) => {
+							const tabId = TAB_IDS[name];
+							const Panel = PANELS[name];
+							return (
+								<div
+									key={name}
+									className="mt-6"
+									role="tabpanel"
+									id={`panel-${tabId}`}
+									aria-labelledby={`tab-${tabId}`}
+									hidden={tab !== name}
+								>
+									<h2 className="sr-only">{name}</h2>
+									<Panel />
+								</div>
+							);
+						})}
+					</div>
 				</section>
 			</main>
 		</div>
