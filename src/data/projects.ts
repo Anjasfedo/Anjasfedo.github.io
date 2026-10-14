@@ -2,7 +2,7 @@ import type { Project } from "../types/portfolio";
 
 export const PROJECTS: Project[] = [
 	{
-		name: "LATUN Website",
+		name: "LATUN Jobs",
 		blurb: "Public landing page for marine conservation in Bengkulu.",
 		details:
 			"Full-stack Developer · latun.or.id — Sole contributor (140 commits) to the bilingual ID/EN landing page for Laut Untuk Negeri: programs (livelihood, marine, terrestrial), Berita, Agenda, Galeri, Video, Unduhan, Layanan, grant banner integration, newsletter, and contact.",
@@ -40,6 +40,29 @@ export const PROJECTS: Project[] = [
 			{
 				src: `${import.meta.env.BASE_URL}grant-latun-github-stats.webp`,
 				caption: "Git commit contribution statistics (100% contribution)",
+			},
+		],
+	},
+	{
+		name: "LATUN Jobs",
+		blurb: "Recruitment platform for marine conservation roles in Bengkulu.",
+		details:
+			"Full-stack Developer · job.latun.or.id — Sole contributor (175 commits) to LATUN's recruitment platform: TanStack Start SPA + React 19 + Tailwind 4 + shadcn/ui client backed by a Laravel 13 + Sanctum JSON API. Built coastal-identity landing page with job board, applicant portal (dashboard, 4-step apply wizard, document library, per-application chat, notifications), and admin panel (vacancy management, sequential application review queue, applicant directory, support inbox) for REKRUTMEN LATUN 2026 — 50 positions in Bengkulu.",
+		href: "https://job.latun.or.id/",
+		initial: "LJ",
+		logo: `${import.meta.env.BASE_URL}latun-main-logo.webp`,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}job-latun-landing-page.webp`,
+				caption: "LATUN Jobs landing page hero section",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}job-latun-app-dashboard-page.webp`,
+				caption: "Applicant dashboard overview",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}job-latun-admin-dashboard-page.webp`,
+				caption: "Admin dashboard overview",
 			},
 		],
 	},
