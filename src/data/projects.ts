@@ -5,7 +5,7 @@ export const PROJECTS: Project[] = [
 		name: "LATUN Jobs",
 		blurb: "Recruitment platform for marine conservation roles in Bengkulu.",
 		details:
-			"Full-stack Developer · job.latun.or.id — Sole contributor (175 commits) to LATUN's recruitment platform: TanStack Start SPA + React 19 + Tailwind 4 + shadcn/ui client backed by a Laravel 13 + Sanctum JSON API. Built coastal-identity landing page with job board, applicant portal (dashboard, 4-step apply wizard, document library, per-application chat, notifications), and admin panel (vacancy management, sequential application review queue, applicant directory, support inbox) for REKRUTMEN LATUN 2026 — 50 positions in Bengkulu.",
+			"Full-stack Developer · job.latun.or.id — Sole contributor (175 commits) to LATUN's recruitment platform: TanStack Start SPA + React 19 + Tailwind 4 + shadcn/ui client backed by a Laravel 13 + Sanctum + MySQL JSON API. Built coastal-identity landing page with job board, applicant portal (dashboard, 4-step apply wizard, document library, per-application chat, notifications), and admin panel (vacancy management, sequential application review queue, applicant directory, support inbox) for REKRUTMEN LATUN 2026 — 50 positions in Bengkulu.",
 		href: "https://job.latun.or.id/",
 		initial: "LJ",
 		logo: `${import.meta.env.BASE_URL}latun-main-logo.webp`,
@@ -28,7 +28,7 @@ export const PROJECTS: Project[] = [
 		name: "LATUN Website",
 		blurb: "Public landing page for marine conservation in Bengkulu.",
 		details:
-			"Full-stack Developer · latun.or.id — Sole contributor (140 commits) to the bilingual ID/EN landing page for Laut Untuk Negeri: programs (livelihood, marine, terrestrial), Berita, Agenda, Galeri, Video, Unduhan, Layanan, grant banner integration, newsletter, and contact.",
+			"Full-stack Developer · latun.or.id — Sole contributor (141 commits) to the bilingual ID/EN landing page for Laut Untuk Negeri: Laravel 13 + Livewire 4 Blaze + Fortify auth + Flux UI + Tailwind v4 + MySQL monolith. Built programs (livelihood, marine, terrestrial), Berita (News), Agenda (Events), Galeri (Gallery), Video (Videos), Unduhan (Downloads), Layanan (Services), grant banner integration, newsletter, and contact.",
 		href: "https://latun.or.id/",
 		initial: "LA",
 		logo: `${import.meta.env.BASE_URL}latun-main-logo.webp`,
@@ -44,17 +44,17 @@ export const PROJECTS: Project[] = [
 		],
 	},
 	{
-		name: "Sistem Grant LATUN",
+		name: "Grant LATUN",
 		blurb: "Grant management platform for coastal & marine conservation.",
 		details:
-			"Full-stack Developer · grant.latun.or.id — Sole contributor (89 commits) to the grant management platform. Built Admin panel & Mitra portal, 6-step proposal wizard, 12-document verification workflow, dynamic DOCX legal generation (SK, SPK, RAB), reporting & self-assessments, guided tours, and notifications.",
+			"Full-stack Developer · grant.latun.or.id — Sole contributor (121 commits) to the grant management platform: Laravel 13 + Inertia 2 + Vue 3 (TS) + Tailwind + MySQL monolith. Built Admin panel & Mitra portal, 6-step proposal wizard, 12-document verification workflow, dynamic DOCX legal generation (SK, SPK, RAB), reporting & self-assessments, guided tours, and notifications.",
 		href: "https://grant.latun.or.id/",
 		initial: "GL",
 		logo: `${import.meta.env.BASE_URL}latun-grant-logo.webp`,
 		images: [
 			{
 				src: `${import.meta.env.BASE_URL}grant-latun-landing-page.webp`,
-				caption: "Sistem Grant LATUN landing page",
+				caption: "Grant LATUN landing page",
 			},
 			{
 				src: `${import.meta.env.BASE_URL}grant-latun-admin-dashboard-page.webp`,
@@ -70,7 +70,7 @@ export const PROJECTS: Project[] = [
 		name: "Chikora",
 		blurb: "Landing page for broiler & layer farm management platform.",
 		details:
-			"Full-stack Developer · chikora.rafflesiaagro.com — Top contributor with 180+ commits (~46% of total commits) for Rafflesia Agro's Chikora web showcase. Highlighting daily flock recording, real-time FCR & IOFC analytics, IoT sensor integration, harvest alerts, multi-device sync, and marketplace integration.",
+			"Full-stack Developer · chikora.rafflesiaagro.com — Top contributor with 180+ commits (~46% of total commits) for Rafflesia Agro's Chikora web showcase: Next.js + Supabase + Tailwind. Highlighting daily flock recording, real-time FCR & IOFC analytics, IoT sensor integration, harvest alerts, multi-device sync, and marketplace integration.",
 		href: "https://chikora.rafflesiaagro.com/",
 		initial: "CH",
 		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
@@ -89,7 +89,7 @@ export const PROJECTS: Project[] = [
 		name: "Chikora Mobile",
 		blurb: "Cross-platform mobile app for broiler & layer farm management.",
 		details:
-			"Mobile App Developer · App Store / Play Store — Architected and built the initial foundation (100% of early repository commits) for Chikora's cross-platform mobile application. Laid the initial codebase for daily flock logging, FCR/HDP analytics, feed tracking, mortality records, and offline sync prior to production expansion.",
+			"Mobile App Developer · App Store / Play Store — Architected and built the initial foundation (100% of early repository commits) for Chikora's cross-platform mobile application in Flutter. Laid the initial codebase for daily flock logging, FCR/HDP analytics, feed tracking, mortality records, and offline sync prior to production expansion.",
 		href: "https://play.google.com/store/apps/details?id=com.rafflesiaagro.chikora",
 		initial: "CM",
 		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
@@ -110,7 +110,7 @@ export const PROJECTS: Project[] = [
 		blurb:
 			"Self-hosted PaaS platform, Docker containerization, and automated CI/CD deployments.",
 		details:
-			"DevOps — Designed and deployed Aranus Technology's self-hosted Coolify PaaS environment. Authored production Dockerfiles and docker-compose.yml configurations across multiple microservices and client applications (POS, IoT tracking, databases), establishing automated containerized deployments, SSL routing, and server orchestration.",
+			"DevOps — Designed and deployed Aranus Technology's self-hosted Coolify PaaS environment on a VPS. Authored production Dockerfiles and docker-compose.yml configurations across multiple microservices and client applications (POS, IoT tracking, databases), establishing automated containerized deployments, SSL routing, and server orchestration.",
 		href: "https://aranustech.co.id/",
 		initial: "AC",
 		logo: `${import.meta.env.BASE_URL}aranus-logo.webp`,
@@ -127,7 +127,7 @@ export const PROJECTS: Project[] = [
 		name: "Yena AI",
 		blurb: "AI-powered recruitment SaaS platform built from the ground up.",
 		details:
-			"Full-stack Developer · Jan 2025 – Nov 2025 · Upwork (Freelance) — Contributed 37 commits during the initial feature development of a 1,400+ commit codebase before handing off to the core team. Developed OpenAI vector similarity search with real-time SSE streaming for candidate matching, BullMQ CV parsing, Stripe subscription management, talent pools, and kanban pipelines in a Turborepo monorepo.",
+			"Full-stack Developer · Jan 2025 – Nov 2025 · Upwork (Freelance) — Contributed 37 commits during the initial feature development of a 1,400+ commit codebase before handing off to the core team: Next.js + Express + Tailwind in a Turborepo monorepo. Developed OpenAI vector similarity search with real-time SSE streaming for candidate matching, BullMQ CV parsing with multi-provider OCR (Google, Mistral, and others), Stripe subscription management, talent pools, and kanban pipelines.",
 		href: "https://yena.ai",
 		initial: "YA",
 		logo: `${import.meta.env.BASE_URL}yena-logo.webp`,
@@ -147,7 +147,7 @@ export const PROJECTS: Project[] = [
 		name: "UPM FMIPA UNIB",
 		blurb: "Quality assurance unit website for FMIPA Universitas Bengkulu.",
 		details:
-			"Full-stack Developer · upmfmipa.unib.ac.id — Lead contributor with 130 commits (~53% of total commits) for Unit Penjaminan Mutu (UPM) FMIPA Universitas Bengkulu: SPMI documents, surveys, reports, downloads, SOPs, and administrative portal.",
+			"Full-stack Developer · upmfmipa.unib.ac.id — Lead contributor with 130 commits (~53% of total commits) for Unit Penjaminan Mutu (UPM) FMIPA Universitas Bengkulu: Laravel 10 + Blade + Bootstrap (SBAdmin2) + MySQL monolith. Built SPMI documents, surveys, reports, downloads, SOPs, and administrative portal.",
 		href: "https://upmfmipa.unib.ac.id/",
 		initial: "UPM",
 		logo: `${import.meta.env.BASE_URL}unib-logo.webp`,
@@ -168,7 +168,7 @@ export const PROJECTS: Project[] = [
 		name: "API Chikora (Legacy)",
 		blurb: "Legacy Go backend API powering the Chikora web & mobile apps.",
 		details:
-			"Backend Developer · api.chikora.rafflesiaagro.com — Sole contributor (45 commits) to the legacy RESTful backend built with Go (Chi v5) router, supporting daily flock management, analytics, and mobile/web client synchronization for Chikora. Superseded by a newer backend version.",
+			"Backend Developer · api.chikora.rafflesiaagro.com — Sole contributor (45 commits) to the legacy RESTful backend built with Go (Chi v5) router + PostgreSQL, supporting daily flock management, analytics, and mobile/web client synchronization for Chikora. Superseded by a newer backend version.",
 		href: "https://api.chikora.rafflesiaagro.com/",
 		initial: "AC",
 		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
@@ -184,7 +184,7 @@ export const PROJECTS: Project[] = [
 		name: "MQTT Server Rafflesia Agro",
 		blurb: "MQTT broker service for IoT sensors and actuator telemetry.",
 		details:
-			"IoT / Backend Developer · mqtt.rafflesiaagro.com — Sole contributor (28 commits) to the MQTT broker infrastructure bridging IoT sensors, actuator control systems, and backend services within the Aranus Farm / Rafflesia Agro smart poultry ecosystem. Currently offline.",
+			"IoT / Backend Developer · mqtt.rafflesiaagro.com — Sole contributor (28 commits) to the MQTT broker infrastructure with a Go backend, bridging ESP32 microcontrollers, sensors (humidity, temperature, brightness), and actuators for electricity connection within the Aranus Farm / Rafflesia Agro smart poultry ecosystem. Currently offline.",
 		href: "https://mqtt.rafflesiaagro.com/",
 		initial: "MQ",
 		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
@@ -200,7 +200,7 @@ export const PROJECTS: Project[] = [
 		name: "API Rafflesia Agro",
 		blurb: "API backend for Aranus Farm & Rafflesia Agro ecosystem.",
 		details:
-			"Backend Developer · api.rafflesiaagro.com — Sole contributor (126 commits) to the REST API service supporting web and mobile apps across the former Aranus Farm and Rafflesia Agro livestock management ecosystem. Currently offline.",
+			"Backend Developer · api.rafflesiaagro.com — Sole contributor (126 commits) to the REST API service supporting web and mobile apps across the former Aranus Farm and Rafflesia Agro livestock management ecosystem: Laravel + PostgreSQL + Redis. Currently offline.",
 		href: "https://api.rafflesiaagro.com/",
 		initial: "RA",
 		logo: `${import.meta.env.BASE_URL}rafflesiaagro-logo.webp`,
@@ -216,7 +216,7 @@ export const PROJECTS: Project[] = [
 		name: "Rafflesia Agro (Legacy)",
 		blurb: "Previous landing page for agricultural technology company.",
 		details:
-			"Full-stack Developer · rafflesiaagro.com — Sole contributor (18 commits) to the corporate landing page presenting smart farming solutions, product portfolio, company profiles, and contact channels. Superseded by a newer site version.",
+			"Full-stack Developer · rafflesiaagro.com — Sole contributor (18 commits) to the corporate landing page presenting smart farming solutions, product portfolio, company profiles, and contact channels: Astro frontend with PocketBase backend & CMS. Superseded by a newer site version.",
 		href: "https://rafflesiaagro.com/",
 		initial: "RA",
 		logo: `${import.meta.env.BASE_URL}rafflesiaagro-logo.webp`,
@@ -237,7 +237,7 @@ export const PROJECTS: Project[] = [
 		blurb:
 			"Previous landing page for software development agency (Old Version).",
 		details:
-			"Full-stack Developer · aranustech.co.id — Contributed 90+ commits (~36% of total commits) to the previous company website featuring IT services, portfolio, client testimonials, and contact channels. Superseded by a newer web layout version.",
+			"Full-stack Developer · aranustech.co.id — Contributed 90+ commits (~36% of total commits) to the previous company website featuring IT services, portfolio, client testimonials, and contact channels: Laravel + MySQL. Superseded by a newer web layout version.",
 		href: "https://aranustech.co.id/",
 		initial: "AT",
 		logo: `${import.meta.env.BASE_URL}aranus-logo.webp`,
