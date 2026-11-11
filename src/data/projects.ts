@@ -2,6 +2,79 @@ import type { Project } from "../types/portfolio";
 
 export const PROJECTS: Project[] = [
 	{
+		name: "SuratLamaran",
+		blurb:
+			"Local-first toolkit for tailored CVs, cover letters, and freelance proposals.",
+		details:
+			"Full-stack Developer · suratlamaran.my.id — Job-application and proposal toolkit: React 19 + TypeScript + TanStack Router/Query/DB + Tailwind 4 + shadcn/ui, backed by Appwrite Auth, database, and storage on Cloudflare Pages. Built reusable biodata, CV and cover-letter builders, job-specific tailoring, application tracking, proposal budgeting, PDF exports, browser OCR, copy-paste AI workflows, and offline-capable cloud synchronization.",
+		href: "https://suratlamaran.my.id/",
+		initial: "SL",
+		logo: `${import.meta.env.BASE_URL}suratlamaran-logo.webp`,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}suratlamaran-cv-preview.webp`,
+				caption: "CV document preview with scoring and PDF export controls",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}suratlamaran-proposal-budget.webp`,
+				caption: "Freelance proposal cost breakdown and itemized budget",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}suratlamaran-tools.webp`,
+				caption: "Reusable biodata and job-application toolkit overview",
+			},
+		],
+	},
+	{
+		name: "Idea Log",
+		blurb:
+			"Offline-first idea workspace for turning rough captures into actionable plans.",
+		details:
+			"Full-stack Developer · idea-log.pages.dev — Idea-management workspace: TanStack Start SPA + React 19 + TypeScript + Tailwind 4 + shadcn/ui, backed by IndexedDB and Firebase Auth/Firestore on Cloudflare Pages. Built project-scoped status boards, progress dashboards, reviewable copy-paste AI workflows, resumable execution plans, ZIP plan exports, JSON import/export, and device-local evidence attachments.",
+		href: "https://idea-log.pages.dev/",
+		initial: "IL",
+		logo: `${import.meta.env.BASE_URL}idea-log-logo.webp`,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}idea-log-ideas-board.webp`,
+				caption: "Project ideas organized across six lifecycle stages",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}idea-log-enhancement-review.webp`,
+				caption: "Review AI-assisted idea enhancements before applying changes",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}idea-log-dashboard.webp`,
+				caption: "Idea capture activity, progress, and project overview",
+			},
+		],
+	},
+	{
+		name: "Cash Log",
+		blurb:
+			"Offline-first personal finance tracker for daily spending and cash-flow insights.",
+		details:
+			"Full-stack Developer · cash-log.pages.dev — Personal cash-flow tracker for Indonesian rupiah: React 19 + TypeScript + Vite 8 + TanStack Router/Query/DB + Tailwind 4 + shadcn/ui, backed by Supabase PostgreSQL, Auth, and Storage on Cloudflare Pages. Built offline cash logging, transfers, budgets, savings goals, trip tracking, receipt attachments, spending reports, and reviewable copy-paste AI workflows for categorizing and splitting entries.",
+		href: "https://cash-log.pages.dev/",
+		initial: "CL",
+		logo: `${import.meta.env.BASE_URL}cash-log-logo.webp`,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}cash-log-dashboard.webp`,
+				caption: "Personal cash-flow dashboard, budgets, and savings goals",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}cash-log-reports.webp`,
+				caption: "Monthly spending reports and activity heatmap",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}cash-log-entries.webp`,
+				caption:
+					"Cash log entries with transaction breakdowns and enhancement status",
+			},
+		],
+	},
+	{
 		name: "LATUN Jobs",
 		blurb: "Recruitment platform for marine conservation roles in Bengkulu.",
 		details:
