@@ -181,20 +181,20 @@ rule(p, 46, 309, 865)
 text(p, 46, 335, NAME, 29, "medium", INK)
 para(p, 48, 379, "Software Engineer\nMobile Team Lead & Full-stack Developer", 495, 15, fill=MUTED, leading=1.55)
 label(p, 669, 339, "Based in Bengkulu, Indonesia", 9.2)
-para(p, 669, 362, "Mobile apps, web platforms,\nIoT backends, and cloud systems.", 240, 12, fill=BODY)
+para(p, 669, 362, "Mobile apps, web platforms,\nREST APIs, and cloud systems.", 240, 12, fill=BODY)
 button(p, 669, 420, "Explore the live portfolio", SITE)
 
 p = new_page("Profile", "Engineering across the whole product.", "Mobile, web, backend, and deployment — connected by hands-on delivery.")
 screenshot(p, "1725254377.webp", 44, 155, 254, 306, crop=(98, 75, 322, 577), frame=False)
 label(p, 44, 467, "M Anjasfedo Afridiansah", 9)
 text(p, 44, 483, "Bengkulu, Indonesia", 10.5, fill=MUTED)
-para(p, 338, 164, "I lead mobile engineering and build full-stack systems end to end, from Flutter and native apps to web platforms, Go backends, IoT telemetry, and cloud deployments.", 571, 16, "regular", INK, 1.45)
+para(p, 338, 164, "I lead mobile engineering and build full-stack products end to end, from Flutter and native apps to React, Next.js, and Laravel web platforms on Cloudflare and Google Cloud.", 571, 16, "regular", INK, 1.45)
 rule(p, 338, 273, 575)
 for x, y, title, body in [
     (338, 292, "MOBILE ENGINEERING", "Flutter · Android Kotlin/C\niOS Swift · Team leadership"),
     (638, 292, "FULL-STACK DEVELOPMENT", "React · Next.js · TypeScript\nLaravel · Vue · Node.js"),
-    (338, 382, "BACKEND & IOT", "Go · REST APIs · MQTT\nPostgreSQL · MySQL · Redis"),
-    (638, 382, "CLOUD & DELIVERY", "AWS · Google Cloud · Docker\nCoolify · CI/CD · IaC"),
+    (338, 382, "BACKEND & DATA", "Laravel · REST APIs · Supabase\nPostgreSQL · MySQL · Firestore"),
+    (638, 382, "CLOUD & DELIVERY", "Cloudflare · Google Cloud · Docker\nAWS · CI/CD · IaC"),
 ]:
     label(p, x, y, title)
     para(p, x, y + 21, body, 273, 12.5, leading=1.5)
@@ -211,7 +211,7 @@ bullets(p, 44, 332, [
 ], 361, 12.5)
 p.draw_line((435, 156), (435, 475), color=LINE, width=0.6)
 roles = [
-    ("Software Engineer", "PT Rafflesia Agro Investama", "Aug 2025 — Apr 2026 · Part-time, concurrent", "Go APIs, MQTT telemetry, Flutter foundation, and Chikora web showcase."),
+    ("Software Engineer", "PT Rafflesia Agro Investama", "Aug 2025 — Apr 2026 · Part-time, concurrent", "Mobile, backend, and web engineering across an agriculture platform."),
     ("DevOps & Solutions Architect Intern", "Elitery · PT Data Sinergitama Jaya Tbk", "Nov 2024 — Jan 2025", "AWS architecture, CI/CD pipelines, IaC, and infrastructure optimization."),
     ("Frontend Engineer Intern", "PT Langgeng Inovasi Teknologi", "Jun 2024 — Aug 2024", "Responsive UI implementation, code reviews, and Agile delivery."),
     ("Assistant Lecturer · Universitas Bengkulu", "Web Programming / Framework Programming", "Jan — Jun 2024 / Aug — Dec 2024", "Hands-on teaching in React, Laravel, MVC, and REST APIs."),
@@ -249,22 +249,6 @@ for x, name, image, intro, detail, technology, url in [
     para(p, x, 436, detail, 414, 10.3, leading=1.3)
     hyperlink(p, x, 480, url.removeprefix("https://").rstrip("/"), url, 9.5)
     text(p, x + 139, 481, "Laravel / Vue" if name == "Grant LATUN" else "Laravel / Livewire", 9.1, fill=MUTED)
-
-p = new_page("Mobile & IoT", "Software for smarter farm operations.", "Chikora · Mobile foundations, web presence, and the original backend and telemetry services.")
-label(p, 44, 156, "PT Rafflesia Agro Investama")
-para(p, 44, 179, "Connected mobile, web, and IoT engineering.", 424, 23, "medium", INK, 1.2)
-para(p, 44, 246, "Built the initial Flutter foundation for flock logging, feed and mortality records, analytics, and offline synchronization before production expansion.", 425, 12.5)
-bullets(p, 44, 332, [
-    "Developed Go (Chi v5) REST APIs with PostgreSQL.",
-    "Built MQTT telemetry pipelines connecting ESP32 sensors and actuators.",
-    "Created the Next.js and Supabase web showcase.",
-], 425, 11.5)
-stack(p, 44, 447, "Flutter · Go · PostgreSQL · MQTT · ESP32 · Next.js", 425)
-screenshot(p, "chikora-preview.webp", 573, 151, 193, 343, frame=False)
-para(p, 789, 169, "INITIAL\nMOBILE\nFOUNDATION", 127, 10.5, "medium", INK, 1.55)
-para(p, 789, 254, "Product preview from the portfolio.", 122, 10.2, fill=MUTED)
-para(p, 789, 324, "Historical backend work: the original API was superseded; the MQTT service is offline.", 125, 9.5, fill=MUTED)
-hyperlink(p, 789, 453, "View app listing", "https://play.google.com/store/apps/details?id=com.rafflesiaagro.chikora", 9.3)
 
 p = new_page("AI-assisted products", "Recruiting workflows, with AI assistance.", "Yena AI · Early feature development for an AI-powered recruitment SaaS platform.")
 label(p, 44, 156, "Full-stack Developer / Freelance")
@@ -305,20 +289,19 @@ for x, title, image, summary, technology, url in [
     para(p, x, 451, technology, 284, 9.4, fill=MUTED, leading=1.4)
     hyperlink(p, x + 284, 466, url.removeprefix("https://").rstrip("/"), url, 9.1)
 
-p = new_page("Cloud & infrastructure", "From application code to deployment.", "Containerized delivery and cloud-native backend architecture.")
-label(p, 44, 155, "Aranus Technology / DevOps")
-para(p, 44, 177, "A self-hosted platform for application delivery.", 346, 23, "medium", INK, 1.2)
-para(p, 44, 246, "Designed and deployed a Coolify PaaS environment on a VPS for microservices and client applications.", 346, 12)
+p = new_page("Cloud & infrastructure", "Serverless backends on Google Cloud.", "Pulih Apps · Cloud backend architecture for the Bangkit 2024 capstone.")
+label(p, 44, 155, "Cloud Computing Cohort / Bangkit 2024")
+para(p, 44, 177, "A Django backend, deployed without servers.", 346, 23, "medium", INK, 1.2)
+para(p, 44, 246, "Designed and deployed the backend architecture with Django REST Framework on Cloud Run and Cloud SQL (PostgreSQL).", 346, 12)
 bullets(p, 44, 313, [
-    "Production Dockerfiles and Compose configurations.",
-    "Automated deployments, SSL routing, and server orchestration.",
+    "REST APIs and authentication.",
+    "IAM permissions and automated serverless deployment.",
 ], 346, 11.5)
-stack(p, 44, 410, "Coolify · Docker · Docker Compose\nVPS · CI/CD", 345)
-hyperlink(p, 44, 476, "aranustech.co.id", "https://aranustech.co.id/", 9.7)
-screenshot(p, "aranus-technology-coolify.webp", 430, 155, 486, 250, crop=(0, 0, 1600, 823))
-label(p, 432, 424, "Pulih Apps / Bangkit 2024 capstone", 8.7)
-para(p, 432, 441, "Django REST backend on Cloud Run and Cloud SQL; APIs, authentication, IAM, and serverless deployment.", 479, 10.5, leading=1.35)
-hyperlink(p, 432, 477, "View capstone repository", "https://github.com/C241-PS019/Pulih-Apps-CC", 9.5)
+stack(p, 44, 410, "Django REST Framework · Cloud Run\nCloud SQL · IAM · Google Cloud", 345)
+hyperlink(p, 44, 476, "View capstone repository", "https://github.com/C241-PS019/Pulih-Apps-CC", 9.7)
+para(p, 470, 169, "SERVERLESS\nBACKEND", 400, 44, "medium", INK, 1.35)
+rule(p, 470, 330, 420)
+para(p, 470, 350, "Django REST Framework on Cloud Run and Cloud SQL, with API authentication, IAM permissions, and automated serverless deployment.", 420, 12, fill=MUTED)
 
 p = new_page("Education & learning", "A foundation in software and cloud.", "Formal education, practical bootcamps, and selected course certificates.")
 label(p, 44, 157, "Education & programs")

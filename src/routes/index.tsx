@@ -100,9 +100,10 @@ function Home() {
 							— Bengkulu, Indonesia
 						</p>
 						<p className="mt-4 max-w-md text-[16px] leading-[1.5] text-ash">
-							Lead mobile engineering, ship full-stack systems end to end.
+							Lead mobile teams and ship full-stack products end to end.
 							<br />
-							Flutter & native apps, Go/IoT backends, AWS/GCP/Docker infra.
+							Flutter & native apps, React/TanStack web, Laravel APIs, cloud
+							deployments.
 						</p>
 						<div className="mt-6 flex flex-wrap items-center gap-2">
 							{LINKS.map(({ label, href, Icon }) => (

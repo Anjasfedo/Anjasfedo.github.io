@@ -131,54 +131,8 @@ export const PROJECTS: Project[] = [
 			},
 		],
 	},
-	{
-		name: "Chikora",
-		blurb: "Landing page for broiler & layer farm management platform.",
-		details:
-			"Full-stack Developer · chikora.rafflesiaagro.com — Rafflesia Agro's Chikora web showcase: Next.js + Supabase + Tailwind. Highlighting daily flock recording, real-time FCR & IOFC analytics, IoT sensor integration, harvest alerts, multi-device sync, and marketplace integration.",
-		href: "https://chikora.rafflesiaagro.com/",
-		initial: "CH",
-		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
-		images: [
-			{
-				src: `${import.meta.env.BASE_URL}chikora-rafflesiaagro-landing-page.webp`,
-				caption: "Chikora landing page hero section",
-			},
-		],
-	},
-	{
-		name: "Chikora Mobile",
-		blurb: "Cross-platform mobile app for broiler & layer farm management.",
-		details:
-			"Mobile App Developer · App Store / Play Store — Architected and built the initial foundation for Chikora's cross-platform mobile application in Flutter. Laid the initial codebase for daily flock logging, FCR/HDP analytics, feed tracking, mortality records, and offline sync prior to production expansion.",
-		href: "https://play.google.com/store/apps/details?id=com.rafflesiaagro.chikora",
-		initial: "CM",
-		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
-		images: [
-			{
-				src: `${import.meta.env.BASE_URL}chikora-preview.webp`,
-				caption: "Chikora mobile app interface preview",
-			},
-		],
-	},
-	{
-		name: "Aranus Technology Cloud Infrastructure",
-		blurb:
-			"Self-hosted PaaS platform, Docker containerization, and automated CI/CD deployments.",
-		details:
-			"DevOps — Designed and deployed Aranus Technology's self-hosted Coolify PaaS environment on a VPS. Authored production Dockerfiles and docker-compose.yml configurations across multiple microservices and client applications (POS, IoT tracking, databases), establishing automated containerized deployments, SSL routing, and server orchestration.",
-		href: "https://aranustech.co.id/",
-		initial: "AC",
-		logo: `${import.meta.env.BASE_URL}aranus-logo.webp`,
-		images: [
-			{
-				src: `${import.meta.env.BASE_URL}aranus-technology-coolify.webp`,
-				caption:
-					"Coolify self-hosted dashboard & container deployment management",
-			},
-		],
-	},
-	// 3. Collaborative / Freelance Client Development
+
+	// Collaborative / Freelance Client Development
 	{
 		name: "Yena AI",
 		blurb: "AI-powered recruitment SaaS platform built from the ground up.",
@@ -194,7 +148,7 @@ export const PROJECTS: Project[] = [
 			},
 		],
 	},
-	// 4. Institutional & University Projects
+	// Institutional & University Projects
 	{
 		name: "UPM FMIPA UNIB",
 		blurb: "Quality assurance unit website for FMIPA Universitas Bengkulu.",
@@ -211,72 +165,7 @@ export const PROJECTS: Project[] = [
 		],
 	},
 
-	// 5. Legacy Infrastructure & Deprecated Services
-	{
-		name: "API Chikora (Legacy)",
-		blurb: "Legacy Go backend API powering the Chikora web & mobile apps.",
-		details:
-			"Backend Developer · api.chikora.rafflesiaagro.com — Legacy RESTful backend built with Go (Chi v5) router + PostgreSQL, supporting daily flock management, analytics, and mobile/web client synchronization for Chikora. Superseded by a newer backend version.",
-		href: "https://api.chikora.rafflesiaagro.com/",
-		initial: "AC",
-		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
-		deprecated: true,
-	},
-	{
-		name: "MQTT Server Rafflesia Agro",
-		blurb: "MQTT broker service for IoT sensors and actuator telemetry.",
-		details:
-			"IoT / Backend Developer · mqtt.rafflesiaagro.com — MQTT broker infrastructure with a Go backend, bridging ESP32 microcontrollers, sensors (humidity, temperature, brightness), and actuators for electricity connection within the Aranus Farm / Rafflesia Agro smart poultry ecosystem. Currently offline.",
-		href: "https://mqtt.rafflesiaagro.com/",
-		initial: "MQ",
-		logo: `${import.meta.env.BASE_URL}chikora-logo.webp`,
-		deprecated: true,
-	},
-	{
-		name: "API Rafflesia Agro",
-		blurb: "API backend for Aranus Farm & Rafflesia Agro ecosystem.",
-		details:
-			"Backend Developer · api.rafflesiaagro.com — REST API service supporting web and mobile apps across the former Aranus Farm and Rafflesia Agro livestock management ecosystem: Laravel + PostgreSQL + Redis. Currently offline.",
-		href: "https://api.rafflesiaagro.com/",
-		initial: "RA",
-		logo: `${import.meta.env.BASE_URL}rafflesiaagro-logo.webp`,
-		deprecated: true,
-	},
-	{
-		name: "Rafflesia Agro (Legacy)",
-		blurb: "Previous landing page for agricultural technology company.",
-		details:
-			"Full-stack Developer · rafflesiaagro.com — Corporate landing page presenting smart farming solutions, product portfolio, company profiles, and contact channels: Astro frontend with PocketBase backend & CMS. Superseded by a newer site version.",
-		href: "https://rafflesiaagro.com/",
-		initial: "RA",
-		logo: `${import.meta.env.BASE_URL}rafflesiaagro-logo.webp`,
-		deprecated: true,
-		images: [
-			{
-				src: `${import.meta.env.BASE_URL}rafflesiaagro-landing-page.webp`,
-				caption: "Rafflesia Agro landing page hero section",
-			},
-		],
-	},
-	{
-		name: "Aranus Technology (Legacy)",
-		blurb:
-			"Previous landing page for software development agency (Old Version).",
-		details:
-			"Full-stack Developer · aranustech.co.id — Previous company website featuring IT services, portfolio, client testimonials, and contact channels: Laravel + MySQL. Superseded by a newer web layout version.",
-		href: "https://aranustech.co.id/",
-		initial: "AT",
-		logo: `${import.meta.env.BASE_URL}aranus-logo.webp`,
-		deprecated: true,
-		images: [
-			{
-				src: `${import.meta.env.BASE_URL}aranus-technology-landing-page.webp`,
-				caption: "Aranus Technology previous landing page hero section",
-			},
-		],
-	},
-
-	// 6. Early Career & Academic Capstones
+	// Early Career & Academic Capstones
 	{
 		name: "Pulih Apps",
 		blurb: "Bangkit 2024 capstone — cloud backend on Django & GCP.",
