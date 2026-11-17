@@ -2,6 +2,76 @@ import type { Project } from "../types/portfolio";
 
 export const PROJECTS: Project[] = [
 	{
+		name: "Daily Log",
+		blurb:
+			"Offline daily reminders & private journal — no account, no streaks.",
+		details:
+			"Android Developer · github.com/Anjasfedo/daily-log-releases — Offline daily reminder & private journal app: native Kotlin + Jetpack Compose + Room + Hilt with a fully custom design system (zero Material UI). Built reliable exact alarms, offline computed prayer times, mood journal with biometric lock, step-by-step routines with voice guide, home-screen widget, progress dashboard with Year in Pixels, and encrypted JSON/CSV export — no account, no cloud, no streaks.",
+		href: "https://github.com/Anjasfedo/daily-log-releases",
+		initial: "DL",
+		logo: `${import.meta.env.BASE_URL}daily-log-logo.webp`,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}daily-log-today.webp`,
+				caption: "Today view — one-tap completions, grouped by time of day",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}daily-log-progress.webp`,
+				caption: "Progress dashboard with insights and heatmaps",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}daily-log-prayer.webp`,
+				caption: "Prayer times with alarms, computed offline",
+			},
+		],
+	},
+	{
+		name: "Series Log",
+		blurb: "Offline series tracker with a built-in reading browser.",
+		details:
+			"Android Developer · github.com/Anjasfedo/series-log-releases — Offline series tracker with a built-in browser: native Kotlin + Jetpack Compose + Room + DataStore + Hilt. Built Chrome-style browser tabs, bookmarks with backup, clean read mode, on-device ML Kit image translation, per-site element blocking and domain lock, progress suggestions, ~70 default genres, star ratings, and a fingerprint quick lock — no account, no cloud.",
+		href: "https://github.com/Anjasfedo/series-log-releases",
+		initial: "SL",
+		logo: `${import.meta.env.BASE_URL}series-log-logo.webp`,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}series-log-library.webp`,
+				caption: "Library — every series in a masonry grid",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}series-log-browser.webp`,
+				caption: "Built-in browser, right inside the app",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}series-log-detail.webp`,
+				caption: "Series detail with progress and a 10-star rating",
+			},
+		],
+	},
+	{
+		name: "Chillin",
+		blurb: "Offline-first music player with YouTube audio downloads.",
+		details:
+			"Android Developer · github.com/Anjasfedo/chillin-releases — Offline-first music player: native Kotlin + Jetpack Compose (Material 3) + Media3 ExoPlayer. Built local MediaStore library, background playback with Now Playing queue and synced lyrics, YouTube audio downloads (M4A/MP3, playlists) via yt-dlp with a pausable queue, song/artist radio, Smart Shuffle, speed dial, and an equalizer with 8D audio — no account, no streaming service.",
+		href: "https://github.com/Anjasfedo/chillin-releases",
+		initial: "CH",
+		logo: `${import.meta.env.BASE_URL}chillin-logo.webp`,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}chillin-home.webp`,
+				caption: "Home — your library at a glance",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}chillin-player.webp`,
+				caption: "Now Playing with queue and synced lyrics",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}chillin-download.webp`,
+				caption: "Paste a YouTube link and it lands in Music/Chillin",
+			},
+		],
+	},
+	{
 		name: "LATUN Jobs",
 		blurb: "Recruitment platform for marine conservation roles in Bengkulu.",
 		details:

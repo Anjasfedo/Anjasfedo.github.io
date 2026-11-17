@@ -8,7 +8,7 @@ import appCss from "../styles.css?url";
 const SITE_URL = "https://anjasfedo.github.io/";
 const TITLE = "M. Anjasfedo Afridiansah — Software Engineer";
 const DESCRIPTION =
-	"M. Anjasfedo Afridiansah — Software Engineer and Mobile Team Lead from Bengkulu, Indonesia, building Flutter apps, React and Laravel web platforms, and cloud deployments.";
+	"M. Anjasfedo Afridiansah — Software Engineer and Mobile Team Lead from Bengkulu, Indonesia, building native Android (Kotlin) and Flutter apps, React and Laravel web platforms, and cloud deployments.";
 const OG_IMAGE = `${SITE_URL}og-image.jpg`;
 
 const PERSON_JSON_LD = {

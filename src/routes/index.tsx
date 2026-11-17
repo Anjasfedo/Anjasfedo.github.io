@@ -102,8 +102,8 @@ function Home() {
 						<p className="mt-4 max-w-md text-[16px] leading-[1.5] text-ash">
 							Lead mobile teams and ship full-stack products end to end.
 							<br />
-							Flutter & native apps, React/TanStack web, Laravel APIs, cloud
-							deployments.
+							Native Android (Kotlin) & Flutter apps, React/TanStack web,
+							Laravel APIs, cloud deployments.
 						</p>
 						<div className="mt-6 flex flex-wrap items-center gap-2">
 							{LINKS.map(({ label, href, Icon }) => (
