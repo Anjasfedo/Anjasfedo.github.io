@@ -2,6 +2,63 @@ import type { Project } from "../types/portfolio";
 
 export const PROJECTS: Project[] = [
 	{
+		name: "LATUN Jobs",
+		blurb: "Recruitment platform for marine conservation roles in Bengkulu.",
+		details:
+			"Full-stack Developer · job.latun.or.id — LATUN's recruitment platform: TanStack Start SPA + React 19 + Tailwind 4 + shadcn/ui client backed by a Laravel 13 + Sanctum + MySQL JSON API. Built coastal-identity landing page with job board, applicant portal (dashboard, 4-step apply wizard, document library, per-application chat, notifications), and admin panel (vacancy management, sequential application review queue, applicant directory, support inbox) for REKRUTMEN LATUN 2026 — 50 positions in Bengkulu.",
+		href: "https://job.latun.or.id/",
+		initial: "LJ",
+		logo: `${import.meta.env.BASE_URL}latun-main-logo.webp`,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}job-latun-landing-page.webp`,
+				caption: "LATUN Jobs landing page hero section",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}job-latun-app-dashboard-page.webp`,
+				caption: "Applicant dashboard overview",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}job-latun-admin-dashboard-page.webp`,
+				caption: "Admin dashboard overview",
+			},
+		],
+	},
+	{
+		name: "LATUN Website",
+		blurb: "Public landing page for marine conservation in Bengkulu.",
+		details:
+			"Full-stack Developer · latun.or.id — Bilingual ID/EN landing page for Laut Untuk Negeri: Laravel 13 + Livewire 4 Blaze + Fortify auth + Flux UI + Tailwind v4 + MySQL monolith. Built programs (livelihood, marine, terrestrial), Berita (News), Agenda (Events), Galeri (Gallery), Video (Videos), Unduhan (Downloads), Layanan (Services), grant banner integration, newsletter, and contact.",
+		href: "https://latun.or.id/",
+		initial: "LA",
+		logo: `${import.meta.env.BASE_URL}latun-main-logo.webp`,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}latun-landing-page.webp`,
+				caption: "LATUN landing page hero section",
+			},
+		],
+	},
+	{
+		name: "Grant LATUN",
+		blurb: "Grant management platform for coastal & marine conservation.",
+		details:
+			"Full-stack Developer · grant.latun.or.id — Grant management platform: Laravel 13 + Inertia 2 + Vue 3 (TS) + Tailwind + MySQL monolith. Built Admin panel & Mitra portal, 6-step proposal wizard, 12-document verification workflow, dynamic DOCX legal generation (SK, SPK, RAB), reporting & self-assessments, guided tours, and notifications.",
+		href: "https://grant.latun.or.id/",
+		initial: "GL",
+		logo: `${import.meta.env.BASE_URL}latun-grant-logo.webp`,
+		images: [
+			{
+				src: `${import.meta.env.BASE_URL}grant-latun-landing-page.webp`,
+				caption: "Grant LATUN landing page",
+			},
+			{
+				src: `${import.meta.env.BASE_URL}grant-latun-admin-dashboard-page.webp`,
+				caption: "Admin dashboard overview",
+			},
+		],
+	},
+	{
 		name: "Daily Log",
 		blurb:
 			"Offline daily reminders & private journal — no account, no streaks.",
@@ -68,63 +125,6 @@ export const PROJECTS: Project[] = [
 			{
 				src: `${import.meta.env.BASE_URL}chillin-download.webp`,
 				caption: "Paste a YouTube link and it lands in Music/Chillin",
-			},
-		],
-	},
-	{
-		name: "LATUN Jobs",
-		blurb: "Recruitment platform for marine conservation roles in Bengkulu.",
-		details:
-			"Full-stack Developer · job.latun.or.id — LATUN's recruitment platform: TanStack Start SPA + React 19 + Tailwind 4 + shadcn/ui client backed by a Laravel 13 + Sanctum + MySQL JSON API. Built coastal-identity landing page with job board, applicant portal (dashboard, 4-step apply wizard, document library, per-application chat, notifications), and admin panel (vacancy management, sequential application review queue, applicant directory, support inbox) for REKRUTMEN LATUN 2026 — 50 positions in Bengkulu.",
-		href: "https://job.latun.or.id/",
-		initial: "LJ",
-		logo: `${import.meta.env.BASE_URL}latun-main-logo.webp`,
-		images: [
-			{
-				src: `${import.meta.env.BASE_URL}job-latun-landing-page.webp`,
-				caption: "LATUN Jobs landing page hero section",
-			},
-			{
-				src: `${import.meta.env.BASE_URL}job-latun-app-dashboard-page.webp`,
-				caption: "Applicant dashboard overview",
-			},
-			{
-				src: `${import.meta.env.BASE_URL}job-latun-admin-dashboard-page.webp`,
-				caption: "Admin dashboard overview",
-			},
-		],
-	},
-	{
-		name: "LATUN Website",
-		blurb: "Public landing page for marine conservation in Bengkulu.",
-		details:
-			"Full-stack Developer · latun.or.id — Bilingual ID/EN landing page for Laut Untuk Negeri: Laravel 13 + Livewire 4 Blaze + Fortify auth + Flux UI + Tailwind v4 + MySQL monolith. Built programs (livelihood, marine, terrestrial), Berita (News), Agenda (Events), Galeri (Gallery), Video (Videos), Unduhan (Downloads), Layanan (Services), grant banner integration, newsletter, and contact.",
-		href: "https://latun.or.id/",
-		initial: "LA",
-		logo: `${import.meta.env.BASE_URL}latun-main-logo.webp`,
-		images: [
-			{
-				src: `${import.meta.env.BASE_URL}latun-landing-page.webp`,
-				caption: "LATUN landing page hero section",
-			},
-		],
-	},
-	{
-		name: "Grant LATUN",
-		blurb: "Grant management platform for coastal & marine conservation.",
-		details:
-			"Full-stack Developer · grant.latun.or.id — Grant management platform: Laravel 13 + Inertia 2 + Vue 3 (TS) + Tailwind + MySQL monolith. Built Admin panel & Mitra portal, 6-step proposal wizard, 12-document verification workflow, dynamic DOCX legal generation (SK, SPK, RAB), reporting & self-assessments, guided tours, and notifications.",
-		href: "https://grant.latun.or.id/",
-		initial: "GL",
-		logo: `${import.meta.env.BASE_URL}latun-grant-logo.webp`,
-		images: [
-			{
-				src: `${import.meta.env.BASE_URL}grant-latun-landing-page.webp`,
-				caption: "Grant LATUN landing page",
-			},
-			{
-				src: `${import.meta.env.BASE_URL}grant-latun-admin-dashboard-page.webp`,
-				caption: "Admin dashboard overview",
 			},
 		],
 	},
